@@ -23,7 +23,7 @@ public class Main implements spark.servlet.SparkApplication {
                     name = "Anonymous";
                 }
 
-                return String.format("Hello, %s", name);
+                return String.format("Hello, %s, isn't it a lovely day?", name);
             }
 
         });
