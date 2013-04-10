@@ -80,7 +80,7 @@ public class Main implements spark.servlet.SparkApplication {
     private void setupDB() {
         System.out.println("Setting up DB");
         try {
-            mongoClient = new MongoClient( "hellojava-brightnorth-mdb-0.azva.dotcloud.net", 55385 );
+            mongoClient = new MongoClient( "hellojava-brightnorth-mdb-0.azva.dotcloud.net", 32858 );
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
