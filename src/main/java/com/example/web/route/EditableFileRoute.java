@@ -17,7 +17,7 @@ import java.io.IOException;
 
 public class EditableFileRoute extends AbstractAuthenticatedRoute {
 
-    public static final String JAVASCRIPT_TO_APPEND = "<script src=\"ces-resources/content.js\" type=\"text/javascript\"></script><script src=\"ces-resources/jquery-getpath.js\" type=\"text/javascript\"></script>";
+    public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"ces-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"ces-resources/jquery-getpath.js\" type=\"text/javascript\"></script>";
     public static final String HTML_SUFFIX = ".html";
     private Database database;
     private String fileBase;
@@ -79,7 +79,7 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
 
 
     private Document makeEditable(Document doc) {
-        doc.body().append(JAVASCRIPT_TO_APPEND);
+        doc.body().append(AUTHENTICATED_JAVASCRIPT_TO_APPEND);
         return doc;
     }
 
