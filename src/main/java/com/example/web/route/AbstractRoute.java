@@ -14,13 +14,14 @@ import java.io.InputStream;
 public abstract class AbstractRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(AbstractRoute.class);
+    public static final String RESOURCE_ROOT_PATH = "/ces-resources/";
 
     public AbstractRoute(String route) {
         super(route);
     }
 
     protected Object writeClasspathFileToResponse(Response response, String filename) {
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream("/ces-resources/" + filename);
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(RESOURCE_ROOT_PATH + filename);
         try {
             IOUtils.copy(resourceAsStream, response.raw().getOutputStream());
             response.status(200);

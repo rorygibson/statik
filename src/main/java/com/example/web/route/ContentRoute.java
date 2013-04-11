@@ -10,6 +10,9 @@ import java.util.Map;
 public class ContentRoute extends AbstractRoute {
 
     private static final Logger LOG = Logger.getLogger(ContentRoute.class);
+    public static final String ID = "id";
+    public static final String CONTENT = "content";
+    public static final String SELECTOR = "selector";
     private final Database database;
 
     public ContentRoute(Database database, String route) {
@@ -21,9 +24,9 @@ public class ContentRoute extends AbstractRoute {
     public Object handle(Request request, Response response) {
         Map<String, String[]> parameterMap = request.raw().getParameterMap();
 
-        String id = request.params("id");
-        String newContent = parameterMap.get("content")[0];
-        String selector = parameterMap.get("selector")[0];
+        String id = request.params(ID);
+        String newContent = parameterMap.get(CONTENT)[0];
+        String selector = parameterMap.get(SELECTOR)[0];
 
         LOG.debug("POST to [" + request.url() + "], + id [" + id + "], selector [" + selector + "], content length [" + newContent.length() + "]");
 

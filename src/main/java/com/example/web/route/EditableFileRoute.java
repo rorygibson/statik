@@ -1,5 +1,6 @@
 package com.example.web.route;
 
+import com.example.web.AuthStore;
 import com.example.web.Database;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -16,6 +17,8 @@ import java.io.IOException;
 
 public class EditableFileRoute extends AbstractAuthenticatedRoute {
 
+    public static final String JAVASCRIPT_TO_APPEND = "<script src=\"ces-resources/content.js\" type=\"text/javascript\"></script><script src=\"ces-resources/jquery-getpath.js\" type=\"text/javascript\"></script>";
+    public static final String HTML_SUFFIX = ".html";
     private Database database;
     private String fileBase;
     private String namedFile = null;
@@ -24,14 +27,14 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
     private final String SELECTOR = "*[data-content-id]";
     private final String ATTRIBUTE_NAME = "data-content-id";
 
-    public EditableFileRoute(Database database, String fileBase, String route, String username, String password) {
-        super(route, username, password);
+    public EditableFileRoute(Database database, String fileBase, String route, AuthStore authStore) {
+        super(route, authStore);
         this.database = database;
         this.fileBase = fileBase;
     }
 
-    public EditableFileRoute(Database database, String fileBase, String route, String namedFile, String username, String password) {
-        super(route, username, password);
+    public EditableFileRoute(Database database, String fileBase, String route, String namedFile, AuthStore authStore) {
+        super(route, authStore);
         this.database = database;
         this.fileBase = fileBase;
         this.namedFile = namedFile;
@@ -76,12 +79,12 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
 
 
     private Document makeEditable(Document doc) {
-        doc.body().append("<script src=\"ces-resources/content.js\" type=\"text/javascript\"></script><script src=\"ces-resources/jquery-getpath.js\" type=\"text/javascript\"></script>");
+        doc.body().append(JAVASCRIPT_TO_APPEND);
         return doc;
     }
 
     private boolean mightContainCmsContent(File theFile) {
-        return theFile.getName().endsWith(".html");
+        return theFile.getName().endsWith(HTML_SUFFIX);
     }
 
     private Document replaceContent(Document doc) {

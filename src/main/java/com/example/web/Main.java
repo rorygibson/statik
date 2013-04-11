@@ -21,6 +21,7 @@ public class Main implements spark.servlet.SparkApplication {
     private String welcomeFile;
     private String password;
     private String username;
+    private AuthStore authStore;
 
     public static void main(String[] args) {
         new Main().init();
@@ -39,14 +40,17 @@ public class Main implements spark.servlet.SparkApplication {
             loadMessagesIntoDatabaseFrom(MESSAGE_BUNDLE_NAME);
         }
 
+        this.authStore = new AuthStore();
+        this.authStore.addUser(this.username, this.password);
+
         LOG.info("Setting up routes");
-        Spark.get(new LogoutRoute("/logout", username, password));
+        Spark.get(new LogoutRoute("/logout", this.authStore));
         Spark.get(new LoginFormRoute("/auth"));
-        Spark.post(new AuthReceiverRoute("/auth", username, password));
-        Spark.post(new ContentRetrievalRoute(this.database, "/content/:id"));
+        Spark.post(new LoginRoute("/auth", this.authStore));
+        Spark.post(new ContentRoute(this.database, "/content/:id"));
         Spark.get(new CESResourceRoute("/ces-resources/:file"));
-        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/", this.welcomeFile, username, password));
-        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/*", username, password));
+        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/", this.welcomeFile, this.authStore));
+        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/*", this.authStore));
     }
 
 

@@ -1,42 +1,49 @@
 package com.example.web.route;
 
+import com.example.web.AuthStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public abstract class AbstractAuthenticatedRoute extends AbstractRoute {
 
-    protected static final String COOKIE_NAME = "cms";
+    protected static final String COOKIE_NAME = "ces";
     protected static Map<String, String> sessionStore = new HashMap<String, String>();
     private static final Logger LOG = Logger.getLogger(AbstractAuthenticatedRoute.class);
-    private final String username;
-    private final String password;
+    private final AuthStore authStore;
 
-    public AbstractAuthenticatedRoute(String route, String username, String password) {
+    public AbstractAuthenticatedRoute(String route, AuthStore authStore) {
         super(route);
-        this.username = username;
-        this.password = password;
+        this.authStore = authStore;
     }
 
     public boolean hasSession(Request request) {
-        boolean authenticated = false;
         if (sessionStore.containsKey(request.cookie(COOKIE_NAME))) {
-            authenticated = true;
-            LOG.debug("User is authenticated");
-        } else {
-            LOG.debug("User is not authenticated");
+            LOG.debug("User has a session");
+            return true;
         }
-        return authenticated;
-    }
 
-    protected String sessionId() {
-        return String.valueOf(Math.random());
+        LOG.debug("User does not have a session");
+        return false;
     }
 
     protected boolean auth(String username, String password) {
-        return username != null && password != null && username.equals(this.username) && password.equals(this.password);
+        if (this.authStore.auth(username, password)) {
+            LOG.debug("User is authenticated");
+            return true;
+        }
+
+        LOG.debug("User is NOT authenticated");
+        return false;
+    }
+
+    protected String createSessionFor(String username) {
+        String sessionId = UUID.randomUUID().toString();
+        sessionStore.put(sessionId, username);
+        return sessionId;
     }
 
 }

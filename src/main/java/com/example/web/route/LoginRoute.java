@@ -11,6 +11,8 @@ import java.util.Map;
 public class LoginRoute extends AbstractAuthenticatedRoute {
 
     private static final Logger LOG = Logger.getLogger(LoginRoute.class);
+    public static final String PASSWORD = "password";
+    public static final String USERNAME = "username";
 
     public LoginRoute(String route, AuthStore authStore) {
         super(route, authStore);
@@ -19,8 +21,8 @@ public class LoginRoute extends AbstractAuthenticatedRoute {
     @Override
     public Object handle(Request request, Response response) {
         Map<String, String[]> parameterMap = request.raw().getParameterMap();
-        String username = parameterMap.get("username")[0];
-        String password = parameterMap.get("password")[0];
+        String username = parameterMap.get(USERNAME)[0];
+        String password = parameterMap.get(PASSWORD)[0];
 
         LOG.debug("POST to /auth for user [" + username + "]");
 
@@ -33,7 +35,7 @@ public class LoginRoute extends AbstractAuthenticatedRoute {
 
         LOG.debug("Not authenticated");
         response.status(401);
-        return "NOAUTH";
+        return "Not authenticated";
     }
 
 }
