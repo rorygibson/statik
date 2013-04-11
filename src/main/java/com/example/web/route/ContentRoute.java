@@ -7,12 +7,12 @@ import spark.Response;
 
 import java.util.Map;
 
-public class ContentRetrievalRoute extends AbstractRoute {
+public class ContentRoute extends AbstractRoute {
 
-    private static final Logger LOG = Logger.getLogger(ContentRetrievalRoute.class);
+    private static final Logger LOG = Logger.getLogger(ContentRoute.class);
     private final Database database;
 
-    public ContentRetrievalRoute(Database database, String route) {
+    public ContentRoute(Database database, String route) {
         super(route);
         this.database = database;
     }

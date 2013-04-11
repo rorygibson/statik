@@ -1,18 +1,19 @@
 package com.example.web.route;
 
 
+import com.example.web.AuthStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
 
 import java.util.Map;
 
-public class AuthReceiverRoute extends AbstractAuthenticatedRoute {
+public class LoginRoute extends AbstractAuthenticatedRoute {
 
-    private static final Logger LOG = Logger.getLogger(AuthReceiverRoute.class);
+    private static final Logger LOG = Logger.getLogger(LoginRoute.class);
 
-    public AuthReceiverRoute(String route, String username, String password) {
-        super(route, username, password);
+    public LoginRoute(String route, AuthStore authStore) {
+        super(route, authStore);
     }
 
     @Override
@@ -24,10 +25,8 @@ public class AuthReceiverRoute extends AbstractAuthenticatedRoute {
         LOG.debug("POST to /auth for user [" + username + "]");
 
         if (auth(username, password)) {
-            String sessionId = sessionId();
-            sessionStore.put(sessionId, username);
+            String sessionId = createSessionFor(username);
             response.cookie(COOKIE_NAME, sessionId);
-            LOG.debug("Authenticated");
             response.redirect("/");
             return "";
         }
