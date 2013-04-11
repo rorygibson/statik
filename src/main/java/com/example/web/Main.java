@@ -1,20 +1,26 @@
 package com.example.web;
 
+import com.example.web.route.*;
 import org.apache.log4j.Logger;
-import spark.Request;
-import spark.Response;
-import spark.Route;
 import spark.Spark;
 
-import java.util.Map;
 import java.util.Properties;
 
 public class Main implements spark.servlet.SparkApplication {
 
     private static final Logger LOG = Logger.getLogger(Main.class);
-
     private static final String MESSAGE_BUNDLE_NAME = "messages.properties";
+    private static final String CONFIG_FILENAME = "config.properties";
+    private static final String FILE_BASE = "fileBase";
+    private static final String WELCOME_FILE = "welcomeFile";
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
+    private String fileBase;
     private Database database;
+    private boolean configured = false;
+    private String welcomeFile;
+    private String password;
+    private String username;
 
     public static void main(String[] args) {
         new Main().init();
@@ -22,54 +28,45 @@ public class Main implements spark.servlet.SparkApplication {
 
     @Override
     public void init() {
-        LOG.debug("init()");
+        if (!configured) {
+            this.configure(CONFIG_FILENAME);
+        }
+
         this.database = new MongoDatabase();
-        this.database.configure();
+        this.database.configure(CONFIG_FILENAME);
 
         if (database.isEmpty()) {
-            loadMessages();
+            loadMessagesIntoDatabaseFrom(MESSAGE_BUNDLE_NAME);
         }
 
         LOG.info("Setting up routes");
-
-        Spark.staticFileRoute("public");
-
-        Spark.get(new Route("/content/:id") {
-            @Override
-            public Object handle(Request request, Response response) {
-                LOG.debug("GET " + request.url());
-                String id = request.params("id");
-
-                String content = database.get(id);
-
-                LOG.debug("Content size for id [" + id + "] is [" + content.length() + "]");
-                return content;
-            }
-        });
-
-        Spark.post(new Route("/content/:id") {
-            @Override
-            public Object handle(Request request, Response response) {
-                Map<String, String[]> parameterMap = request.raw().getParameterMap();
-
-                String id = request.params("id");
-                String newContent = parameterMap.get("content")[0];
-                String selector = parameterMap.get("selector")[0];
-
-                LOG.debug("POST to [" + request.url() + "], + id [" + id + "], selector [" + selector + "], content length [" + newContent.length() + "]");
-
-                database.insertOrUpdate(id, newContent);
-
-                response.status(200);
-                return "OK";
-            }
-        });
+        Spark.get(new LogoutRoute("/logout", username, password));
+        Spark.get(new LoginFormRoute("/auth"));
+        Spark.post(new AuthReceiverRoute("/auth", username, password));
+        Spark.post(new ContentRetrievalRoute(this.database, "/content/:id"));
+        Spark.get(new CESResourceRoute("/ces-resources/:file"));
+        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/", this.welcomeFile, username, password));
+        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/*", username, password));
     }
 
 
-    private void loadMessages() {
-        LOG.info("Loading messages into DB");
-        Properties content = new PropertiesLoader().loadProperties(MESSAGE_BUNDLE_NAME);
+    private void configure(String configFilename) {
+        LOG.info("Configuring from [" + configFilename + "]");
+        Properties config = PropertiesLoader.loadProperties(configFilename);
+        this.fileBase = config.getProperty(FILE_BASE);
+        this.welcomeFile = config.getProperty(WELCOME_FILE);
+        this.configured = true;
+        this.username = config.getProperty(USERNAME);
+        this.password = config.getProperty(PASSWORD);
+
+        LOG.debug("File base is " + fileBase);
+        LOG.debug("Welcome file is " + welcomeFile);
+    }
+
+
+    private void loadMessagesIntoDatabaseFrom(String messageBundleName) {
+        LOG.info("Loading messages into DB from [" + messageBundleName + "]");
+        Properties content = new PropertiesLoader().loadProperties(messageBundleName);
 
         for (Object key : content.keySet()) {
             String value = content.getProperty(key.toString());
@@ -77,5 +74,4 @@ public class Main implements spark.servlet.SparkApplication {
             LOG.debug("Inserted item to database");
         }
     }
-
 }

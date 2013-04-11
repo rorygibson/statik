@@ -23,7 +23,6 @@ public class MongoDatabase implements Database {
     private String MONGO_PASSWORD = "";
 
     private boolean configured = false;
-    private static final String CONFIG_FILENAME = "config.properties";
 
     @Override
     public boolean isEmpty() {
@@ -36,7 +35,7 @@ public class MongoDatabase implements Database {
     public String get(String id) {
         BasicDBObject q = new BasicDBObject("contentId", id);
         DBObject r = items.findOne(q);
-        return (r == null) ? "" : r.containsField("content") ? r.get("content").toString() : "";
+        return (r == null) ? null : r.containsField("content") ? r.get("content").toString() : null;
     }
 
     @Override
@@ -56,30 +55,23 @@ public class MongoDatabase implements Database {
     }
 
     @Override
-    public void configure() {
+    public void configure(String configFilename) {
         if (!configured) {
-            loadConfig();
+            loadConfig(configFilename);
             setupDB();
             this.configured = true;
         }
     }
 
-    private void loadConfig() {
+    private void loadConfig(String filename) {
         LOG.info("Loading config");
-        try {
-            ClassLoader contextClassLoader = this.getClass().getClassLoader();
-            InputStream resourceAsStream = contextClassLoader.getResourceAsStream(CONFIG_FILENAME);
-            Properties config = new Properties();
-            config.load(resourceAsStream);
+        Properties config = PropertiesLoader.loadProperties(filename);
 
-            DB_NAME = config.getProperty("DB_NAME");
-            MONGO_HOST= config.getProperty("MONGO_HOST");
-            MONGO_PORT = Integer.parseInt(config.getProperty("MONGO_PORT"));
-            MONGO_USERNAME = config.getProperty("MONGO_USERNAME");
-            MONGO_PASSWORD = config.getProperty("MONGO_PASSWORD");
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't load config", e);
-        }
+        DB_NAME = config.getProperty("DB_NAME");
+        MONGO_HOST= config.getProperty("MONGO_HOST");
+        MONGO_PORT = Integer.parseInt(config.getProperty("MONGO_PORT"));
+        MONGO_USERNAME = config.getProperty("MONGO_USERNAME");
+        MONGO_PASSWORD = config.getProperty("MONGO_PASSWORD");
     }
 
     private void setupDB() {

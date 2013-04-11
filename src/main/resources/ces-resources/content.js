@@ -5,12 +5,7 @@ $(document).ready(function(){
     $.each(items, function(index, item) {
         var contentId = $(item).attr('data-content-id');
 
-        $.get('/content/' + contentId, function(data) {
-            if (data) {
-                $(item).html(data);
-            }
-            $(item).attr('contenteditable','true');
-        });
+        $(item).attr('contenteditable','true');
 
         $(item).live('blur',function(){
         	$.ajax({

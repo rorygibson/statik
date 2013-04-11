@@ -7,5 +7,5 @@ public interface Database {
 
     void insertOrUpdate(String id, String content);
 
-    void configure();
+    void configure(String configFilename);
 }
