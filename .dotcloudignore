@@ -1,6 +1,0 @@
-*.iml
-.idea
-.git
-.gitignore
-target
-!target\ROOT.war
