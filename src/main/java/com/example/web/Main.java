@@ -1,20 +1,17 @@
 package com.example.web;
 
-import com.mongodb.BasicDBObject;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.Spark;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
 
 public class Main implements spark.servlet.SparkApplication {
 
-    private static final Logger log = Logger.getLogger(Main.class);
+    private static final Logger LOG = Logger.getLogger(Main.class);
 
     private static final String MESSAGE_BUNDLE_NAME = "messages.properties";
     private Database database;
@@ -25,25 +22,27 @@ public class Main implements spark.servlet.SparkApplication {
 
     @Override
     public void init() {
-        log.debug("init()");
-        this.database = new Database();
+        LOG.debug("init()");
+        this.database = new MongoDatabase();
         this.database.configure();
 
         if (database.isEmpty()) {
             loadMessages();
         }
 
-        log.info("Setting up routes");
+        LOG.info("Setting up routes");
+
+        Spark.staticFileRoute("public");
 
         Spark.get(new Route("/content/:id") {
             @Override
             public Object handle(Request request, Response response) {
-                log.debug("GET " + request.url());
+                LOG.debug("GET " + request.url());
                 String id = request.params("id");
 
                 String content = database.get(id);
 
-                log.debug("Content size [" + content.length() + "]");
+                LOG.debug("Content size for id [" + id + "] is [" + content.length() + "]");
                 return content;
             }
         });
@@ -51,13 +50,15 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.post(new Route("/content/:id") {
             @Override
             public Object handle(Request request, Response response) {
-                log.debug("POST " + request.url());
                 Map<String, String[]> parameterMap = request.raw().getParameterMap();
 
                 String id = request.params("id");
                 String newContent = parameterMap.get("content")[0];
+                String selector = parameterMap.get("selector")[0];
 
-                database.insert(id, newContent);
+                LOG.debug("POST to [" + request.url() + "], + id [" + id + "], selector [" + selector + "], content length [" + newContent.length() + "]");
+
+                database.insertOrUpdate(id, newContent);
 
                 response.status(200);
                 return "OK";
@@ -67,23 +68,14 @@ public class Main implements spark.servlet.SparkApplication {
 
 
     private void loadMessages() {
-        log.info("Loading messages into empty DB");
-        Properties content = new Properties();
-        try {
-            ClassLoader contextClassLoader = this.getClass().getClassLoader();
-            InputStream resourceAsStream = contextClassLoader.getResourceAsStream(MESSAGE_BUNDLE_NAME);
-
-            content.load(resourceAsStream);
-
-            log.info("Loaded " + content.size() + " as properties");
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't load messages", e);
-        }
+        LOG.info("Loading messages into DB");
+        Properties content = new PropertiesLoader().loadProperties(MESSAGE_BUNDLE_NAME);
 
         for (Object key : content.keySet()) {
             String value = content.getProperty(key.toString());
-            this.database.insert(key.toString(), value);
-            log.debug("Inserted item to mongo");
+            this.database.insertOrUpdate(key.toString(), value);
+            LOG.debug("Inserted item to database");
         }
     }
+
 }

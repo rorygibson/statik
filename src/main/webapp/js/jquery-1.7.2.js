@@ -1396,7 +1396,7 @@ jQuery.support = (function() {
 		leadingWhitespace: ( div.firstChild.nodeType === 3 ),
 
 		// Make sure that tbody elements aren't automatically inserted
-		// IE will insert them into empty tables
+		// IE will insertOrUpdate them into empty tables
 		tbody: !div.getElementsByTagName("tbody").length,
 
 		// Make sure that link elements get serialized correctly by innerHTML
@@ -6704,7 +6704,7 @@ jQuery.extend({
 		var old = {},
 			ret, name;
 
-		// Remember the old values, and insert the new ones
+		// Remember the old values, and insertOrUpdate the new ones
 		for ( name in options ) {
 			old[ name ] = elem.style[ name ];
 			elem.style[ name ] = options[ name ];
