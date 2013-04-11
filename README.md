@@ -26,12 +26,16 @@ Requires (as a designer who wants to give a client an editable website):
  - that you put a simple attribute on the elements you consider 'editable' (just include a data-content-id="some unique value" attribute on each one)
 
 ## Setup
+    git clone https://github.com/rorygibson/ces.git
 
- - git clone https://github.com/rorygibson/ces.git
- - mkdir /home/rory/websites/my-site (or wherever)
- - dump the HTML of your static site into the directory
- - configure the src/main/resources/config.properties with your MongoDB details, path to website and the name and password of the author account you want to give to your client
- - mvn clean package tomcat:run-war
- - open browser on http://<host>:8080/index.html
+    mkdir /home/rory/websites/my-site (or wherever)
+
+    dump the HTML of your static site into the directory
+
+    configure the src/main/resources/config.properties with your MongoDB details, path to website and the name and password of the author account you want to give to your client
+
+    mvn clean package tomcat:run-war
+
+    open browser on http://[host]:8080/index.html
 
 
