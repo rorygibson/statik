@@ -1,6 +1,7 @@
 package com.example.web.route;
 
 import com.example.web.AuthStore;
+import com.example.web.ContentItem;
 import com.example.web.Database;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -13,6 +14,7 @@ import spark.Response;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 
 public class EditableFileRoute extends AbstractAuthenticatedRoute {
@@ -44,37 +46,53 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
     public Object handle(Request request, Response response) {
         File theFile;
 
-        if (this.namedFile == null) {
-            String filename = request.raw().getServletPath();
-            String fullPath = fileBase + "/" + filename;
-            theFile = new File(fullPath);
-            LOG.debug("Request for file, url is [" + request.url() + "], full path to file is [" + fullPath + "]");
+        if (thisRouteIsBoundToASpecificFile()) {
+            theFile = findMySpecificFile();
         } else {
-            theFile = new File(fileBase + "/" + this.namedFile);
-            LOG.debug("Serving welcome file [" + theFile.getAbsolutePath() + "]");
+            theFile = findRequestedFileFrom(request);
         }
 
-        if (theFile.exists()) {
-            try {
-                response.status(200);
+        if (!theFile.exists()) {
+            LOG.warn("File not found [" + theFile.getAbsolutePath() + "]");
+            response.status(404);
+            return "File not found";
+        }
 
-                if (mightContainCmsContent(theFile)) {
-                    LOG.debug("File is candidate for content editing");
-                    return cmsify(theFile, hasSession(request));
-                }
+        try {
+            response.status(200);
 
-                LOG.debug("Serving file [" + theFile.getAbsolutePath() + "] straight from disk");
-                writeFileToResponse(response, theFile);
-                return "";
-
-            } catch (IOException e) {
-                LOG.error("Error reading [" + theFile.getAbsolutePath() + "]");
+            if (mightContainCmsContent(theFile)) {
+                LOG.debug("File is candidate for content editing");
+                return cmsify(theFile, hasSession(request));
             }
+
+            LOG.debug("Serving file [" + theFile.getAbsolutePath() + "] straight from disk");
+            writeFileToResponse(response, theFile);
+
+        } catch (IOException e) {
+            LOG.error("Error reading [" + theFile.getAbsolutePath() + "]");
         }
 
-        LOG.warn("File not found [" + theFile.getAbsolutePath() + "]");
-        response.status(404);
-        return "File not found";
+        return "";
+    }
+
+    private File findMySpecificFile() {
+        File theFile;
+        theFile = new File(fileBase + "/" + this.namedFile);
+        LOG.debug("Serving welcome file [" + theFile.getAbsolutePath() + "]");
+        return theFile;
+    }
+
+    private File findRequestedFileFrom(Request request) {
+        File theFile;
+        String fullPath = fileBase + "/" + request.raw().getServletPath();
+        theFile = new File(fullPath);
+        LOG.debug("Request for file, url is [" + request.url() + "], full path to file is [" + fullPath + "]");
+        return theFile;
+    }
+
+    private boolean thisRouteIsBoundToASpecificFile() {
+        return this.namedFile != null;
     }
 
 
@@ -88,18 +106,15 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
     }
 
     private Document replaceContent(Document doc) {
-        Elements elements = doc.select(SELECTOR);
+        Map<String,ContentItem> contentItems = this.database.findAll();
 
-        for (Element el : elements) {
-            String id = el.attr(ATTRIBUTE_NAME);
-
-            LOG.debug("Found replaceable content item with id [" + id + "]");
-            String newContent = this.database.get(id);
-
-            if (newContent != null) {
-                el.text(newContent);
-            }
+        for (String selector : contentItems.keySet()) {
+            ContentItem contentItem = contentItems.get(selector);
+            Element el = doc.select(selector).first();
+            LOG.debug("Replacing content with selector [" + selector + "]");
+            el.text(contentItem.content());
         }
+
         return doc;
     }
 

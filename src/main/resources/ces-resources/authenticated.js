@@ -1,16 +1,14 @@
 $(document).ready(function(){
 
-    var items = $('*[data-content-id]');
+    var items = $('p');
 
     $.each(items, function(index, item) {
-        var contentId = $(item).attr('data-content-id');
-
         $(item).attr('contenteditable','true');
 
         $(item).live('blur',function(){
         	$.ajax({
         		type:'POST',
-        		url:'/content/' + contentId,
+        		url:'/content',
         		data:{
         			content: $(this).text(),
                     selector: $(this).getPath()

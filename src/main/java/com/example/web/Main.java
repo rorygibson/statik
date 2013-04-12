@@ -37,7 +37,7 @@ public class Main implements spark.servlet.SparkApplication {
         this.database.configure(CONFIG_FILENAME);
 
         if (database.isEmpty()) {
-            loadMessagesIntoDatabaseFrom(MESSAGE_BUNDLE_NAME);
+//            loadMessagesIntoDatabaseFrom(MESSAGE_BUNDLE_NAME);
         }
 
         this.authStore = new AuthStore();
@@ -48,7 +48,7 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new LoginFormRoute("/login"));
         Spark.get(new LoginErrorRoute("/login-error"));
         Spark.post(new LoginRoute("/auth", this.authStore));
-        Spark.post(new ContentRoute(this.database, "/content/:id"));
+        Spark.post(new ContentRoute(this.database, "/content"));
         Spark.get(new CESResourceRoute("/ces-resources/:file"));
         Spark.get(new EditableFileRoute(this.database, this.fileBase, "/", this.welcomeFile, this.authStore));
         Spark.get(new EditableFileRoute(this.database, this.fileBase, "/*", this.authStore));
@@ -68,15 +68,15 @@ public class Main implements spark.servlet.SparkApplication {
         LOG.debug("Welcome file is " + welcomeFile);
     }
 
-
-    private void loadMessagesIntoDatabaseFrom(String messageBundleName) {
-        LOG.info("Loading messages into DB from [" + messageBundleName + "]");
-        Properties content = new PropertiesLoader().loadProperties(messageBundleName);
-
-        for (Object key : content.keySet()) {
-            String value = content.getProperty(key.toString());
-            this.database.insertOrUpdate(key.toString(), value);
-            LOG.debug("Inserted item to database");
-        }
-    }
+//
+//    private void loadMessagesIntoDatabaseFrom(String messageBundleName) {
+//        LOG.info("Loading messages into DB from [" + messageBundleName + "]");
+//        Properties content = new PropertiesLoader().loadProperties(messageBundleName);
+//
+//        for (Object key : content.keySet()) {
+//            String value = content.getProperty(key.toString());
+//            this.database.insertOrUpdate(key.toString(), value, "");
+//            LOG.debug("Inserted item to database");
+//        }
+//    }
 }

@@ -24,13 +24,12 @@ public class ContentRoute extends AbstractRoute {
     public Object handle(Request request, Response response) {
         Map<String, String[]> parameterMap = request.raw().getParameterMap();
 
-        String id = request.params(ID);
         String newContent = parameterMap.get(CONTENT)[0];
         String selector = parameterMap.get(SELECTOR)[0];
 
-        LOG.debug("POST to [" + request.url() + "], + id [" + id + "], selector [" + selector + "], content length [" + newContent.length() + "]");
+        LOG.debug("POST to [" + request.url() + "], selector [" + selector + "], content length [" + newContent.length() + "]");
 
-        database.insertOrUpdate(id, newContent);
+        database.insertOrUpdate(newContent, selector);
 
         response.status(200);
         return "OK";

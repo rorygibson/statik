@@ -1,11 +1,13 @@
 package com.example.web;
 
+import java.util.Map;
+
 public interface Database {
     boolean isEmpty();
 
-    String get(String id);
-
-    void insertOrUpdate(String id, String content);
+    void insertOrUpdate(String content, String selector);
 
     void configure(String configFilename);
+
+    Map<String, ContentItem> findAll();
 }

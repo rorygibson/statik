@@ -23,7 +23,6 @@ Requires (currently), on the server:
 
 Requires (as a designer who wants to give a client an editable website):
  - a website, expressed as a set of static .html files, CSS, JavaScript, images etc.
- - that you put a simple attribute on the elements you consider 'editable' (just include a data-content-id="some unique value" attribute on each one)
 
 ## Setup
     git clone https://github.com/rorygibson/ces.git
@@ -39,3 +38,10 @@ Requires (as a designer who wants to give a client an editable website):
     open browser on http://[host]:8080/index.html
 
 
+## TODO
+
+ - Editing of repeated elements (nth in a list, or second of 4 paragraphs) will result in the results appearing the the wrong element - it's not taking account of nth-child selectors in the JS.
+ - Editability of an element should be signified by the author, by right clicking on elements of allowed types (headings, paras, sections...), probably with a right click menu
+ - Currently there's a single collection for the whole site, and no way to differentiate pages. ContentItem needs to be aware of the page it's on, or similar. At the moment it's only safe to use on a single page.
+ - Binary packaging and release, with externalised config
+ - Productionise - no tests right now

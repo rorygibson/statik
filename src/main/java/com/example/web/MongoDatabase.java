@@ -4,13 +4,13 @@ import com.mongodb.*;
 import org.apache.log4j.Logger;
 
 import java.net.UnknownHostException;
-import java.util.Properties;
+import java.util.*;
 
 public class MongoDatabase implements Database {
     private static final Logger LOG = Logger.getLogger(MongoDatabase.class);
     public static final String COLLECTION_NAME = "contentItems";
-    public static final String CONTENT_ID = "contentId";
     public static final String CONTENT = "content";
+    private static final String SELECTOR = "selector";
 
     private MongoClient mongoClient = null;
 
@@ -32,18 +32,11 @@ public class MongoDatabase implements Database {
     }
 
     @Override
-    public String get(String id) {
-        BasicDBObject q = new BasicDBObject(CONTENT_ID, id);
-        DBObject r = items.findOne(q);
-        return (r == null) ? null : r.containsField(CONTENT) ? r.get(CONTENT).toString() : null;
-    }
+    public void insertOrUpdate(String content, String selector) {
+        LOG.debug("Updating with content, length [" + content.length() + "] and selector [" + selector + "]");
 
-    @Override
-    public void insertOrUpdate(String id, String content) {
-        LOG.debug("Updating contentItem [" + id + "] with content, length [" + content.length() + "]");
-
-        BasicDBObject queryObject = new BasicDBObject(CONTENT_ID, id);
-        BasicDBObject updateObject = new BasicDBObject(CONTENT_ID, id).append(CONTENT, content);
+        BasicDBObject queryObject = new BasicDBObject(SELECTOR, selector);
+        BasicDBObject updateObject = new BasicDBObject(SELECTOR, selector).append(CONTENT, content);
         WriteResult update = items.update(queryObject, updateObject);
 
         if (update.getN() == 0) {
@@ -61,6 +54,20 @@ public class MongoDatabase implements Database {
             setupDB();
             this.configured = true;
         }
+    }
+
+    @Override
+    public Map<String, ContentItem> findAll() {
+        DBCursor cursor = this.items.find();
+
+        Map<String, ContentItem> items = new HashMap<String, ContentItem>();
+        while (cursor.hasNext()) {
+            DBObject dbObject = cursor.next();
+            String content = dbObject.get(CONTENT).toString();
+            String selector = dbObject.get(SELECTOR).toString();
+            items.put(selector, new ContentItem(content));
+        }
+        return items;
     }
 
     private void loadConfig(String filename) {
