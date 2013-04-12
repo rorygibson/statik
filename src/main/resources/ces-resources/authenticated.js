@@ -2,6 +2,8 @@ $(document).ready(function(){
 
     var items = $('p');
 
+
+
     $.each(items, function(index, item) {
         $(item).attr('contenteditable','true');
 
