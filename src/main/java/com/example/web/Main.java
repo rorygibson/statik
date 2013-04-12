@@ -46,6 +46,7 @@ public class Main implements spark.servlet.SparkApplication {
         LOG.info("Setting up routes");
         Spark.get(new LogoutRoute("/logout", this.authStore));
         Spark.get(new LoginFormRoute("/login"));
+        Spark.get(new LoginErrorRoute("/login-error"));
         Spark.post(new LoginRoute("/auth", this.authStore));
         Spark.post(new ContentRoute(this.database, "/content/:id"));
         Spark.get(new CESResourceRoute("/ces-resources/:file"));

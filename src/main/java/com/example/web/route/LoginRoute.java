@@ -34,7 +34,7 @@ public class LoginRoute extends AbstractAuthenticatedRoute {
         }
 
         LOG.debug("Not authenticated");
-        response.status(401);
+        response.redirect("/login-error");
         return "Not authenticated";
     }
 
