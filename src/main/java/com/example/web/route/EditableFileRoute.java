@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class EditableFileRoute extends Route {
 
-    public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"ces-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"ces-resources/jquery-getpath.js\" type=\"text/javascript\"></script>";
+    public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"ces-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"ces-resources/getpath.js\" type=\"text/javascript\"></script>";
     public static final String HTML_SUFFIX = ".html";
     private final AuthStore authStore;
     private final SessionStore sessionStore;

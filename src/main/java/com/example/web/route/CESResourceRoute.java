@@ -13,7 +13,7 @@ import java.io.InputStream;
 public class CESResourceRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(CESResourceRoute.class);
-    private static final String RESOURCE_ROOT_PATH = "/ces-resources/";
+    private static final String RESOURCE_ROOT_PATH = "ces-resources/";
 
     public CESResourceRoute(String route) {
         super(route);
@@ -29,15 +29,15 @@ public class CESResourceRoute extends Route {
 
 
     protected Object writeClasspathFileToResponse(Response response, String filename) {
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(RESOURCE_ROOT_PATH + filename);
+        String filePath = RESOURCE_ROOT_PATH + filename;
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
         try {
             IOUtils.copy(resourceAsStream, response.raw().getOutputStream());
-            response.status(200);
             return Http.EMPTY_RESPONSE;
         } catch (IOException e) {
             LOG.error("Error retrieving resource", e);
+            response.status(404);
         }
-        response.status(404);
         return Http.EMPTY_RESPONSE;
     }
 }

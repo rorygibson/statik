@@ -37,7 +37,7 @@ public class LoginRoute extends Route {
             String sessionId = sessionStore.createSession(username);
             response.cookie(Http.COOKIE_NAME, sessionId);
             response.redirect("/");
-            return Http.EMPTY_RESPONSE;
+            return "OK";
         }
 
         response.redirect("/login-error");
