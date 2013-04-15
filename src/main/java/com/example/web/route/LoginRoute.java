@@ -36,5 +36,4 @@ public class LoginRoute extends AbstractAuthenticatedRoute {
         response.redirect("/login-error");
         return EMPTY_RESPONSE;
     }
-
 }
