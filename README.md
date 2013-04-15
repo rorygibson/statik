@@ -42,13 +42,17 @@ Requires (as a designer who wants to give a client an editable website):
 
 On a development machine:
     git clone https://github.com/rorygibson/ces.git
-
     mvn clean install
 
 Server side tasks:
 
  * Copy the target/ROOT.war file to the servlet container deployment directory
- * Create a config.properties file in the lib/ directory of the servlet container. Template:
+ * Create a config.properties file in the lib/ directory of the servlet container.
+ * Copy your website static files to the directory specified in your config.properties
+ * Start Tomcat (/ Jetty, whatever)
+
+Example config.properties
+
     dbName=contentdb
     mongoHost=localhost
     mongoPort=27017
@@ -56,8 +60,6 @@ Server side tasks:
     mongoPassword=password
     fileBase=/tmp/testFiles
     welcomeFile=index.html
- * Copy your website static files to the directory specified in your config.properties
- * Start Tomcat (/ Jetty, whatever)
 
 
 
