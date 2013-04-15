@@ -60,15 +60,3 @@ Example config.properties
     mongoPassword=password
     fileBase=/tmp/testFiles
     welcomeFile=index.html
-
-
-
-## TODO
-
- - Binary packaging and release, with externalised config
- - Needs some UI tests
- - Editing of repeated elements (nth in a list, or second of 4 paragraphs) will result in the results appearing the the wrong element - it's not taking account of nth-child selectors in the JS.
- - Needs to have a JS editor - just using contenteditable looks rough. Something like wysihtml or maybe Aloha (bit heavy though)
- - Editability of an element should be signified by the author, by right clicking on elements of allowed types (headings, LIs, spans, paras, sections... - only those containing text?), probably with a right click menu
- - BUG: / and index.html (welcome file) are treated as separate pages so don't share content
-
