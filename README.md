@@ -1,30 +1,47 @@
 # CES - Content Editing System
 
+## The Elevator Pitch (tl;dr)
+
 A very simple content editing system.
 
-The premise is that if you've got a proper designer building your website, they want to work in plain ol' HTML, CSS and maybe JS.
-And they're going to give you a zip file of stuff.
-If you want to be able to change the words (not the images, or the layout, or the colours - *designers hate that*) then you can't, unless you know a bit about HTML.
+ 1. Get a web designer to make you a website (in HTML, CSS and maybe some JavaScript)
+ 2. Copy the website into CES, and change the content whenever you want, immediately.
+ 3. ...
+ 4. Profit!
 
-The idea of CES is, as a designer who can work an FTP client, it should be possible to throw the static resources into a directory on a server, and it just becomes editable when you're signed in.
+## In a bit more detail
 
-You give the client some login details and that's it, they've got a minimal, editable website.
+Generally, content managed websites require the designer to build the code in "Wordpress", or "FreeMarker", or "Smarty templates".
+And that makes sense for great big sites with thousands of pages and complicated features.
 
-Just like that.
+But what if you've got a few pages of HTML and you'd just like, as the owner of a site you paid someone to design for you, to change the words on them sometimes?
+Generally it's hard. You either have to know HTML, or pay someone.
+And if you're a designer, and you want to make a site content managed - then again, you're back to writing-it-in-Wordpress, instead of working in your favourite tools of HTML and CSS.
 
-(It's not there yet, but we're well on the way).
+CES lets you copy a static site into a directory on the server (probably using FTP, like back in the day), where it serves from, just like Apache.
+Except, whenever you want to, you can fire a browser at http://website/login, punch in a username and password, and live-edit the content on the page.
+
+That's it.
+
+## Project status
+It works. It's got a couple of bugs and the edtor functionality is very basic.
+Try it out and gimme feedback, please!
+
 
 ## Prerequisites
 
 To build:
+
  - Java 7
  - Maven 3
 
 To run:
+
  - Java 7
  - MongoDB
 
-Requires (to do anything useful):
+To serve a website:
+
  - a website, expressed as a set of static .html files, CSS, JavaScript, images etc.
 
 ## Development setup
