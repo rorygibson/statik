@@ -1,9 +1,6 @@
 package com.example.web.route;
 
-import com.example.web.AuthStore;
-import com.example.web.ContentItem;
-import com.example.web.Database;
-import com.example.web.SessionStore;
+import com.example.web.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -11,6 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import spark.Request;
 import spark.Response;
+import spark.Route;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -18,7 +16,7 @@ import java.io.IOException;
 import java.util.Map;
 
 
-public class EditableFileRoute extends AbstractRoute {
+public class EditableFileRoute extends Route {
 
     public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"ces-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"ces-resources/jquery-getpath.js\" type=\"text/javascript\"></script>";
     public static final String HTML_SUFFIX = ".html";
@@ -63,7 +61,7 @@ public class EditableFileRoute extends AbstractRoute {
         if (!theFile.exists()) {
             LOG.warn("File not found [" + theFile.getAbsolutePath() + "]");
             response.status(404);
-            return EMPTY_RESPONSE;
+            return Http.EMPTY_RESPONSE;
         }
 
         try {
@@ -71,7 +69,7 @@ public class EditableFileRoute extends AbstractRoute {
 
             if (mightContainCmsContent(theFile)) {
                 LOG.debug("File is candidate for content editing");
-                return cesify(path, theFile, sessionStore.hasSession(sessionFrom(request)));
+                return cesify(path, theFile, sessionStore.hasSession(Http.sessionFrom(request)));
             }
 
             LOG.trace("Serving file [" + theFile.getAbsolutePath() + "] straight from disk");
@@ -81,7 +79,7 @@ public class EditableFileRoute extends AbstractRoute {
             LOG.error("Error reading [" + theFile.getAbsolutePath() + "]");
         }
 
-        return EMPTY_RESPONSE;
+        return Http.EMPTY_RESPONSE;
     }
 
     private File findMySpecificFile() {
@@ -110,7 +108,7 @@ public class EditableFileRoute extends AbstractRoute {
     }
 
     private Document replaceContent(Document doc, String path) {
-        Map<String,ContentItem> contentItems = this.database.findForPath(path);
+        Map<String, ContentItem> contentItems = this.database.findForPath(path);
 
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
@@ -135,4 +133,11 @@ public class EditableFileRoute extends AbstractRoute {
 
         return doc.toString();
     }
+
+
+    public void writeFileToResponse(Response response, File theFile) throws IOException {
+        byte[] bytes = FileUtils.readFileToByteArray(theFile);
+        response.raw().getOutputStream().write(bytes);
+    }
+
 }

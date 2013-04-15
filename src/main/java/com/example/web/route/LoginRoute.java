@@ -2,14 +2,16 @@ package com.example.web.route;
 
 
 import com.example.web.AuthStore;
+import com.example.web.Http;
 import com.example.web.SessionStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
+import spark.Route;
 
 import java.util.Map;
 
-public class LoginRoute extends AbstractRoute {
+public class LoginRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(LoginRoute.class);
     public static final String PASSWORD = "password";
@@ -33,12 +35,12 @@ public class LoginRoute extends AbstractRoute {
 
         if (authStore.auth(username, password)) {
             String sessionId = sessionStore.createSession(username);
-            response.cookie(COOKIE_NAME, sessionId);
+            response.cookie(Http.COOKIE_NAME, sessionId);
             response.redirect("/");
-            return EMPTY_RESPONSE;
+            return Http.EMPTY_RESPONSE;
         }
 
         response.redirect("/login-error");
-        return EMPTY_RESPONSE;
+        return Http.EMPTY_RESPONSE;
     }
 }

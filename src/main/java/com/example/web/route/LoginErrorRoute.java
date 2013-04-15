@@ -8,7 +8,7 @@ import spark.Response;
 
 import java.util.Map;
 
-public class LoginErrorRoute extends AbstractRoute {
+public class LoginErrorRoute extends CESResourceRoute {
 
     private static final Logger LOG = Logger.getLogger(LoginErrorRoute.class);
 

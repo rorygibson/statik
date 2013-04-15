@@ -1,12 +1,14 @@
 package com.example.web.route;
 
 import com.example.web.AuthStore;
+import com.example.web.Http;
 import com.example.web.SessionStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
+import spark.Route;
 
-public class LogoutRoute extends AbstractRoute {
+public class LogoutRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(LogoutRoute.class);
     private final AuthStore authStore;
@@ -20,13 +22,13 @@ public class LogoutRoute extends AbstractRoute {
 
     @Override
      public Object handle(Request request, Response response) {
-         if (sessionStore.hasSession(request.cookie(COOKIE_NAME))) {
-             LOG.debug(("Log out [" + sessionStore.usernameFor(sessionFrom(request)) + "]"));
-             response.removeCookie(COOKIE_NAME);
+         if (sessionStore.hasSession(request.cookie(Http.COOKIE_NAME))) {
+             LOG.debug(("Log out [" + sessionStore.usernameFor(Http.sessionFrom(request)) + "]"));
+             response.removeCookie(Http.COOKIE_NAME);
              response.redirect("/");
-             return EMPTY_RESPONSE;
+             return Http.EMPTY_RESPONSE;
          }
          response.status(401);
-         return EMPTY_RESPONSE;
+         return Http.EMPTY_RESPONSE;
      }
 }

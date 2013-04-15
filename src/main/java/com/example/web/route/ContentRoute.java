@@ -2,13 +2,15 @@ package com.example.web.route;
 
 import com.example.web.ContentItem;
 import com.example.web.Database;
+import com.example.web.Http;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
+import spark.Route;
 
 import java.util.Map;
 
-public class ContentRoute extends AbstractRoute {
+public class ContentRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(ContentRoute.class);
     private final Database database;
@@ -31,6 +33,6 @@ public class ContentRoute extends AbstractRoute {
         database.insertOrUpdate(new ContentItem(path, selector, newContent));
 
         response.status(200);
-        return EMPTY_RESPONSE;
+        return Http.EMPTY_RESPONSE;
     }
 }
