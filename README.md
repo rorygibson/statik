@@ -45,17 +45,17 @@ To serve a website:
  - a website, expressed as a set of static .html files, CSS, JavaScript, images etc.
 
 ## Development setup
-    git clone https://github.com/rorygibson/statik.git
 
+    git clone https://github.com/rorygibson/statik.git
     mkdir /home/rory/websites/my-site (or wherever)
 
-    Copy the HTML of your static site into the directory you just created
+Copy the HTML of your static site into the directory you just created
 
-    Configure $HOME/config.properties with your MongoDB details, path to website and so on (template below)
+Configure $HOME/config.properties with your MongoDB details, path to website and so on (template below)
 
     mvn clean package tomcat:run-war
 
-    Open browser on http://localhost:8080/index.html
+Open browser on http://localhost:8080/index.html
 
 
 ## Server setup
