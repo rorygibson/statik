@@ -1,11 +1,11 @@
-# CES - Content Editing System
+# Statik - a content editing system
 
 ## The Elevator Pitch (tl;dr)
 
 A very simple content editing system.
 
  1. Get a web designer to make you a website (in HTML, CSS and maybe some JavaScript)
- 2. Copy the website into CES, and change the content whenever you want, immediately.
+ 2. Copy the website into Statik, and change the content whenever you want, immediately.
  3. ...
  4. Profit!
 
@@ -18,7 +18,7 @@ But what if you've got a few pages of HTML and you'd just like, as the owner of 
 Generally it's hard. You either have to know HTML, or pay someone.
 And if you're a designer, and you want to make a site content managed - then again, you're back to writing-it-in-Wordpress, instead of working in your favourite tools of HTML and CSS.
 
-CES lets you copy a static site into a directory on the server (probably using FTP, like back in the day), where it serves from, just like Apache.
+Statik lets you copy a static site into a directory on the server (probably using FTP, like back in the day), where it serves from, just like Apache.
 Except, whenever you want to, you can fire a browser at http://website/login, punch in a username and password, and live-edit the content on the page.
 
 That's it.
@@ -45,7 +45,7 @@ To serve a website:
  - a website, expressed as a set of static .html files, CSS, JavaScript, images etc.
 
 ## Development setup
-    git clone https://github.com/rorygibson/ces.git
+    git clone https://github.com/rorygibson/statik.git
 
     mkdir /home/rory/websites/my-site (or wherever)
 

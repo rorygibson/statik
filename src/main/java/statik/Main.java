@@ -1,8 +1,8 @@
-package com.example.web;
+package statik;
 
-import com.example.web.route.*;
 import org.apache.log4j.Logger;
 import spark.Spark;
+import statik.route.*;
 
 import java.io.File;
 import java.util.Properties;

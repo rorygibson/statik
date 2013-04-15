@@ -1,12 +1,9 @@
-package com.example.web.route;
+package statik.route;
 
 
-import com.example.web.AuthStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
-
-import java.util.Map;
 
 public class LoginErrorRoute extends CESResourceRoute {
 

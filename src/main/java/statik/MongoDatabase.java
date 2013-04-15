@@ -1,4 +1,4 @@
-package com.example.web;
+package statik;
 
 import com.mongodb.*;
 import org.apache.log4j.Logger;

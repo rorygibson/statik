@@ -1,6 +1,7 @@
-package com.example.web;
+package statik;
 
 import org.junit.Test;
+import statik.SessionStore;
 
 import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;

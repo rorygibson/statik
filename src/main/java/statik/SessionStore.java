@@ -1,4 +1,4 @@
-package com.example.web;
+package statik;
 
 import java.util.HashMap;
 import java.util.Map;

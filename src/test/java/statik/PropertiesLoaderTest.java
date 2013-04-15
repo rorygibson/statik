@@ -1,8 +1,9 @@
-package com.example.web;
+package statik;
 
 
 import junit.framework.Assert;
 import org.junit.Test;
+import statik.PropertiesLoader;
 
 import java.util.Properties;
 

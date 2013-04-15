@@ -12,7 +12,7 @@
       <filter-class>spark.servlet.SparkFilter</filter-class>
       <init-param>
         <param-name>applicationClass</param-name>
-        <param-value>com.example.web.Main</param-value>
+        <param-value>statik.Main</param-value>
       </init-param>
     </filter>
 

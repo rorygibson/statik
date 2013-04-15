@@ -1,9 +1,9 @@
-package com.example.web.route;
+package statik.route;
 
 
-import com.example.web.AuthStore;
-import com.example.web.Http;
-import com.example.web.SessionStore;
+import statik.AuthStore;
+import statik.Http;
+import statik.SessionStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;

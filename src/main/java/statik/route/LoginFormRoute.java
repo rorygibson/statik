@@ -1,4 +1,4 @@
-package com.example.web.route;
+package statik.route;
 
 import org.apache.log4j.Logger;
 import spark.Request;

@@ -1,6 +1,7 @@
-package com.example.web;
+package statik;
 
 import org.junit.Test;
+import statik.ContentItem;
 
 import static org.junit.Assert.assertEquals;
 

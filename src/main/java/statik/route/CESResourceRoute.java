@@ -1,6 +1,6 @@
-package com.example.web.route;
+package statik.route;
 
-import com.example.web.Http;
+import statik.Http;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import spark.Request;

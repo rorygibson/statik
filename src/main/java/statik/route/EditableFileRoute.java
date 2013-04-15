@@ -1,6 +1,5 @@
-package com.example.web.route;
+package statik.route;
 
-import com.example.web.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -9,6 +8,7 @@ import org.jsoup.nodes.Element;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import statik.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;

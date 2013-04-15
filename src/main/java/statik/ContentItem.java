@@ -1,4 +1,4 @@
-package com.example.web;
+package statik;
 
 public class ContentItem {
 

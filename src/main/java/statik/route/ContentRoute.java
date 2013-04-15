@@ -1,8 +1,8 @@
-package com.example.web.route;
+package statik.route;
 
-import com.example.web.ContentItem;
-import com.example.web.Database;
-import com.example.web.Http;
+import statik.ContentItem;
+import statik.Database;
+import statik.Http;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
