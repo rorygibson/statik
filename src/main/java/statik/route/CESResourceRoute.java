@@ -13,7 +13,7 @@ import java.io.InputStream;
 public class CESResourceRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(CESResourceRoute.class);
-    private static final String RESOURCE_ROOT_PATH = "ces-resources/";
+    private static final String RESOURCE_ROOT_PATH = "statik-resources/";
 
     public CESResourceRoute(String route) {
         super(route);

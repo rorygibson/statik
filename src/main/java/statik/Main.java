@@ -55,7 +55,7 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new LoginErrorRoute("/login-error"));
         Spark.post(new LoginRoute("/auth", this.authStore, this.sessionStore));
         Spark.post(new ContentRoute(this.database, "/content"));
-        Spark.get(new CESResourceRoute("/ces-resources/:file"));
+        Spark.get(new CESResourceRoute("/statik-resources/:file"));
         Spark.get(new EditableFileRoute(this.database, this.fileBase, "/", this.welcomeFile, this.authStore, this.sessionStore));
         Spark.get(new EditableFileRoute(this.database, this.fileBase, "/*", this.authStore, this.sessionStore));
     }
