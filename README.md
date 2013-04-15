@@ -24,7 +24,7 @@ Requires (currently), on the server:
 Requires (as a designer who wants to give a client an editable website):
  - a website, expressed as a set of static .html files, CSS, JavaScript, images etc.
 
-## Setup
+## Quick setup (for development)
     git clone https://github.com/rorygibson/ces.git
 
     mkdir /home/rory/websites/my-site (or wherever)
@@ -38,12 +38,30 @@ Requires (as a designer who wants to give a client an editable website):
     open browser on http://[host]:8080/index.html
 
 
+## Setup (for deployment in a servlet container like Tomcat)
+
+On a development machine:
+    git clone https://github.com/rorygibson/ces.git
+
+    mvn clean install
+
+Server side tasks:
+    Copy the target/ROOT.war file to the servlet container deployment directory
+
+    Create a config.properties file in the lib/ directory of the servlet container (use the one in src/main/resoures as a template)
+
+    Copy your website static files to the directory specified in your config.properties
+
+    Start Tomcat (/ Jetty, whatever)
+
+
+
 ## TODO
 
  - Binary packaging and release, with externalised config
- - Productionise - no tests right now
+ - Needs some UI tests
  - Editing of repeated elements (nth in a list, or second of 4 paragraphs) will result in the results appearing the the wrong element - it's not taking account of nth-child selectors in the JS.
  - Needs to have a JS editor - just using contenteditable looks rough. Something like wysihtml or maybe Aloha (bit heavy though)
  - Editability of an element should be signified by the author, by right clicking on elements of allowed types (headings, LIs, spans, paras, sections... - only those containing text?), probably with a right click menu
- - / and index.html (welcome file) are treated as separate pages so don't share content
+ - BUG: / and index.html (welcome file) are treated as separate pages so don't share content
 
