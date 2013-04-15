@@ -16,40 +16,42 @@ Just like that.
 
 ## Prerequisites
 
-Requires (currently), on the server:
+To build:
  - Java 7
- - Maven 3 (to build, a packaged binary will be forthcoming soon)
+ - Maven 3
+
+To run:
+ - Java 7
  - MongoDB
 
-Requires (as a designer who wants to give a client an editable website):
+Requires (to do anything useful):
  - a website, expressed as a set of static .html files, CSS, JavaScript, images etc.
 
-## Quick setup (for development)
+## Development setup
     git clone https://github.com/rorygibson/ces.git
 
     mkdir /home/rory/websites/my-site (or wherever)
 
-    dump the HTML of your static site into the directory
+    Copy the HTML of your static site into the directory you just created
 
-    configure the src/main/resources/config.properties with your MongoDB details, path to website and the name and password of the author account you want to give to your client
+    Configure $HOME/config.properties with your MongoDB details, path to website and so on (template below)
 
     mvn clean package tomcat:run-war
 
-    open browser on http://[host]:8080/index.html
+    Open browser on http://localhost:8080/index.html
 
 
-## Setup (for deployment in a servlet container like Tomcat)
+## Server setup
 
-On a development machine:
-    git clone https://github.com/rorygibson/ces.git
-    mvn clean install
+Server side tasks (ex. Tomcat):
 
-Server side tasks:
-
- * Copy the target/ROOT.war file to the servlet container deployment directory
- * Create a config.properties file in the lib/ directory of the servlet container.
+ * Obtain the WAR file
+ * Make sure it's called ROOT.war (rename if necessary)
+ * Copy the ROOT.war file to the servlet container deployment directory ($CATALINA_HOME/webapps)
+ * Create a config.properties file in the $HOME directory of the user running the servlet container
+ * Create a users.properties file in the $HOME directory of the user running the servlet container
  * Copy your website static files to the directory specified in your config.properties
- * Start Tomcat (/ Jetty, whatever)
+ * Start Tomcat (./bin/startup.sh)
 
 Example config.properties
 
@@ -60,3 +62,9 @@ Example config.properties
     mongoPassword=password
     fileBase=/tmp/testFiles
     welcomeFile=index.html
+
+Example users.properties
+
+    fred=password1
+    barney=secret-dinosaur-key
+
