@@ -16,8 +16,8 @@ public class LogoutRoute extends AbstractAuthenticatedRoute {
     @Override
      public Object handle(Request request, Response response) {
          if (hasSession(request)) {
-             response.removeCookie(COOKIE_NAME);
              LOG.debug(("Log out [" + usernameForSession(sessionFrom(request)) + "]"));
+             response.removeCookie(COOKIE_NAME);
              response.redirect("/");
              return EMPTY_RESPONSE;
          }
