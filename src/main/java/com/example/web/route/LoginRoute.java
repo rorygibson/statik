@@ -30,12 +30,12 @@ public class LoginRoute extends AbstractAuthenticatedRoute {
             String sessionId = createSessionFor(username);
             response.cookie(COOKIE_NAME, sessionId);
             response.redirect("/");
-            return "";
+            return EMPTY_RESPONSE;
         }
 
         LOG.debug("Not authenticated");
         response.redirect("/login-error");
-        return "Not authenticated";
+        return EMPTY_RESPONSE;
     }
 
 }

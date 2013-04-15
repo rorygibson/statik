@@ -22,11 +22,11 @@ public abstract class AbstractAuthenticatedRoute extends AbstractRoute {
 
     public boolean hasSession(Request request) {
         if (sessionStore.containsKey(request.cookie(COOKIE_NAME))) {
-            LOG.debug("User has a session");
+            LOG.trace("User has a session");
             return true;
         }
 
-        LOG.debug("User does not have a session");
+        LOG.trace("User does not have a session");
         return false;
     }
 
@@ -44,6 +44,14 @@ public abstract class AbstractAuthenticatedRoute extends AbstractRoute {
         String sessionId = UUID.randomUUID().toString();
         sessionStore.put(sessionId, username);
         return sessionId;
+    }
+
+    protected String usernameForSession(String sessionId) {
+        return sessionStore.get(sessionId);
+    }
+
+    protected String sessionFrom(Request request) {
+        return request.cookie(COOKIE_NAME);
     }
 
 }

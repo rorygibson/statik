@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     var items = $('p');
-
+    var path = window.location.pathname;
 
 
     $.each(items, function(index, item) {
@@ -12,6 +12,7 @@ $(document).ready(function(){
         		type:'POST',
         		url:'/content',
         		data:{
+                    path: path,
         			content: $(this).text(),
                     selector: $(this).getPath()
         		},

@@ -1,5 +1,6 @@
 package com.example.web.route;
 
+import com.example.web.ContentItem;
 import com.example.web.Database;
 import org.apache.log4j.Logger;
 import spark.Request;
@@ -10,9 +11,6 @@ import java.util.Map;
 public class ContentRoute extends AbstractRoute {
 
     private static final Logger LOG = Logger.getLogger(ContentRoute.class);
-    public static final String ID = "id";
-    public static final String CONTENT = "content";
-    public static final String SELECTOR = "selector";
     private final Database database;
 
     public ContentRoute(Database database, String route) {
@@ -24,14 +22,15 @@ public class ContentRoute extends AbstractRoute {
     public Object handle(Request request, Response response) {
         Map<String, String[]> parameterMap = request.raw().getParameterMap();
 
-        String newContent = parameterMap.get(CONTENT)[0];
-        String selector = parameterMap.get(SELECTOR)[0];
+        String newContent = parameterMap.get(ContentItem.CONTENT)[0];
+        String selector = parameterMap.get(ContentItem.SELECTOR)[0];
+        String path = parameterMap.get(ContentItem.PATH)[0];
 
-        LOG.debug("POST to [" + request.url() + "], selector [" + selector + "], content length [" + newContent.length() + "]");
+        LOG.debug("POST with selector [" + selector + "], path [" + path + "], content length [" + newContent.length() + "]");
 
-        database.insertOrUpdate(newContent, selector);
+        database.insertOrUpdate(new ContentItem(path, selector, newContent));
 
         response.status(200);
-        return "OK";
+        return EMPTY_RESPONSE;
     }
 }

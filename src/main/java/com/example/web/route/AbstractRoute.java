@@ -13,6 +13,7 @@ import java.io.InputStream;
 
 public abstract class AbstractRoute extends Route {
 
+    public static final String EMPTY_RESPONSE = "";
     private static final Logger LOG = Logger.getLogger(AbstractRoute.class);
     public static final String RESOURCE_ROOT_PATH = "/ces-resources/";
 
@@ -25,12 +26,12 @@ public abstract class AbstractRoute extends Route {
         try {
             IOUtils.copy(resourceAsStream, response.raw().getOutputStream());
             response.status(200);
-            return "";
+            return EMPTY_RESPONSE;
         } catch (IOException e) {
             LOG.error("Error retrieving resource", e);
         }
         response.status(404);
-        return "ERROR";
+        return EMPTY_RESPONSE;
     }
 
     public void writeFileToResponse(Response response, File theFile) throws IOException {

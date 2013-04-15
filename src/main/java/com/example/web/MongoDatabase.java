@@ -9,8 +9,6 @@ import java.util.*;
 public class MongoDatabase implements Database {
     private static final Logger LOG = Logger.getLogger(MongoDatabase.class);
     public static final String COLLECTION_NAME = "contentItems";
-    public static final String CONTENT = "content";
-    private static final String SELECTOR = "selector";
 
     private MongoClient mongoClient = null;
 
@@ -32,11 +30,12 @@ public class MongoDatabase implements Database {
     }
 
     @Override
-    public void insertOrUpdate(String content, String selector) {
-        LOG.debug("Updating with content, length [" + content.length() + "] and selector [" + selector + "]");
+    public void insertOrUpdate(ContentItem contentItem) {
+        LOG.debug("Updating with content, size [" + contentItem.size() + "] and selector [" + contentItem.selector() + "]");
 
-        BasicDBObject queryObject = new BasicDBObject(SELECTOR, selector);
-        BasicDBObject updateObject = new BasicDBObject(SELECTOR, selector).append(CONTENT, content);
+        BasicDBObject queryObject = new BasicDBObject(ContentItem.SELECTOR, contentItem.selector());
+        BasicDBObject updateObject = new BasicDBObject(ContentItem.SELECTOR, contentItem.selector()).append(ContentItem.CONTENT, contentItem.content()).append(ContentItem.PATH
+                , contentItem.path());
         WriteResult update = items.update(queryObject, updateObject);
 
         if (update.getN() == 0) {
@@ -57,15 +56,17 @@ public class MongoDatabase implements Database {
     }
 
     @Override
-    public Map<String, ContentItem> findAll() {
-        DBCursor cursor = this.items.find();
+    public Map<String, ContentItem> findForPath(String path) {
+        BasicDBObject query = new BasicDBObject(ContentItem.PATH, path);
+        DBCursor cursor = this.items.find(query);
 
         Map<String, ContentItem> items = new HashMap<String, ContentItem>();
         while (cursor.hasNext()) {
             DBObject dbObject = cursor.next();
-            String content = dbObject.get(CONTENT).toString();
-            String selector = dbObject.get(SELECTOR).toString();
-            items.put(selector, new ContentItem(content));
+            String content = dbObject.get(ContentItem.CONTENT).toString();
+            String selector = dbObject.get(ContentItem.SELECTOR).toString();
+            String itemPath = dbObject.get(ContentItem.PATH).toString();
+            items.put(selector, new ContentItem(itemPath, selector, content));
         }
         return items;
     }

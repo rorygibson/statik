@@ -5,9 +5,9 @@ import java.util.Map;
 public interface Database {
     boolean isEmpty();
 
-    void insertOrUpdate(String content, String selector);
+    void insertOrUpdate(ContentItem contentItem);
 
     void configure(String configFilename);
 
-    Map<String, ContentItem> findAll();
+    Map<String,ContentItem> findForPath(String path);
 }

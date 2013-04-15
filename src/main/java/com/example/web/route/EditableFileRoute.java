@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import spark.Request;
 import spark.Response;
 
@@ -26,9 +25,6 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
     private String namedFile = null;
     private static final Logger LOG = Logger.getLogger(EditableFileRoute.class);
 
-    private final String SELECTOR = "*[data-content-id]";
-    private final String ATTRIBUTE_NAME = "data-content-id";
-
     public EditableFileRoute(Database database, String fileBase, String route, AuthStore authStore) {
         super(route, authStore);
         this.database = database;
@@ -45,17 +41,18 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
     @Override
     public Object handle(Request request, Response response) {
         File theFile;
+        String path = request.raw().getServletPath();
 
         if (thisRouteIsBoundToASpecificFile()) {
             theFile = findMySpecificFile();
         } else {
-            theFile = findRequestedFileFrom(request);
+            theFile = findRequestedFileFrom(path);
         }
 
         if (!theFile.exists()) {
             LOG.warn("File not found [" + theFile.getAbsolutePath() + "]");
             response.status(404);
-            return "File not found";
+            return EMPTY_RESPONSE;
         }
 
         try {
@@ -63,38 +60,34 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
 
             if (mightContainCmsContent(theFile)) {
                 LOG.debug("File is candidate for content editing");
-                return cmsify(theFile, hasSession(request));
+                return cesify(path, theFile, hasSession(request));
             }
 
-            LOG.debug("Serving file [" + theFile.getAbsolutePath() + "] straight from disk");
+            LOG.trace("Serving file [" + theFile.getAbsolutePath() + "] straight from disk");
             writeFileToResponse(response, theFile);
 
         } catch (IOException e) {
             LOG.error("Error reading [" + theFile.getAbsolutePath() + "]");
         }
 
-        return "";
+        return EMPTY_RESPONSE;
     }
 
     private File findMySpecificFile() {
-        File theFile;
-        theFile = new File(fileBase + "/" + this.namedFile);
-        LOG.debug("Serving welcome file [" + theFile.getAbsolutePath() + "]");
-        return theFile;
+        String path = fileBase + "/" + this.namedFile;
+        LOG.trace("Serving welcome file [" + path + "]");
+        return new File(path);
     }
 
-    private File findRequestedFileFrom(Request request) {
-        File theFile;
-        String fullPath = fileBase + "/" + request.raw().getServletPath();
-        theFile = new File(fullPath);
-        LOG.debug("Request for file, url is [" + request.url() + "], full path to file is [" + fullPath + "]");
-        return theFile;
+    private File findRequestedFileFrom(String path) {
+        String fullPath = fileBase + "/" + path;
+        LOG.trace("Request for file; full path to file is [" + fullPath + "]");
+        return new File(fullPath);
     }
 
     private boolean thisRouteIsBoundToASpecificFile() {
         return this.namedFile != null;
     }
-
 
     private Document makeEditable(Document doc) {
         doc.body().append(AUTHENTICATED_JAVASCRIPT_TO_APPEND);
@@ -105,25 +98,24 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
         return theFile.getName().endsWith(HTML_SUFFIX);
     }
 
-    private Document replaceContent(Document doc) {
-        Map<String,ContentItem> contentItems = this.database.findAll();
+    private Document replaceContent(Document doc, String path) {
+        Map<String,ContentItem> contentItems = this.database.findForPath(path);
 
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
             Element el = doc.select(selector).first();
-            LOG.debug("Replacing content with selector [" + selector + "]");
+            LOG.debug("trace content with selector [" + selector + "]");
             el.text(contentItem.content());
         }
 
         return doc;
     }
 
-    private Object cmsify(File theFile, boolean authenticated) throws IOException {
-        LOG.debug("CESifying file");
+    private String cesify(String path, File theFile, boolean authenticated) throws IOException {
+        LOG.debug("CESifying file ");
 
-        Document doc;
-        doc = Jsoup.parse(FileUtils.readFileToString(theFile));
-        doc = replaceContent(doc);
+        Document doc = Jsoup.parse(FileUtils.readFileToString(theFile));
+        doc = replaceContent(doc, path);
 
         if (authenticated) {
             LOG.debug("Making page editable");

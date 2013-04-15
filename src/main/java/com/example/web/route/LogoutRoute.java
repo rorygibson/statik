@@ -17,11 +17,11 @@ public class LogoutRoute extends AbstractAuthenticatedRoute {
      public Object handle(Request request, Response response) {
          if (hasSession(request)) {
              response.removeCookie(COOKIE_NAME);
-             LOG.debug(("Cookie removed"));
+             LOG.debug(("Log out [" + usernameForSession(sessionFrom(request)) + "]"));
              response.redirect("/");
-             return "";
+             return EMPTY_RESPONSE;
          }
          response.status(401);
-         return "NO SESSION FOUND";
+         return EMPTY_RESPONSE;
      }
 }

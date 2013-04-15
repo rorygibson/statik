@@ -15,7 +15,6 @@ public class LoginFormRoute extends AbstractRoute {
 
     @Override
     public Object handle(Request request, Response response) {
-        LOG.debug("Serving login form");
         return writeClasspathFileToResponse(response, LOGIN_FORM_HTML);
     }
 }

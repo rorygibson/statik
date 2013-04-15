@@ -16,7 +16,7 @@ public class CESResourceRoute extends AbstractRoute {
     @Override
     public Object handle(Request request, Response response) {
         String filename = request.params("file");
-        LOG.debug("Request for file, url is [" + request.url() + "], file is [" + filename + "]");
+        LOG.trace("Request for file, path is [" + request.url() + "], file is [" + filename + "]");
 
         return writeClasspathFileToResponse(response, filename);
     }
