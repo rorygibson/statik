@@ -104,7 +104,7 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
             Element el = doc.select(selector).first();
-            LOG.debug("trace content with selector [" + selector + "]");
+            LOG.trace("Replaced content with selector [" + selector + "]");
             el.text(contentItem.content());
         }
 

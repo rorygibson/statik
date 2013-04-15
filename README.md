@@ -45,4 +45,6 @@ Requires (as a designer who wants to give a client an editable website):
  - Editing of repeated elements (nth in a list, or second of 4 paragraphs) will result in the results appearing the the wrong element - it's not taking account of nth-child selectors in the JS.
  - Needs to have a JS editor - just using contenteditable looks rough. Something like wysihtml or maybe Aloha (bit heavy though)
  - Editability of an element should be signified by the author, by right clicking on elements of allowed types (headings, LIs, spans, paras, sections... - only those containing text?), probably with a right click menu
+ - Username and password management is very simplistic, find a better way
+ - / and index.html (welcome file) are treated as separate pages so don't share content
 

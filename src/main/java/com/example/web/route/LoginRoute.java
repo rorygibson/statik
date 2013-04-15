@@ -33,7 +33,6 @@ public class LoginRoute extends AbstractAuthenticatedRoute {
             return EMPTY_RESPONSE;
         }
 
-        LOG.debug("Not authenticated");
         response.redirect("/login-error");
         return EMPTY_RESPONSE;
     }
