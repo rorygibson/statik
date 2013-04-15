@@ -3,6 +3,7 @@ package com.example.web;
 import com.mongodb.*;
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.net.UnknownHostException;
 import java.util.*;
 
@@ -85,7 +86,7 @@ public class MongoDatabase implements Database {
 
     private void loadConfig(String filename) {
         LOG.info("Loading config");
-        Properties config = PropertiesLoader.loadProperties(filename);
+        Properties config = PropertiesLoader.loadPropertiesFrom(new File(filename));
 
         dbName = config.getProperty("dbName");
         mongoHost = config.getProperty("mongoHost");

@@ -28,11 +28,4 @@ public class AuthStoreTest {
         assertFalse("Should not have authenticated", store.auth("not-a-user", "password"));
     }
 
-    @Test
-    public void loadsUsersFromFile() {
-        AuthStore store = new AuthStore();
-        store.configure("test-auth-store.properties");
-        assertTrue("Should have found user fred", store.auth("fred", "password1"));
-    }
-
 }

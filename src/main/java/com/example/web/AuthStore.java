@@ -3,6 +3,7 @@ package com.example.web;
 
 import org.apache.log4j.Logger;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -25,7 +26,7 @@ public class AuthStore {
         if (!configured) {
             LOG.info("Loading users");
 
-            Properties config = PropertiesLoader.loadProperties(usersFile);
+            Properties config = PropertiesLoader.loadPropertiesFrom(new File(usersFile));
             for (Object key : config.keySet()) {
                 String username = key.toString();
                 String password = config.getProperty(username);

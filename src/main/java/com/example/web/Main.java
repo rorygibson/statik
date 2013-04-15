@@ -4,14 +4,15 @@ import com.example.web.route.*;
 import org.apache.log4j.Logger;
 import spark.Spark;
 
+import java.io.File;
 import java.util.Properties;
 
 public class Main implements spark.servlet.SparkApplication {
 
     private static final Logger LOG = Logger.getLogger(Main.class);
 
-    private static final String CONFIG_FILENAME = "config.properties";
-    private static final String USERS_DB_FILENAME = "users.properties";
+    private static final String CONFIG_FILENAME = System.getProperty("user.home") + "/config.properties";
+    private static final String USERS_DB_FILENAME = System.getProperty("user.home") + "/users.properties";
 
     private static final String FILE_BASE = "fileBase";
     private static final String WELCOME_FILE = "welcomeFile";
@@ -61,7 +62,7 @@ public class Main implements spark.servlet.SparkApplication {
 
     private void configure(String configFilename) {
         LOG.info("Configuring from [" + configFilename + "]");
-        Properties config = PropertiesLoader.loadProperties(configFilename);
+        Properties config = PropertiesLoader.loadPropertiesFrom(new File(configFilename));
 
         this.fileBase = config.getProperty(FILE_BASE);
         this.welcomeFile = config.getProperty(WELCOME_FILE);
