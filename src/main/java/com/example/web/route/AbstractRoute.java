@@ -4,6 +4,7 @@ package com.example.web.route;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import spark.Request;
 import spark.Response;
 import spark.Route;
 
@@ -16,6 +17,7 @@ public abstract class AbstractRoute extends Route {
     public static final String EMPTY_RESPONSE = "";
     private static final Logger LOG = Logger.getLogger(AbstractRoute.class);
     public static final String RESOURCE_ROOT_PATH = "/ces-resources/";
+    protected static final String COOKIE_NAME = "ces";
 
     public AbstractRoute(String route) {
         super(route);
@@ -37,6 +39,10 @@ public abstract class AbstractRoute extends Route {
     public void writeFileToResponse(Response response, File theFile) throws IOException {
         byte[] bytes = FileUtils.readFileToByteArray(theFile);
         response.raw().getOutputStream().write(bytes);
+    }
+
+    protected String sessionFrom(Request request) {
+        return request.cookie(COOKIE_NAME);
     }
 
 }

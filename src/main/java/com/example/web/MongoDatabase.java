@@ -15,7 +15,7 @@ public class MongoDatabase implements Database {
     private DBCollection items = null;
     private DB db = null;
 
-    public String dbName = "";
+    private String dbName = "";
     private String mongoHost = "";
     private int mongoPort = 0;
     private String mongoUsername = "";
@@ -48,11 +48,23 @@ public class MongoDatabase implements Database {
 
     @Override
     public void configure(String configFilename) {
-        if (!configured) {
-            loadConfig(configFilename);
-            setupDB();
-            this.configured = true;
+        if (configured) {
+            return;
         }
+
+        loadConfig(configFilename);
+
+        LOG.info("Connecting to MongoDB on " + mongoHost + ":" + mongoPort);
+        this.mongoClient = mongoClientFor(mongoHost, mongoPort);
+        this.db = mongoClient.getDB(dbName);
+
+        boolean auth = db.authenticate(mongoUsername, mongoPassword.toCharArray());
+        if (!auth) {
+            throw new RuntimeException("Couldn't authenticate with MongoDB");
+        }
+
+        this.items = db.getCollection(COLLECTION_NAME);
+        this.configured = true;
     }
 
     @Override
@@ -82,21 +94,11 @@ public class MongoDatabase implements Database {
         mongoPassword = config.getProperty("mongoPassword");
     }
 
-    private void setupDB() {
-        LOG.info("Connecting to MongoDB on " + mongoHost + ":" + mongoPort);
-
+    private MongoClient mongoClientFor(String host, int port) {
         try {
-            mongoClient = new MongoClient(mongoHost, mongoPort);
+            return new MongoClient(host, port);
         } catch (UnknownHostException e) {
             throw new RuntimeException("Couldn't connect to MongoDB", e);
         }
-
-        db = mongoClient.getDB(dbName);
-        boolean auth = db.authenticate(mongoUsername, mongoPassword.toCharArray());
-        if (!auth) {
-            throw new RuntimeException("Couldn't authenticate with MongoDB");
-        }
-
-        items = db.getCollection(COLLECTION_NAME);
     }
 }

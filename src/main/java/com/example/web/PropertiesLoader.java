@@ -18,8 +18,8 @@ public class PropertiesLoader {
 
             content.load(resourceAsStream);
 
-            LOG.info("Loaded " + content.size() + " properties");
-        } catch (IOException e) {
+            LOG.debug("Loaded " + content.size() + " properties");
+        } catch (Exception e) {
             throw new RuntimeException("Couldn't load properties from [" + propertiesFilename + "]", e);
         }
         return content;

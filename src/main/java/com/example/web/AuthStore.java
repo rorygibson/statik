@@ -10,8 +10,7 @@ import java.util.Properties;
 public class AuthStore {
 
     private static final Logger LOG = Logger.getLogger(AuthStore.class);
-    private static Map<String, String> users = new HashMap<String, String>();
-    private static final String USERS_DB_FILE = "users.properties";
+    private Map<String, String> users = new HashMap<String, String>();
     private boolean configured = false;
 
     public void addUser(String username, String password) {

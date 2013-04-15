@@ -3,6 +3,7 @@ package com.example.web.route;
 import com.example.web.AuthStore;
 import com.example.web.ContentItem;
 import com.example.web.Database;
+import com.example.web.SessionStore;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
@@ -11,38 +12,48 @@ import org.jsoup.nodes.Element;
 import spark.Request;
 import spark.Response;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 
-public class EditableFileRoute extends AbstractAuthenticatedRoute {
+public class EditableFileRoute extends AbstractRoute {
 
     public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"ces-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"ces-resources/jquery-getpath.js\" type=\"text/javascript\"></script>";
     public static final String HTML_SUFFIX = ".html";
+    private final AuthStore authStore;
+    private final SessionStore sessionStore;
     private Database database;
     private String fileBase;
     private String namedFile = null;
     private static final Logger LOG = Logger.getLogger(EditableFileRoute.class);
 
-    public EditableFileRoute(Database database, String fileBase, String route, AuthStore authStore) {
-        super(route, authStore);
+    public EditableFileRoute(Database database, String fileBase, String route, AuthStore authStore, SessionStore sessionStore) {
+        super(route);
         this.database = database;
         this.fileBase = fileBase;
+        this.authStore = authStore;
+        this.sessionStore = sessionStore;
     }
 
-    public EditableFileRoute(Database database, String fileBase, String route, String namedFile, AuthStore authStore) {
-        super(route, authStore);
+    public EditableFileRoute(Database database, String fileBase, String route, String namedFile, AuthStore authStore, SessionStore sessionStore) {
+        super(route);
         this.database = database;
         this.fileBase = fileBase;
         this.namedFile = namedFile;
+        this.authStore = authStore;
+        this.sessionStore = sessionStore;
     }
 
     @Override
     public Object handle(Request request, Response response) {
-        File theFile;
-        String path = request.raw().getServletPath();
+        HttpServletRequest httpReq = request.raw();
+        String path = httpReq.getPathInfo() == null ? httpReq.getServletPath() : httpReq.getPathInfo();
 
+        LOG.debug("GET " + path);
+
+        File theFile;
         if (thisRouteIsBoundToASpecificFile()) {
             theFile = findMySpecificFile();
         } else {
@@ -60,7 +71,7 @@ public class EditableFileRoute extends AbstractAuthenticatedRoute {
 
             if (mightContainCmsContent(theFile)) {
                 LOG.debug("File is candidate for content editing");
-                return cesify(path, theFile, hasSession(request));
+                return cesify(path, theFile, sessionStore.hasSession(sessionFrom(request)));
             }
 
             LOG.trace("Serving file [" + theFile.getAbsolutePath() + "] straight from disk");

@@ -22,6 +22,7 @@ public class Main implements spark.servlet.SparkApplication {
 
     private Database database;
     private AuthStore authStore;
+    private SessionStore sessionStore;
 
     private String fileBase;
     private String welcomeFile;
@@ -36,25 +37,27 @@ public class Main implements spark.servlet.SparkApplication {
     public void init() {
         if (!configured) {
             this.configure(CONFIG_FILENAME);
+
+            this.database = new MongoDatabase();
+            this.database.configure(CONFIG_FILENAME);
+
+            this.authStore = new AuthStore();
+            this.authStore.configure(USERS_DB_FILENAME);
+
+            this.sessionStore = new SessionStore();
         }
 
-        this.database = new MongoDatabase();
-        this.database.configure(CONFIG_FILENAME);
-
-        this.authStore = new AuthStore();
-        this.authStore.configure(USERS_DB_FILENAME);
 
         LOG.info("Setting up routes");
-        Spark.get(new LogoutRoute("/logout", this.authStore));
+        Spark.get(new LogoutRoute("/logout", this.authStore, this.sessionStore));
         Spark.get(new LoginFormRoute("/login"));
         Spark.get(new LoginErrorRoute("/login-error"));
-        Spark.post(new LoginRoute("/auth", this.authStore));
+        Spark.post(new LoginRoute("/auth", this.authStore, this.sessionStore));
         Spark.post(new ContentRoute(this.database, "/content"));
         Spark.get(new CESResourceRoute("/ces-resources/:file"));
-        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/", this.welcomeFile, this.authStore));
-        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/*", this.authStore));
+        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/", this.welcomeFile, this.authStore, this.sessionStore));
+        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/*", this.authStore, this.sessionStore));
     }
-
 
     private void configure(String configFilename) {
         LOG.info("Configuring from [" + configFilename + "]");
