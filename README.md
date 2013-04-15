@@ -46,13 +46,18 @@ On a development machine:
     mvn clean install
 
 Server side tasks:
-    Copy the target/ROOT.war file to the servlet container deployment directory
 
-    Create a config.properties file in the lib/ directory of the servlet container (use the one in src/main/resoures as a template)
-
-    Copy your website static files to the directory specified in your config.properties
-
-    Start Tomcat (/ Jetty, whatever)
+ * Copy the target/ROOT.war file to the servlet container deployment directory
+ * Create a config.properties file in the lib/ directory of the servlet container. Template:
+    dbName=contentdb
+    mongoHost=localhost
+    mongoPort=27017
+    mongoUsername=hellojava
+    mongoPassword=password
+    fileBase=/tmp/testFiles
+    welcomeFile=index.html
+ * Copy your website static files to the directory specified in your config.properties
+ * Start Tomcat (/ Jetty, whatever)
 
 
 
