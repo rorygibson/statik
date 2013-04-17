@@ -6,7 +6,8 @@ import org.openqa.selenium.WebElement;
 
 import static junit.framework.Assert.assertEquals;
 
-public class CheckRunningIT extends AbstractWebDriverIntTst {
+public class EditingIT extends AbstractWebDriverIntTst {
+
 
     @Test
     public void checkItsRunning() {
@@ -14,5 +15,6 @@ public class CheckRunningIT extends AbstractWebDriverIntTst {
         WebElement para = driver.findElement(By.cssSelector("p"));
         assertEquals("Text not as expected", "one", para.getText());
     }
+    
 
 }
