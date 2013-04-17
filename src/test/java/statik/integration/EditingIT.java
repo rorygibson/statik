@@ -38,6 +38,20 @@ public class EditingIT extends AbstractWebDriverIntTst {
         assertEquals("Should now hve some different content", "new content", afterEdit.getText());
     }
 
+    @Test
+    public void editOfListItemInASequence() {
+        driver.get(LIST_TEST_PAGE);
+
+        WebElement atFirst = driver.findElements(By.tagName("li")).get(3);
+        assertEquals("Should be the 4th item in the list", "four", atFirst.getText());
+
+        changeContentOf(atFirst, "still the 4th, but different");
+
+        WebElement afterEdit = driver.findElements(By.tagName("li")).get(3);
+        assertEquals("Should now hve some different content", "still the 4th, but different", afterEdit.getText());
+    }
+
+
     private void changeContentOf(WebElement el, String newContent) {
         el.click();
         el.clear();

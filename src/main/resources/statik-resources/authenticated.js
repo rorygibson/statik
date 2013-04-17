@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var items = $('p');
+    var items = $('p, li');
     var path = window.location.pathname;
 
 

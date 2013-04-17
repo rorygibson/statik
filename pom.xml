@@ -80,6 +80,10 @@
                                     <name>fileBase</name>
                                     <value>${basedir}/test-website</value>
                                 </systemProperty>
+                                <systemProperty>
+                                    <name>testMode</name>
+                                    <value>true</value>
+                                </systemProperty>
                             </systemProperties>
                         </configuration>
                     </execution>
