@@ -41,8 +41,9 @@ public class AuthStore {
 
             Iterator keys = config.getKeys("users");
             while (keys.hasNext()) {
-                String username = keys.next().toString();
-                String password = config.getProperty(username).toString();
+                String key = keys.next().toString();
+                String username = key.replace("users.", "");
+                String password = config.getProperty(key).toString();
                 this.addUser(username, password);
             }
 
