@@ -1,6 +1,10 @@
 package statik;
 
 import com.mongodb.*;
+import org.apache.commons.configuration.CompositeConfiguration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -86,13 +90,20 @@ public class MongoDatabase implements Database {
 
     private void loadConfig(String filename) {
         LOG.info("Loading config");
-        Properties config = PropertiesLoader.loadPropertiesFrom(new File(filename));
 
-        dbName = config.getProperty("dbName");
-        mongoHost = config.getProperty("mongoHost");
-        mongoPort = Integer.parseInt(config.getProperty("mongoPort"));
-        mongoUsername = config.getProperty("mongoUsername");
-        mongoPassword = config.getProperty("mongoPassword");
+        CompositeConfiguration config = new CompositeConfiguration();
+        config.addConfiguration(new SystemConfiguration());
+        try {
+            config.addConfiguration(new PropertiesConfiguration(filename));
+        } catch (ConfigurationException e) {
+            throw new RuntimeException("Couldn't load configuration from " + filename);
+        }
+
+        dbName = config.getProperty("dbName").toString();
+        mongoHost = config.getProperty("mongoHost").toString();
+        mongoPort = Integer.parseInt(config.getProperty("mongoPort").toString());
+        mongoUsername = config.getProperty("mongoUsername").toString();
+        mongoPassword = config.getProperty("mongoPassword").toString();
     }
 
     private MongoClient mongoClientFor(String host, int port) {

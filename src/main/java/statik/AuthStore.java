@@ -1,10 +1,15 @@
 package statik;
 
 
+import org.apache.commons.configuration.CompositeConfiguration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -26,10 +31,18 @@ public class AuthStore {
         if (!configured) {
             LOG.info("Loading users");
 
-            Properties config = PropertiesLoader.loadPropertiesFrom(new File(usersFile));
-            for (Object key : config.keySet()) {
-                String username = key.toString();
-                String password = config.getProperty(username);
+            CompositeConfiguration config = new CompositeConfiguration();
+            config.addConfiguration(new SystemConfiguration());
+            try {
+                config.addConfiguration(new PropertiesConfiguration(usersFile));
+            } catch (ConfigurationException e) {
+                throw new RuntimeException("Couldn't load configuration from " + usersFile);
+            }
+
+            Iterator keys = config.getKeys("users");
+            while (keys.hasNext()) {
+                String username = keys.next().toString();
+                String password = config.getProperty(username).toString();
                 this.addUser(username, password);
             }
 

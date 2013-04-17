@@ -1,0 +1,9 @@
+www:
+    type: java
+    approot: deploy
+    config:
+      java_version: java-7
+      jetty_version: jetty-7
+
+db:
+    type: mongodb
