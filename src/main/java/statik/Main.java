@@ -67,20 +67,33 @@ public class Main implements spark.servlet.SparkApplication {
         LOG.info("Configuring from [" + configFilename + "]");
 
         CompositeConfiguration config = new CompositeConfiguration();
-        config.addConfiguration(new SystemConfiguration());
-        try {
-            config.addConfiguration(new PropertiesConfiguration(configFilename));
-        } catch (ConfigurationException e) {
-            throw new RuntimeException("Couldn't load configuration from " + configFilename);
-        }
+        PropertiesConfiguration propertiesConfiguration = loadPropertiesConfigFrom(configFilename);
+        SystemConfiguration systemConfiguration = new SystemConfiguration();
+        PropertiesConfiguration defaults = new PropertiesConfiguration();
+
+        defaults.setProperty("testMode", false);
+
+        config.addConfiguration(systemConfiguration);
+        config.addConfiguration(propertiesConfiguration);
+        config.addConfiguration(defaults);
 
         this.testMode = config.getBoolean(TEST_MODE);
-        this.fileBase = config.getProperty(FILE_BASE).toString();
-        this.welcomeFile = config.getProperty(WELCOME_FILE).toString();
+        this.fileBase = config.getString(FILE_BASE);
+        this.welcomeFile = config.getString(WELCOME_FILE);
 
         this.configured = true;
         LOG.debug("Test mode is " + testMode);
         LOG.debug("File base is " + fileBase);
         LOG.debug("Welcome file is " + welcomeFile);
+    }
+
+    private PropertiesConfiguration loadPropertiesConfigFrom(String configFilename) {
+        PropertiesConfiguration fileConfig;
+        try {
+            fileConfig = new PropertiesConfiguration(configFilename);
+        } catch (ConfigurationException e) {
+            throw new RuntimeException("Couldn't load configuration from " + configFilename);
+        }
+        return fileConfig;
     }
 }
