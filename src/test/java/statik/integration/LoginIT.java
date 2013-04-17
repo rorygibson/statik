@@ -49,15 +49,7 @@ public class LoginIT {
     public void logout() {
         driver.get("http://localhost:8080/login");
         sendLogin(driver, "rory", "password");
-        System.out.println(driver.getPageSource());
         driver.findElement(By.id("ces-auth-box"));
-
-//        new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
-//            public Boolean apply(WebDriver driver) {
-//                return driver.findElement(By.id("ces-auth-box")) != null;
-//            }
-//        });
-
     }
 
 
