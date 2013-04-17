@@ -35,7 +35,4 @@ $(document).ready(function(){
 
         });
     });
-
-    var authenticatedAuthBox = '<div id="ces-auth-box" style="position:absolute; top:20px; right:20px; border: solid lightgrey 1px; background-color: lightgray; border-radius: 4px; padding: 5px"><a style="color: blue" href="/logout">Log out</a></div>';
-    $('body').append(authenticatedAuthBox);
 });

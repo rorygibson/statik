@@ -18,29 +18,27 @@ import java.util.Map;
 
 public class EditableFileRoute extends Route {
 
-    public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"statik-resources/getpath.js\" type=\"text/javascript\"></script>";
+    public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"statik-resources/jquery-1.7.2.js\" type=\"text/javascript\"></script><script src=\"statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"statik-resources/getpath.js\" type=\"text/javascript\"></script>";
+    public static final String AUTHENTICATED_LOG_OUT_BOX_HTML = "<div id=\"ces-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgrey 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/logout\">Log out</a></div>";
     public static final String HTML_SUFFIX = ".html";
-    private final AuthStore authStore;
     private final SessionStore sessionStore;
     private Database database;
     private String fileBase;
     private String namedFile = null;
     private static final Logger LOG = Logger.getLogger(EditableFileRoute.class);
 
-    public EditableFileRoute(Database database, String fileBase, String route, AuthStore authStore, SessionStore sessionStore) {
+    public EditableFileRoute(Database database, String fileBase, String route, SessionStore sessionStore) {
         super(route);
         this.database = database;
         this.fileBase = fileBase;
-        this.authStore = authStore;
         this.sessionStore = sessionStore;
     }
 
-    public EditableFileRoute(Database database, String fileBase, String route, String namedFile, AuthStore authStore, SessionStore sessionStore) {
+    public EditableFileRoute(Database database, String fileBase, String route, String namedFile, SessionStore sessionStore) {
         super(route);
         this.database = database;
         this.fileBase = fileBase;
         this.namedFile = namedFile;
-        this.authStore = authStore;
         this.sessionStore = sessionStore;
     }
 
@@ -99,6 +97,7 @@ public class EditableFileRoute extends Route {
     }
 
     private Document makeEditable(Document doc) {
+        doc.body().append(AUTHENTICATED_LOG_OUT_BOX_HTML);
         doc.body().append(AUTHENTICATED_JAVASCRIPT_TO_APPEND);
         return doc;
     }

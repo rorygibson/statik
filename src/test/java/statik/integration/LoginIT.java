@@ -6,8 +6,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
 
 public class LoginIT {
 
@@ -21,9 +25,7 @@ public class LoginIT {
     @Test
     public void login() {
         driver.get("http://localhost:8080/login");
-
         sendLogin(driver, "fred", "p4ssw0rd");
-
         assertEquals("Should have been redirected to index page", "http://localhost:8080/", driver.getCurrentUrl());
     }
 
@@ -38,15 +40,23 @@ public class LoginIT {
 
     @Test
     public void loginWithNonexistantUser() {
-        driver().get("http://localhost:8080/login");
-
+        driver.get("http://localhost:8080/login");
         sendLogin(driver(), "dont-exist", "wrong-password");
-
-        assertEquals("Should have been redirected to login error page", "http://localhost:8080/login-error", driver().getCurrentUrl());
+        assertEquals("Should have been redirected to login error page", "http://localhost:8080/login-error", driver.getCurrentUrl());
     }
 
     @Test
     public void logout() {
+        driver.get("http://localhost:8080/login");
+        sendLogin(driver, "rory", "password");
+        System.out.println(driver.getPageSource());
+        driver.findElement(By.id("ces-auth-box"));
+
+//        new WebDriverWait(driver, 10).until(new ExpectedCondition<Boolean>() {
+//            public Boolean apply(WebDriver driver) {
+//                return driver.findElement(By.id("ces-auth-box")) != null;
+//            }
+//        });
 
     }
 
