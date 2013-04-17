@@ -10,7 +10,7 @@ public class CheckRunningIT extends AbstractWebDriverIntTst {
 
     @Test
     public void checkItsRunning() {
-        driver.get("http://localhost:8080/two-paras.html");
+        driver.get(TWO_PARA_TEST_PAGE);
         WebElement para = driver.findElement(By.cssSelector("p"));
         assertEquals("Text not as expected", "one", para.getText());
     }

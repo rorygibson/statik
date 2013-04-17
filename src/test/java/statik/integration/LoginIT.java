@@ -9,34 +9,31 @@ import static org.junit.Assert.assertThat;
 
 public class LoginIT extends AbstractWebDriverIntTst {
 
+
     @Test
     public void login() {
-        driver.get("http://localhost:8080/login");
-        sendLogin(driver, "fred", "p4ssw0rd");
-        assertEquals("Should have been redirected to index page", "http://localhost:8080/", driver.getCurrentUrl());
+        doLoginWith("fred", "p4ssw0rd");
+        assertEquals("Should have been redirected to index page", ROOT_PAGE, driver.getCurrentUrl());
     }
 
 
     @Test
     public void loginWithWrongPassword() {
-        driver.get("http://localhost:8080/login");
-        sendLogin(driver, "fred", "wrong-password");
-        assertEquals("Should have been redirected to login error page", "http://localhost:8080/login-error", driver.getCurrentUrl());
+        doLoginWith("fred", "wrong-password");
+        assertEquals("Should have been redirected to login error page", LOGIN_ERROR_PAGE, driver.getCurrentUrl());
     }
 
 
     @Test
     public void loginWithNonexistantUser() {
-        driver.get("http://localhost:8080/login");
-        sendLogin(driver(), "dont-exist", "wrong-password");
-        assertEquals("Should have been redirected to login error page", "http://localhost:8080/login-error", driver.getCurrentUrl());
+        doLoginWith("dont-exist", "wrong-password");
+        assertEquals("Should have been redirected to login error page", LOGIN_ERROR_PAGE, driver.getCurrentUrl());
     }
 
 
     @Test
     public void logout() {
-        driver.get("http://localhost:8080/login");
-        sendLogin(driver, "rory", "password");
+        doLoginWith("rory", "password");
         driver.findElement(By.id("ces-auth-box"));
     }
 

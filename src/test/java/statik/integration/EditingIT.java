@@ -8,13 +8,22 @@ import static junit.framework.Assert.assertEquals;
 
 public class EditingIT extends AbstractWebDriverIntTst {
 
-
     @Test
-    public void checkItsRunning() {
-        driver.get("http://localhost:8080/two-paras.html");
+    public void simpleEdit() {
+        doLoginWith("rory", "password");
+
+        driver.get(ONE_PARA_TEST_PAGE);
         WebElement para = driver.findElement(By.cssSelector("p"));
-        assertEquals("Text not as expected", "one", para.getText());
+        assertEquals("Text not as expected", "content", para.getText());
+
+        para.click();
+        para.clear();
+        para.sendKeys("new content");
+        driver.findElement(By.tagName("body")).click();
+
+        WebElement again = driver.findElement(By.cssSelector("p"));
+        assertEquals("Text not as expected", "new content", again.getText());
     }
-    
+
 
 }
