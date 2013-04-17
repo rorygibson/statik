@@ -88,6 +88,12 @@ public class MongoDatabase implements Database {
         return items;
     }
 
+    @Override
+    public void clearContentItems() {
+        LOG.warn("Dropping " + COLLECTION_NAME + " collection");
+        this.items.drop();
+    }
+
     private void loadConfig(String filename) {
         LOG.info("Loading config");
 

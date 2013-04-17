@@ -33,6 +33,11 @@ public class AbstractWebDriverIntTst {
         driver.quit();
     }
 
+    @After
+    public void clearContentItemsCollection() {
+        driver.get("http://localhost:8080/clear-db");
+    }
+
     protected void sendLogin(String wrongUsername, String wrongPassword) {
         WebElement username = driver.findElement(By.name("username"));
         username.sendKeys(wrongUsername);

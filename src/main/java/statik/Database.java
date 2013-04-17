@@ -10,4 +10,6 @@ public interface Database {
     void configure(String configFilename);
 
     Map<String,ContentItem> findForPath(String path);
+
+    void clearContentItems();
 }

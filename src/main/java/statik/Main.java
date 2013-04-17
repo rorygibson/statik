@@ -17,8 +17,7 @@ public class Main implements spark.servlet.SparkApplication {
 
     private static final String FILE_BASE = "fileBase";
     private static final String WELCOME_FILE = "welcomeFile";
-    private static final String USERNAME = "username";
-    private static final String PASSWORD = "password";
+    private static final String TEST_MODE = "testMode";
 
     private boolean configured = false;
 
@@ -28,8 +27,7 @@ public class Main implements spark.servlet.SparkApplication {
 
     private String fileBase;
     private String welcomeFile;
-    private String username;
-    private String password;
+    private boolean testMode = false;
 
     public static void main(String[] args) {
         new Main().init();
@@ -47,6 +45,11 @@ public class Main implements spark.servlet.SparkApplication {
             this.authStore.configure(USERS_DB_FILENAME);
 
             this.sessionStore = new SessionStore();
+        }
+
+        if (testMode) {
+            LOG.info("Setting up test-only routes");
+            Spark.get(new ClearDbRoute("/clear-db", this.database));
         }
 
         LOG.info("Setting up routes");
@@ -71,10 +74,12 @@ public class Main implements spark.servlet.SparkApplication {
             throw new RuntimeException("Couldn't load configuration from " + configFilename);
         }
 
+        this.testMode = config.getBoolean(TEST_MODE);
         this.fileBase = config.getProperty(FILE_BASE).toString();
         this.welcomeFile = config.getProperty(WELCOME_FILE).toString();
 
         this.configured = true;
+        LOG.debug("Test mode is " + testMode);
         LOG.debug("File base is " + fileBase);
         LOG.debug("Welcome file is " + welcomeFile);
     }
