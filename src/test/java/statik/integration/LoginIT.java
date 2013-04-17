@@ -1,5 +1,6 @@
 package statik.integration;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,47 +11,56 @@ import static junit.framework.Assert.assertEquals;
 
 public class LoginIT {
 
+    private WebDriver driver;
+
+    @Before
+    public void setUp() {
+        this.driver = driver();
+    }
+
     @Test
     public void login() {
-        WebDriver driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080/login");
 
-        WebElement username = driver.findElement(By.name("username"));
-        username.sendKeys("fred");
-        WebElement password = driver.findElement(By.name("password"));
-        password.sendKeys("p4ssw0rd");
-        password.submit();
+        sendLogin(driver, "fred", "p4ssw0rd");
 
         assertEquals("Should have been redirected to index page", "http://localhost:8080/", driver.getCurrentUrl());
     }
 
+
     @Test
     public void loginWithWrongPassword() {
-        WebDriver driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080/login");
-
-        WebElement username = driver.findElement(By.name("username"));
-        username.sendKeys("fred");
-        WebElement password = driver.findElement(By.name("password"));
-        password.sendKeys("wrong-password");
-        password.submit();
-
+        sendLogin(driver, "fred", "wrong-password");
         assertEquals("Should have been redirected to login error page", "http://localhost:8080/login-error", driver.getCurrentUrl());
     }
 
 
     @Test
     public void loginWithNonexistantUser() {
-        WebDriver driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080/login");
+        driver().get("http://localhost:8080/login");
 
-        WebElement username = driver.findElement(By.name("username"));
-        username.sendKeys("dont-exist");
-        WebElement password = driver.findElement(By.name("password"));
-        password.sendKeys("wrong-password");
-        password.submit();
+        sendLogin(driver(), "dont-exist", "wrong-password");
 
-        assertEquals("Should have been redirected to login error page", "http://localhost:8080/login-error", driver.getCurrentUrl());
+        assertEquals("Should have been redirected to login error page", "http://localhost:8080/login-error", driver().getCurrentUrl());
     }
 
+    @Test
+    public void logout() {
+
+    }
+
+
+    private void sendLogin(WebDriver driver, String wrongUsername, String wrongPassword) {
+        WebElement username = driver.findElement(By.name("username"));
+        username.sendKeys(wrongUsername);
+        WebElement password = driver.findElement(By.name("password"));
+        password.sendKeys(wrongPassword);
+        password.submit();
+    }
+
+
+    private WebDriver driver() {
+        return this.driver == null ? new HtmlUnitDriver() : this.driver;
+    }
 }
