@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class EditableFileRoute extends Route {
 
-    public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"statik-resources/jquery-1.7.2.js\" type=\"text/javascript\"></script><script src=\"statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"statik-resources/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"statik-resources/getpath.js\" type=\"text/javascript\"></script>";
+    public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"statik-resources/jquery-1.7.2.js\" type=\"text/javascript\"></script><script src=\"statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"statik-resources/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"statik-resources/dom.js\" type=\"text/javascript\"></script><script src=\"statik-resources/getpath.js\" type=\"text/javascript\"></script>";
     public static final String AUTHENTICATED_LOG_OUT_BOX_HTML = "<div id=\"ces-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgrey 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/logout\">Log out</a></div>";
     public static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;

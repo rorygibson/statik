@@ -1,6 +1,4 @@
-function cacheOriginalValue(element) {
-    $(element).data('before', $(element).html());
-}
+
 
 function doPost(item, pagePath) {
     var hasChanged = $(item).data('before') !== $(item).html();
@@ -26,8 +24,8 @@ function doPost(item, pagePath) {
     }
 }
 
-function makeEditable(item, path) {
-    $(item).attr('contenteditable', 'true');
+function addPostBehaviour(item, path) {
+    makeEditable(item);
 
     $(item).focus(function () {
         cacheOriginalValue(this);
