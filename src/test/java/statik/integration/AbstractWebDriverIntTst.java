@@ -1,5 +1,7 @@
 package statik.integration;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,6 +12,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class AbstractWebDriverIntTst {
@@ -23,21 +28,48 @@ public class AbstractWebDriverIntTst {
     public static final String TWO_PARA_TEST_PAGE = "http://localhost:8080/two-paras.html";
     public static final String LIST_TEST_PAGE = "http://localhost:8080/list.html";
     public static final String QUNIT_TESTS_PAGE = "http://localhost:8080/qunit-tests.html";
+    public static final String CLEAR_DB_ENDPOINT = "http://localhost:8080/clear-db";
 
+    private static final Logger LOG = Logger.getLogger(AbstractWebDriverIntTst.class);
+    private static boolean running;
 
     @BeforeClass
     public static void setUp() {
-        driver = new FirefoxDriver();
+        if (running) {
+            return;
+        }
+
+        String phantomBinaryLocation = System.getProperty("phantomBinary");
+        if (StringUtils.isNotBlank(phantomBinaryLocation)) {
+            LOG.info("Using phantomjs at " + phantomBinaryLocation);
+            DesiredCapabilities caps = new DesiredCapabilities();
+            caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomBinaryLocation);
+
+            driver = new PhantomJSDriver(caps);
+        } else {
+            LOG.info("Using Firefox");
+            driver = new FirefoxDriver();
+        }
+
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                driver.quit();
+            }
+        });
+
+        running = true;
     }
 
     @AfterClass
     public static void tearDown() {
-        driver.quit();
+        //driver.quit();
     }
+
 
     @After
     public void clearContentItemsCollection() {
-        driver.get("http://localhost:8080/clear-db");
+        driver.get(CLEAR_DB_ENDPOINT);
     }
 
     protected void sendLogin(String wrongUsername, String wrongPassword) {
