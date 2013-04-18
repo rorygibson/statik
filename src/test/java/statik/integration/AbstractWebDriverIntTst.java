@@ -22,6 +22,7 @@ public class AbstractWebDriverIntTst {
     public static final String ONE_PARA_TEST_PAGE = "http://localhost:8080/one-para.html";
     public static final String TWO_PARA_TEST_PAGE = "http://localhost:8080/two-paras.html";
     public static final String LIST_TEST_PAGE = "http://localhost:8080/list.html";
+    public static final String QUNIT_TESTS_PAGE = "http://localhost:8080/qunit-tests.html";
 
 
     @BeforeClass
