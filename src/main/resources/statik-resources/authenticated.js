@@ -1,38 +1,48 @@
-$(document).ready(function(){
+function cacheOriginalValue(element) {
+    $(element).data('before', $(element).html());
+}
 
-    var items = $('p, li');
-    var path = window.location.pathname;
+function doPost(item, pagePath) {
+    var hasChanged = $(item).data('before') !== $(item).html();
 
+    if (hasChanged) {
+        var content = $(item).text();
+        var selector = getPath(item);
 
-    $.each(items, function(index, item) {
-        $(item).attr('contenteditable','true');
-
-
-        $(item).focus(function() {
-            $(this).data('before', $(this).html());
-        });
-
-        $(item).live('blur',function(){
-            var $this = $(this);
-            if ($this.data('before') !== $this.html()) {
-                $this.data('before', $this.html());
-
-                $.ajax({
-                    type:'POST',
-                    url:'/content',
-                    data:{
-                        path: path,
-                        content: $(this).text(),
-                        selector: getPath(this)
-                    },
-                    success:function(msg){
-                        if(!msg){
-                            console.error('update failure');
-                        }
-                    }
-                });
+        $.ajax({
+            type: 'POST',
+            url: '/content',
+            data: {
+                path: pagePath,
+                content: content,
+                selector: selector
+            },
+            success: function (msg) {
+                if (!msg) {
+                    console.error('update failure');
+                }
             }
-
         });
+    }
+}
+
+function makeEditable(item, path) {
+    $(item).attr('contenteditable', 'true');
+
+    $(item).focus(function () {
+        cacheOriginalValue(this);
+    });
+
+    $(item).live('blur', function () {
+        doPost(item, path);
+    });
+}
+
+$(document).ready(function () {
+    var editableElements = $('p, li');
+    var pagePath = window.location.pathname;
+
+    $.each(editableElements, function (index, item) {
+        makeEditable(item, pagePath);
     });
 });
