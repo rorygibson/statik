@@ -12,17 +12,19 @@
 
 	<form method="post" action="/auth">
         <div>
-		    <label>Username:</label> <input name="username" />
+		    <label>Username:</label> <input tabindex="1" name="username" />
         </div>
 
         <div>
 		    <label>Password:</label>
-            <input name="password" type="password" />
+            <input name="password" tabindex="2" type="password" />
         </div>
 
         <div>
-		    <input type="submit" value="Sign in" />
+		    <input type="submit" tabindex="3" value="Sign in" />
         </div>
 	</form>
+
+    <script type="text/javascript" src="/statik-resources/login.js"></script>
 </body>
 </html>
