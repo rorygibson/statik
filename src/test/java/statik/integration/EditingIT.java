@@ -15,6 +15,7 @@ public class EditingIT extends AbstractWebDriverIntTst {
         doLoginWith("rory", "password");
     }
 
+
     @Test
     public void simpleEdit() {
         driver.get(ONE_PARA_TEST_PAGE);
@@ -59,10 +60,9 @@ public class EditingIT extends AbstractWebDriverIntTst {
         driver.findElement(By.tagName("body")).click();
     }
 
+
     private void changeContentOf(String tag, String newContent) {
         WebElement para = driver.findElement(By.cssSelector(tag));
         changeContentOf(para, newContent);
     }
-
-
 }

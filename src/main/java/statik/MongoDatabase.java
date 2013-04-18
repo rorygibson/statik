@@ -105,11 +105,11 @@ public class MongoDatabase implements Database {
             throw new RuntimeException("Couldn't load configuration from " + filename);
         }
 
-        dbName = config.getProperty("dbName").toString();
-        mongoHost = config.getProperty("mongoHost").toString();
-        mongoPort = Integer.parseInt(config.getProperty("mongoPort").toString());
-        mongoUsername = config.getProperty("mongoUsername").toString();
-        mongoPassword = config.getProperty("mongoPassword").toString();
+        dbName = config.getString("dbName");
+        mongoHost = config.getString("mongoHost");
+        mongoPort = config.getInt("mongoPort");
+        mongoUsername = config.getString("mongoUsername");
+        mongoPassword = config.getString("mongoPassword");
     }
 
     private MongoClient mongoClientFor(String host, int port) {

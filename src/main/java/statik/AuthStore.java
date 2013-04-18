@@ -43,7 +43,7 @@ public class AuthStore {
             while (keys.hasNext()) {
                 String key = keys.next().toString();
                 String username = key.replace("users.", "");
-                String password = config.getProperty(key).toString();
+                String password = config.getString(key);
                 this.addUser(username, password);
             }
 
