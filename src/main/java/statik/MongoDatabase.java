@@ -25,6 +25,7 @@ public class MongoDatabase implements Database {
     private int mongoPort = 0;
     private String mongoUsername = "";
     private String mongoPassword = "";
+    private boolean mongoAuth = false;
 
     private boolean configured = false;
 
@@ -63,9 +64,11 @@ public class MongoDatabase implements Database {
         this.mongoClient = mongoClientFor(mongoHost, mongoPort);
         this.db = mongoClient.getDB(dbName);
 
-        boolean auth = db.authenticate(mongoUsername, mongoPassword.toCharArray());
-        if (!auth) {
-            throw new RuntimeException("Couldn't authenticate with MongoDB");
+        if (mongoAuth) {
+            boolean auth = db.authenticate(mongoUsername, mongoPassword.toCharArray());
+            if (!auth) {
+                throw new RuntimeException("Couldn't authenticate with MongoDB");
+            }
         }
 
         this.items = db.getCollection(COLLECTION_NAME);
@@ -110,6 +113,7 @@ public class MongoDatabase implements Database {
         mongoPort = config.getInt("mongoPort");
         mongoUsername = config.getString("mongoUsername");
         mongoPassword = config.getString("mongoPassword");
+        mongoAuth = config.getBoolean("mongoAuth");
     }
 
     private MongoClient mongoClientFor(String host, int port) {
