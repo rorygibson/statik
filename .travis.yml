@@ -1,5 +1,5 @@
 language: java
-script: mvn clean verify -DphantomBinary=`which phantomjs`
+script: mvn clean verify
 services:
   - mongodb
 before_install:
