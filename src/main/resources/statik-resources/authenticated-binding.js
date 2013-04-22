@@ -3,6 +3,8 @@ $(document).ready(function () {
     var pagePath = window.location.pathname;
 
     $.each(editableElements, function (index, item) {
+        addHoverState(item);
         addPostBehaviour(item, pagePath);
     });
+
 });

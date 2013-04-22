@@ -28,7 +28,7 @@ public class ContentRoute extends Route {
         String selector = parameterMap.get(ContentItem.SELECTOR)[0];
         String path = parameterMap.get(ContentItem.PATH)[0];
 
-        LOG.debug("POST with selector [" + selector + "], path [" + path + "], content length [" + newContent.length() + "]");
+        LOG.debug("POST with selector [" + selector + "], path [" + path + "], content [" + newContent + "]");
 
         database.insertOrUpdate(new ContentItem(path, selector, newContent));
 

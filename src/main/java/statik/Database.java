@@ -12,4 +12,6 @@ public interface Database {
     Map<String,ContentItem> findForPath(String path);
 
     void clearContentItems();
+
+    ContentItem findByPathAndSelector(String path, String selector);
 }

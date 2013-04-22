@@ -18,9 +18,12 @@ import java.util.Map;
 
 public class EditableFileRoute extends Route {
 
-    public static final String AUTHENTICATED_JAVASCRIPT_TO_APPEND = "<script src=\"statik-resources/jquery-1.7.2.js\" type=\"text/javascript\"></script><script src=\"statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"statik-resources/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"statik-resources/dom.js\" type=\"text/javascript\"></script><script src=\"statik-resources/getpath.js\" type=\"text/javascript\"></script>";
-    public static final String AUTHENTICATED_LOG_OUT_BOX_HTML = "<div id=\"ces-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgrey 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/logout\">Log out</a></div>";
-    public static final String HTML_SUFFIX = ".html";
+    private static final String JQUERY_CSS = "<link href=\"/statik-resources/jquery-ui/css/jquery-ui-1.10.2.custom.min.css\" rel=\"stylesheet\" />";
+    private static final String JQUERY_JS = "<script src=\"/statik-resources/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/jquery-ui/js/jquery-ui-1.10.2.custom.min.js\" type=\"text/javascript\"></script>";
+    private static final String AUTH_JS = "<script src=\"/statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"statik-resources/dom.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/getpath.js\" type=\"text/javascript\"></script>";
+    private static final String LOGOUT_BOX_HTML = "<div id=\"ces-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgrey 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/logout\">Log out</a></div>";
+    private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
+    private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
     private Database database;
     private String fileBase;
@@ -87,7 +90,7 @@ public class EditableFileRoute extends Route {
     }
 
     private File findRequestedFileFrom(String path) {
-        String fullPath = fileBase + "/" + path;
+        String fullPath = fileBase + path;
         LOG.trace("Request for file; full path to file is [" + fullPath + "]");
         return new File(fullPath);
     }
@@ -97,8 +100,11 @@ public class EditableFileRoute extends Route {
     }
 
     private Document makeEditable(Document doc) {
-        doc.body().append(AUTHENTICATED_LOG_OUT_BOX_HTML);
-        doc.body().append(AUTHENTICATED_JAVASCRIPT_TO_APPEND);
+        doc.head().append(JQUERY_CSS);
+        doc.body().append(LOGOUT_BOX_HTML);
+        doc.body().append(EDITOR_HTML);
+        doc.body().append(JQUERY_JS);
+        doc.body().append(AUTH_JS);
         return doc;
     }
 
@@ -112,16 +118,14 @@ public class EditableFileRoute extends Route {
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
             Element el = doc.select(selector).first();
-            LOG.trace("Replaced content with selector [" + selector + "]");
-            el.text(contentItem.content());
+            el.html(contentItem.content());
+            LOG.trace("Replaced element with selector [" + selector + "] with content [" + contentItem.content() + "]");
         }
 
         return doc;
     }
 
     private String cesify(String path, File theFile, boolean authenticated) throws IOException {
-        LOG.debug("CESifying file ");
-
         Document doc = Jsoup.parse(FileUtils.readFileToString(theFile));
         doc = replaceContent(doc, path);
 

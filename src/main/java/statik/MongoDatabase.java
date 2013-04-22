@@ -83,10 +83,8 @@ public class MongoDatabase implements Database {
         Map<String, ContentItem> items = new HashMap<String, ContentItem>();
         while (cursor.hasNext()) {
             DBObject dbObject = cursor.next();
-            String content = dbObject.get(ContentItem.CONTENT).toString();
-            String selector = dbObject.get(ContentItem.SELECTOR).toString();
-            String itemPath = dbObject.get(ContentItem.PATH).toString();
-            items.put(selector, new ContentItem(itemPath, selector, content));
+            ContentItem contentItem = contentItemFrom(dbObject);
+            items.put(contentItem.selector(), contentItem);
         }
         return items;
     }
@@ -96,6 +94,25 @@ public class MongoDatabase implements Database {
         LOG.warn("Dropping " + COLLECTION_NAME + " collection");
         this.items.drop();
     }
+
+    @Override
+    public ContentItem findByPathAndSelector(String path, String selector) {
+        DBObject q = new BasicDBObject(ContentItem.PATH, path).append(ContentItem.SELECTOR, selector);
+        DBObject dbObject = items.findOne(q);
+        if (dbObject == null) {
+            return null;
+        }
+        return contentItemFrom(dbObject);
+    }
+
+
+    private ContentItem contentItemFrom(DBObject dbObject) {
+        String content = dbObject.get(ContentItem.CONTENT).toString();
+        String selector = dbObject.get(ContentItem.SELECTOR).toString();
+        String itemPath = dbObject.get(ContentItem.PATH).toString();
+        return new ContentItem(itemPath, selector, content);
+    }
+
 
     private void loadConfig(String filename) {
         LOG.info("Loading config");

@@ -1,12 +1,10 @@
 package statik.route;
 
-import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
 
 public class LoginFormRoute extends CESResourceRoute {
 
-    private static final Logger LOG = Logger.getLogger(LoginFormRoute.class);
     private static final String LOGIN_FORM_HTML = "login.html";
 
     public LoginFormRoute(String route) {

@@ -1,0 +1,64 @@
+<html>
+
+<body>
+
+<div id="wysihtml5-toolbar" style="display: none;">
+    <a data-wysihtml5-command="bold">bold</a>
+    <a data-wysihtml5-command="italic">italic</a>
+
+    <!-- Some wysihtml5 commands require extra parameters -->
+    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red">red</a>
+    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green">green</a>
+    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue">blue</a>
+
+    <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
+    <a data-wysihtml5-command="createLink">insert link</a>
+
+    <div data-wysihtml5-dialog="createLink" style="display: none;">
+        <label>
+            Link:
+            <input data-wysihtml5-dialog-field="href" value="http://" class="text">
+        </label>
+        <a data-wysihtml5-dialog-action="save">OK</a> <a data-wysihtml5-dialog-action="cancel">Cancel</a>
+    </div>
+</div>
+
+<form action="/content" method="post" id="editorForm">
+    <textarea name="content" id="wysihtml5-textarea" autofocus></textarea>
+    <br />
+    <input type="submit" value="Save" name="save" />
+</form>
+
+<script src="/statik-resources/wysihtml5/jquery.form.js"></script>
+<script type="text/javascript" src="/statik-resources/wysihtml5/simple-wysi-rules.js"></script>
+<script type="text/javascript" src="/statik-resources/wysihtml5/wysihtml5-0.3.0.js"></script>
+
+<script>
+$(document).ready(function(){
+    var editor = new wysihtml5.Editor("wysihtml5-textarea", {
+      name:         "statik",
+      toolbar:      "wysihtml5-toolbar",
+      stylesheets: ["/statik-resources/wysihtml5/editor.css"],
+      parserRules:  wysihtml5ParserRules
+    });
+
+    editor.on("load", function() {
+      if (!editor.isCompatible()) {
+        return;
+      }
+
+      var doc =  editor.composer.sandbox.getDocument();
+      var link = doc.createElement("link");
+      link.href = "/statik-resources/wysihtml5/editor.css";
+      link.rel = "stylesheet";
+      doc.querySelector("head").appendChild(link);
+    });
+
+    $('#editorForm').ajaxForm(function() {
+        window.location.reload();
+    });
+});
+</script>
+
+</body>
+</html>

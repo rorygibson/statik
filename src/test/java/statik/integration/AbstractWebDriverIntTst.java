@@ -61,11 +61,6 @@ public class AbstractWebDriverIntTst {
         running = true;
     }
 
-    @AfterClass
-    public static void tearDown() {
-        //driver.quit();
-    }
-
 
     @After
     public void clearContentItemsCollection() {

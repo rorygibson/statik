@@ -13,7 +13,7 @@ import java.io.InputStream;
 public class CESResourceRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(CESResourceRoute.class);
-    private static final String RESOURCE_ROOT_PATH = "statik-resources/";
+    protected static final String RESOURCE_ROOT_PATH = "statik-resources/";
 
     public CESResourceRoute(String route) {
         super(route);
@@ -21,7 +21,7 @@ public class CESResourceRoute extends Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        String filename = request.params("file");
+        String filename = request.splat()[0];
         LOG.trace("Request for file, path is [" + request.url() + "], file is [" + filename + "]");
 
         return writeClasspathFileToResponse(response, filename);
