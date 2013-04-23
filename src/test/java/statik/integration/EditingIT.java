@@ -1,14 +1,12 @@
 package statik.integration;
 
 import com.google.common.base.Function;
-import com.sun.istack.internal.Nullable;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -79,7 +77,7 @@ public class EditingIT extends AbstractWebDriverIntTst {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         Object editor = wait.until(new Function<WebDriver, Object>() {
             @Override
-            public Object apply(@Nullable WebDriver webDriver) {
+            public Object apply(WebDriver webDriver) {
                 return driver.findElement(By.tagName(tagName));
             }
         });
