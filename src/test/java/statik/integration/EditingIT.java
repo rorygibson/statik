@@ -33,9 +33,31 @@ public class EditingIT extends AbstractWebDriverIntTst {
         assertEquals("Text not as expected", "new content", again.getText());
     }
 
+    @Test
+    public void editLink() throws InterruptedException {
+        driver.get(LINK_TEST_PAGE);
+
+        WebElement originalLink = driver.findElement(By.tagName("a"));
+        assertEquals("Link text wrong", "one para page", originalLink.getText());
+        assertEquals("Link target wrong", "http://localhost:8080/one-para.html", originalLink.getAttribute("href"));
+
+        changeContentOf("#first-link", "new link text");
+
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        WebElement changedLink = driver.findElement(By.id("first-link"));
+        assertEquals("Link text wrong", "new link text", changedLink.getText());
+        assertEquals("Link target wrong", "http://localhost:8080/one-para.html", changedLink.getAttribute("href"));
+    }
+
 
     @Test
-    public void editOfSecondParaInASequence() {
+    public void editOfSecondParaInASequence() throws InterruptedException {
         driver.get(TWO_PARA_TEST_PAGE);
         WebElement atFirst = driver.findElements(By.tagName("p")).get(1);
         assertEquals("Should be the second para", "two", atFirst.getText());
@@ -48,7 +70,7 @@ public class EditingIT extends AbstractWebDriverIntTst {
     }
 
     @Test
-    public void editOfListItemInASequence() {
+    public void editOfListItemInASequence() throws InterruptedException {
         driver.get(LIST_TEST_PAGE);
         WebElement atFirst = driver.findElements(By.tagName("li")).get(3);
         assertEquals("Should be the 4th item in the list", "four", atFirst.getText());
@@ -61,21 +83,30 @@ public class EditingIT extends AbstractWebDriverIntTst {
     }
 
 
-    private void changeContentOf(WebElement el, String newContent) {
+    private void changeContentOf(WebElement el, String newContent) throws InterruptedException {
         Actions a = new Actions(driver);
-        a.doubleClick(el);
+        a.contextClick(el);
         a.perform();
 
-        waitForPresenceOf("textarea");
+        WebElement menu = driver.findElement(By.id("jqContextMenu"));
+        menu.findElement(By.id("edit")).click();
 
-        ((FirefoxDriver)driver).executeScript("document.getElementById('wysihtml5-textarea').value='" + newContent + "';");
+        waitForPresenceOf("textarea");
+        waitForPresenceOf("iframe");
+
+        Thread.sleep(300);
+
+
+        ((FirefoxDriver)driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
+
+        Thread.sleep(300);
 
         driver.findElement(By.tagName("form")).submit();
     }
 
     private void waitForPresenceOf(final String tagName) {
         WebDriverWait wait = new WebDriverWait(driver, 3);
-        Object editor = wait.until(new Function<WebDriver, Object>() {
+        wait.until(new Function<WebDriver, Object>() {
             @Override
             public Object apply(WebDriver webDriver) {
                 return driver.findElement(By.tagName(tagName));
@@ -83,8 +114,18 @@ public class EditingIT extends AbstractWebDriverIntTst {
         });
     }
 
+    private void waitUntilEditorIsActive() {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(new Function<WebDriver, Object>() {
+            @Override
+            public Object apply(WebDriver webDriver) {
+                Object returned = ((FirefoxDriver)driver).executeScript("return document.editor == null");
+                return returned.equals("false");
+            }
+        });
+    }
 
-    private void changeContentOf(String tag, String newContent) {
+    private void changeContentOf(String tag, String newContent) throws InterruptedException {
         WebElement para = driver.findElement(By.cssSelector(tag));
         changeContentOf(para, newContent);
     }

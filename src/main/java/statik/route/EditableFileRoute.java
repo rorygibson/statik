@@ -21,8 +21,14 @@ public class EditableFileRoute extends Route {
     private static final String JQUERY_CSS = "<link href=\"/statik-resources/jquery-ui/css/jquery-ui-1.10.2.custom.min.css\" rel=\"stylesheet\" />";
     private static final String JQUERY_JS = "<script src=\"/statik-resources/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/jquery-ui/js/jquery-ui-1.10.2.custom.min.js\" type=\"text/javascript\"></script>";
     private static final String AUTH_JS = "<script src=\"/statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"statik-resources/dom.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/getpath.js\" type=\"text/javascript\"></script>";
+    private static final String MENU_JS = "<script src=\"/statik-resources/jquery.contextmenu.r2.packed.js\" type=\"text/javascript\"></script>";
     private static final String LOGOUT_BOX_HTML = "<div id=\"ces-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgrey 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/logout\">Log out</a></div>";
     private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
+    private static final String MENU_HTML = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
+            "      <ul>\n" +
+            "        <li id=\"edit\"><img src=\"/statik-resources/edit.png\" /> Edit </li>\n" +
+            "      </ul>\n" +
+            "    </div>";
     private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
     private Database database;
@@ -103,8 +109,10 @@ public class EditableFileRoute extends Route {
         doc.head().append(JQUERY_CSS);
         doc.body().append(LOGOUT_BOX_HTML);
         doc.body().append(EDITOR_HTML);
+        doc.body().append(MENU_HTML);
         doc.body().append(JQUERY_JS);
         doc.body().append(AUTH_JS);
+        doc.body().append(MENU_JS);
         return doc;
     }
 

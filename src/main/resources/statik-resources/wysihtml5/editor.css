@@ -1,4 +1,4 @@
-.statik {
-    width: 250px !important;
-    min-width: 250px !important;
+a {
+    color: blue;
+    text-decoration: underline;
 }

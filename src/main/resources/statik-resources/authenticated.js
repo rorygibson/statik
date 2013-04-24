@@ -1,28 +1,35 @@
+function addContextMenuTo(item, path) {
+    $(item).contextMenu('editMenu', {
+        bindings: {
+            'edit': function (t) {
+                var selector = getPath(item);
+                var content = $(item).html();
+
+                var encodedSelector = encodeURIComponent(selector);
+                var encodedPath = encodeURIComponent(path);
+                var encodedContent = encodeURIComponent(content);
+
+                loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent);
+            }
+        }
+    });
+}
 
 function addHoverState(item) {
     $(item).hover(
-        function () {
-            $(item).data('pre-hover', $(item).css('border'));
-            $(item).css("border", "solid 1px lightgreen");
+        function (e) {
+            if (e.target === this) {
+                $(item).data('pre-hover', $(item).css('background-color'));
+                $(item).css("background-color", "lightgreen");
+            }
         },
-        function () {
-            $(item).css("border", $(item).data('pre-hover'));
-            $(item).data('pre-hover', '');
+        function (e) {
+            if (e.target === this) {
+                $(item).css("background-color", $(item).data('pre-hover'));
+                $(item).data('pre-hover', '');
+            }
         }
     );
-}
-
-function addPostBehaviour(item, path) {
-    $(item).dblclick(function (e) {
-        var selector = getPath(item);
-        var content = $(item).text();
-
-        var encodedSelector = encodeURIComponent(selector);
-        var encodedPath = encodeURIComponent(path);
-        var encodedContent = encodeURIComponent(content);
-
-        loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent);
-    });
 }
 
 

@@ -1,10 +1,10 @@
 package statik.route;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Entities;
 import org.jsoup.select.Elements;
 import spark.Request;
 import spark.Response;
@@ -61,19 +61,25 @@ public class EditorRoute extends CESResourceRoute {
         }
 
         Document document = Jsoup.parse(data);
+        document.outputSettings().escapeMode(Entities.EscapeMode.extended);
+
         String template = "<input type=\"hidden\" name=\"selector\" value=\"%s\" />  \n  <input type=\"hidden\" name=\"path\" value=\"%s\" />";
         String replaced = String.format(template, selector, path);
 
         Elements form = document.select("#editorForm");
         form.append(replaced);
 
-        Elements textarea = document.select("textarea");
+        Elements textareaPreload = document.select("#textarea-preload");
         if (contentItem != null) {
             LOG.debug("Found the content in the DB, passing that to load the editor");
-            textarea.first().text(contentItem.content());
+            String content = contentItem.content();
+            if (content == null) {
+                content = "";
+            }
+            textareaPreload.first().html(content);
         } else {
             LOG.debug("Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [" + sentContent + "]");
-            textarea.first().text(sentContent);
+            textareaPreload.first().html(sentContent);
         }
 
         return document.toString();

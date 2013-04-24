@@ -3,19 +3,14 @@ package statik.integration;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.safari.SafariDriver;
 
 public class AbstractWebDriverIntTst {
 
@@ -29,6 +24,7 @@ public class AbstractWebDriverIntTst {
     public static final String LIST_TEST_PAGE = "http://localhost:8080/list.html";
     public static final String QUNIT_TESTS_PAGE = "http://localhost:8080/qunit-tests.html";
     public static final String CLEAR_DB_ENDPOINT = "http://localhost:8080/clear-db";
+    public static final String LINK_TEST_PAGE = "http://localhost:8080/links.html";
 
     private static final Logger LOG = Logger.getLogger(AbstractWebDriverIntTst.class);
     private static boolean running;
@@ -54,7 +50,11 @@ public class AbstractWebDriverIntTst {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                driver.quit();
+                try {
+                    driver.quit();
+                } catch (Exception e) {
+                    // ignore
+                }
             }
         });
 
