@@ -2,3 +2,15 @@ a {
     color: blue;
     text-decoration: underline;
 }
+
+#textarea-preload {
+    display: none;
+}
+
+textarea {
+    min-height: 130px !important;
+}
+
+#linkBox {
+    display: none;
+ }

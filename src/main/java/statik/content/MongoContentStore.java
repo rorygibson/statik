@@ -48,7 +48,7 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
         BasicDBObject query = new BasicDBObject(ContentItem.PATH, path);
         DBCursor cursor = this.items.find(query);
 
-        Map<String, ContentItem> items = new HashMap<String, ContentItem>();
+        Map<String, ContentItem> items = new HashMap<>();
         while (cursor.hasNext()) {
             DBObject dbObject = cursor.next();
             ContentItem contentItem = contentItemFrom(dbObject);

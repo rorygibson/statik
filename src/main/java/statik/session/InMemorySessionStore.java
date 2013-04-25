@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class InMemorySessionStore implements SessionStore {
 
-    private Map<String,String> map = new HashMap<String, String>();
+    private final Map<String,String> map = new HashMap<>();
 
     @Override
     public String createSession(String username) {

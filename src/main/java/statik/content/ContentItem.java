@@ -2,8 +2,8 @@ package statik.content;
 
 public class ContentItem {
 
-    private String path;
-    private String selector;
+    private final String path;
+    private final String selector;
     private final String content;
     public static final String PATH = "path";
     public static final String SELECTOR = "selector";

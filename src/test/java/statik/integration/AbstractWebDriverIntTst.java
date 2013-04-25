@@ -78,7 +78,7 @@ public class AbstractWebDriverIntTst {
     }
 
     protected static WebDriver createDriver() {
-        WebDriver d = null;
+        WebDriver d;
 
         String phantomBinaryLocation = System.getProperty("phantomBinary");
         if (StringUtils.isNotBlank(phantomBinaryLocation)) {

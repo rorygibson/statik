@@ -34,8 +34,8 @@ public class EditableFileRoute extends Route {
             "    </div>";
     private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
-    private ContentStore contentStore;
-    private String fileBase;
+    private final ContentStore contentStore;
+    private final String fileBase;
     private String namedFile = null;
     private static final Logger LOG = Logger.getLogger(EditableFileRoute.class);
 

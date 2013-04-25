@@ -1,4 +1,7 @@
 <html>
+<head>
+    <link type="text/css" rel="stylesheet" href="/statik-resources/wysihtml5/editor.css" />
+</head>
 
 <body>
 
@@ -12,63 +15,32 @@
     <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue">blue</a>
 
     <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
-    <a data-wysihtml5-command="createLink">insert link</a>
+    <a data-wysihtml5-command="createLink">Link</a>
 
-    <a data-wysihtml5-action="change_view" href="javascript:;" unselectable="on" class="">Switch to HTML view</a>
+    <a data-wysihtml5-action="change_view" unselectable="on">HTML</a>
 
-    <div data-wysihtml5-dialog="createLink" style="display: none;">
+    <div id="linkBox" data-wysihtml5-dialog="createLink">
         <label>
             Link:
             <input data-wysihtml5-dialog-field="href" value="http://" class="text">
         </label>
-        <a data-wysihtml5-dialog-action="save">OK</a> <a data-wysihtml5-dialog-action="cancel">Cancel</a>
+
+        <a data-wysihtml5-dialog-action="save">OK</a>
+        <a data-wysihtml5-dialog-action="cancel">Cancel</a>
     </div>
 </div>
 
 <form action="/content" method="post" id="editorForm">
-    <div id="textarea-preload" style="display: none"></div>
-    <textarea name="content" id="wysihtml5-textarea" autofocus style="height: 130px !important;"></textarea>
+    <div id="textarea-preload"></div>
+    <textarea name="content" id="wysihtml5-textarea" autofocus></textarea>
     <br />
     <input type="submit" value="Save" id="submit" name="save" />
 </form>
 
-<script src="/statik-resources/wysihtml5/jquery.form.js"></script>
+<script type="text/javascript" src="/statik-resources/wysihtml5/jquery.form.js"></script>
 <script type="text/javascript" src="/statik-resources/wysihtml5/simple-wysi-rules.js"></script>
 <script type="text/javascript" src="/statik-resources/wysihtml5/wysihtml5-0.3.0.js"></script>
-
-<script>
-$(document).ready(function(){
-    var txt = document.querySelector('#textarea-preload').innerHTML
-    document.querySelector('textarea').innerHTML = txt;
-
-    var editor = new wysihtml5.Editor("wysihtml5-textarea", {
-      name:         "statik",
-      toolbar:      "wysihtml5-toolbar",
-      stylesheets: ["/statik-resources/wysihtml5/editor.css"],
-      parserRules:  wysihtml5ParserRules,
-      html: true,
-      style: true
-    });
-
-    editor.on("load", function() {
-      if (!editor.isCompatible()) {
-        return;
-      }
-
-      var doc =  editor.composer.sandbox.getDocument();
-      var link = doc.createElement("link");
-      link.href = "/statik-resources/wysihtml5/editor.css";
-      link.rel = "stylesheet";
-      doc.querySelector("head").appendChild(link);
-    });
-
-    document.editor = editor;
-
-    $('#editorForm').ajaxForm(function() {
-        window.location.reload();
-    });
-});
-</script>
+<script type="text/javascript" src="/statik-resources/wysihtml5/binding.js"></script>
 
 </body>
 </html>

@@ -26,4 +26,4 @@ var getPath = function(el) {
     }
 
     return path.join(" > ");
-}
+};

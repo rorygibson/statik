@@ -33,7 +33,6 @@ public class CESResourceRoute extends Route {
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
         try {
             IOUtils.copy(resourceAsStream, response.raw().getOutputStream());
-            return Http.EMPTY_RESPONSE;
         } catch (IOException e) {
             LOG.error("Error retrieving resource", e);
             response.status(404);

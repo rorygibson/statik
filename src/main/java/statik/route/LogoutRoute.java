@@ -1,22 +1,19 @@
 package statik.route;
 
-import statik.auth.AuthStore;
-import statik.util.Http;
-import statik.session.SessionStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import statik.session.SessionStore;
+import statik.util.Http;
 
 public class LogoutRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(LogoutRoute.class);
-    private final AuthStore authStore;
     private final SessionStore sessionStore;
 
-    public LogoutRoute(String route, AuthStore authStore, SessionStore sessionStore) {
+    public LogoutRoute(String route, SessionStore sessionStore) {
         super(route);
-        this.authStore = authStore;
         this.sessionStore = sessionStore;
     }
 

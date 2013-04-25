@@ -59,7 +59,7 @@ public class Main implements spark.servlet.SparkApplication {
         }
 
         LOG.info("Setting up routes");
-        Spark.get(new LogoutRoute("/logout", this.authStore, this.sessionStore));
+        Spark.get(new LogoutRoute("/logout", this.sessionStore));
         Spark.get(new LoginFormRoute("/login", this.sessionStore));
         Spark.get(new LoginErrorRoute("/login-error"));
         Spark.post(new LoginRoute("/auth", this.authStore, this.sessionStore));

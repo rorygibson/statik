@@ -86,7 +86,7 @@ public class EditingIT extends AbstractWebDriverIntTst {
     }
 
 
-    private void changeContentOf(WebElement el, String newContent) throws InterruptedException {
+    private void changeContentOf(WebElement el, String newContent) {
         Actions a = new Actions(driver);
         a.contextClick(el);
         a.perform();
@@ -120,7 +120,7 @@ public class EditingIT extends AbstractWebDriverIntTst {
         });
     }
 
-    private void changeContentOf(String tag, String newContent) throws InterruptedException {
+    private void changeContentOf(String tag, String newContent) {
         WebElement para = driver.findElement(By.cssSelector(tag));
         changeContentOf(para, newContent);
     }

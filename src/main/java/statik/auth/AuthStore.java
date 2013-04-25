@@ -14,7 +14,7 @@ import java.util.Map;
 public class AuthStore {
 
     private static final Logger LOG = Logger.getLogger(AuthStore.class);
-    private Map<String, String> users = new HashMap<String, String>();
+    private final Map<String, String> users = new HashMap<>();
     private boolean configured = false;
 
     public void addUser(String username, String password) {

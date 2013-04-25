@@ -34,9 +34,9 @@ public class EditorRoute extends CESResourceRoute {
         String encodedPath = request.queryParams("path");
         String encodedContent = request.queryParams("content");
 
-        String selector = "";
-        String path = "";
-        String sentContent = "";
+        String selector;
+        String path;
+        String sentContent;
         try {
             selector = URLDecoder.decode(encodedSelector, "utf-8");
             path = URLDecoder.decode(encodedPath, "utf-8");
@@ -50,7 +50,7 @@ public class EditorRoute extends CESResourceRoute {
         LOG.trace("GET " + request.raw().getRequestURL() + ", selector [" + selector + "], path [" + path + "], content [" + sentContent + "]");
         ContentItem contentItem = this.contentStore.findByPathAndSelector(path, selector);
 
-        String data = null;
+        String data;
         String filePath = RESOURCE_ROOT_PATH + EDITOR_HTML;
         try {
             data = fileAsString(filePath);
@@ -87,9 +87,7 @@ public class EditorRoute extends CESResourceRoute {
 
     private String fileAsString(String file) throws IOException {
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(file);
-        String data = "";
-        data = IOUtils.toString(resourceAsStream);
-        return data;
+        return IOUtils.toString(resourceAsStream);
     }
 
 }
