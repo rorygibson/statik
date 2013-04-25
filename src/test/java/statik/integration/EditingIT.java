@@ -96,7 +96,6 @@ public class EditingIT extends AbstractWebDriverIntTst {
 
         Thread.sleep(300);
 
-
         ((FirefoxDriver)driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
 
         Thread.sleep(300);
@@ -104,15 +103,6 @@ public class EditingIT extends AbstractWebDriverIntTst {
         driver.findElement(By.tagName("form")).submit();
     }
 
-    private void waitForPresenceOf(final String tagName) {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(new Function<WebDriver, Object>() {
-            @Override
-            public Object apply(WebDriver webDriver) {
-                return driver.findElement(By.tagName(tagName));
-            }
-        });
-    }
 
     private void waitUntilEditorIsActive() {
         WebDriverWait wait = new WebDriverWait(driver, 3);

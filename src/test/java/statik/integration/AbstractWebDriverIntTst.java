@@ -1,5 +1,6 @@
 package statik.integration;
 
+import com.google.common.base.Function;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -11,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AbstractWebDriverIntTst {
 
@@ -65,6 +67,17 @@ public class AbstractWebDriverIntTst {
     @After
     public void clearContentItemsCollection() {
         driver.get(CLEAR_DB_ENDPOINT);
+    }
+
+
+    protected void waitForPresenceOf(final String tagName) {
+        WebDriverWait wait = new WebDriverWait(driver, 3);
+        wait.until(new Function<WebDriver, Object>() {
+            @Override
+            public Object apply(WebDriver webDriver) {
+                return driver.findElement(By.tagName(tagName));
+            }
+        });
     }
 
     protected void sendLogin(String wrongUsername, String wrongPassword) {
