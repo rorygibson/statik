@@ -1,4 +1,4 @@
-package statik;
+package statik.util;
 
 
 import junit.framework.Assert;

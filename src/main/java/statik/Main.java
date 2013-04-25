@@ -6,7 +6,12 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.log4j.Logger;
 import spark.Spark;
+import statik.auth.AuthStore;
+import statik.content.ContentStore;
+import statik.content.MongoContentStore;
 import statik.route.*;
+import statik.session.MongoSessionStore;
+import statik.session.SessionStore;
 
 public class Main implements spark.servlet.SparkApplication {
 
@@ -21,7 +26,7 @@ public class Main implements spark.servlet.SparkApplication {
 
     private boolean configured = false;
 
-    private Database database;
+    private ContentStore contentStore;
     private AuthStore authStore;
     private SessionStore sessionStore;
 
@@ -38,18 +43,19 @@ public class Main implements spark.servlet.SparkApplication {
         if (!configured) {
             this.configure(CONFIG_FILENAME);
 
-            this.database = new MongoDatabase();
-            this.database.configure(CONFIG_FILENAME);
+            this.contentStore = new MongoContentStore();
+            this.contentStore.configure(CONFIG_FILENAME);
 
             this.authStore = new AuthStore();
             this.authStore.configure(USERS_DB_FILENAME);
 
-            this.sessionStore = new SessionStore();
+            this.sessionStore = new MongoSessionStore();
+            this.sessionStore.configure(CONFIG_FILENAME);
         }
 
         if (testMode) {
             LOG.info("Setting up test-only routes");
-            Spark.get(new ClearDbRoute("/clear-db", this.database));
+            Spark.get(new ClearDbRoute("/clear-db", this.contentStore, this.sessionStore));
         }
 
         LOG.info("Setting up routes");
@@ -57,14 +63,14 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new LoginFormRoute("/login", this.sessionStore));
         Spark.get(new LoginErrorRoute("/login-error"));
         Spark.post(new LoginRoute("/auth", this.authStore, this.sessionStore));
-        Spark.post(new ContentRoute(this.database, "/content"));
+        Spark.post(new ContentRoute(this.contentStore, "/content"));
 
         Spark.get(new CESResourceRoute("/statik-resources/*"));
 
-        Spark.get(new EditorRoute("/statik-editor", this.database));
+        Spark.get(new EditorRoute("/statik-editor", this.contentStore));
 
-        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/", this.welcomeFile, this.sessionStore));
-        Spark.get(new EditableFileRoute(this.database, this.fileBase, "/*", this.sessionStore));
+        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/", this.welcomeFile, this.sessionStore));
+        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/*", this.sessionStore));
     }
 
     private void configure(String configFilename) {

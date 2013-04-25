@@ -1,14 +1,15 @@
 package statik.route;
 
 
-import statik.AuthStore;
-import statik.Http;
-import statik.SessionStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import statik.auth.AuthStore;
+import statik.session.SessionStore;
+import statik.util.Http;
 
+import javax.servlet.http.Cookie;
 import java.util.Map;
 
 public class LoginRoute extends Route {
@@ -35,7 +36,10 @@ public class LoginRoute extends Route {
 
         if (authStore.auth(username, password)) {
             String sessionId = sessionStore.createSession(username);
-            response.cookie(Http.COOKIE_NAME, sessionId);
+            Cookie cookie = new Cookie(Http.COOKIE_NAME, sessionId);
+            cookie.setPath("/");
+            cookie.setMaxAge(Integer.MAX_VALUE);
+            response.raw().addCookie(cookie);
             response.redirect("/");
             return "OK";
         }

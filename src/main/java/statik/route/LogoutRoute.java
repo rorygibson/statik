@@ -1,8 +1,8 @@
 package statik.route;
 
-import statik.AuthStore;
-import statik.Http;
-import statik.SessionStore;
+import statik.auth.AuthStore;
+import statik.util.Http;
+import statik.session.SessionStore;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
@@ -22,9 +22,11 @@ public class LogoutRoute extends Route {
 
     @Override
      public Object handle(Request request, Response response) {
-         if (sessionStore.hasSession(request.cookie(Http.COOKIE_NAME))) {
+        String cookie = request.cookie(Http.COOKIE_NAME);
+        if (sessionStore.hasSession(cookie)) {
              LOG.debug(("Log out [" + sessionStore.usernameFor(Http.sessionFrom(request)) + "]"));
              response.removeCookie(Http.COOKIE_NAME);
+             sessionStore.deleteSession(cookie);
              response.redirect("/");
              return Http.EMPTY_RESPONSE;
          }

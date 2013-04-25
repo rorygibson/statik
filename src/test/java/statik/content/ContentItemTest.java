@@ -1,7 +1,6 @@
-package statik;
+package statik.content;
 
 import org.junit.Test;
-import statik.ContentItem;
 
 import static org.junit.Assert.assertEquals;
 

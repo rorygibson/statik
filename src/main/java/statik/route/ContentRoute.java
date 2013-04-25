@@ -1,8 +1,8 @@
 package statik.route;
 
-import statik.ContentItem;
-import statik.Database;
-import statik.Http;
+import statik.content.ContentItem;
+import statik.content.ContentStore;
+import statik.util.Http;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
@@ -13,11 +13,11 @@ import java.util.Map;
 public class ContentRoute extends Route {
 
     private static final Logger LOG = Logger.getLogger(ContentRoute.class);
-    private final Database database;
+    private final ContentStore contentStore;
 
-    public ContentRoute(Database database, String route) {
+    public ContentRoute(ContentStore contentStore, String route) {
         super(route);
-        this.database = database;
+        this.contentStore = contentStore;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ContentRoute extends Route {
 
         LOG.debug("POST with selector [" + selector + "], path [" + path + "], content [" + newContent + "]");
 
-        database.insertOrUpdate(new ContentItem(path, selector, newContent));
+        contentStore.insertOrUpdate(new ContentItem(path, selector, newContent));
 
         response.status(200);
         return Http.EMPTY_RESPONSE;

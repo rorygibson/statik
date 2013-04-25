@@ -1,8 +1,8 @@
-package statik;
+package statik.content;
 
 import java.util.Map;
 
-public interface Database {
+public interface ContentStore {
     boolean isEmpty();
 
     void insertOrUpdate(ContentItem contentItem);

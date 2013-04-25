@@ -1,4 +1,4 @@
-package statik;
+package statik.auth;
 
 
 import org.apache.commons.configuration.CompositeConfiguration;
@@ -7,11 +7,9 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Properties;
 
 public class AuthStore {
 

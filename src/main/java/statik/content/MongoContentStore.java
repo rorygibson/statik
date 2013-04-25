@@ -1,33 +1,18 @@
-package statik;
+package statik.content;
 
 import com.mongodb.*;
-import org.apache.commons.configuration.CompositeConfiguration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.configuration.SystemConfiguration;
 import org.apache.log4j.Logger;
+import statik.UsesMongo;
 
-import java.io.File;
-import java.net.UnknownHostException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-public class MongoDatabase implements Database {
-    private static final Logger LOG = Logger.getLogger(MongoDatabase.class);
+public class MongoContentStore extends UsesMongo implements ContentStore {
+    private static final Logger LOG = Logger.getLogger(MongoContentStore.class);
     public static final String COLLECTION_NAME = "contentItems";
 
-    private MongoClient mongoClient = null;
-
-    private DBCollection items = null;
-    private DB db = null;
-
-    private String dbName = "";
-    private String mongoHost = "";
-    private int mongoPort = 0;
-    private String mongoUsername = "";
-    private String mongoPassword = "";
-    private boolean mongoAuth = false;
-
     private boolean configured = false;
+    private DBCollection items;
 
     @Override
     public boolean isEmpty() {
@@ -54,25 +39,8 @@ public class MongoDatabase implements Database {
 
     @Override
     public void configure(String configFilename) {
-        if (configured) {
-            return;
-        }
-
-        loadConfig(configFilename);
-
-        LOG.info("Connecting to MongoDB on " + mongoHost + ":" + mongoPort);
-        this.mongoClient = mongoClientFor(mongoHost, mongoPort);
-        this.db = mongoClient.getDB(dbName);
-
-        if (mongoAuth) {
-            boolean auth = db.authenticate(mongoUsername, mongoPassword.toCharArray());
-            if (!auth) {
-                throw new RuntimeException("Couldn't authenticate with MongoDB");
-            }
-        }
-
+        super.configure(configFilename);
         this.items = db.getCollection(COLLECTION_NAME);
-        this.configured = true;
     }
 
     @Override
@@ -113,31 +81,4 @@ public class MongoDatabase implements Database {
         return new ContentItem(itemPath, selector, content);
     }
 
-
-    private void loadConfig(String filename) {
-        LOG.info("Loading config");
-
-        CompositeConfiguration config = new CompositeConfiguration();
-        config.addConfiguration(new SystemConfiguration());
-        try {
-            config.addConfiguration(new PropertiesConfiguration(filename));
-        } catch (ConfigurationException e) {
-            throw new RuntimeException("Couldn't load configuration from " + filename);
-        }
-
-        dbName = config.getString("dbName");
-        mongoHost = config.getString("mongoHost");
-        mongoPort = config.getInt("mongoPort");
-        mongoUsername = config.getString("mongoUsername");
-        mongoPassword = config.getString("mongoPassword");
-        mongoAuth = config.getBoolean("mongoAuth");
-    }
-
-    private MongoClient mongoClientFor(String host, int port) {
-        try {
-            return new MongoClient(host, port);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException("Couldn't connect to MongoDB", e);
-        }
-    }
 }

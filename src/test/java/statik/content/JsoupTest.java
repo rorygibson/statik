@@ -1,4 +1,4 @@
-package statik;
+package statik.content;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

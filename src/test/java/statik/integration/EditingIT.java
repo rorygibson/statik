@@ -14,6 +14,8 @@ import static junit.framework.Assert.assertEquals;
 
 public class EditingIT extends AbstractWebDriverIntTst {
 
+    public static final int PERIOD_TO_WAIT_FOR_EDITOR = 500;
+    public static final int PERIOD_TO_WAIT_FOR_CHANGES = 500;
 
     @Before
     public void performLogin() {
@@ -28,7 +30,6 @@ public class EditingIT extends AbstractWebDriverIntTst {
 
         changeContentOf("p", "new content");
 
-        driver.get(ONE_PARA_TEST_PAGE);
         WebElement again = driver.findElement(By.cssSelector("p"));
         assertEquals("Text not as expected", "new content", again.getText());
     }
@@ -37,18 +38,11 @@ public class EditingIT extends AbstractWebDriverIntTst {
     public void editLink() throws InterruptedException {
         driver.get(LINK_TEST_PAGE);
 
-        WebElement originalLink = driver.findElement(By.tagName("a"));
+        WebElement originalLink = driver.findElement(By.id("first-link"));
         assertEquals("Link text wrong", "one para page", originalLink.getText());
         assertEquals("Link target wrong", "http://localhost:8080/one-para.html", originalLink.getAttribute("href"));
 
         changeContentOf("#first-link", "new link text");
-
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
 
         WebElement changedLink = driver.findElement(By.id("first-link"));
         assertEquals("Link text wrong", "new link text", changedLink.getText());
@@ -83,6 +77,15 @@ public class EditingIT extends AbstractWebDriverIntTst {
     }
 
 
+    private void sleepForMs(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            //
+        }
+    }
+
+
     private void changeContentOf(WebElement el, String newContent) throws InterruptedException {
         Actions a = new Actions(driver);
         a.contextClick(el);
@@ -94,13 +97,15 @@ public class EditingIT extends AbstractWebDriverIntTst {
         waitForPresenceOf("textarea");
         waitForPresenceOf("iframe");
 
-        Thread.sleep(300);
+        sleepForMs(PERIOD_TO_WAIT_FOR_EDITOR);
 
         ((FirefoxDriver)driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
 
-        Thread.sleep(300);
+        sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
 
-        driver.findElement(By.tagName("form")).submit();
+        driver.findElement(By.id("submit")).click();
+
+        sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
     }
 
 

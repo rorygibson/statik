@@ -2,8 +2,8 @@ package statik.route;
 
 import spark.Request;
 import spark.Response;
-import statik.Http;
-import statik.SessionStore;
+import statik.util.Http;
+import statik.session.SessionStore;
 
 public class LoginFormRoute extends CESResourceRoute {
 

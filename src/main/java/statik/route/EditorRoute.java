@@ -8,9 +8,9 @@ import org.jsoup.nodes.Entities;
 import org.jsoup.select.Elements;
 import spark.Request;
 import spark.Response;
-import statik.ContentItem;
-import statik.Database;
-import statik.Http;
+import statik.content.ContentItem;
+import statik.content.ContentStore;
+import statik.util.Http;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,11 +21,11 @@ public class EditorRoute extends CESResourceRoute {
 
     private static final Logger LOG = Logger.getLogger(EditorRoute.class);
     private static final String EDITOR_HTML = "wysihtml5/editor.html";
-    private final Database database;
+    private final ContentStore contentStore;
 
-    public EditorRoute(String route, Database database) {
+    public EditorRoute(String route, ContentStore contentStore) {
         super(route);
-        this.database = database;
+        this.contentStore = contentStore;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class EditorRoute extends CESResourceRoute {
         }
 
         LOG.trace("GET " + request.raw().getRequestURL() + ", selector [" + selector + "], path [" + path + "], content [" + sentContent + "]");
-        ContentItem contentItem = this.database.findByPathAndSelector(path, selector);
+        ContentItem contentItem = this.contentStore.findByPathAndSelector(path, selector);
 
         String data = null;
         String filePath = RESOURCE_ROOT_PATH + EDITOR_HTML;

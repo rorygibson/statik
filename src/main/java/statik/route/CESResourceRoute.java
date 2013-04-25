@@ -1,6 +1,6 @@
 package statik.route;
 
-import statik.Http;
+import statik.util.Http;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import spark.Request;

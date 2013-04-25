@@ -36,31 +36,9 @@ public class AbstractWebDriverIntTst {
         if (running) {
             return;
         }
-
-        String phantomBinaryLocation = System.getProperty("phantomBinary");
-        if (StringUtils.isNotBlank(phantomBinaryLocation)) {
-            LOG.info("Using phantomjs at " + phantomBinaryLocation);
-            DesiredCapabilities caps = new DesiredCapabilities();
-            caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomBinaryLocation);
-
-            driver = new PhantomJSDriver(caps);
-        } else {
-            LOG.info("Using Firefox");
-            driver = new FirefoxDriver();
-        }
-
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            @Override
-            public void run() {
-                try {
-                    driver.quit();
-                } catch (Exception e) {
-                    // ignore
-                }
-            }
-        });
-
         running = true;
+
+        driver = runningDriver();
     }
 
 
@@ -69,6 +47,12 @@ public class AbstractWebDriverIntTst {
         driver.get(CLEAR_DB_ENDPOINT);
     }
 
+
+    protected static WebDriver runningDriver() {
+        WebDriver d = createDriver();
+        addHookToShutdownDriver(d);
+        return d;
+    }
 
     protected void waitForPresenceOf(final String tagName) {
         WebDriverWait wait = new WebDriverWait(driver, 3);
@@ -88,10 +72,39 @@ public class AbstractWebDriverIntTst {
         password.submit();
     }
 
-
     protected void doLoginWith(String username, String password) {
         driver.get(LOGIN_PAGE);
         sendLogin(username, password);
+    }
+
+    protected static WebDriver createDriver() {
+        WebDriver d = null;
+
+        String phantomBinaryLocation = System.getProperty("phantomBinary");
+        if (StringUtils.isNotBlank(phantomBinaryLocation)) {
+            LOG.info("Using phantomjs at " + phantomBinaryLocation);
+            DesiredCapabilities caps = new DesiredCapabilities();
+            caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomBinaryLocation);
+
+            d = new PhantomJSDriver(caps);
+        } else {
+            LOG.info("Using Firefox");
+            d = new FirefoxDriver();
+        }
+        return d;
+    }
+
+    protected static void addHookToShutdownDriver(final WebDriver d) {
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                try {
+                    d.quit();
+                } catch (Exception e) {
+                    // ignore
+                }
+            }
+        });
     }
 
 }

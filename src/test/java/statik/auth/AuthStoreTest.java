@@ -1,7 +1,7 @@
-package statik;
+package statik.auth;
 
 import org.junit.Test;
-import statik.AuthStore;
+import statik.auth.AuthStore;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

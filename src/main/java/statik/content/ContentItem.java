@@ -1,4 +1,4 @@
-package statik;
+package statik.content;
 
 public class ContentItem {
 

@@ -8,7 +8,10 @@ import org.jsoup.nodes.Element;
 import spark.Request;
 import spark.Response;
 import spark.Route;
-import statik.*;
+import statik.content.ContentItem;
+import statik.content.ContentStore;
+import statik.session.SessionStore;
+import statik.util.Http;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -31,21 +34,21 @@ public class EditableFileRoute extends Route {
             "    </div>";
     private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
-    private Database database;
+    private ContentStore contentStore;
     private String fileBase;
     private String namedFile = null;
     private static final Logger LOG = Logger.getLogger(EditableFileRoute.class);
 
-    public EditableFileRoute(Database database, String fileBase, String route, SessionStore sessionStore) {
+    public EditableFileRoute(ContentStore contentStore, String fileBase, String route, SessionStore sessionStore) {
         super(route);
-        this.database = database;
+        this.contentStore = contentStore;
         this.fileBase = fileBase;
         this.sessionStore = sessionStore;
     }
 
-    public EditableFileRoute(Database database, String fileBase, String route, String namedFile, SessionStore sessionStore) {
+    public EditableFileRoute(ContentStore contentStore, String fileBase, String route, String namedFile, SessionStore sessionStore) {
         super(route);
-        this.database = database;
+        this.contentStore = contentStore;
         this.fileBase = fileBase;
         this.namedFile = namedFile;
         this.sessionStore = sessionStore;
@@ -121,7 +124,7 @@ public class EditableFileRoute extends Route {
     }
 
     private Document replaceContent(Document doc, String path) {
-        Map<String, ContentItem> contentItems = this.database.findForPath(path);
+        Map<String, ContentItem> contentItems = this.contentStore.findForPath(path);
 
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
