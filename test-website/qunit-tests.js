@@ -62,19 +62,3 @@ module("Editing", {
         this.server.restore();
     }
 });
-
-
-//test("Should post new content to the server", function () {
-//    this.server = sinon.fakeServer.create();
-//
-//    var $fixture = $("#qunit-fixture");
-//    $fixture.append("<p id='my-p'>the paragraph</p>");
-//
-//    var item = $('#my-p');
-//    $(item).data('before', 'an orignal value to trigger a change');
-//
-//    doPost(item, "/path");
-//    equal(1, this.server.requests.length);
-//});
-
-
