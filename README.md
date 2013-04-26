@@ -23,8 +23,18 @@ Except, whenever you want to, you can fire a browser at http://website/login, pu
 
 That's it.
 
-## Project status
-It works. It's got a couple of bugs and the edtor functionality is very basic.
+## Features
+
+ - Works with any static website
+ - WYSIWYG content editing
+ - Supports multiple authors
+ - Serves a single website per instance of Statik (each instance should be configured with a unique fileBase and MongoDB database name)
+ - Right click on elements (paragraphs, list items, anchors) to edit
+ - Can run in an installed servlet container (Tomcat, Jetty etc) or standalone as an executable JAR
+
+
+## Status
+It works. It's got a couple of bugs.
 Try it out and gimme feedback, please!
 
 
@@ -34,54 +44,63 @@ To build:
 
  - Java 7
  - Maven 3
+ - MongoDB
+ - Firefox (to run the acceptance tests)
 
 To run:
 
  - Java 7
  - MongoDB
-
-To serve a website:
-
  - a website, expressed as a set of static .html files, CSS, JavaScript, images etc.
 
 ## Development setup
 
+### Get the code
     git clone https://github.com/rorygibson/statik.git
-    mkdir /home/rory/websites/my-site (or wherever)
 
-Copy the HTML of your static site into the directory you just created
+### Build (defaults to webapp packaging)
+    cd statik
+    mvn -DfileBase=$PWD/demo-website clean install
 
-Configure $HOME/config.properties with your MongoDB details, path to website and so on (template below)
+### Run locally in Jetty (port 8080)
+    cd statik
+    mvn -DfileBase=$PWD/demo-website jetty:run-war
 
-    mvn clean package tomcat:run-war
+### Build (as standalone uber-jar for non-servlet-container deployment)
+    cd statik
+    mvn clean install -Pstandalone
 
-Open browser on http://localhost:8080/index.html
+### Run locally as standalone service (port 4567)
+    cd statik
+    java -jar -DfileBase=$PWD/demo-website target/statik-1.0-SNAPSHOT.jar
 
 
-## Server setup
 
-Server side tasks (ex. Tomcat):
+## Setup for using it "for real"
+
+Example instructions (for e.g. Tomcat servlet container)
 
  * Obtain the WAR file
  * Make sure it's called ROOT.war (rename if necessary)
- * Copy the ROOT.war file to the servlet container deployment directory ($CATALINA_HOME/webapps)
- * Create a config.properties file in the $HOME directory of the user running the servlet container
- * Create a users.properties file in the $HOME directory of the user running the servlet container
+ * Copy the ROOT.war file to the deployment directory ($CATALINA_HOME/webapps)
+ * Create a config.properties file in the $HOME directory of the user running Tomcat
+ * Create a users.properties file in the $HOME directory of the user running Tomcat
  * Copy your website static files to the directory specified in your config.properties
+ * Make sure MongoDB is running (and on the port specified in config.properties)
  * Start Tomcat (./bin/startup.sh)
 
 Example config.properties
 
-    dbName=contentdb
+    dbName=statik
     mongoHost=localhost
     mongoPort=27017
-    mongoUsername=hellojava
+    mongoAuth=true
+    mongoUsername=myFirstStatik
     mongoPassword=password
-    fileBase=/tmp/testFiles
+    fileBase=/home/bob/statik-websites/my-first-website
     welcomeFile=index.html
 
 Example users.properties
 
     fred=password1
-    barney=secret-dinosaur-key
-
+    barney=secret-dinosaur-password
