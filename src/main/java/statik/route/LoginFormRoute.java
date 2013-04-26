@@ -5,7 +5,7 @@ import spark.Response;
 import statik.util.Http;
 import statik.session.SessionStore;
 
-public class LoginFormRoute extends CESResourceRoute {
+public class LoginFormRoute extends ResourceRoute {
 
     private static final String LOGIN_FORM_HTML = "login.html";
     private static final String LOGIN_ALREADY_HTML = "login-already.html";

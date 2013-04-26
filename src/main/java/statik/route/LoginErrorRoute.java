@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
 
-public class LoginErrorRoute extends CESResourceRoute {
+public class LoginErrorRoute extends ResourceRoute {
 
     private static final Logger LOG = Logger.getLogger(LoginErrorRoute.class);
 

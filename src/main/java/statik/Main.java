@@ -66,7 +66,7 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.post(new LoginRoute("/auth", this.authStore, this.sessionStore));
         Spark.post(new ContentRoute(this.contentStore, "/content"));
 
-        Spark.get(new CESResourceRoute("/statik-resources/*"));
+        Spark.get(new ResourceRoute("/statik-resources/*"));
 
         Spark.get(new EditorRoute("/statik-editor", this.contentStore));
 
