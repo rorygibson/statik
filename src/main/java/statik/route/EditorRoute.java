@@ -11,7 +11,6 @@ import statik.content.ContentItem;
 import statik.content.ContentStore;
 import statik.util.Http;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -47,25 +46,35 @@ public class EditorRoute extends ResourceRoute {
         }
 
         LOG.trace("GET " + request.raw().getRequestURL() + ", selector [" + selector + "], path [" + path + "], content [" + sentContent + "]");
-        ContentItem contentItem = this.contentStore.findByPathAndSelector(path, selector);
 
-        String data;
-        String filePath = RESOURCE_ROOT_PATH + EDITOR_HTML;
-        try {
-            data = fileAsString(filePath);
-        } catch (IOException e) {
-            LOG.warn("Couldn't load file " + filePath);
+        ContentItem contentItem = lookupContentItemBy(selector, path);
+
+        String editorView = populateEditorView(selector, path, contentItem, sentContent);
+        if (editorView == null) {
             response.status(404);
             return Http.EMPTY_RESPONSE;
+        }
+
+        return editorView;
+    }
+
+    private ContentItem lookupContentItemBy(String selector, String path) {
+        return this.contentStore.findByPathAndSelector(path, selector);
+    }
+
+    private String populateEditorView(String selector, String path, ContentItem contentItem, String sentContent) {
+        String data = fileAsString(RESOURCE_ROOT_PATH + EDITOR_HTML);
+        if (data == null) {
+            return null;
         }
 
         Document document = Jsoup.parse(data);
         document.outputSettings().escapeMode(Entities.EscapeMode.extended);
 
-        String replaced = String.format(HIDDEN_INPUTS_TEMPLATE, selector, path);
+        String hiddenFields = String.format(HIDDEN_INPUTS_TEMPLATE, selector, path);
 
         Elements form = document.select("#editorForm");
-        form.append(replaced);
+        form.append(hiddenFields);
 
         Elements textareaPreload = document.select("#textarea-preload");
         if (contentItem != null) {
