@@ -23,6 +23,7 @@ public class Main implements spark.servlet.SparkApplication {
     private static final String FILE_BASE = "fileBase";
     private static final String WELCOME_FILE = "welcomeFile";
     private static final String TEST_MODE = "testMode";
+    private static final String NOT_FOUND_PAGE = "404page";
 
     private boolean configured = false;
 
@@ -33,6 +34,7 @@ public class Main implements spark.servlet.SparkApplication {
     private String fileBase;
     private String welcomeFile;
     private boolean testMode = false;
+    private String notFoundPage;
 
     public static void main(String[] args) {
         new Main().init();
@@ -65,13 +67,10 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new LoginErrorRoute("/login-error"));
         Spark.post(new LoginRoute("/auth", this.authStore, this.sessionStore));
         Spark.post(new ContentRoute(this.contentStore, "/content"));
-
         Spark.get(new ResourceRoute("/statik-resources/*"));
-
         Spark.get(new EditorRoute("/statik-editor", this.contentStore));
-
-        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/", this.welcomeFile, this.sessionStore));
-        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/*", this.sessionStore));
+        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/", this.welcomeFile, this.sessionStore, this.notFoundPage));
+        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/*", this.sessionStore, this.notFoundPage));
     }
 
     private void configure(String configFilename) {
@@ -91,11 +90,13 @@ public class Main implements spark.servlet.SparkApplication {
         this.testMode = config.getBoolean(TEST_MODE);
         this.fileBase = config.getString(FILE_BASE);
         this.welcomeFile = config.getString(WELCOME_FILE);
+        this.notFoundPage = config.getString(NOT_FOUND_PAGE);
 
         this.configured = true;
         LOG.debug("Test mode is " + testMode);
         LOG.debug("File base is " + fileBase);
         LOG.debug("Welcome file is " + welcomeFile);
+        LOG.debug("404 file is " + notFoundPage);
     }
 
     private PropertiesConfiguration loadPropertiesConfigFrom(String configFilename) {

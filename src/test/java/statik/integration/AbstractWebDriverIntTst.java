@@ -29,9 +29,11 @@ public class AbstractWebDriverIntTst {
     public static String QUNIT_TESTS_PAGE;
     public static String CLEAR_DB_ENDPOINT;
     public static String LINK_TEST_PAGE;
+    public static String LOGOUT_PAGE;
 
     private static final Logger LOG = Logger.getLogger(AbstractWebDriverIntTst.class);
     private static boolean running;
+
 
     static {
         BASE_URL = System.getProperty("baseUrl");
@@ -47,6 +49,7 @@ public class AbstractWebDriverIntTst {
         ROOT_PAGE = BASE_URL + "index.html";
         LOGIN_ERROR_PAGE = BASE_URL + "login-error";
         LOGIN_PAGE = BASE_URL + "login";
+        LOGOUT_PAGE = BASE_URL + "logout";
         ONE_PARA_TEST_PAGE = BASE_URL + "one-para.html";
         TWO_PARA_TEST_PAGE = BASE_URL + "two-paras.html";
         LIST_TEST_PAGE = BASE_URL + "list.html";
@@ -99,6 +102,11 @@ public class AbstractWebDriverIntTst {
     protected void doLoginWith(String username, String password) {
         driver.get(LOGIN_PAGE);
         sendLogin(username, password);
+    }
+
+
+    protected void doLogout() {
+        driver.get(LOGOUT_PAGE);
     }
 
     protected static WebDriver createDriver() {

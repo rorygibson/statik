@@ -27,6 +27,7 @@ public class ResourceRoute extends Route {
         String filename = request.splat()[0];
         LOG.trace("Request for file, path is [" + request.url() + "], file is [" + filename + "]");
 
+        setCacheable(response);
         return writeClasspathFileToResponse(response, filename);
     }
 
@@ -38,8 +39,6 @@ public class ResourceRoute extends Route {
     }
 
     protected Object writeClasspathFileToResponse(Response response, String filename) {
-        setCacheable(response);
-
         String filePath = RESOURCE_ROOT_PATH + filename;
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
         try {

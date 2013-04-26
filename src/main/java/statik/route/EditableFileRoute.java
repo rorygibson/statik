@@ -32,6 +32,7 @@ public class EditableFileRoute extends Route {
             "        <li id=\"edit\"><img src=\"/statik-resources/edit.png\" /> Edit </li>\n" +
             "      </ul>\n" +
             "    </div>";
+    private static String notFoundPage = "";
     private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
     private final ContentStore contentStore;
@@ -39,19 +40,21 @@ public class EditableFileRoute extends Route {
     private String namedFile = null;
     private static final Logger LOG = Logger.getLogger(EditableFileRoute.class);
 
-    public EditableFileRoute(ContentStore contentStore, String fileBase, String route, SessionStore sessionStore) {
+    public EditableFileRoute(ContentStore contentStore, String fileBase, String route, SessionStore sessionStore, String notFoundPage) {
         super(route);
         this.contentStore = contentStore;
         this.fileBase = fileBase;
         this.sessionStore = sessionStore;
+        this.notFoundPage = notFoundPage;
     }
 
-    public EditableFileRoute(ContentStore contentStore, String fileBase, String route, String namedFile, SessionStore sessionStore) {
+    public EditableFileRoute(ContentStore contentStore, String fileBase, String route, String namedFile, SessionStore sessionStore, String notFoundPage) {
         super(route);
         this.contentStore = contentStore;
         this.fileBase = fileBase;
         this.namedFile = namedFile;
         this.sessionStore = sessionStore;
+        this.notFoundPage = notFoundPage;
     }
 
     @Override
@@ -68,13 +71,15 @@ public class EditableFileRoute extends Route {
             theFile = findRequestedFileFrom(path);
         }
 
-        if (!theFile.exists()) {
-            LOG.warn("File not found [" + theFile.getAbsolutePath() + "]");
-            response.status(404);
-            return Http.EMPTY_RESPONSE;
-        }
-
         try {
+            if (!theFile.exists()) {
+                LOG.warn("File not found [" + theFile.getAbsolutePath() + "]");
+                File the404File = findRequestedFileFrom(notFoundPage);
+                writeFileToResponse(response, the404File);
+                response.status(404);
+                return Http.EMPTY_RESPONSE;
+            }
+
             response.status(200);
 
             if (mightContainCmsContent(theFile)) {
@@ -99,7 +104,7 @@ public class EditableFileRoute extends Route {
     }
 
     private File findRequestedFileFrom(String path) {
-        String fullPath = fileBase + path;
+        String fullPath = fileBase + "/" + path;
         LOG.trace("Request for file; full path to file is [" + fullPath + "]");
         return new File(fullPath);
     }
