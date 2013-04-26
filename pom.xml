@@ -5,7 +5,7 @@
     <groupId>statik</groupId>
     <artifactId>statik</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>web</name>
+    <name>statik</name>
     <packaging>${packaging.type}</packaging>
 
     <properties>
