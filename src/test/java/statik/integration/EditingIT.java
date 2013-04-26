@@ -11,6 +11,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class EditingIT extends AbstractWebDriverIntTst {
 
@@ -40,13 +41,13 @@ public class EditingIT extends AbstractWebDriverIntTst {
 
         WebElement originalLink = driver.findElement(By.id("first-link"));
         assertEquals("Link text wrong", "one para page", originalLink.getText());
-        assertEquals("Link target wrong", "http://localhost:8080/one-para.html", originalLink.getAttribute("href"));
+        assertTrue("Link target wrong", originalLink.getAttribute("href").endsWith("/one-para.html"));
 
         changeContentOf("#first-link", "new link text");
 
         WebElement changedLink = driver.findElement(By.id("first-link"));
         assertEquals("Link text wrong", "new link text", changedLink.getText());
-        assertEquals("Link target wrong", "http://localhost:8080/one-para.html", changedLink.getAttribute("href"));
+        assertTrue("Link target wrong", changedLink.getAttribute("href").endsWith("/one-para.html"));
     }
 
 

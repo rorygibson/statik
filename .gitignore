@@ -1,4 +1,4 @@
 target
 *.iml
 .idea
-dc-deploy
+dependency-reduced-pom.xml

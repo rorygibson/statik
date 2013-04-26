@@ -56,6 +56,7 @@ public class Main implements spark.servlet.SparkApplication {
         if (testMode) {
             LOG.info("Setting up test-only routes");
             Spark.get(new ClearDbRoute("/clear-db", this.contentStore, this.sessionStore));
+            Spark.get(new ShutdownRoute("/shutdown"));
         }
 
         LOG.info("Setting up routes");

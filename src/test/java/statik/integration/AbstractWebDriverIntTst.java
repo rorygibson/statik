@@ -18,18 +18,42 @@ public class AbstractWebDriverIntTst {
 
     protected static WebDriver driver;
 
-    public static final String ROOT_PAGE = "http://localhost:8080/";
-    public static final String LOGIN_ERROR_PAGE = "http://localhost:8080/login-error";
-    public static final String LOGIN_PAGE = "http://localhost:8080/login";
-    public static final String ONE_PARA_TEST_PAGE = "http://localhost:8080/one-para.html";
-    public static final String TWO_PARA_TEST_PAGE = "http://localhost:8080/two-paras.html";
-    public static final String LIST_TEST_PAGE = "http://localhost:8080/list.html";
-    public static final String QUNIT_TESTS_PAGE = "http://localhost:8080/qunit-tests.html";
-    public static final String CLEAR_DB_ENDPOINT = "http://localhost:8080/clear-db";
-    public static final String LINK_TEST_PAGE = "http://localhost:8080/links.html";
+    public static String BASE_URL;
+
+    public static String ROOT_PAGE;
+    public static String LOGIN_ERROR_PAGE;
+    public static String LOGIN_PAGE;
+    public static String ONE_PARA_TEST_PAGE;
+    public static String TWO_PARA_TEST_PAGE;
+    public static String LIST_TEST_PAGE;
+    public static String QUNIT_TESTS_PAGE;
+    public static String CLEAR_DB_ENDPOINT;
+    public static String LINK_TEST_PAGE;
 
     private static final Logger LOG = Logger.getLogger(AbstractWebDriverIntTst.class);
     private static boolean running;
+
+    static {
+        BASE_URL = System.getProperty("baseUrl");
+
+        if (BASE_URL == null || BASE_URL.equals("")) {
+            BASE_URL = "http://localhost:8080/";
+        }
+
+        if (!BASE_URL.endsWith("/")) {
+            BASE_URL = BASE_URL + "/";
+        }
+
+        ROOT_PAGE = BASE_URL + "index.html";
+        LOGIN_ERROR_PAGE = BASE_URL + "login-error";
+        LOGIN_PAGE = BASE_URL + "login";
+        ONE_PARA_TEST_PAGE = BASE_URL + "one-para.html";
+        TWO_PARA_TEST_PAGE = BASE_URL + "two-paras.html";
+        LIST_TEST_PAGE = BASE_URL + "list.html";
+        QUNIT_TESTS_PAGE = BASE_URL + "qunit-tests.html";
+        CLEAR_DB_ENDPOINT = BASE_URL + "clear-db";
+        LINK_TEST_PAGE = BASE_URL + "links.html";
+    }
 
     @BeforeClass
     public static void setUp() {
