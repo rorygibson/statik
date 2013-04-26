@@ -6,27 +6,25 @@
 <body>
 
 <div id="wysihtml5-toolbar" style="display: none;">
-    <a data-wysihtml5-command="bold">bold</a>
-    <a data-wysihtml5-command="italic">italic</a>
+    <a data-text-i18n="editor.bold" data-wysihtml5-command="bold"></a>
+    <a data-text-i18n="editor.italic" data-wysihtml5-command="italic"></a>
 
     <!-- Some wysihtml5 commands require extra parameters -->
-    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red">red</a>
-    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green">green</a>
-    <a data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue">blue</a>
+    <a data-text-i18n="editor.red" data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></a>
+    <a data-text-i18n="editor.green" data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></a>
+    <a data-text-i18n="editor.blue" data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></a>
 
     <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
-    <a data-wysihtml5-command="createLink">Link</a>
+    <a data-text-i18n="editor.link" data-wysihtml5-command="createLink">Link</a>
 
-    <a data-wysihtml5-action="change_view" unselectable="on">HTML</a>
+    <a data-text-i18n="editor.html" data-wysihtml5-action="change_view" unselectable="on">HTML</a>
 
     <div id="linkBox" data-wysihtml5-dialog="createLink">
-        <label>
-            Link:
-            <input data-wysihtml5-dialog-field="href" value="http://" class="text">
-        </label>
+        <label for="url" data-text-i18n="editor.link"></label>
+        <input id="url" data-wysihtml5-dialog-field="href" value="http://" class="text">
 
-        <a data-wysihtml5-dialog-action="save">OK</a>
-        <a data-wysihtml5-dialog-action="cancel">Cancel</a>
+        <a data-text-i18n="editor.save" data-wysihtml5-dialog-action="save"></a>
+        <a data-text-i18n="editor.cancel" data-wysihtml5-dialog-action="cancel"></a>
     </div>
 </div>
 
@@ -34,7 +32,7 @@
     <div id="textarea-preload"></div>
     <textarea name="content" id="wysihtml5-textarea" autofocus></textarea>
     <br />
-    <input type="submit" value="Save" id="submit" name="save" />
+    <input data-value-i18n="editor.save" type="submit" value="" id="submit" name="save" />
 </form>
 
 <script type="text/javascript" src="/statik-resources/wysihtml5/jquery.form.js"></script>

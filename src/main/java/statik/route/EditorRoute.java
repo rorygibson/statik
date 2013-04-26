@@ -14,7 +14,7 @@ import statik.util.Http;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class EditorRoute extends ResourceRoute {
+public class EditorRoute extends InternationalisedResourceRoute {
 
     private static final Logger LOG = Logger.getLogger(EditorRoute.class);
     private static final String EDITOR_HTML = "wysihtml5/editor.html";
@@ -63,7 +63,7 @@ public class EditorRoute extends ResourceRoute {
     }
 
     private String populateEditorView(String selector, String path, ContentItem contentItem, String sentContent) {
-        String data = fileAsString(RESOURCE_ROOT_PATH + EDITOR_HTML);
+        String data = i18n(RESOURCE_ROOT_PATH + EDITOR_HTML);
         if (data == null) {
             return null;
         }

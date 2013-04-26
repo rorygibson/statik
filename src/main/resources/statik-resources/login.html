@@ -4,20 +4,21 @@
 </head>
 
 <body>
-    <h1>Sign in</h1>
+    <h1 data-text-i18n="login.heading"></h1>
 
 	<form method="post" action="/auth">
         <div>
-		    <label>Username:</label> <input tabindex="1" name="username" />
+		    <label data-text-i18n="login.username"></label>
+            <input tabindex="1" name="username" />
         </div>
 
         <div>
-		    <label>Password:</label>
+		    <label data-text-i18n="login.password"></label>
             <input name="password" tabindex="2" type="password" />
         </div>
 
         <div>
-		    <input type="submit" tabindex="3" value="Sign in" />
+		    <input type="submit" tabindex="3" data-value-i18n="login.submit" value="" />
         </div>
 	</form>
 

@@ -5,7 +5,7 @@
 h1 {
     font-size: 14pt;
     display: block;
-    width: 5em;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
 }

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 
 public class EditableFileRoute extends Route {
@@ -25,11 +26,11 @@ public class EditableFileRoute extends Route {
     private static final String JQUERY_JS = "<script src=\"/statik-resources/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/jquery-ui/js/jquery-ui-1.10.2.custom.min.js\" type=\"text/javascript\"></script>";
     private static final String AUTH_JS = "<script src=\"/statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"statik-resources/dom.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/getpath.js\" type=\"text/javascript\"></script>";
     private static final String MENU_JS = "<script src=\"/statik-resources/jquery.contextmenu.r2.packed.js\" type=\"text/javascript\"></script>";
-    private static final String LOGOUT_BOX_HTML = "<div id=\"ces-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgrey 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/logout\">Log out</a></div>";
+    private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/logout\">%s</a></div>";
     private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
-    private static final String MENU_HTML = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
+    private static final String MENU_HTML_TEMPLATE = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
             "      <ul>\n" +
-            "        <li id=\"edit\"><img src=\"/statik-resources/edit.png\" /> Edit </li>\n" +
+            "        <li id=\"edit\"><img src=\"/statik-resources/edit.png\" /> %s </li>\n" +
             "      </ul>\n" +
             "    </div>";
     private static String notFoundPage = "";
@@ -114,10 +115,14 @@ public class EditableFileRoute extends Route {
     }
 
     private Document makeEditable(Document doc) {
+        ResourceBundle bundle = ResourceBundle.getBundle("messages");
+        String logout = bundle.getString("authbox.logout");
+        String edit = bundle.getString("editmenu.edit");
+
         doc.head().append(JQUERY_CSS);
-        doc.body().append(LOGOUT_BOX_HTML);
+        doc.body().append(String.format(LOGOUT_BOX_HTML_TEMPLATE, logout));
         doc.body().append(EDITOR_HTML);
-        doc.body().append(MENU_HTML);
+        doc.body().append(String.format(MENU_HTML_TEMPLATE, edit));
         doc.body().append(JQUERY_JS);
         doc.body().append(AUTH_JS);
         doc.body().append(MENU_JS);

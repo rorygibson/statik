@@ -4,7 +4,7 @@ package statik.route;
 import spark.Request;
 import spark.Response;
 
-public class LoginErrorRoute extends ResourceRoute {
+public class LoginErrorRoute extends InternationalisedResourceRoute {
 
     public LoginErrorRoute(String route) {
         super(route);
@@ -12,7 +12,7 @@ public class LoginErrorRoute extends ResourceRoute {
 
     @Override
     public Object handle(Request request, Response response) {
-        return writeClasspathFileToResponse(response, "login-error.html");
+        return i18n(RESOURCE_ROOT_PATH + "/" + "login-error.html");
     }
 
 }

@@ -33,7 +33,7 @@ public class LoginIT extends AbstractWebDriverIntTst {
     @Test
     public void logout() {
         doLoginWith("rory", "password");
-        driver.findElement(By.id("ces-auth-box"));
+        driver.findElement(By.id("statik-auth-box"));
     }
 
 
