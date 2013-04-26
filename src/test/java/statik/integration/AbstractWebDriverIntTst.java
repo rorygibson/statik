@@ -114,13 +114,13 @@ public class AbstractWebDriverIntTst {
 
         String phantomBinaryLocation = System.getProperty("phantomBinary");
         if (StringUtils.isNotBlank(phantomBinaryLocation)) {
-            LOG.info("Using phantomjs at " + phantomBinaryLocation);
+            LOG.trace("Using phantomjs at " + phantomBinaryLocation);
             DesiredCapabilities caps = new DesiredCapabilities();
             caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomBinaryLocation);
 
             d = new PhantomJSDriver(caps);
         } else {
-            LOG.info("Using Firefox");
+            LOG.trace("Using Firefox");
             d = new FirefoxDriver();
         }
         return d;
