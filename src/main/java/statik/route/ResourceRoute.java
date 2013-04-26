@@ -1,21 +1,24 @@
 package statik.route;
 
-import statik.util.Http;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import statik.util.Http;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
-public class CESResourceRoute extends Route {
+public class ResourceRoute extends Route {
 
-    private static final Logger LOG = Logger.getLogger(CESResourceRoute.class);
+    private static final Logger LOG = Logger.getLogger(ResourceRoute.class);
     protected static final String RESOURCE_ROOT_PATH = "statik-resources/";
 
-    public CESResourceRoute(String route) {
+    public ResourceRoute(String route) {
         super(route);
     }
 
@@ -24,9 +27,17 @@ public class CESResourceRoute extends Route {
         String filename = request.splat()[0];
         LOG.trace("Request for file, path is [" + request.url() + "], file is [" + filename + "]");
 
+        setCacheable(response);
+
         return writeClasspathFileToResponse(response, filename);
     }
 
+    public static void setCacheable(Response r) {
+        final Calendar inTwoMonths = new GregorianCalendar();
+        inTwoMonths.setTime(new Date());
+        inTwoMonths.add(Calendar.MONTH, 2);
+        r.raw().setDateHeader("Expires", inTwoMonths.getTimeInMillis());
+    }
 
     protected Object writeClasspathFileToResponse(Response response, String filename) {
         String filePath = RESOURCE_ROOT_PATH + filename;
