@@ -1,6 +1,5 @@
 package statik.route;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,7 +12,6 @@ import statik.content.ContentStore;
 import statik.util.Http;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -21,6 +19,7 @@ public class EditorRoute extends ResourceRoute {
 
     private static final Logger LOG = Logger.getLogger(EditorRoute.class);
     private static final String EDITOR_HTML = "wysihtml5/editor.html";
+    public static final String HIDDEN_INPUTS_TEMPLATE = "<input type=\"hidden\" name=\"selector\" value=\"%s\" />  \n  <input type=\"hidden\" name=\"path\" value=\"%s\" />";
     private final ContentStore contentStore;
 
     public EditorRoute(String route, ContentStore contentStore) {
@@ -63,8 +62,7 @@ public class EditorRoute extends ResourceRoute {
         Document document = Jsoup.parse(data);
         document.outputSettings().escapeMode(Entities.EscapeMode.extended);
 
-        String template = "<input type=\"hidden\" name=\"selector\" value=\"%s\" />  \n  <input type=\"hidden\" name=\"path\" value=\"%s\" />";
-        String replaced = String.format(template, selector, path);
+        String replaced = String.format(HIDDEN_INPUTS_TEMPLATE, selector, path);
 
         Elements form = document.select("#editorForm");
         form.append(replaced);
@@ -83,11 +81,6 @@ public class EditorRoute extends ResourceRoute {
         }
 
         return document.toString();
-    }
-
-    private String fileAsString(String file) throws IOException {
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(file);
-        return IOUtils.toString(resourceAsStream);
     }
 
 }

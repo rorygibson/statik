@@ -11,14 +11,8 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
     private static final Logger LOG = Logger.getLogger(MongoContentStore.class);
     public static final String COLLECTION_NAME = "contentItems";
 
-    private boolean configured = false;
     private DBCollection items;
 
-    @Override
-    public boolean isEmpty() {
-        int count = items.find().count();
-        return count == 0;
-    }
 
     @Override
     public void insertOrUpdate(ContentItem contentItem) {

@@ -1,14 +1,11 @@
 package statik.integration;
 
-import com.google.common.base.Function;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +19,6 @@ public class EditingIT extends AbstractWebDriverIntTst {
     public void performLogin() {
         doLoginWith("rory", "password");
     }
-
 
     @Test
     public void simpleEdit() throws InterruptedException {
@@ -77,7 +73,6 @@ public class EditingIT extends AbstractWebDriverIntTst {
         assertEquals("Should now have some different content", "still the 4th, but different", afterEdit.getText());
     }
 
-
     private void sleepForMs(int ms) {
         try {
             Thread.sleep(ms);
@@ -85,7 +80,6 @@ public class EditingIT extends AbstractWebDriverIntTst {
             //
         }
     }
-
 
     private void changeContentOf(WebElement el, String newContent) {
         Actions a = new Actions(driver);
@@ -95,30 +89,13 @@ public class EditingIT extends AbstractWebDriverIntTst {
         WebElement menu = driver.findElement(By.id("jqContextMenu"));
         menu.findElement(By.id("edit")).click();
 
-        waitForPresenceOf("textarea");
         waitForPresenceOf("iframe");
 
         sleepForMs(PERIOD_TO_WAIT_FOR_EDITOR);
-
         ((FirefoxDriver)driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
-
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
-
         driver.findElement(By.id("submit")).click();
-
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
-    }
-
-
-    private void waitUntilEditorIsActive() {
-        WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(new Function<WebDriver, Object>() {
-            @Override
-            public Object apply(WebDriver webDriver) {
-                Object returned = ((FirefoxDriver)driver).executeScript("return document.editor == null");
-                return returned.equals("false");
-            }
-        });
     }
 
     private void changeContentOf(String tag, String newContent) {

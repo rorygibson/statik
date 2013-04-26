@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
+import statik.util.Http;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,7 +15,6 @@ public class SessionPersistenceIT extends AbstractWebDriverIntTst {
     public void tearDown() {
         doLogout();
     }
-
 
     @Test
     public void ifYouHaveLoggedOutYouSeeTheLoginForm() {
@@ -47,11 +47,11 @@ public class SessionPersistenceIT extends AbstractWebDriverIntTst {
         driver.manage().deleteAllCookies();
 
         doLoginWith("rory", "password");
-        Cookie cookie = driver.manage().getCookieNamed("ces");
+        Cookie cookie = driver.manage().getCookieNamed(Http.COOKIE_NAME);
         driver.quit();
 
         driver = runningDriver();
-        driver.get(ROOT_PAGE); // WebDriver wont let you set a cookie while you're on about:blank - have to visit a page on the domain first
+        driver.get(ROOT_PAGE); // WebDriver won't let you set a cookie while you're on about:blank - have to visit a page on the domain first
         driver.manage().addCookie(cookie);
 
         driver.get(LOGIN_PAGE);

@@ -49,4 +49,11 @@ public class ResourceRoute extends Route {
         }
         return Http.EMPTY_RESPONSE;
     }
+
+
+    protected String fileAsString(String file) throws IOException {
+        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(file);
+        return IOUtils.toString(resourceAsStream);
+    }
+
 }

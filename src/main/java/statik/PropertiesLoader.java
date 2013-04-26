@@ -2,9 +2,6 @@ package statik;
 
 import org.apache.log4j.Logger;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -25,16 +22,5 @@ public class PropertiesLoader {
             throw new RuntimeException("Couldn't load properties from [" + propertiesFilename + "]", e);
         }
         return content;
-    }
-
-
-    public static Properties loadPropertiesFrom(File file) {
-        Properties props = new Properties();
-        try {
-            props.load(new FileReader(file));
-        } catch (IOException e) {
-            throw new RuntimeException("Couldn't load from " + file.getAbsolutePath());
-        }
-        return props;
     }
 }

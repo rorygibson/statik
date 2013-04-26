@@ -3,7 +3,6 @@ package statik.content;
 import java.util.Map;
 
 public interface ContentStore {
-    boolean isEmpty();
 
     void insertOrUpdate(ContentItem contentItem);
 
