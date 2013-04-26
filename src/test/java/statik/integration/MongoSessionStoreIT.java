@@ -5,9 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import statik.session.MongoSessionStore;
 
-import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 public class MongoSessionStoreIT {
 

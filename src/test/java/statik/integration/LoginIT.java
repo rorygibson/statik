@@ -3,7 +3,8 @@ package statik.integration;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 public class LoginIT extends AbstractWebDriverIntTst {
 
