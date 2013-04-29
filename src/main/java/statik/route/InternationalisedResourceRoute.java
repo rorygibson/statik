@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 public class InternationalisedResourceRoute extends ResourceRoute {
 
-
     private static final Logger LOG = Logger.getLogger(InternationalisedResourceRoute.class);
 
     public InternationalisedResourceRoute(String route) {
@@ -25,9 +24,8 @@ public class InternationalisedResourceRoute extends ResourceRoute {
     }
 
     protected String i18n(String filename) {
-        InternationalisationReplacer replacer = new InternationalisationReplacer();
         String content = fileAsString(filename);
-        return replacer.replace(content).with(ResourceBundle.getBundle("messages"));
+        return InternationalisationReplacer.replace(content).with(ResourceBundle.getBundle("messages"));
     }
 
 }

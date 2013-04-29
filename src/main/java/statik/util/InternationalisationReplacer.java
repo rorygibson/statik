@@ -10,16 +10,20 @@ import java.util.ResourceBundle;
 
 public class InternationalisationReplacer {
 
+    private static final String SELECTOR = "*[data-text-i18n], *[data-value-i18n]";
     private String sourceContent;
 
-    public InternationalisationReplacer replace(String content) {
+    private InternationalisationReplacer(String content) {
         this.sourceContent = content;
-        return this;
+    }
+
+    public static InternationalisationReplacer replace(String content) {
+        return new InternationalisationReplacer(content);
     }
 
     public String with(ResourceBundle bundle) {
         Document document = Jsoup.parse(this.sourceContent);
-        Elements elements = document.select("*[data-text-i18n], *[data-value-i18n]");
+        Elements elements = document.select(SELECTOR);
 
         for (Element el : elements) {
             // text nodes

@@ -19,6 +19,7 @@ public class AbstractWebDriverIntTst {
     protected static WebDriver driver;
 
     public static String BASE_URL;
+    public static String ADMIN_BASE_URL;
 
     public static String ROOT_PAGE;
     public static String LOGIN_ERROR_PAGE;
@@ -46,15 +47,19 @@ public class AbstractWebDriverIntTst {
             BASE_URL = BASE_URL + "/";
         }
 
-        ROOT_PAGE = BASE_URL + "index.html";
-        LOGIN_ERROR_PAGE = BASE_URL + "login-error";
+        // builtin stuff
+        ADMIN_BASE_URL = BASE_URL + "/admin/";
         LOGIN_PAGE = BASE_URL + "login";
         LOGOUT_PAGE = BASE_URL + "logout";
+        LOGIN_ERROR_PAGE = BASE_URL + "login-error";
+        CLEAR_DB_ENDPOINT = BASE_URL + "clear-db";
+
+        // test pages in test-website directory
+        ROOT_PAGE = BASE_URL + "index.html";
         ONE_PARA_TEST_PAGE = BASE_URL + "one-para.html";
         TWO_PARA_TEST_PAGE = BASE_URL + "two-paras.html";
         LIST_TEST_PAGE = BASE_URL + "list.html";
         QUNIT_TESTS_PAGE = BASE_URL + "qunit-tests.html";
-        CLEAR_DB_ENDPOINT = BASE_URL + "clear-db";
         LINK_TEST_PAGE = BASE_URL + "links.html";
     }
 
