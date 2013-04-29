@@ -1,10 +1,12 @@
 package statik.route;
 
-import org.apache.log4j.Logger;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Entities;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import statik.content.ContentItem;
@@ -16,7 +18,7 @@ import java.net.URLDecoder;
 
 public class EditorRoute extends InternationalisedResourceRoute {
 
-    private static final Logger LOG = Logger.getLogger(EditorRoute.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EditorRoute.class);
     private static final String EDITOR_HTML = "wysihtml5/editor.html";
     public static final String HIDDEN_INPUTS_TEMPLATE = "<input type=\"hidden\" name=\"selector\" value=\"%s\" />  \n  <input type=\"hidden\" name=\"path\" value=\"%s\" />";
     private final ContentStore contentStore;

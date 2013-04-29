@@ -6,13 +6,13 @@ import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.UnknownHostException;
 
 public class UsesMongo {
 
-    private static final Logger LOG = Logger.getLogger(UsesMongo.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(UsesMongo.class);
 
     protected MongoClient mongoClient = null;
     protected String dbName = "";

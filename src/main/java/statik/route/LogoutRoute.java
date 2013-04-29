@@ -1,6 +1,8 @@
 package statik.route;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -9,7 +11,7 @@ import statik.util.Http;
 
 public class LogoutRoute extends Route {
 
-    private static final Logger LOG = Logger.getLogger(LogoutRoute.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LogoutRoute.class);
     private final SessionStore sessionStore;
 
     public LogoutRoute(String route, SessionStore sessionStore) {

@@ -1,7 +1,8 @@
 package statik.route;
 
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public class LoginRoute extends Route {
 
-    private static final Logger LOG = Logger.getLogger(LoginRoute.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LoginRoute.class);
     public static final String PASSWORD = "password";
     public static final String USERNAME = "username";
     private final AuthStore authStore;

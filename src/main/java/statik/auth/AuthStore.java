@@ -5,7 +5,7 @@ import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class AuthStore {
 
-    private static final Logger LOG = Logger.getLogger(AuthStore.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AuthStore.class);
     private final Map<String, String> users = new HashMap<>();
     private boolean configured = false;
 

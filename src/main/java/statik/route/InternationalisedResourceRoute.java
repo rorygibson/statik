@@ -1,6 +1,8 @@
 package statik.route;
 
-import org.apache.log4j.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import statik.util.InternationalisationReplacer;
@@ -9,7 +11,7 @@ import java.util.ResourceBundle;
 
 public class InternationalisedResourceRoute extends ResourceRoute {
 
-    private static final Logger LOG = Logger.getLogger(InternationalisedResourceRoute.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InternationalisedResourceRoute.class);
 
     public InternationalisedResourceRoute(String route) {
         super(route);

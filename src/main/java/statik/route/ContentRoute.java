@@ -1,18 +1,19 @@
 package statik.route;
 
-import statik.content.ContentItem;
-import statik.content.ContentStore;
-import statik.util.Http;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import statik.content.ContentItem;
+import statik.content.ContentStore;
+import statik.util.Http;
 
 import java.util.Map;
 
 public class ContentRoute extends Route {
 
-    private static final Logger LOG = Logger.getLogger(ContentRoute.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ContentRoute.class);
     private final ContentStore contentStore;
 
     public ContentRoute(ContentStore contentStore, String route) {

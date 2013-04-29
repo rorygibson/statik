@@ -4,7 +4,8 @@ import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Spark;
 import statik.auth.AuthStore;
 import statik.content.ContentStore;
@@ -15,7 +16,7 @@ import statik.session.SessionStore;
 
 public class Main implements spark.servlet.SparkApplication {
 
-    private static final Logger LOG = Logger.getLogger(Main.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     private static final String CONFIG_FILENAME = "config.properties";
     private static final String USERS_DB_FILENAME = "users.properties";

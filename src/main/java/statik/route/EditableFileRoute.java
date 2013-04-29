@@ -1,10 +1,11 @@
 package statik.route;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -39,7 +40,7 @@ public class EditableFileRoute extends Route {
     private final ContentStore contentStore;
     private final String fileBase;
     private String namedFile = null;
-    private static final Logger LOG = Logger.getLogger(EditableFileRoute.class);
+    private static final Logger LOG = LoggerFactory.getLogger(EditableFileRoute.class);
 
     public EditableFileRoute(ContentStore contentStore, String fileBase, String route, SessionStore sessionStore, String notFoundPage) {
         super(route);

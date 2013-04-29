@@ -1,14 +1,15 @@
 package statik.content;
 
 import com.mongodb.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import statik.UsesMongo;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class MongoContentStore extends UsesMongo implements ContentStore {
-    private static final Logger LOG = Logger.getLogger(MongoContentStore.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MongoContentStore.class);
     public static final String COLLECTION_NAME = "contentItems";
 
     private DBCollection items;

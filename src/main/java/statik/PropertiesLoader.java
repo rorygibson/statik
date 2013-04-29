@@ -1,13 +1,13 @@
 package statik;
 
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.Properties;
 
 public class PropertiesLoader {
 
-    private static final Logger LOG = Logger.getLogger(PropertiesLoader.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(PropertiesLoader.class);
 
     public static Properties loadProperties(String propertiesFilename) {
         Properties content = new Properties();

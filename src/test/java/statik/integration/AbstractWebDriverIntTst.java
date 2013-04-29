@@ -2,7 +2,6 @@ package statik.integration;
 
 import com.google.common.base.Function;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
@@ -13,6 +12,8 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AbstractWebDriverIntTst {
 
@@ -32,7 +33,7 @@ public class AbstractWebDriverIntTst {
     public static String LINK_TEST_PAGE;
     public static String LOGOUT_PAGE;
 
-    private static final Logger LOG = Logger.getLogger(AbstractWebDriverIntTst.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractWebDriverIntTst.class);
     private static boolean running;
 
 
