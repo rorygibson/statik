@@ -51,15 +51,4 @@ public class ResourceRoute extends Route {
         return Http.EMPTY_RESPONSE;
     }
 
-
-    protected String fileAsString(String file) {
-        InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(file);
-        try {
-            return IOUtils.toString(resourceAsStream);
-        } catch (Exception e) {
-            LOG.error("Exception loading " + file);
-            return null;
-        }
-    }
-
 }

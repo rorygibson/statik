@@ -1,12 +1,11 @@
 package statik.route;
 
 import spark.Request;
-import spark.Response;
 import statik.auth.AuthStore;
 
-public class UserManagementRoute extends InternationalisedResourceRoute {
+public class UserManagementRoute extends ThymeLeafResourceRoute {
 
-    private static final String USERS_HTML = "users.html";
+    private static final String USERS_HTML = "users";
     private final AuthStore authStore;
 
     public UserManagementRoute(String route, AuthStore authStore) {
@@ -15,10 +14,8 @@ public class UserManagementRoute extends InternationalisedResourceRoute {
     }
 
     @Override
-    public Object handle(Request request, Response response) {
-        // TODO something useful
-        // TODO auth
-        return i18n(RESOURCE_ROOT_PATH + "/" + USERS_HTML);
+    protected String resolveTemplateName(Request request) {
+        return USERS_HTML;
     }
 
 }

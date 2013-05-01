@@ -16,10 +16,10 @@ import statik.util.Http;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-public class EditorRoute extends InternationalisedResourceRoute {
+public class EditorRoute extends ThymeLeafResourceRoute {
 
     private static final Logger LOG = LoggerFactory.getLogger(EditorRoute.class);
-    private static final String EDITOR_HTML = "wysihtml5/editor.html";
+    private static final String EDITOR_HTML = "wysihtml5/editor";
     public static final String HIDDEN_INPUTS_TEMPLATE = "<input type=\"hidden\" name=\"selector\" value=\"%s\" />  \n  <input type=\"hidden\" name=\"path\" value=\"%s\" />";
     private final ContentStore contentStore;
 
@@ -65,7 +65,8 @@ public class EditorRoute extends InternationalisedResourceRoute {
     }
 
     private String populateEditorView(String selector, String path, ContentItem contentItem, String sentContent) {
-        String data = i18n(RESOURCE_ROOT_PATH + EDITOR_HTML);
+        String data = processWithThymeLeaf(EDITOR_HTML);
+
         if (data == null) {
             return null;
         }
