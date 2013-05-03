@@ -25,10 +25,15 @@ public abstract class ThymeLeafResourceRoute extends ResourceRoute {
         return processWithThymeLeaf(templateName);
     }
 
-    protected String processWithThymeLeaf(String templateName) {
+
+    protected String processWithThymeLeaf(String templateName, Context ctx) {
         TemplateEngine engine = templateEngine();
-        Context ctx = new Context();
         return engine.process(templateName, ctx);
+    }
+
+    protected String processWithThymeLeaf(String templateName) {
+        Context ctx = new Context();
+        return processWithThymeLeaf(templateName, ctx);
     }
 
     protected TemplateEngine templateEngine() {
