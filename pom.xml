@@ -10,6 +10,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <slf4j.version>1.6.1</slf4j.version>
+        <java.compiler.version>1.7</java.compiler.version>
+
+        <jetty.base.url>http://localhost:8080</jetty.base.url>
+        <standalone.shutdown.url>${standalone.base.url}/shutdown</standalone.shutdown.url>
+        <standalone.base.url>http://localhost:4567</standalone.base.url>
     </properties>
 
     <repositories>
@@ -100,7 +107,7 @@
                                 <phase>post-integration-test</phase>
                                 <configuration>
                                     <target>
-                                        <get ignoreerrors="true" src="http://localhost:4567/shutdown" dest="${project.build.outputDirectory}" />
+                                        <get ignoreerrors="true" src="${standalone.shutdown.url}" dest="${project.build.outputDirectory}" />
                                     </target>
                                 </configuration>
                                 <goals>
@@ -123,7 +130,7 @@
 
                                 <configuration>
                                     <systemPropertyVariables>
-                                        <baseUrl>http://localhost:4567</baseUrl>
+                                        <baseUrl>${standalone.base.url}</baseUrl>
                                     </systemPropertyVariables>
                                 </configuration>
                             </execution>
@@ -161,7 +168,7 @@
 
                                 <configuration>
                                     <systemPropertyVariables>
-                                        <baseUrl>http://localhost:8080</baseUrl>
+                                        <baseUrl>${jetty.base.url}</baseUrl>
                                     </systemPropertyVariables>
                                 </configuration>
                             </execution>
@@ -223,8 +230,8 @@
                 <version>3.0</version>
 
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>${java.compiler.version}</source>
+                    <target>${java.compiler.version}</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -270,13 +277,13 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.1</version>
+            <version>${slf4j.version}</version>
         </dependency>
 
         <dependency>
