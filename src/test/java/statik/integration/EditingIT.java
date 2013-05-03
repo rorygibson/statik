@@ -37,13 +37,13 @@ public class EditingIT extends AbstractWebDriverIntTst {
 
         WebElement originalLink = driver.findElement(By.id("first-link"));
         assertEquals("Link text wrong", "one para page", originalLink.getText());
-        assertTrue("Link target wrong", originalLink.getAttribute("href").endsWith("/one-para.html"));
+        assertTrue("Link target wrong", originalLink.getAttribute("href").endsWith("one-para.html"));
 
         changeContentOf("#first-link", "new link text");
 
         WebElement changedLink = driver.findElement(By.id("first-link"));
         assertEquals("Link text wrong", "new link text", changedLink.getText());
-        assertTrue("Link target wrong", changedLink.getAttribute("href").endsWith("/one-para.html"));
+        assertTrue("Link target wrong", changedLink.getAttribute("href").endsWith("one-para.html"));
     }
 
 
