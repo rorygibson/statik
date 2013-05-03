@@ -1,5 +1,6 @@
 package statik.route;
 
+import org.thymeleaf.context.Context;
 import spark.Request;
 import spark.Response;
 import statik.auth.AuthStore;
@@ -17,7 +18,9 @@ public class UserManagementRoute extends ThymeLeafResourceRoute {
     @Override
     public Object handle(Request request, Response response) {
         String templateName = USERS_HTML;
-        return processWithThymeLeaf(templateName);
+        Context ctx = new Context();
+        ctx.setVariable("users", this.authStore.users());
+        return processWithThymeLeaf(templateName, ctx);
     }
 
 

@@ -7,9 +7,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class AuthStore {
 
@@ -23,6 +21,16 @@ public class AuthStore {
 
     public boolean auth(String username, String password) {
         return this.users.containsKey(username) && this.users.get(username).equals(password);
+    }
+
+    public List<User> users() {
+        List<User> theUsers = new ArrayList<>();
+        for (String username : this.users.keySet()) {
+            String password = this.users.get(username);
+            User u = new User(username, password);
+            theUsers.add(u);
+        }
+        return theUsers;
     }
 
     public void configure(String usersFile) {

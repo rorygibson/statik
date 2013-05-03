@@ -8,6 +8,8 @@
 <body>
     <h1 th:text="#{users.heading}">heading</h1>
 
-    <ul id="users"></ul>
+    <ul id="users" th:each="user : ${users}">
+        <li th:text="${user.username}">username</li>
+    </ul>
 </body>
 </html>
