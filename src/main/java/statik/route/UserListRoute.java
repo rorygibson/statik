@@ -5,12 +5,12 @@ import spark.Request;
 import spark.Response;
 import statik.auth.AuthStore;
 
-public class UserManagementRoute extends ThymeLeafResourceRoute {
+public class UserListRoute extends ThymeLeafResourceRoute {
 
     private static final String USERS_HTML = "users";
     private final AuthStore authStore;
 
-    public UserManagementRoute(String route, AuthStore authStore) {
+    public UserListRoute(String route, AuthStore authStore) {
         super(route);
         this.authStore = authStore;
     }
@@ -22,7 +22,5 @@ public class UserManagementRoute extends ThymeLeafResourceRoute {
         ctx.setVariable("users", this.authStore.users());
         return processWithThymeLeaf(templateName, ctx);
     }
-
-
 
 }

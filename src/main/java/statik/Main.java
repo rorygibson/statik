@@ -67,7 +67,10 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new LoginFormRoute("/login", this.sessionStore));
         Spark.get(new LoginErrorRoute("/login-error"));
         Spark.post(new LoginRoute("/auth", this.authStore, this.sessionStore));
-        Spark.get(new UserManagementRoute("/admin/users", this.authStore));
+
+        Spark.get(new UserListRoute("/admin/users", this.authStore));
+        Spark.get(new AddUserRoute("/admin/user", this.authStore));
+        Spark.post(new AddUserRoute("/admin/user", this.authStore));
 
         Spark.get(new ResourceRoute("/statik-resources/*"));
         Spark.post(new ContentRoute(this.contentStore, "/content"));

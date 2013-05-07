@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+
+<html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="../statik-resources/styles.css"/>
+</head>
+
+<body>
+
+<h1 th:text="#{heading}">Add a user</h1>
+
+<section>
+    <form method="post">
+
+        <p class="flash" th:if="${addedUser == true}" th:text="#{user.added}">User added</p>
+        <p class="error" th:if="${addedUser == false}" th:text="${errorMessage}">Error message</p>
+
+        <div>
+            <label th:text="#{username}" for="username" autoocus="autofocus">Username</label>
+            <input type="text" required="required" name="username" th:value="${username}" />
+        </div>
+
+
+        <div>
+            <label th:text="#{password}" for="password">Password</label>
+            <input type="password" required="required" name="password" />
+        </div>
+
+
+        <div>
+            <label th:text="#{password.again}" for="password-again">Again</label>
+            <input type="password" required="required" name="password-again" />
+        </div>
+        
+        <input type="submit" value="Add" th:value="#{add}" />
+
+    </form>
+</section>
+
+</body>
+</html>

@@ -2,14 +2,24 @@
 
 <html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link type="text/css" rel="stylesheet" href="/statik-resources/styles.css" />
+    <link type="text/css" rel="stylesheet" href="../statik-resources/styles.css"/>
 </head>
 
 <body>
-    <h1 th:text="#{users.heading}">heading</h1>
+
+<h1 th:text="#{heading}">Users</h1>
+
+<section>
+    <a id="add" th:text="#{add}" href="../admin/user">Add a user</a>
 
     <ul id="users" th:each="user : ${users}">
-        <li th:text="${user.username}">username</li>
+        <li>
+            <span th:text="${user.username}">Andrew</span>
+            <a th:text="#{delete}" href="">Delete</a>
+            <a th:text="#{edit}" href="">Edit</a>
+        </li>
     </ul>
+</section>
+
 </body>
 </html>
