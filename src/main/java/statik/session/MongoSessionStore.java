@@ -51,6 +51,7 @@ public class MongoSessionStore extends UsesMongo implements SessionStore {
     public void configure(String configFilename) {
         super.configure(configFilename);
         this.sessions = db.getCollection(COLLECTION_NAME);
+
     }
 
     @Override

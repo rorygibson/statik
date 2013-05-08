@@ -34,20 +34,22 @@ public class EditableFileRoute extends Route {
             "        <li id=\"edit\"><img src=\"/statik-resources/edit.png\" /> %s </li>\n" +
             "      </ul>\n" +
             "    </div>";
-    private static String notFoundPage = "";
     private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
     private final ContentStore contentStore;
     private final String fileBase;
     private String namedFile = null;
+    private File fileNotFoundPage;
     private static final Logger LOG = LoggerFactory.getLogger(EditableFileRoute.class);
+
 
     public EditableFileRoute(ContentStore contentStore, String fileBase, String route, SessionStore sessionStore, String notFoundPage) {
         super(route);
         this.contentStore = contentStore;
         this.fileBase = fileBase;
         this.sessionStore = sessionStore;
-        this.notFoundPage = notFoundPage;
+
+        this.fileNotFoundPage = findRequestedFileFrom(notFoundPage);
     }
 
     public EditableFileRoute(ContentStore contentStore, String fileBase, String route, String namedFile, SessionStore sessionStore, String notFoundPage) {
@@ -56,47 +58,77 @@ public class EditableFileRoute extends Route {
         this.fileBase = fileBase;
         this.namedFile = namedFile;
         this.sessionStore = sessionStore;
-        this.notFoundPage = notFoundPage;
+
+        this.fileNotFoundPage = findRequestedFileFrom(notFoundPage);
     }
 
     @Override
     public Object handle(Request request, Response response) {
-        HttpServletRequest httpReq = request.raw();
-        String path = httpReq.getPathInfo() == null ? httpReq.getServletPath() : httpReq.getPathInfo();
+        String path = pathFrom(request);
 
         LOG.debug("GET " + path);
 
+        File fileToServe = fileToServe(path);
+
+        if (!fileToServe.exists()) {
+            return do404(response, path);
+        }
+
+        try {
+            response.status(200);
+            return dataMatching(request, path, fileToServe);
+        } catch (IOException e) {
+            do404(response, path);
+        }
+
+        return Http.EMPTY_RESPONSE;
+    }
+
+    private String pathFrom(Request request) {
+        HttpServletRequest httpReq = request.raw();
+        return httpReq.getPathInfo() == null ? httpReq.getServletPath() : httpReq.getPathInfo();
+    }
+
+    private String dataMatching(Request request, String path, File fileToServe) throws IOException {
+        if (mightContainCmsContent(fileToServe)) {
+            LOG.debug("File is candidate for content editing");
+            String fileContent;
+            fileContent = FileUtils.readFileToString(fileToServe);
+
+            return editableContentFor(path, fileContent, isAuthenticated(request));
+        }
+        return rawDataFrom(fileToServe);
+    }
+
+    private boolean isAuthenticated(Request request) {
+        return sessionStore.hasSession(Http.sessionFrom(request));
+    }
+
+    private String rawDataFrom(File fileToServe) throws IOException {
+        return FileUtils.readFileToString(fileToServe);
+    }
+
+    private Object do404(Response response, String missingFilePath) {
+        LOG.error("Error reading file " + missingFilePath);
+        response.status(404);
+
+        try {
+            writeFileToResponse(response, fileNotFoundPage);
+        } catch (IOException e) {
+            LOG.error("404 page HTML not found");
+        }
+
+        return Http.EMPTY_RESPONSE;
+    }
+
+    private File fileToServe(String path) {
         File theFile;
         if (thisRouteIsBoundToASpecificFile()) {
             theFile = findMySpecificFile();
         } else {
             theFile = findRequestedFileFrom(path);
         }
-
-        try {
-            if (!theFile.exists()) {
-                LOG.warn("File not found [" + theFile.getAbsolutePath() + "]");
-                File the404File = findRequestedFileFrom(notFoundPage);
-                writeFileToResponse(response, the404File);
-                response.status(404);
-                return Http.EMPTY_RESPONSE;
-            }
-
-            response.status(200);
-
-            if (mightContainCmsContent(theFile)) {
-                LOG.debug("File is candidate for content editing");
-                return cesify(path, theFile, sessionStore.hasSession(Http.sessionFrom(request)));
-            }
-
-            LOG.trace("Serving file [" + theFile.getAbsolutePath() + "] straight from disk");
-            writeFileToResponse(response, theFile);
-
-        } catch (IOException e) {
-            LOG.error("Error reading [" + theFile.getAbsolutePath() + "]");
-        }
-
-        return Http.EMPTY_RESPONSE;
+        return theFile;
     }
 
     private File findMySpecificFile() {
@@ -147,8 +179,8 @@ public class EditableFileRoute extends Route {
         return doc;
     }
 
-    private String cesify(String path, File theFile, boolean authenticated) throws IOException {
-        Document doc = Jsoup.parse(FileUtils.readFileToString(theFile));
+    private String editableContentFor(String path, String fileContent, boolean authenticated) {
+        Document doc = Jsoup.parse(fileContent);
         doc = replaceContent(doc, path);
 
         if (authenticated) {

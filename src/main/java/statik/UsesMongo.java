@@ -34,6 +34,9 @@ public class UsesMongo {
 
         LOG.info("Connecting to MongoDB on " + mongoHost + ":" + mongoPort);
         this.mongoClient = mongoClientFor(mongoHost, mongoPort);
+
+        testConnection();
+
         this.db = mongoClient.getDB(dbName);
 
         if (mongoAuth) {
@@ -44,6 +47,15 @@ public class UsesMongo {
         }
 
         this.configured = true;
+    }
+
+    private void testConnection() {
+        try {
+            this.mongoClient.getDatabaseNames();
+        } catch (Throwable e) {
+            LOG.error("Couldn't connect to MongoDB");
+            throw new RuntimeException("Shutting down");
+        }
     }
 
 
