@@ -27,7 +27,7 @@ public class EditableFileRoute extends Route {
     private static final String JQUERY_JS = "<script src=\"/statik-resources/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/jquery-ui/js/jquery-ui-1.10.2.custom.min.js\" type=\"text/javascript\"></script>";
     private static final String AUTH_JS = "<script src=\"/statik-resources/authenticated.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"statik-resources/dom.js\" type=\"text/javascript\"></script><script src=\"/statik-resources/getpath.js\" type=\"text/javascript\"></script>";
     private static final String MENU_JS = "<script src=\"/statik-resources/jquery.contextmenu.r2.packed.js\" type=\"text/javascript\"></script>";
-    private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/logout\">%s</a></div>";
+    private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/statik-logout\">%s</a></div>";
     private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
     private static final String MENU_HTML_TEMPLATE = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
             "      <ul>\n" +

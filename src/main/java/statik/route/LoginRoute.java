@@ -33,7 +33,7 @@ public class LoginRoute extends Route {
         String username = parameterMap.get(USERNAME)[0];
         String password = parameterMap.get(PASSWORD)[0];
 
-        LOG.debug("POST to /auth for user [" + username + "]");
+        LOG.debug("POST to /statik-auth for user [" + username + "]");
 
         if (authStore.auth(username, password)) {
             String sessionId = sessionStore.createSession(username);
@@ -45,7 +45,7 @@ public class LoginRoute extends Route {
             return "OK";
         }
 
-        response.redirect("/login-error");
+        response.redirect("/statik-login-error");
         return Http.EMPTY_RESPONSE;
     }
 }

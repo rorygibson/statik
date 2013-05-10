@@ -49,10 +49,10 @@ public class AbstractWebDriverIntTst {
         }
 
         // builtin stuff
-        ADMIN_BASE_URL = BASE_URL + "/admin/";
-        LOGIN_PAGE = BASE_URL + "login";
-        LOGOUT_PAGE = BASE_URL + "logout";
-        LOGIN_ERROR_PAGE = BASE_URL + "login-error";
+        ADMIN_BASE_URL = BASE_URL + "/statik-admin/";
+        LOGIN_PAGE = BASE_URL + "statik-login";
+        LOGOUT_PAGE = BASE_URL + "statik-logout";
+        LOGIN_ERROR_PAGE = BASE_URL + "statik-login-error";
         CLEAR_DB_ENDPOINT = BASE_URL + "clear-db";
 
         // test pages in test-website directory

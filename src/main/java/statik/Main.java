@@ -62,20 +62,21 @@ public class Main implements spark.servlet.SparkApplication {
             Spark.get(new ShutdownRoute("/shutdown"));
         }
 
-        LOG.info("Setting up routes");
-        Spark.get(new LogoutRoute("/logout", this.sessionStore));
-        Spark.get(new LoginFormRoute("/login", this.sessionStore));
-        Spark.get(new LoginErrorRoute("/login-error"));
-        Spark.post(new LoginRoute("/auth", this.authStore, this.sessionStore));
+        LOG.info("Setting up statik routes");
+        Spark.get(new LogoutRoute("/statik-logout", this.sessionStore));
+        Spark.get(new LoginFormRoute("/statik-login", this.sessionStore));
+        Spark.get(new LoginErrorRoute("/statik-login-error"));
+        Spark.post(new LoginRoute("/statik-auth", this.authStore, this.sessionStore));
 
-        Spark.get(new UserListRoute("/admin/users", this.authStore));
-        Spark.get(new AddUserRoute("/admin/user", this.authStore));
-        Spark.post(new AddUserRoute("/admin/user", this.authStore));
+        Spark.get(new UserListRoute("/statik-admin/users", this.authStore));
+        Spark.get(new AddUserRoute("/statik-admin/user", this.authStore));
+        Spark.post(new AddUserRoute("/statik-admin/user", this.authStore));
 
         Spark.get(new ResourceRoute("/statik-resources/*"));
-        Spark.post(new ContentRoute(this.contentStore, "/content"));
+        Spark.post(new ContentRoute("/statik-content", this.contentStore));
         Spark.get(new EditorRoute("/statik-editor", this.contentStore));
 
+        LOG.info("Setting up editable site routes");
         Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/", this.welcomeFile, this.sessionStore, this.notFoundPage));
         Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/*", this.sessionStore, this.notFoundPage));
     }

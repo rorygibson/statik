@@ -16,7 +16,7 @@ public class ContentRoute extends Route {
     private static final Logger LOG = LoggerFactory.getLogger(ContentRoute.class);
     private final ContentStore contentStore;
 
-    public ContentRoute(ContentStore contentStore, String route) {
+    public ContentRoute(String route, ContentStore contentStore) {
         super(route);
         this.contentStore = contentStore;
     }
