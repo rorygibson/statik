@@ -45,7 +45,7 @@ public class LoginRoute extends Route {
             return Http.OK_RESPONSE;
         }
 
-        response.redirect(PathsAndRoutes.LOGIN_ERROR_REDIRECT);
+        response.redirect(PathsAndRoutes.STATIK_LOGIN_ERROR);
         return Http.EMPTY_RESPONSE;
     }
 }

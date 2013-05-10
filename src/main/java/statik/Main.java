@@ -59,8 +59,8 @@ public class Main implements spark.servlet.SparkApplication {
 
         if (testMode) {
             LOG.info("Setting up test-only routes");
-            Spark.get(new ClearDbRoute(PathsAndRoutes.CLEAR_DB, this.contentStore, this.sessionStore));
-            Spark.get(new ShutdownRoute(PathsAndRoutes.SHUTDOWN));
+            Spark.get(new ClearDbRoute(PathsAndRoutes.STATIK_CLEAR_DB, this.contentStore, this.sessionStore));
+            Spark.get(new ShutdownRoute(PathsAndRoutes.STATIK_SHUTDOWN));
         }
 
         LOG.info("Setting up statik routes");
@@ -73,7 +73,7 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new AddUserRoute(PathsAndRoutes.STATIK_ADMIN_USER, this.authStore));
         Spark.post(new AddUserRoute(PathsAndRoutes.STATIK_ADMIN_USER, this.authStore));
 
-        Spark.get(new ResourceRoute(PathsAndRoutes.STATIK_RESOURCES));
+        Spark.get(new ResourceRoute(PathsAndRoutes.STATIK_RESOURCES_GLOB));
         Spark.post(new ContentRoute(PathsAndRoutes.STATIK_CONTENT, this.contentStore));
         Spark.get(new EditorRoute(PathsAndRoutes.STATIK_EDITOR, this.contentStore));
 

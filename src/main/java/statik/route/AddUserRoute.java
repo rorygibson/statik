@@ -40,11 +40,11 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
 
         ctx.setVariable("addedUser", added);
         ctx.setVariable("addedUsername", username);
-        return processWithThymeLeaf(PathsAndRoutes.ADD_USER_HTML, ctx);
+        return processWithThymeLeaf(PathsAndRoutes.ADD_USER_VIEWNAME, ctx);
     }
 
     private Object doGet() {
-        return processWithThymeLeaf(PathsAndRoutes.ADD_USER_HTML);
+        return processWithThymeLeaf(PathsAndRoutes.ADD_USER_VIEWNAME);
     }
 
 }

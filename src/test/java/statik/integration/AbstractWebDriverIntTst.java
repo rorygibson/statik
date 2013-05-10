@@ -14,6 +14,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import statik.route.PathsAndRoutes;
 
 public class AbstractWebDriverIntTst {
 
@@ -49,11 +50,11 @@ public class AbstractWebDriverIntTst {
         }
 
         // builtin stuff
-        ADMIN_BASE_URL = BASE_URL + "/statik/admin/";
-        LOGIN_PAGE = BASE_URL + "/statik/login";
-        LOGOUT_PAGE = BASE_URL + "/statik/logout";
-        LOGIN_ERROR_PAGE = BASE_URL + "/statik/login-error";
-        CLEAR_DB_ENDPOINT = BASE_URL + "clear-db";
+        ADMIN_BASE_URL = BASE_URL + PathsAndRoutes.STATIK_ADMIN;
+        LOGIN_PAGE = BASE_URL + PathsAndRoutes.STATIK_LOGIN;
+        LOGOUT_PAGE = BASE_URL + PathsAndRoutes.STATIK_LOGOUT;
+        LOGIN_ERROR_PAGE = BASE_URL + PathsAndRoutes.STATIK_LOGIN_ERROR;
+        CLEAR_DB_ENDPOINT = BASE_URL + PathsAndRoutes.STATIK_CLEAR_DB;
 
         // test pages in test-website directory
         ROOT_PAGE = BASE_URL + "index.html";

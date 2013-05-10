@@ -64,7 +64,7 @@ public class EditorRoute extends ThymeLeafResourceRoute {
     }
 
     private String populateEditorView(String selector, String path, ContentItem contentItem, String sentContent) {
-        String data = processWithThymeLeaf(PathsAndRoutes.EDITOR_HTML);
+        String data = processWithThymeLeaf(PathsAndRoutes.EDITOR_VIEWNAME);
 
         if (data == null) {
             return null;

@@ -17,9 +17,9 @@ public class LoginFormRoute extends ThymeLeafResourceRoute {
     @Override
     public Object handle(Request request, Response response) {
         if (sessionStore.hasSession(request.cookie(Http.COOKIE_NAME))) {
-            return processWithThymeLeaf(PathsAndRoutes.LOGIN_ALREADY);
+            return processWithThymeLeaf(PathsAndRoutes.LOGIN_ALREADY_VIEWNAME);
         }
-        return processWithThymeLeaf(PathsAndRoutes.LOGIN_FORM);
+        return processWithThymeLeaf(PathsAndRoutes.LOGIN_FORM_VIEWNAME);
     }
 
 }

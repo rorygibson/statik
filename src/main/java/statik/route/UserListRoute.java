@@ -16,7 +16,7 @@ public class UserListRoute extends ThymeLeafResourceRoute {
 
     @Override
     public Object handle(Request request, Response response) {
-        String templateName = PathsAndRoutes.USERS_HTML;
+        String templateName = PathsAndRoutes.USERS_VIEWNAME;
         Context ctx = new Context();
         ctx.setVariable("users", this.authStore.users());
         return processWithThymeLeaf(templateName, ctx);
