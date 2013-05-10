@@ -26,7 +26,7 @@ public class LogoutRoute extends Route {
              LOG.debug(("Log out [" + sessionStore.usernameFor(Http.sessionFrom(request)) + "]"));
              response.removeCookie(Http.COOKIE_NAME);
              sessionStore.deleteSession(cookie);
-             response.redirect("/");
+             response.redirect(PathsAndRoutes.ROOT);
              return Http.EMPTY_RESPONSE;
          }
          response.status(401);

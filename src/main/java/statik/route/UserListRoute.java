@@ -7,7 +7,6 @@ import statik.auth.AuthStore;
 
 public class UserListRoute extends ThymeLeafResourceRoute {
 
-    private static final String USERS_HTML = "users";
     private final AuthStore authStore;
 
     public UserListRoute(String route, AuthStore authStore) {
@@ -17,7 +16,7 @@ public class UserListRoute extends ThymeLeafResourceRoute {
 
     @Override
     public Object handle(Request request, Response response) {
-        String templateName = USERS_HTML;
+        String templateName = PathsAndRoutes.USERS_HTML;
         Context ctx = new Context();
         ctx.setVariable("users", this.authStore.users());
         return processWithThymeLeaf(templateName, ctx);

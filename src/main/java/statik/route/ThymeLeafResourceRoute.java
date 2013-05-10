@@ -14,6 +14,8 @@ import spark.Response;
 public abstract class ThymeLeafResourceRoute extends ResourceRoute {
 
     private static final Logger LOG = LoggerFactory.getLogger(ThymeLeafResourceRoute.class);
+    public static final String HTML_5 = "HTML5";
+    public static final String SUFFIX = ".html";
 
     public ThymeLeafResourceRoute(String route) {
         super(route);
@@ -38,9 +40,9 @@ public abstract class ThymeLeafResourceRoute extends ResourceRoute {
 
     protected TemplateEngine templateEngine() {
         ClassLoaderTemplateResolver tr = new ClassLoaderTemplateResolver();
-        tr.setTemplateMode("HTML5");
-        tr.setSuffix(".html");
-        tr.setPrefix("statik-resources/");
+        tr.setTemplateMode(HTML_5);
+        tr.setSuffix(SUFFIX);
+        tr.setPrefix(PathsAndRoutes.RESOURCE_ROOT_PATH);
 
         IMessageResolver messageResolver = new StandardMessageResolver();
         TemplateEngine engine = new TemplateEngine();

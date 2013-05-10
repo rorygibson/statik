@@ -11,7 +11,7 @@ public class LoginErrorRoute extends ThymeLeafResourceRoute {
 
     @Override
     protected String resolveTemplateName(Request request) {
-        return "login-error";
+        return PathsAndRoutes.LOGIN_ERROR;
     }
 
 }

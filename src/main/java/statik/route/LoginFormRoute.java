@@ -7,8 +7,6 @@ import statik.session.SessionStore;
 
 public class LoginFormRoute extends ThymeLeafResourceRoute {
 
-    private static final String LOGIN_FORM = "login";
-    private static final String LOGIN_ALREADY = "login-already";
     private final SessionStore sessionStore;
 
     public LoginFormRoute(String route, SessionStore sessionStore) {
@@ -19,9 +17,9 @@ public class LoginFormRoute extends ThymeLeafResourceRoute {
     @Override
     public Object handle(Request request, Response response) {
         if (sessionStore.hasSession(request.cookie(Http.COOKIE_NAME))) {
-            return processWithThymeLeaf(LOGIN_ALREADY);
+            return processWithThymeLeaf(PathsAndRoutes.LOGIN_ALREADY);
         }
-        return processWithThymeLeaf(LOGIN_FORM);
+        return processWithThymeLeaf(PathsAndRoutes.LOGIN_FORM);
     }
 
 }

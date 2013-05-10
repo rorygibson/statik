@@ -17,7 +17,7 @@ import java.util.GregorianCalendar;
 public class ResourceRoute extends Route {
 
     private static final Logger LOG = LoggerFactory.getLogger(ResourceRoute.class);
-    protected static final String RESOURCE_ROOT_PATH = "statik-resources/";
+    public static final int EXPIRY_IN_MONTHS = 2;
 
     public ResourceRoute(String route) {
         super(route);
@@ -41,12 +41,12 @@ public class ResourceRoute extends Route {
     private static void setCacheable(Response r) {
         final Calendar inTwoMonths = new GregorianCalendar();
         inTwoMonths.setTime(new Date());
-        inTwoMonths.add(Calendar.MONTH, 2);
+        inTwoMonths.add(Calendar.MONTH, EXPIRY_IN_MONTHS);
         r.raw().setDateHeader("Expires", inTwoMonths.getTimeInMillis());
     }
 
     protected Object writeClasspathFileToResponse(Response response, String filename) {
-        String filePath = RESOURCE_ROOT_PATH + filename;
+        String filePath = PathsAndRoutes.RESOURCE_ROOT_PATH + filename;
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
         try {
             IOUtils.copy(resourceAsStream, response.raw().getOutputStream());

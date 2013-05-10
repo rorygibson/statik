@@ -8,7 +8,6 @@ import statik.auth.AuthStore;
 
 public class AddUserRoute extends ThymeLeafResourceRoute {
 
-    private static final String ADD_USER_HTML = "add-user";
     private final AuthStore authStore;
 
     public AddUserRoute(String route, AuthStore authStore) {
@@ -41,11 +40,11 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
 
         ctx.setVariable("addedUser", added);
         ctx.setVariable("addedUsername", username);
-        return processWithThymeLeaf(ADD_USER_HTML, ctx);
+        return processWithThymeLeaf(PathsAndRoutes.ADD_USER_HTML, ctx);
     }
 
     private Object doGet() {
-        return processWithThymeLeaf(ADD_USER_HTML);
+        return processWithThymeLeaf(PathsAndRoutes.ADD_USER_HTML);
     }
 
 }
