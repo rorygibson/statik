@@ -5,7 +5,7 @@ $(document).ready(function(){
     var editor = new wysihtml5.Editor("wysihtml5-textarea", {
       name:         "statik",
       toolbar:      "wysihtml5-toolbar",
-      stylesheets: ["/statik-resources/wysihtml5/editor.css"],
+      stylesheets: ["/statik/resources/wysihtml5/editor.css"],
       parserRules:  wysihtml5ParserRules,
       html: true,
       style: true
@@ -18,7 +18,7 @@ $(document).ready(function(){
 
       var doc =  editor.composer.sandbox.getDocument();
       var link = doc.createElement("link");
-      link.href = "/statik-resources/wysihtml5/editor.css";
+      link.href = "/statik/resources/wysihtml5/editor.css";
       link.rel = "stylesheet";
       doc.querySelector("head").appendChild(link);
     });

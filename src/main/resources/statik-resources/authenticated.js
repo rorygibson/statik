@@ -35,7 +35,7 @@ function addHoverState(item) {
 
 function loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent) {
     $.ajax({
-        url: "/statik-editor?selector=" + encodedSelector + "&path=" + encodedPath + "&content=" + encodedContent,
+        url: "/statik/editor?selector=" + encodedSelector + "&path=" + encodedPath + "&content=" + encodedContent,
         success: function (data) {
             $("#statik-editor-dialog").html(data);
 
