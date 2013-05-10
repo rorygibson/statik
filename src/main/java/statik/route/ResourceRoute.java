@@ -28,8 +28,14 @@ public class ResourceRoute extends Route {
         String filename = request.splat()[0];
         LOG.trace("Request for file, path is [" + request.url() + "], file is [" + filename + "]");
 
-        setCacheable(response);
+        if (testMode()) {
+            setCacheable(response);
+        }
         return writeClasspathFileToResponse(response, filename);
+    }
+
+    private boolean testMode() {
+        return !Boolean.getBoolean("testMode");
     }
 
     private static void setCacheable(Response r) {

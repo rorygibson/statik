@@ -75,6 +75,7 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new ResourceRoute("/statik-resources/*"));
         Spark.post(new ContentRoute(this.contentStore, "/content"));
         Spark.get(new EditorRoute("/statik-editor", this.contentStore));
+
         Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/", this.welcomeFile, this.sessionStore, this.notFoundPage));
         Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, "/*", this.sessionStore, this.notFoundPage));
     }
