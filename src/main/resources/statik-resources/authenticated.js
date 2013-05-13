@@ -1,3 +1,8 @@
+function hasCopyAbility(item) {
+    return (item.tagName === "LI") ||
+        (item.tagName === "P");
+}
+
 function addContextMenuTo(item, path) {
     $(item).contextMenu('editMenu', {
         bindings: {
@@ -11,6 +16,14 @@ function addContextMenuTo(item, path) {
 
                 loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent);
             }
+        },
+        onShowMenu: function(e, menu) {
+            if (!hasCopyAbility(item)) {
+                menu.find("#copy").hide();
+            } else {
+                menu.find("#copy").show();
+            }
+            return menu;
         }
     });
 }

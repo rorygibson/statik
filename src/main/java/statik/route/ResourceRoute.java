@@ -49,7 +49,12 @@ public class ResourceRoute extends Route {
         String filePath = PathsAndRoutes.RESOURCE_ROOT_PATH + filename;
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
         try {
-            IOUtils.copy(resourceAsStream, response.raw().getOutputStream());
+            if (resourceAsStream != null) {
+                IOUtils.copy(resourceAsStream, response.raw().getOutputStream());
+            } else {
+                LOG.error("Error retrieving resource " + filename);
+                response.status(404);
+            }
         } catch (IOException e) {
             LOG.error("Error retrieving resource", e);
             response.status(404);

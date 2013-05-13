@@ -32,6 +32,7 @@ public class EditableFileRoute extends Route {
     private static final String MENU_HTML_TEMPLATE = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
             "      <ul>\n" +
             "        <li id=\"edit\"><img src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/edit.png\" /> %s </li>\n" +
+            "        <li id=\"copy\"><img src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/copy.png\" /> %s </li>\n" +
             "      </ul>\n" +
             "    </div>";
     private static final String HTML_SUFFIX = ".html";
@@ -151,11 +152,12 @@ public class EditableFileRoute extends Route {
         ResourceBundle bundle = ResourceBundle.getBundle("messages");
         String logout = bundle.getString("authbox.logout");
         String edit = bundle.getString("editmenu.edit");
+        String copy = bundle.getString("editmenu.copy");
 
         doc.head().append(JQUERY_CSS);
         doc.body().append(String.format(LOGOUT_BOX_HTML_TEMPLATE, logout));
         doc.body().append(EDITOR_HTML);
-        doc.body().append(String.format(MENU_HTML_TEMPLATE, edit));
+        doc.body().append(String.format(MENU_HTML_TEMPLATE, edit, copy));
         doc.body().append(JQUERY_JS);
         doc.body().append(AUTH_JS);
         doc.body().append(MENU_JS);
