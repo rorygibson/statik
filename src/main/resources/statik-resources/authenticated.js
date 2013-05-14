@@ -15,9 +15,32 @@ function addContextMenuTo(item, path) {
                 var encodedContent = encodeURIComponent(content);
 
                 loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent);
+            },
+            'copy': function (t) {
+                var theCopy = $(item).clone();
+                $(item).parent().append(theCopy);
+
+                var content = $(item).html();
+                var selector = getPath(theCopy.get(0));
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/statik/content',
+                    data: {
+                        path: path,
+                        content: content,
+                        selector: selector
+                    },
+                    success: function (msg) {
+                        if (!msg) {
+                            console.error('update failure');
+                        }
+                    }
+                });
+
             }
         },
-        onShowMenu: function(e, menu) {
+        onShowMenu: function (e, menu) {
             if (!hasCopyAbility(item)) {
                 menu.find("#copy").hide();
             } else {
@@ -46,7 +69,7 @@ function addHoverState(item) {
 }
 
 
-function loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent) {
+function loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent, encodedParentSelector) {
     $.ajax({
         url: "/statik/editor?selector=" + encodedSelector + "&path=" + encodedPath + "&content=" + encodedContent,
         success: function (data) {

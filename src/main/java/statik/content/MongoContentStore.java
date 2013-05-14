@@ -14,6 +14,17 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
 
     private DBCollection items;
 
+    @Override
+    public void copyElement(ContentItem contentItem) {
+        LOG.debug("Copying element with content, size [" + contentItem.size() + "] and selector [" + contentItem.selector() + "]");
+
+        BasicDBObject updateObject = new BasicDBObject(ContentItem.SELECTOR, contentItem.selector())
+                .append(ContentItem.PATH, contentItem.path())
+                .append(ContentItem.CONTENT, contentItem.content())
+                .append(ContentItem.IS_COPY, true);
+
+        items.insert(updateObject);
+    }
 
     @Override
     public void insertOrUpdate(ContentItem contentItem) {

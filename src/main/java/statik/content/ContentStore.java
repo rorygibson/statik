@@ -13,4 +13,6 @@ public interface ContentStore {
     void clearContentItems();
 
     ContentItem findByPathAndSelector(String path, String selector);
+
+    void copyElement(ContentItem contentItem);
 }

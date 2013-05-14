@@ -23,16 +23,16 @@ import java.util.ResourceBundle;
 
 public class EditableFileRoute extends Route {
 
-    private static final String JQUERY_CSS = "<link href=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/css/jquery-ui-1.10.2.custom.min.css\" rel=\"stylesheet\" />";
-    private static final String JQUERY_JS = "<script src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/js/jquery-ui-1.10.2.custom.min.js\" type=\"text/javascript\"></script>";
-    private static final String AUTH_JS = "<script src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/authenticated.js\" type=\"text/javascript\"></script><script src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/dom.js\" type=\"text/javascript\"></script><script src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/getpath.js\" type=\"text/javascript\"></script>";
-    private static final String MENU_JS = "<script src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/jquery.contextmenu.r2.packed.js\" type=\"text/javascript\"></script>";
+    private static final String JQUERY_CSS = "<link href=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/css/jquery-ui-1.10.2.custom.min.css\" rel=\"stylesheet\" />";
+    private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/js/jquery-ui-1.10.2.custom.min.js\" type=\"text/javascript\"></script>";
+    private static final String AUTH_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/dom.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/getpath.js\" type=\"text/javascript\"></script>";
+    private static final String MENU_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery.contextmenu.r2.packed.js\" type=\"text/javascript\"></script>";
     private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/statik/logout\">%s</a></div>";
     private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
     private static final String MENU_HTML_TEMPLATE = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
             "      <ul>\n" +
-            "        <li id=\"edit\"><img src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/edit.png\" /> %s </li>\n" +
-            "        <li id=\"copy\"><img src=\"" +  PathsAndRoutes.STATIK_RESOURCES + "/copy.png\" /> %s </li>\n" +
+            "        <li id=\"edit\"><img src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/edit.png\" /> %s </li>\n" +
+            "        <li id=\"copy\"><img src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/copy.png\" /> %s </li>\n" +
             "      </ul>\n" +
             "    </div>";
     private static final String HTML_SUFFIX = ".html";
@@ -173,12 +173,40 @@ public class EditableFileRoute extends Route {
 
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
+
             Element el = doc.select(selector).first();
-            el.html(contentItem.content());
-            LOG.trace("Replaced element with selector [" + selector + "] with content [" + contentItem.content() + "]");
+            if (el == null) {
+                LOG.debug("Element doesn't exist; must be a copy. Creating and inserting");
+
+                if (describesNthChild(selector)) {
+                    String siblingSelector = selector.substring(0, selector.lastIndexOf(':'));
+                    int lastChevron = selector.lastIndexOf('>');
+                    String tagName = selector.substring(lastChevron + 2).split(":")[0];
+
+                    LOG.debug("Creating element with sibling selector [" + siblingSelector + "], tagName [" + tagName + "]");
+                    el = doc.createElement(tagName);
+                    el.text(contentItem.content());
+
+                    Element sibling = doc.select(siblingSelector).last();
+                    sibling.after(el);
+                } else {
+                    LOG.debug("Selector [" + selector + "] did not describe an element in a sequence");
+                }
+
+
+
+            } else {
+                el.html(contentItem.content());
+                LOG.debug("Replaced element with selector [" + selector + "] with content [" + contentItem.content() + "]");
+            }
+
         }
 
         return doc;
+    }
+
+    private boolean describesNthChild(String selector) {
+        return selector.substring(0, selector.length() - 3).endsWith("nth-of-type");
     }
 
     private String editableContentFor(String path, String fileContent, boolean authenticated) {
