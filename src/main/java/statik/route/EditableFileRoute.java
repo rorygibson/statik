@@ -23,16 +23,16 @@ import java.util.ResourceBundle;
 
 public class EditableFileRoute extends Route {
 
-    private static final String JQUERY_CSS = "<link href=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/css/jquery-ui-1.10.2.custom.min.css\" rel=\"stylesheet\" />";
-    private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/js/jquery-ui-1.10.2.custom.min.js\" type=\"text/javascript\"></script>";
+    private static final String JQUERY_CSS = "<link href=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/css/smoothness/jquery-ui-1.10.3.custom.min.css\" rel=\"stylesheet\" />";
+    private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/js/jquery-ui-1.10.3.custom.min.js\" type=\"text/javascript\"></script>";
     private static final String AUTH_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/dom.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/getpath.js\" type=\"text/javascript\"></script>";
     private static final String MENU_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery.contextmenu.r2.packed.js\" type=\"text/javascript\"></script>";
-    private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 4px; padding: 5px\"><a style=\"color: blue\" href=\"/statik/logout\">%s</a></div>";
+    private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 2px; padding: 5px\"><a style=\"color: blue\" href=\"/statik/logout\">%s</a></div>";
     private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
     private static final String MENU_HTML_TEMPLATE = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
             "      <ul>\n" +
-            "        <li id=\"edit\"><img width=\"20px\" src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/edit-small.jpg\" /> %s </li>\n" +
-            "        <li id=\"copy\"><img width=\"20px\" src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/copy-small.jpg\" /> %s </li>\n" +
+            "        <li id=\"edit\"> <span style=\"display:inline-block\" class=\"ui-icon ui-icon-pencil\"></span> %s </li>\n" +
+            "        <li id=\"copy\"> <span style=\"display:inline-block\" class=\"ui-icon ui-icon-plusthick\"></span> %s </li>\n" +
             "      </ul>\n" +
             "    </div>";
     private static final String HTML_SUFFIX = ".html";

@@ -91,6 +91,7 @@ function loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent, enco
 
             $("#statik-editor-dialog").dialog(
                 {
+                    title: "Edit",
                     bgiframe: true,
                     autoOpen: true,
                     height: 250,
