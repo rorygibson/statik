@@ -57,6 +57,10 @@ function addContextMenuTo(item, path) {
                 menu.find("#copy").show();
             }
             return menu;
+        },
+        menuStyle: {
+            width: '120px',
+            'font-size': '10pt'
         }
     });
 }

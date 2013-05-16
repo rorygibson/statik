@@ -31,8 +31,8 @@ public class EditableFileRoute extends Route {
     private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
     private static final String MENU_HTML_TEMPLATE = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
             "      <ul>\n" +
-            "        <li id=\"edit\"><img src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/edit.png\" /> %s </li>\n" +
-            "        <li id=\"copy\"><img src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/copy.png\" /> %s </li>\n" +
+            "        <li id=\"edit\"><img width=\"20px\" src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/edit-small.jpg\" /> %s </li>\n" +
+            "        <li id=\"copy\"><img width=\"20px\" src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/copy-small.jpg\" /> %s </li>\n" +
             "      </ul>\n" +
             "    </div>";
     private static final String HTML_SUFFIX = ".html";
