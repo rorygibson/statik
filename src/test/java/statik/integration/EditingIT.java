@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -71,6 +73,31 @@ public class EditingIT extends AbstractWebDriverIntTst {
         driver.get(LIST_TEST_PAGE);
         WebElement afterEdit = driver.findElements(By.tagName("li")).get(3);
         assertEquals("Should now have some different content", "still the 4th, but different", afterEdit.getText());
+    }
+
+    @Test
+    public void copyAndEditParagraph() throws InterruptedException {
+        driver.get(ONE_PARA_TEST_PAGE);
+        WebElement original = driver.findElement(By.tagName("p"));
+
+        copy(original);
+        WebElement theCopy = driver.findElements(By.tagName("p")).get(1);
+        changeContentOf(theCopy, "copied");
+
+        driver.get(ONE_PARA_TEST_PAGE);
+        List<WebElement> afterEdit = driver.findElements(By.tagName("p"));
+        assertEquals("Should have two paras", 2, afterEdit.size());
+        assertEquals("Original element text", "content", afterEdit.get(0).getText());
+        assertEquals("Copied element text", "copied", afterEdit.get(1).getText());
+    }
+
+    private void copy(WebElement el) {
+        Actions a = new Actions(driver);
+        a.contextClick(el);
+        a.perform();
+
+        WebElement menu = driver.findElement(By.id("jqContextMenu"));
+        menu.findElement(By.id("copy")).click();
     }
 
     private void sleepForMs(int ms) {
