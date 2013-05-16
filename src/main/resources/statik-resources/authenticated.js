@@ -3,41 +3,51 @@ function hasCopyAbility(item) {
         (item.tagName === "P");
 }
 
+function copy(item, path) {
+    var theCopy = $(item).clone();
+    $(item).parent().append(theCopy);
+
+    var content = $(item).html();
+    var selector = getPath(theCopy.get(0));
+
+    addHoverState(theCopy);
+    addContextMenuTo(theCopy.get(0), path);
+
+    $.ajax({
+        type: 'POST',
+        url: '/statik/content',
+        data: {
+            path: path,
+            content: content,
+            selector: selector
+        },
+        success: function (msg) {
+            if (!msg) {
+                console.error('update failure');
+            }
+        }
+    });
+}
+
+function loadEditor(item, path) {
+    var selector = getPath(item);
+    var content = $(item).html();
+
+    var encodedSelector = encodeURIComponent(selector);
+    var encodedPath = encodeURIComponent(path);
+    var encodedContent = encodeURIComponent(content);
+
+    loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent);
+}
+
 function addContextMenuTo(item, path) {
     $(item).contextMenu('editMenu', {
         bindings: {
             'edit': function (t) {
-                var selector = getPath(item);
-                var content = $(item).html();
-
-                var encodedSelector = encodeURIComponent(selector);
-                var encodedPath = encodeURIComponent(path);
-                var encodedContent = encodeURIComponent(content);
-
-                loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent);
+                loadEditor(item, path);
             },
             'copy': function (t) {
-                var theCopy = $(item).clone();
-                $(item).parent().append(theCopy);
-
-                var content = $(item).html();
-                var selector = getPath(theCopy.get(0));
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/statik/content',
-                    data: {
-                        path: path,
-                        content: content,
-                        selector: selector
-                    },
-                    success: function (msg) {
-                        if (!msg) {
-                            console.error('update failure');
-                        }
-                    }
-                });
-
+                copy(item, path);
             }
         },
         onShowMenu: function (e, menu) {
