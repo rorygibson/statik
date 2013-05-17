@@ -39,31 +39,34 @@ public class Main implements spark.servlet.SparkApplication {
     private String welcomeFile;
     private boolean testMode = false;
     private String notFoundPage;
-    private int port;
+    private static int port;
 
     public static void main(String[] args) {
-        new Main().init();
+        Main main = new Main();
+        main.configure(CONFIG_FILENAME);
+        Spark.setPort(port);
+        main.populate();
+        main.addTestOnlyRoutes();
+        main.addStatikRoutes();
     }
 
     @Override
     public void init() {
-        if (!configured) {
-            configure(CONFIG_FILENAME);
-
-            this.contentStore = new MongoContentStore();
-            this.contentStore.configure(CONFIG_FILENAME);
-
-            this.authStore = new AuthStore();
-            this.authStore.configure(USERS_DB_FILENAME);
-
-            this.sessionStore = new MongoSessionStore();
-            this.sessionStore.configure(CONFIG_FILENAME);
-
-            //Spark.setPort(this.port);
-        }
-
+        configure(CONFIG_FILENAME);
+        populate();
         addTestOnlyRoutes();
         addStatikRoutes();
+    }
+
+    private void populate() {
+        this.contentStore = new MongoContentStore();
+        this.contentStore.configure(CONFIG_FILENAME);
+
+        this.authStore = new AuthStore();
+        this.authStore.configure(USERS_DB_FILENAME);
+
+        this.sessionStore = new MongoSessionStore();
+        this.sessionStore.configure(CONFIG_FILENAME);
     }
 
     private void addStatikRoutes() {
