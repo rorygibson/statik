@@ -31,7 +31,7 @@ public class ContentRoute extends Route {
 
         LOG.debug("POST with selector [" + selector + "], path [" + path + "], content [" + newContent + "]");
 
-        ContentItem contentItem = new ContentItem(path, selector, newContent, false);
+        ContentItem contentItem = new ContentItem(path, selector, newContent, false, false);
         contentStore.insertOrUpdate(contentItem);
 
         response.status(200);

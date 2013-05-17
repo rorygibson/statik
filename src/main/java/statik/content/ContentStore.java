@@ -14,5 +14,5 @@ public interface ContentStore {
 
     ContentItem findByPathAndSelector(String path, String selector);
 
-    void copyElement(ContentItem contentItem);
+    void makeContentLiveFor(String path);
 }

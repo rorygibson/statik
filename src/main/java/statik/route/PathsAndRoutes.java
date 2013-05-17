@@ -32,4 +32,5 @@ public class PathsAndRoutes {
     public static final String STATIK_EDITOR = "/statik/editor";
     public static final String STATIK_ADMIN = "/statik/admin/";
     public static final String STATIK_RESOURCES_GLOB = "/statik/resources/*";
+    public static final String MAKE_CONTENT_LIVE = "/statik/make-it-so";
 }

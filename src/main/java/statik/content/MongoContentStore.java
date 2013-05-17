@@ -14,17 +14,6 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
 
     private DBCollection items;
 
-    @Override
-    public void copyElement(ContentItem contentItem) {
-        LOG.debug("Copying element with content, size [" + contentItem.size() + "] and selector [" + contentItem.selector() + "]");
-
-        BasicDBObject updateObject = new BasicDBObject(ContentItem.SELECTOR, contentItem.selector())
-                .append(ContentItem.PATH, contentItem.path())
-                .append(ContentItem.CONTENT, contentItem.content())
-                .append(ContentItem.IS_COPY, true);
-
-        items.insert(updateObject);
-    }
 
     @Override
     public void insertOrUpdate(ContentItem contentItem) {
@@ -79,12 +68,29 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
         return contentItemFrom(dbObject);
     }
 
+    @Override
+    public void makeContentLiveFor(String path) {
+        LOG.debug("Setting content with path [" + path + "] live");
+        DBCursor dbObjects = this.items.find(new BasicDBObject(ContentItem.PATH, path));
+        int ctr = 0;
+        while (dbObjects.hasNext()) {
+            DBObject obj = dbObjects.next();
+            obj.put(ContentItem.LIVE, true);
+            this.items.save(obj);
+            ctr++;
+        }
+        LOG.debug("Updated page [" + path + "], setting " + ctr + " content items live");
+    }
+
 
     private ContentItem contentItemFrom(DBObject dbObject) {
         String content = dbObject.get(ContentItem.CONTENT).toString();
         String selector = dbObject.get(ContentItem.SELECTOR).toString();
         String itemPath = dbObject.get(ContentItem.PATH).toString();
-        return new ContentItem(itemPath, selector, content);
+        Object liveObj = dbObject.get(ContentItem.LIVE);
+        boolean live = liveObj == null ? false : (Boolean) liveObj;
+
+        return new ContentItem(itemPath, selector, content, live);
     }
 
 }

@@ -27,7 +27,11 @@ public class EditableFileRoute extends Route {
     private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/js/jquery-ui-1.10.3.custom.min.js\" type=\"text/javascript\"></script>";
     private static final String AUTH_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/dom.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/getpath.js\" type=\"text/javascript\"></script>";
     private static final String MENU_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery.contextmenu.r2.packed.js\" type=\"text/javascript\"></script>";
-    private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 2px; padding: 5px\"><a style=\"color: blue\" href=\"/statik/logout\">%s</a></div>";
+    private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 2px; padding: 5px\">" +
+            "<a style=\"color: blue\" href=\"/statik/logout\">%s</a>" +
+            "<br />" +
+            "<a id=\"publish\" style=\"color: blue\" href=\"#\">%s</a>" +
+            "</div>";
     private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
     private static final String MENU_HTML_TEMPLATE = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
             "      <ul>\n" +
@@ -151,11 +155,12 @@ public class EditableFileRoute extends Route {
     private Document makeEditable(Document doc) {
         ResourceBundle bundle = ResourceBundle.getBundle("messages");
         String logout = bundle.getString("authbox.logout");
+        String publish = bundle.getString("authbox.publish");
         String edit = bundle.getString("editmenu.edit");
         String copy = bundle.getString("editmenu.copy");
 
         doc.head().append(JQUERY_CSS);
-        doc.body().append(String.format(LOGOUT_BOX_HTML_TEMPLATE, logout));
+        doc.body().append(String.format(LOGOUT_BOX_HTML_TEMPLATE, logout, publish));
         doc.body().append(EDITOR_HTML);
         doc.body().append(String.format(MENU_HTML_TEMPLATE, edit, copy));
         doc.body().append(JQUERY_JS);
@@ -168,41 +173,47 @@ public class EditableFileRoute extends Route {
         return theFile.getName().endsWith(HTML_SUFFIX);
     }
 
-    private Document replaceContent(Document doc, String path) {
+    private Document replaceContent(Document doc, String path, boolean authenticated) {
         Map<String, ContentItem> contentItems = this.contentStore.findForPath(path);
 
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
 
-            Element el = doc.select(selector).first();
-            if (el == null) {
-                LOG.debug("Element doesn't exist; must be a copy. Creating and inserting");
-
-                if (describesNthChild(selector)) {
-                    String siblingSelector = selector.substring(0, selector.lastIndexOf(':'));
-                    int lastChevron = selector.lastIndexOf('>');
-                    String tagName = selector.substring(lastChevron + 2).split(":")[0];
-
-                    LOG.debug("Creating element with sibling selector [" + siblingSelector + "], tagName [" + tagName + "]");
-                    el = doc.createElement(tagName);
-                    el.text(contentItem.content());
-
-                    Element sibling = doc.select(siblingSelector).last();
-                    sibling.after(el);
-                } else {
-                    LOG.debug("Selector [" + selector + "] did not describe an element in a sequence");
-                }
-
-
-
-            } else {
-                el.html(contentItem.content());
-                LOG.debug("Replaced element with selector [" + selector + "] with content [" + contentItem.content() + "]");
+            if (!contentItem.live() && !authenticated) {
+                continue;
             }
 
+            replaceIndividualContentIem(doc, selector, contentItem);
         }
 
         return doc;
+    }
+
+    private void replaceIndividualContentIem(Document doc, String selector, ContentItem contentItem) {
+        Element el = doc.select(selector).first();
+
+        if (el != null) {
+            el.html(contentItem.content());
+            LOG.debug("Replaced element with selector [" + selector + "] with content [" + contentItem.content() + "]");
+            return;
+        }
+
+        LOG.debug("Element doesn't exist; must be a copy. Creating and inserting");
+
+        if (describesNthChild(selector)) {
+            String siblingSelector = selector.substring(0, selector.lastIndexOf(':'));
+            int lastChevron = selector.lastIndexOf('>');
+            String tagName = selector.substring(lastChevron + 2).split(":")[0];
+
+            LOG.debug("Creating element with sibling selector [" + siblingSelector + "], tagName [" + tagName + "]");
+            el = doc.createElement(tagName);
+            el.text(contentItem.content());
+
+            Element sibling = doc.select(siblingSelector).last();
+            sibling.after(el);
+        } else {
+            LOG.debug("Selector [" + selector + "] did not describe an element in a sequence");
+        }
     }
 
     private boolean describesNthChild(String selector) {
@@ -211,7 +222,7 @@ public class EditableFileRoute extends Route {
 
     private String editableContentFor(String path, String fileContent, boolean authenticated) {
         Document doc = Jsoup.parse(fileContent);
-        doc = replaceContent(doc, path);
+        doc = replaceContent(doc, path, authenticated);
 
         if (authenticated) {
             LOG.debug("Making page editable");

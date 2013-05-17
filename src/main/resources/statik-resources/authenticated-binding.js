@@ -7,4 +7,20 @@ $(document).ready(function () {
         addContextMenuTo(item, pagePath);
     });
 
+    $('#publish').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/statik/make-it-so',
+            data: {
+                path: pagePath
+            },
+            success: function (msg) {
+                if (!msg) {
+                    console.error('publish failure');
+                }
+            }
+        });
+        return false;
+    });
+
 });

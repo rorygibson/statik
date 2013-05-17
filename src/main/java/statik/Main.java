@@ -59,7 +59,7 @@ public class Main implements spark.servlet.SparkApplication {
             this.sessionStore = new MongoSessionStore();
             this.sessionStore.configure(CONFIG_FILENAME);
 
-            Spark.setPort(this.port);
+            //Spark.setPort(this.port);
         }
 
         addTestOnlyRoutes();
@@ -80,6 +80,8 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new ResourceRoute(PathsAndRoutes.STATIK_RESOURCES_GLOB));
         Spark.post(new ContentRoute(PathsAndRoutes.STATIK_CONTENT, this.contentStore));
         Spark.get(new EditorRoute(PathsAndRoutes.STATIK_EDITOR, this.contentStore));
+
+        Spark.post(new MakeContentLiveRoute(PathsAndRoutes.MAKE_CONTENT_LIVE, this.contentStore));
 
         LOG.info("Setting up editable site routes");
         Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, PathsAndRoutes.ROOT, this.welcomeFile, this.sessionStore, this.notFoundPage));
