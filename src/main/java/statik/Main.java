@@ -4,6 +4,7 @@ import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.configuration.SystemConfiguration;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Spark;
@@ -25,6 +26,8 @@ public class Main implements spark.servlet.SparkApplication {
     private static final String WELCOME_FILE = "welcomeFile";
     private static final String TEST_MODE = "testMode";
     private static final String NOT_FOUND_PAGE = "404page";
+    private static final String PORT = "port";
+    private static final int DEFAULT_PORT = 4567;
 
     private boolean configured = false;
 
@@ -36,6 +39,7 @@ public class Main implements spark.servlet.SparkApplication {
     private String welcomeFile;
     private boolean testMode = false;
     private String notFoundPage;
+    private int port;
 
     public static void main(String[] args) {
         new Main().init();
@@ -54,6 +58,8 @@ public class Main implements spark.servlet.SparkApplication {
 
             this.sessionStore = new MongoSessionStore();
             this.sessionStore.configure(CONFIG_FILENAME);
+
+            Spark.setPort(this.port);
         }
 
         addTestOnlyRoutes();
@@ -106,12 +112,14 @@ public class Main implements spark.servlet.SparkApplication {
         this.fileBase = config.getString(FILE_BASE);
         this.welcomeFile = config.getString(WELCOME_FILE);
         this.notFoundPage = config.getString(NOT_FOUND_PAGE);
+        this.port = Integer.valueOf(StringUtils.defaultIfEmpty(config.getString(PORT), "" + DEFAULT_PORT));
 
         this.configured = true;
         LOG.debug("Test mode is " + testMode);
         LOG.debug("File base is " + fileBase);
         LOG.debug("Welcome file is " + welcomeFile);
         LOG.debug("404 file is " + notFoundPage);
+        LOG.debug("Port is " + port);
     }
 
     private PropertiesConfiguration loadPropertiesConfigFrom(String configFilename) {
