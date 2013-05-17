@@ -12,12 +12,8 @@ import java.util.*;
 public class AuthStore {
 
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(AuthStore.class);
-    private final Map<String, String> users = new HashMap<>();
+    private Map<String, String> users = new HashMap<>();
     private boolean configured = false;
-
-    public void addUser(String username, String password) {
-        this.users.put(username, password);
-    }
 
     public boolean auth(String username, String password) {
         return this.users.containsKey(username) && this.users.get(username).equals(password);
@@ -33,28 +29,42 @@ public class AuthStore {
         return theUsers;
     }
 
+    public void addUser(String name, String password) {
+        this.users.put(name, password);
+    }
+
     public void configure(String usersFile) {
         if (!configured) {
-            LOG.info("Loading users");
-
-            CompositeConfiguration config = new CompositeConfiguration();
-            config.addConfiguration(new SystemConfiguration());
-            try {
-                config.addConfiguration(new PropertiesConfiguration(usersFile));
-            } catch (ConfigurationException e) {
-                throw new RuntimeException("Couldn't load configuration from " + usersFile);
-            }
-
-            Iterator keys = config.getKeys("users");
-            while (keys.hasNext()) {
-                String key = keys.next().toString();
-                String username = key.replace("users.", "");
-                String password = config.getString(key);
-                this.addUser(username, password);
-            }
-
+            this.users = usersFrom(configurationFrom(usersFile));
             this.configured = true;
-            LOG.info("Loaded " + users.size() + " users");
         }
+    }
+
+    private Map<String, String> usersFrom(CompositeConfiguration config) {
+        LOG.info("Loading users");
+
+        Map<String, String> map = new HashMap<>();
+        Iterator keys = config.getKeys("users");
+
+        while (keys.hasNext()) {
+            String key = keys.next().toString();
+            String username = key.replace("users.", "");
+            String password = config.getString(key);
+            map.put(username, password);
+        }
+
+        LOG.info("Loaded " + users.size() + " users");
+        return map;
+    }
+
+    private CompositeConfiguration configurationFrom(String usersFile) {
+        CompositeConfiguration config = new CompositeConfiguration();
+        config.addConfiguration(new SystemConfiguration());
+        try {
+            config.addConfiguration(new PropertiesConfiguration(usersFile));
+        } catch (ConfigurationException e) {
+            throw new RuntimeException("Couldn't load configuration from " + usersFile);
+        }
+        return config;
     }
 }

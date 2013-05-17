@@ -26,7 +26,6 @@ public class Main implements spark.servlet.SparkApplication {
     private static final String TEST_MODE = "testMode";
     private static final String NOT_FOUND_PAGE = "404page";
 
-
     private boolean configured = false;
 
     private ContentStore contentStore;
@@ -45,7 +44,7 @@ public class Main implements spark.servlet.SparkApplication {
     @Override
     public void init() {
         if (!configured) {
-            this.configure(CONFIG_FILENAME);
+            configure(CONFIG_FILENAME);
 
             this.contentStore = new MongoContentStore();
             this.contentStore.configure(CONFIG_FILENAME);
@@ -57,12 +56,11 @@ public class Main implements spark.servlet.SparkApplication {
             this.sessionStore.configure(CONFIG_FILENAME);
         }
 
-        if (testMode) {
-            LOG.info("Setting up test-only routes");
-            Spark.get(new ClearDbRoute(PathsAndRoutes.STATIK_CLEAR_DB, this.contentStore, this.sessionStore));
-            Spark.get(new ShutdownRoute(PathsAndRoutes.STATIK_SHUTDOWN));
-        }
+        addTestOnlyRoutes();
+        addStatikRoutes();
+    }
 
+    private void addStatikRoutes() {
         LOG.info("Setting up statik routes");
         Spark.get(new LogoutRoute(PathsAndRoutes.STATIK_LOGOUT, this.sessionStore));
         Spark.get(new LoginFormRoute(PathsAndRoutes.STATIK_LOGIN, this.sessionStore));
@@ -80,6 +78,14 @@ public class Main implements spark.servlet.SparkApplication {
         LOG.info("Setting up editable site routes");
         Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, PathsAndRoutes.ROOT, this.welcomeFile, this.sessionStore, this.notFoundPage));
         Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, PathsAndRoutes.ROOT_GLOB_ALL, this.sessionStore, this.notFoundPage));
+    }
+
+    private void addTestOnlyRoutes() {
+        if (testMode) {
+            LOG.info("Setting up test-only routes");
+            Spark.get(new ClearDbRoute(PathsAndRoutes.STATIK_CLEAR_DB, this.contentStore, this.sessionStore));
+            Spark.get(new ShutdownRoute(PathsAndRoutes.STATIK_SHUTDOWN));
+        }
     }
 
     private void configure(String configFilename) {
