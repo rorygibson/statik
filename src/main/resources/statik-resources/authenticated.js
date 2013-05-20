@@ -19,7 +19,6 @@ function setupEditorContainer() {
 
 function setupScripts() {
     $('head').append('<link type="text/css" rel="stylesheet" href="/statik/resources/styles.css" />')
-        .append('<script type="text/javascript" src="/statik/resources/authenticated.js"></script>')
         .append('<script type="text/javascript" src="/statik/resources/dom.js"></script>')
         .append('<script type="text/javascript" src="/statik/resources/getpath.js"></script>')
         .append('<script type="text/javascript" src="/statik/resources/jquery.contextmenu.r2.packed.js"></script>');
