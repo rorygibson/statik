@@ -18,27 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 
 public class EditableFileRoute extends Route {
 
     private static final String JQUERY_CSS = "<link href=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/css/smoothness/jquery-ui-1.10.3.custom.min.css\" rel=\"stylesheet\" />";
     private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/js/jquery-ui-1.10.3.custom.min.js\" type=\"text/javascript\"></script>";
-    private static final String AUTH_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/dom.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/getpath.js\" type=\"text/javascript\"></script>";
-    private static final String MENU_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery.contextmenu.r2.packed.js\" type=\"text/javascript\"></script>";
-    private static final String LOGOUT_BOX_HTML_TEMPLATE = "<div id=\"statik-auth-box\" style=\"position:absolute; top:20px; right:20px; border: solid lightgray 1px; background-color: lightgray; border-radius: 2px; padding: 5px\">" +
-            "<a style=\"color: blue\" href=\"/statik/logout\">%s</a>" +
-            "<br />" +
-            "<a id=\"publish\" style=\"color: blue\" href=\"#\">%s</a>" +
-            "</div>";
-    private static final String EDITOR_HTML = "<div id=\"statik-editor-dialog\"></div>";
-    private static final String MENU_HTML_TEMPLATE = "   <div style=\"display:none\" class=\"contextMenu\" id=\"editMenu\">\n" +
-            "      <ul>\n" +
-            "        <li id=\"edit\"> <span style=\"display:inline-block\" class=\"ui-icon ui-icon-pencil\"></span> %s </li>\n" +
-            "        <li id=\"copy\"> <span style=\"display:inline-block\" class=\"ui-icon ui-icon-plusthick\"></span> %s </li>\n" +
-            "      </ul>\n" +
-            "    </div>";
+    private static final String AUTH_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script>";
+
     private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
     private final ContentStore contentStore;
@@ -153,19 +140,9 @@ public class EditableFileRoute extends Route {
     }
 
     private Document makeEditable(Document doc) {
-        ResourceBundle bundle = ResourceBundle.getBundle("messages");
-        String logout = bundle.getString("authbox.logout");
-        String publish = bundle.getString("authbox.publish");
-        String edit = bundle.getString("editmenu.edit");
-        String copy = bundle.getString("editmenu.copy");
-
-        doc.head().append(JQUERY_CSS);
-        doc.body().append(String.format(LOGOUT_BOX_HTML_TEMPLATE, logout, publish));
-        doc.body().append(EDITOR_HTML);
-        doc.body().append(String.format(MENU_HTML_TEMPLATE, edit, copy));
         doc.body().append(JQUERY_JS);
+        doc.head().append(JQUERY_CSS);
         doc.body().append(AUTH_JS);
-        doc.body().append(MENU_JS);
         return doc;
     }
 

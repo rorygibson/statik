@@ -1,3 +1,11 @@
+
+function addControlBoxToScreen() {
+    $('body').append('<ul id="statik-auth-box"></ul>');
+    $('#statik-auth-box').append('<li><a href="/statik/logout" id="logout">Log out</a></li>')
+    $('#statik-auth-box').append('<li><a href="#" id="publish">Publish</a></li>')
+}
+
+
 function hasCopyAbility(item) {
     return (item.tagName === "LI") ||
         (item.tagName === "P");
