@@ -1,0 +1,38 @@
+package statik.integration;
+
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import static org.junit.Assert.assertEquals;
+
+public class PublishingIT extends AbstractWebDriverIntTst {
+
+
+    @Test
+    public void unpublishedChangesAreNotVisibleUnlessLoggedIn() {
+        doLoginWith("rory", "password");
+        driver.get(ONE_PARA_TEST_PAGE);
+        changeContentOf("p", "new content");
+
+        doLogout();
+
+        driver.get(ONE_PARA_TEST_PAGE);
+        WebElement again = driver.findElement(By.cssSelector("p"));
+        assertEquals("Text should show the original, unedited content", "content", again.getText());
+    }
+
+    @Test
+    public void publishedChangesAreVisibleWhenNotLoggedIn() {
+        doLoginWith("rory", "password");
+        driver.get(ONE_PARA_TEST_PAGE);
+        changeContentOf("p", "new content");
+
+        // ... don't log out ...
+
+        driver.get(ONE_PARA_TEST_PAGE);
+        WebElement again = driver.findElement(By.cssSelector("p"));
+        assertEquals("Text should show the edited content", "new content", again.getText());
+    }
+
+}

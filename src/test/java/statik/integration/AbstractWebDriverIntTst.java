@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -36,6 +37,9 @@ public class AbstractWebDriverIntTst {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractWebDriverIntTst.class);
     private static boolean running;
+
+    public static final int PERIOD_TO_WAIT_FOR_EDITOR = 500;
+    public static final int PERIOD_TO_WAIT_FOR_CHANGES = 500;
 
 
     static {
@@ -144,6 +148,46 @@ public class AbstractWebDriverIntTst {
                 }
             }
         });
+    }
+
+
+    protected void copy(WebElement el) {
+        Actions a = new Actions(driver);
+        a.contextClick(el);
+        a.perform();
+
+        WebElement menu = driver.findElement(By.id("jqContextMenu"));
+        menu.findElement(By.id("copy")).click();
+    }
+
+    protected void sleepForMs(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            //
+        }
+    }
+
+    protected void changeContentOf(WebElement el, String newContent) {
+        Actions a = new Actions(driver);
+        a.contextClick(el);
+        a.perform();
+
+        WebElement menu = driver.findElement(By.id("jqContextMenu"));
+        menu.findElement(By.id("edit")).click();
+
+        waitForPresenceOf("iframe");
+
+        sleepForMs(PERIOD_TO_WAIT_FOR_EDITOR);
+        ((FirefoxDriver)driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
+        sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
+        driver.findElement(By.id("submit")).click();
+        sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
+    }
+
+    protected void changeContentOf(String tag, String newContent) {
+        WebElement para = driver.findElement(By.cssSelector(tag));
+        changeContentOf(para, newContent);
     }
 
 }

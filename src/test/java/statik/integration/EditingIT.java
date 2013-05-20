@@ -4,8 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 
 import java.util.List;
 
@@ -14,8 +12,6 @@ import static org.junit.Assert.assertTrue;
 
 public class EditingIT extends AbstractWebDriverIntTst {
 
-    public static final int PERIOD_TO_WAIT_FOR_EDITOR = 500;
-    public static final int PERIOD_TO_WAIT_FOR_CHANGES = 500;
 
     @Before
     public void performLogin() {
@@ -91,42 +87,4 @@ public class EditingIT extends AbstractWebDriverIntTst {
         assertEquals("Copied element text", "copied", afterEdit.get(1).getText());
     }
 
-    private void copy(WebElement el) {
-        Actions a = new Actions(driver);
-        a.contextClick(el);
-        a.perform();
-
-        WebElement menu = driver.findElement(By.id("jqContextMenu"));
-        menu.findElement(By.id("copy")).click();
-    }
-
-    private void sleepForMs(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            //
-        }
-    }
-
-    private void changeContentOf(WebElement el, String newContent) {
-        Actions a = new Actions(driver);
-        a.contextClick(el);
-        a.perform();
-
-        WebElement menu = driver.findElement(By.id("jqContextMenu"));
-        menu.findElement(By.id("edit")).click();
-
-        waitForPresenceOf("iframe");
-
-        sleepForMs(PERIOD_TO_WAIT_FOR_EDITOR);
-        ((FirefoxDriver)driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
-        sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
-        driver.findElement(By.id("submit")).click();
-        sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
-    }
-
-    private void changeContentOf(String tag, String newContent) {
-        WebElement para = driver.findElement(By.cssSelector(tag));
-        changeContentOf(para, newContent);
-    }
 }
