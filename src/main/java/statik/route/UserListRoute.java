@@ -4,6 +4,7 @@ import org.thymeleaf.context.Context;
 import spark.Request;
 import spark.Response;
 import statik.auth.AuthStore;
+import statik.session.SessionStore;
 
 public class UserListRoute extends ThymeLeafResourceRoute {
 

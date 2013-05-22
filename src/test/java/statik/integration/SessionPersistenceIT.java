@@ -18,7 +18,7 @@ public class SessionPersistenceIT extends AbstractWebDriverIntTst {
 
     @Test
     public void ifYouHaveLoggedOutYouSeeTheLoginForm() {
-        doLoginWith("rory", "password");
+        doLoginWith("admin", "password");
         doLogout();
 
         driver.get(LOGIN_PAGE);
@@ -28,7 +28,7 @@ public class SessionPersistenceIT extends AbstractWebDriverIntTst {
 
     @Test
     public void onceYouHaveLoggedInYouDontSeeTheLoginForm() {
-        doLoginWith("rory", "password");
+        doLoginWith("admin", "password");
 
         driver.get(LOGIN_PAGE);
         WebElement element = driver.findElement(By.className("error"));
@@ -46,7 +46,7 @@ public class SessionPersistenceIT extends AbstractWebDriverIntTst {
     public void editingSessionsPersistAcrossBrowserSessions() {
         driver.manage().deleteAllCookies();
 
-        doLoginWith("rory", "password");
+        doLoginWith("admin", "password");
         Cookie cookie = driver.manage().getCookieNamed(Http.COOKIE_NAME);
         driver.quit();
 

@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Spark;
 import statik.auth.AuthStore;
+import statik.auth.MongoAuthStore;
+import statik.auth.SecureFilter;
+import statik.auth.User;
 import statik.content.ContentStore;
 import statik.content.MongoContentStore;
 import statik.route.*;
@@ -62,14 +65,26 @@ public class Main implements spark.servlet.SparkApplication {
         this.contentStore = new MongoContentStore();
         this.contentStore.configure(CONFIG_FILENAME);
 
-        this.authStore = new AuthStore();
-        this.authStore.configure(USERS_DB_FILENAME);
+        this.authStore = new MongoAuthStore();
+        this.authStore.configure(CONFIG_FILENAME);
+
+        if (this.authStore.users().isEmpty()) {
+            addDefaultUser();
+        }
 
         this.sessionStore = new MongoSessionStore();
         this.sessionStore.configure(CONFIG_FILENAME);
     }
 
+    private void addDefaultUser() {
+        LOG.error("Adding default user [admin]");
+        User defaultUser = new User("admin", "password", true);
+        this.authStore.addUser(defaultUser);
+    }
+
     private void addStatikRoutes() {
+        Spark.before(new SecureFilter("/statik/", this.sessionStore));
+
         LOG.info("Setting up statik routes");
         Spark.get(new LogoutRoute(PathsAndRoutes.STATIK_LOGOUT, this.sessionStore));
         Spark.get(new LoginFormRoute(PathsAndRoutes.STATIK_LOGIN, this.sessionStore));
@@ -79,6 +94,7 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new UserListRoute(PathsAndRoutes.STATIK_ADMIN_USERS, this.authStore));
         Spark.get(new AddUserRoute(PathsAndRoutes.STATIK_ADMIN_USER, this.authStore));
         Spark.post(new AddUserRoute(PathsAndRoutes.STATIK_ADMIN_USER, this.authStore));
+        Spark.get(new DeleteUserRoute(PathsAndRoutes.STATIK_DELETE_USER, this.authStore));
 
         Spark.get(new ResourceRoute(PathsAndRoutes.STATIK_RESOURCES_GLOB));
         Spark.post(new ContentRoute(PathsAndRoutes.STATIK_CONTENT, this.contentStore));
@@ -94,7 +110,7 @@ public class Main implements spark.servlet.SparkApplication {
     private void addTestOnlyRoutes() {
         if (testMode) {
             LOG.info("Setting up test-only routes");
-            Spark.get(new ClearDbRoute(PathsAndRoutes.STATIK_CLEAR_DB, this.contentStore, this.sessionStore));
+            Spark.get(new ClearDbRoute(PathsAndRoutes.STATIK_CLEAR_DB, this.contentStore, this.sessionStore, this.authStore));
             Spark.get(new ShutdownRoute(PathsAndRoutes.STATIK_SHUTDOWN));
         }
     }

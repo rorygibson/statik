@@ -11,7 +11,7 @@ public class PublishingIT extends AbstractWebDriverIntTst {
 
     @Test
     public void unpublishedChangesAreNotVisibleUnlessLoggedIn() {
-        doLoginWith("rory", "password");
+        doLoginWith("admin", "password");
         driver.get(ONE_PARA_TEST_PAGE);
         changeContentOf("p", "new content");
 
@@ -24,7 +24,7 @@ public class PublishingIT extends AbstractWebDriverIntTst {
 
     @Test
     public void publishedChangesAreVisibleWhenNotLoggedIn() {
-        doLoginWith("rory", "password");
+        doLoginWith("admin", "password");
         driver.get(ONE_PARA_TEST_PAGE);
         changeContentOf("p", "new content");
 

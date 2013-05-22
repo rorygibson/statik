@@ -22,7 +22,6 @@ public class AbstractWebDriverIntTst {
     protected static WebDriver driver;
 
     public static String BASE_URL;
-    public static String ADMIN_BASE_URL;
 
     public static String ROOT_PAGE;
     public static String LOGIN_ERROR_PAGE;
@@ -34,6 +33,8 @@ public class AbstractWebDriverIntTst {
     public static String CLEAR_DB_ENDPOINT;
     public static String LINK_TEST_PAGE;
     public static String LOGOUT_PAGE;
+    public static String USERS_PAGE;
+    public static String USER_PAGE;
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractWebDriverIntTst.class);
     private static boolean running;
@@ -42,31 +43,29 @@ public class AbstractWebDriverIntTst {
     public static final int PERIOD_TO_WAIT_FOR_CHANGES = 500;
 
 
+
     static {
         BASE_URL = System.getProperty("baseUrl");
 
         if (BASE_URL == null || BASE_URL.equals("")) {
-            BASE_URL = "http://localhost:8080/";
-        }
-
-        if (!BASE_URL.endsWith("/")) {
-            BASE_URL = BASE_URL + "/";
+            BASE_URL = "http://localhost:8080";
         }
 
         // builtin stuff
-        ADMIN_BASE_URL = BASE_URL + PathsAndRoutes.STATIK_ADMIN;
         LOGIN_PAGE = BASE_URL + PathsAndRoutes.STATIK_LOGIN;
         LOGOUT_PAGE = BASE_URL + PathsAndRoutes.STATIK_LOGOUT;
         LOGIN_ERROR_PAGE = BASE_URL + PathsAndRoutes.STATIK_LOGIN_ERROR;
         CLEAR_DB_ENDPOINT = BASE_URL + PathsAndRoutes.STATIK_CLEAR_DB;
+        USERS_PAGE = BASE_URL + PathsAndRoutes.STATIK_ADMIN_USERS;
+        USER_PAGE = BASE_URL + PathsAndRoutes.STATIK_ADMIN_USER;
 
         // test pages in test-website directory
-        ROOT_PAGE = BASE_URL + "index.html";
-        ONE_PARA_TEST_PAGE = BASE_URL + "one-para.html";
-        TWO_PARA_TEST_PAGE = BASE_URL + "two-paras.html";
-        LIST_TEST_PAGE = BASE_URL + "list.html";
-        QUNIT_TESTS_PAGE = BASE_URL + "qunit-tests.html";
-        LINK_TEST_PAGE = BASE_URL + "links.html";
+        ROOT_PAGE = BASE_URL + "/index.html";
+        ONE_PARA_TEST_PAGE = BASE_URL + "/one-para.html";
+        TWO_PARA_TEST_PAGE = BASE_URL + "/two-paras.html";
+        LIST_TEST_PAGE = BASE_URL + "/list.html";
+        QUNIT_TESTS_PAGE = BASE_URL + "/qunit-tests.html";
+        LINK_TEST_PAGE = BASE_URL + "/links.html";
     }
 
     @BeforeClass

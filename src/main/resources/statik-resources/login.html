@@ -1,12 +1,12 @@
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="/statik/resources/styles.css"/>
+    <link type="text/css" rel="stylesheet" href="/statik-resources/styles.css"/>
 </head>
 
 <body>
 <h1 th:text="#{login.heading}"></h1>
 
-<form method="post" action="/statik/auth">
+<form method="post" action="/statik-auth">
     <div>
         <label th:text="#{login.username}"></label>
         <input tabindex="1" name="username"/>
@@ -22,7 +22,7 @@
     </div>
 </form>
 
-<script type="text/javascript" src="/statik/resources/login-binding.js"></script>
-<script type="text/javascript" src="/statik/resources/dom.js"></script>
+<script type="text/javascript" src="/statik-resources/login-binding.js"></script>
+<script type="text/javascript" src="/statik-resources/dom.js"></script>
 </body>
 </html>

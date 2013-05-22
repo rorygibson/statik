@@ -15,7 +15,7 @@ public class EditingIT extends AbstractWebDriverIntTst {
 
     @Before
     public void performLogin() {
-        doLoginWith("rory", "password");
+        doLoginWith("admin", "password");
     }
 
     @Test

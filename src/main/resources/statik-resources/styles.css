@@ -74,10 +74,14 @@ ul#users li {
     -webkit-border-radius: 4px;
 }
 
-ul#users li a {
+ul#users li .command {
     color: black;
     float: right;
-    padding-left: 1em
+    padding-left: 1em;
+}
+
+ul#users li span.command {
+    color: gray;
 }
 
 a#add {
@@ -118,3 +122,8 @@ p.flash {
     display: none;
 }
 
+#back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1em;
+}

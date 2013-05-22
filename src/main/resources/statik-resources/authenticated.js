@@ -2,6 +2,7 @@ function addControlBoxToScreen() {
     $('body').append('<ul id="statik-auth-box"></ul>');
     $('#statik-auth-box').append('<li><a href="/statik/logout" id="logout">Log out</a></li>')
         .append('<li><a href="#" id="publish">Publish</a></li>')
+        .append('<li><a href="/statik/users" id="users">Users</a></li>');
 }
 
 function setupContextMenu() {
@@ -18,10 +19,10 @@ function setupEditorContainer() {
 }
 
 function setupScripts() {
-    $('head').append('<link type="text/css" rel="stylesheet" href="/statik/resources/styles.css" />')
-        .append('<script type="text/javascript" src="/statik/resources/dom.js"></script>')
-        .append('<script type="text/javascript" src="/statik/resources/getpath.js"></script>')
-        .append('<script type="text/javascript" src="/statik/resources/jquery.contextmenu.r2.packed.js"></script>');
+    $('head').append('<link type="text/css" rel="stylesheet" href="/statik-resources/styles.css" />')
+        .append('<script type="text/javascript" src="/statik-resources/dom.js"></script>')
+        .append('<script type="text/javascript" src="/statik-resources/getpath.js"></script>')
+        .append('<script type="text/javascript" src="/statik-resources/jquery.contextmenu.r2.packed.js"></script>');
 }
 
 

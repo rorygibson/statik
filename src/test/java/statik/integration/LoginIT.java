@@ -11,7 +11,7 @@ public class LoginIT extends AbstractWebDriverIntTst {
 
     @Test
     public void login() {
-        doLoginWith("fred", "p4ssw0rd");
+        doLoginWith("admin", "password");
         assertEquals("Should have been redirected to the login page", "Statik test pages", driver.findElement(By.tagName("h1")).getText());
     }
 
@@ -32,7 +32,7 @@ public class LoginIT extends AbstractWebDriverIntTst {
 
     @Test
     public void logout() {
-        doLoginWith("rory", "password");
+        doLoginWith("admin", "password");
         driver.findElement(By.id("statik-auth-box"));
     }
 

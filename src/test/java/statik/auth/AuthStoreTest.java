@@ -9,22 +9,22 @@ public class AuthStoreTest {
 
     @Test
     public void authenticates() {
-        AuthStore store = new AuthStore();
-        store.addUser("bob", "password");
+        AuthStore store = new InMemoryAuthStore();
+        store.addUser("bob", "password", false);
         assertTrue("Should have authenticated", store.auth("bob", "password"));
     }
 
     @Test
     public void wrongPassword() {
-        AuthStore store = new AuthStore();
-        store.addUser("bob", "password");
+        AuthStore store = new InMemoryAuthStore();
+        store.addUser("bob", "password", false);
         assertFalse("Should not have authenticated", store.auth("bob", "not-the-password"));
     }
 
     @Test
     public void userDoesntExist() {
-        AuthStore store = new AuthStore();
-        store.addUser("bob", "password");
+        AuthStore store = new InMemoryAuthStore();
+        store.addUser("bob", "password", false);
         assertFalse("Should not have authenticated", store.auth("not-a-user", "password"));
     }
 

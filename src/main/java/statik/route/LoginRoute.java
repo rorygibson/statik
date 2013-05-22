@@ -33,7 +33,7 @@ public class LoginRoute extends Route {
         String username = parameterMap.get(USERNAME)[0];
         String password = parameterMap.get(PASSWORD)[0];
 
-        LOG.debug("POST to " + PathsAndRoutes.AUTH + " for user [" + username + "]");
+        LOG.debug("POST to " + PathsAndRoutes.STATIK_AUTH + " for user [" + username + "]");
 
         if (authStore.auth(username, password)) {
             String sessionId = sessionStore.createSession(username);
