@@ -26,12 +26,13 @@ public class ContentRoute extends Route {
         Map<String, String[]> parameterMap = request.raw().getParameterMap();
 
         String newContent = parameterMap.get(ContentItem.CONTENT)[0];
+        String domain = parameterMap.get(ContentItem.DOMAIN)[0];
         String selector = parameterMap.get(ContentItem.SELECTOR)[0];
         String path = parameterMap.get(ContentItem.PATH)[0];
 
-        LOG.debug("POST with selector [" + selector + "], path [" + path + "], content [" + newContent + "]");
+        LOG.debug("POST with selector [" + selector + "], domain [" + domain + "], path [" + path + "], content [" + newContent + "]");
 
-        ContentItem contentItem = new ContentItem(path, selector, newContent, false, false);
+        ContentItem contentItem = new ContentItem(domain, path, selector, newContent, false, false);
         contentStore.insertOrUpdate(contentItem);
 
         response.status(200);

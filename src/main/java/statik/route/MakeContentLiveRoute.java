@@ -24,10 +24,11 @@ public class MakeContentLiveRoute extends Route {
     @Override
     public Object handle(Request request, Response response) {
         Map<String, String[]> parameterMap = request.raw().getParameterMap();
+        String domain = parameterMap.get(ContentItem.DOMAIN)[0];
         String path = parameterMap.get(ContentItem.PATH)[0];
 
         LOG.info("Making the content live for page [" + path + "]");
-        this.contentStore.makeContentLiveFor(path);
+        this.contentStore.makeContentLiveFor(domain, path);
 
         return Http.OK_RESPONSE;
     }

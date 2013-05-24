@@ -1,7 +1,6 @@
 package statik.integration;
 
 import com.google.common.base.Function;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.openqa.selenium.By;
@@ -9,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.phantomjs.PhantomJSDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,20 +116,7 @@ public class AbstractWebDriverIntTst {
     }
 
     protected static WebDriver createDriver() {
-        WebDriver d;
-
-        String phantomBinaryLocation = System.getProperty("phantomBinary");
-        if (StringUtils.isNotBlank(phantomBinaryLocation)) {
-            LOG.trace("Using phantomjs at " + phantomBinaryLocation);
-            DesiredCapabilities caps = new DesiredCapabilities();
-            caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomBinaryLocation);
-
-            d = new PhantomJSDriver(caps);
-        } else {
-            LOG.trace("Using Firefox");
-            d = new FirefoxDriver();
-        }
-        return d;
+        return new FirefoxDriver();
     }
 
     protected static void addHookToShutdownDriver(final WebDriver d) {

@@ -19,7 +19,7 @@ import java.net.URLDecoder;
 public class EditorRoute extends ThymeLeafResourceRoute {
 
     private static final Logger LOG = LoggerFactory.getLogger(EditorRoute.class);
-    public static final String HIDDEN_INPUTS_TEMPLATE = "<input type=\"hidden\" name=\"selector\" value=\"%s\" />  \n  <input type=\"hidden\" name=\"path\" value=\"%s\" />";
+    public static final String HIDDEN_INPUTS_TEMPLATE = "<input type=\"hidden\" name=\"selector\" value=\"%s\" />  \n  <input type=\"hidden\" name=\"domain\" value=\"%s\" /> \n <input type=\"hidden\" name=\"path\" value=\"%s\" />";
     private final ContentStore contentStore;
 
     public EditorRoute(String route, ContentStore contentStore) {
@@ -32,25 +32,28 @@ public class EditorRoute extends ThymeLeafResourceRoute {
         String encodedSelector = request.queryParams("selector");
         String encodedPath = request.queryParams("path");
         String encodedContent = request.queryParams("content");
+        String encodedDomain = request.queryParams("domain");
 
         String selector;
         String path;
         String sentContent;
+        String domain;
         try {
             selector = URLDecoder.decode(encodedSelector, "utf-8");
             path = URLDecoder.decode(encodedPath, "utf-8");
             sentContent = URLDecoder.decode(encodedContent, "utf-8");
+            domain = URLDecoder.decode(encodedDomain, "utf-8");
         } catch (UnsupportedEncodingException e) {
             LOG.error("Couldn't decode URI-encoded parameter");
             response.status(400);
             return Http.EMPTY_RESPONSE;
         }
 
-        LOG.trace("GET " + request.raw().getRequestURL() + ", selector [" + selector + "], path [" + path + "], content [" + sentContent + "]");
+        LOG.trace("GET " + request.raw().getRequestURL() + ", selector [" + selector + "], domain [" + domain + "], path [" + path + "], content [" + sentContent + "]");
 
-        ContentItem contentItem = lookupContentItemBy(selector, path);
+        ContentItem contentItem = lookupContentItemBy(selector, domain, path);
 
-        String editorView = populateEditorView(selector, path, contentItem, sentContent);
+        String editorView = populateEditorView(selector, domain, path, contentItem, sentContent);
         if (editorView == null) {
             response.status(404);
             return Http.EMPTY_RESPONSE;
@@ -59,11 +62,11 @@ public class EditorRoute extends ThymeLeafResourceRoute {
         return editorView;
     }
 
-    private ContentItem lookupContentItemBy(String selector, String path) {
-        return this.contentStore.findByPathAndSelector(path, selector);
+    private ContentItem lookupContentItemBy(String selector, String domain, String path) {
+        return this.contentStore.findBy(domain, path, selector);
     }
 
-    private String populateEditorView(String selector, String path, ContentItem contentItem, String sentContent) {
+    private String populateEditorView(String selector, String domain, String path, ContentItem contentItem, String sentContent) {
         String data = processWithThymeLeaf(PathsAndRoutes.EDITOR_VIEWNAME);
 
         if (data == null) {
@@ -73,7 +76,7 @@ public class EditorRoute extends ThymeLeafResourceRoute {
         Document document = Jsoup.parse(data);
         document.outputSettings().escapeMode(Entities.EscapeMode.extended);
 
-        String hiddenFields = String.format(HIDDEN_INPUTS_TEMPLATE, selector, path);
+        String hiddenFields = String.format(HIDDEN_INPUTS_TEMPLATE, selector, domain, path);
 
         Elements form = document.select("#editorForm");
         form.append(hiddenFields);

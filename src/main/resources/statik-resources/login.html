@@ -7,6 +7,8 @@
 <h1 th:text="#{login.heading}"></h1>
 
 <form method="post" action="/statik-auth">
+    <input type="hidden" name="originalDomain" th:value="${originalDomain}" />
+
     <div>
         <label th:text="#{login.username}"></label>
         <input tabindex="1" name="username"/>

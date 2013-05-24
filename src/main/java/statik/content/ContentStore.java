@@ -8,11 +8,11 @@ public interface ContentStore {
 
     void configure(String configFilename);
 
-    Map<String,ContentItem> findForPath(String path);
+    Map<String,ContentItem> findForDomainAndPath(String domain, String path);
 
     void clearContentItems();
 
-    ContentItem findByPathAndSelector(String path, String selector);
+    ContentItem findBy(String domain, String path, String selector);
 
-    void makeContentLiveFor(String path);
+    void makeContentLiveFor(String domain, String path);
 }

@@ -7,7 +7,7 @@ $(document).ready(function () {
     setupContextMenu();
     setupEditorContainer();
 
-    var editableElements = $('a, p, li');
+    var editableElements = $('section, a, p, li');
     var pagePath = window.location.pathname;
 
     $.each(editableElements, function (index, item) {
@@ -20,6 +20,7 @@ $(document).ready(function () {
             type: 'POST',
             url: '/statik/make-it-so',
             data: {
+                domain: window.location.hostname,
                 path: pagePath
             },
             success: function (msg) {

@@ -31,6 +31,7 @@ public class Main implements spark.servlet.SparkApplication {
     private static final String NOT_FOUND_PAGE = "404page";
     private static final String PORT = "port";
     private static final int DEFAULT_PORT = 4567;
+    private static final String AUTH_DOMAIN = "authDomain";
 
     private boolean configured = false;
 
@@ -43,11 +44,13 @@ public class Main implements spark.servlet.SparkApplication {
     private boolean testMode = false;
     private String notFoundPage;
     private static int port;
+    private String authDomain;
 
     public static void main(String[] args) {
         Main main = new Main();
         main.configure(CONFIG_FILENAME);
         Spark.setPort(port);
+
         main.populate();
         main.addTestOnlyRoutes();
         main.addStatikRoutes();
@@ -87,9 +90,10 @@ public class Main implements spark.servlet.SparkApplication {
 
         LOG.info("Setting up statik routes");
         Spark.get(new LogoutRoute(PathsAndRoutes.STATIK_LOGOUT, this.sessionStore));
-        Spark.get(new LoginFormRoute(PathsAndRoutes.STATIK_LOGIN, this.sessionStore));
+        Spark.get(new LoginFormRoute(PathsAndRoutes.STATIK_LOGIN, this.sessionStore, this.authDomain));
         Spark.get(new LoginErrorRoute(PathsAndRoutes.STATIK_LOGIN_ERROR));
-        Spark.post(new LoginRoute(PathsAndRoutes.STATIK_AUTH, this.authStore, this.sessionStore));
+        Spark.post(new LoginRoute(PathsAndRoutes.STATIK_AUTH, this.authStore, this.sessionStore, this.authDomain));
+        Spark.get(new CookieRoute(PathsAndRoutes.COOKIE_CREATION_ROUTE, this.sessionStore));
 
         Spark.get(new UserListRoute(PathsAndRoutes.STATIK_ADMIN_USERS, this.authStore));
         Spark.get(new AddUserRoute(PathsAndRoutes.STATIK_ADMIN_USER, this.authStore));
@@ -99,7 +103,6 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new ResourceRoute(PathsAndRoutes.STATIK_RESOURCES_GLOB));
         Spark.post(new ContentRoute(PathsAndRoutes.STATIK_CONTENT, this.contentStore));
         Spark.get(new EditorRoute(PathsAndRoutes.STATIK_EDITOR, this.contentStore));
-
         Spark.post(new MakeContentLiveRoute(PathsAndRoutes.MAKE_CONTENT_LIVE, this.contentStore));
 
         LOG.info("Setting up editable site routes");
@@ -134,6 +137,7 @@ public class Main implements spark.servlet.SparkApplication {
         this.welcomeFile = config.getString(WELCOME_FILE);
         this.notFoundPage = config.getString(NOT_FOUND_PAGE);
         this.port = Integer.valueOf(StringUtils.defaultIfEmpty(config.getString(PORT), "" + DEFAULT_PORT));
+        this.authDomain = config.getString(AUTH_DOMAIN, "http://localhost:" + this.port);
 
         this.configured = true;
         LOG.debug("Test mode is " + testMode);

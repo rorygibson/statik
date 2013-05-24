@@ -45,6 +45,7 @@ function copy(item, path) {
         type: 'POST',
         url: '/statik/content',
         data: {
+            domain: window.location.hostname,
             path: path,
             content: content,
             selector: selector
@@ -61,11 +62,12 @@ function loadEditor(item, path) {
     var selector = getPath(item);
     var content = $(item).html();
 
+    var encodedDomain = encodeURIComponent(window.location.hostname);
     var encodedSelector = encodeURIComponent(selector);
     var encodedPath = encodeURIComponent(path);
     var encodedContent = encodeURIComponent(content);
 
-    loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent);
+    loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent);
 }
 
 function addContextMenuTo(item, path) {
@@ -111,9 +113,9 @@ function addHoverState(item) {
 }
 
 
-function loadEditorIntoDialog(encodedSelector, encodedPath, encodedContent, encodedParentSelector) {
+function loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent, encodedParentSelector) {
     $.ajax({
-        url: "/statik/editor?selector=" + encodedSelector + "&path=" + encodedPath + "&content=" + encodedContent,
+        url: "/statik/editor?selector=" + encodedSelector + "&domain=" + encodedDomain + "&path=" + encodedPath + "&content=" + encodedContent,
         success: function (data) {
             $("#statik-editor-dialog").html(data);
 

@@ -1,0 +1,26 @@
+body {
+    font-family: sans-serif;
+    font-size: 12pt;
+    background-color: #1c94c4;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+section {
+    border: solid white 4px;
+    background-color: grey;
+    padding: 1em;
+    padding-left: 2em;
+    margin: 1em;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+a {
+    color: white
+}

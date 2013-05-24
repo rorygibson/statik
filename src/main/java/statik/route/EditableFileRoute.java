@@ -27,12 +27,14 @@ public class EditableFileRoute extends Route {
     private static final String AUTH_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script>";
 
     private static final String HTML_SUFFIX = ".html";
+    private static final String NO_DOMAIN = "";
     private final SessionStore sessionStore;
     private final ContentStore contentStore;
     private final String fileBase;
     private String namedFile = null;
     private File fileNotFoundPage;
     private static final Logger LOG = LoggerFactory.getLogger(EditableFileRoute.class);
+    private String notFoundPageFilename;
 
 
     public EditableFileRoute(ContentStore contentStore, String fileBase, String route, SessionStore sessionStore, String notFoundPage) {
@@ -40,8 +42,7 @@ public class EditableFileRoute extends Route {
         this.contentStore = contentStore;
         this.fileBase = fileBase;
         this.sessionStore = sessionStore;
-
-        this.fileNotFoundPage = findRequestedFileFrom(notFoundPage);
+        this.notFoundPageFilename = notFoundPage;
     }
 
     public EditableFileRoute(ContentStore contentStore, String fileBase, String route, String namedFile, SessionStore sessionStore, String notFoundPage) {
@@ -50,30 +51,34 @@ public class EditableFileRoute extends Route {
         this.fileBase = fileBase;
         this.namedFile = namedFile;
         this.sessionStore = sessionStore;
-
-        this.fileNotFoundPage = findRequestedFileFrom(notFoundPage);
+        this.notFoundPageFilename = notFoundPage;
     }
 
     @Override
     public Object handle(Request request, Response response) {
         String path = pathFrom(request);
+        String domain = domainFrom(request);
 
-        LOG.debug("GET " + path);
+        LOG.debug("GET on [" + domain + "], path=" + path);
 
-        File fileToServe = fileToServe(path);
+        File fileToServe = fileToServe(domain, path);
 
         if (!fileToServe.exists()) {
-            return do404(response, path);
+            return do404(response, path, findRequestedFileFrom(domain, this.notFoundPageFilename));
         }
 
         try {
             response.status(200);
-            return dataMatching(request, path, fileToServe);
+            return dataMatching(domain, request, path, fileToServe);
         } catch (IOException e) {
-            do404(response, path);
+            do404(response, path, findRequestedFileFrom(domain, this.notFoundPageFilename));
         }
 
         return Http.EMPTY_RESPONSE;
+    }
+
+    private String domainFrom(Request request) {
+        return request.raw().getServerName();
     }
 
     private String pathFrom(Request request) {
@@ -81,13 +86,13 @@ public class EditableFileRoute extends Route {
         return httpReq.getPathInfo() == null ? httpReq.getServletPath() : httpReq.getPathInfo();
     }
 
-    private String dataMatching(Request request, String path, File fileToServe) throws IOException {
+    private String dataMatching(String domain, Request request, String path, File fileToServe) throws IOException {
         if (mightContainCmsContent(fileToServe)) {
             LOG.debug("File is candidate for content editing");
             String fileContent;
             fileContent = FileUtils.readFileToString(fileToServe);
 
-            return editableContentFor(path, fileContent, isAuthenticated(request));
+            return editableContentFor(domain, path, fileContent, isAuthenticated(request));
         }
         return rawDataFrom(fileToServe);
     }
@@ -100,12 +105,12 @@ public class EditableFileRoute extends Route {
         return FileUtils.readFileToString(fileToServe);
     }
 
-    private Object do404(Response response, String missingFilePath) {
+    private Object do404(Response response, String missingFilePath, File fnfPage) {
         LOG.error("Error reading file " + missingFilePath);
         response.status(404);
 
         try {
-            writeFileToResponse(response, fileNotFoundPage);
+            writeFileToResponse(response, fnfPage);
         } catch (IOException e) {
             LOG.error("404 page HTML not found");
         }
@@ -113,25 +118,25 @@ public class EditableFileRoute extends Route {
         return Http.EMPTY_RESPONSE;
     }
 
-    private File fileToServe(String path) {
+    private File fileToServe(String domain, String path) {
         File theFile;
         if (thisRouteIsBoundToASpecificFile()) {
-            theFile = findMySpecificFile();
+            theFile = findMySpecificFile(domain);
         } else {
-            theFile = findRequestedFileFrom(path);
+            theFile = findRequestedFileFrom(domain, path);
         }
         return theFile;
     }
 
-    private File findMySpecificFile() {
-        String path = fileBase + "/" + this.namedFile;
+    private File findMySpecificFile(String domain) {
+        String path = fileBase + "/" + domain + "/" + this.namedFile;
         LOG.trace("Serving welcome file [" + path + "]");
         return new File(path);
     }
 
-    private File findRequestedFileFrom(String path) {
-        String fullPath = fileBase + "/" + path;
-        LOG.trace("Request for file; full path to file is [" + fullPath + "]");
+    private File findRequestedFileFrom(String domain, String path) {
+        String fullPath = fileBase + "/" + domain + "/" + path;
+        LOG.trace("Request for file, full path to file is [" + fullPath + "]");
         return new File(fullPath);
     }
 
@@ -150,8 +155,8 @@ public class EditableFileRoute extends Route {
         return theFile.getName().endsWith(HTML_SUFFIX);
     }
 
-    private Document replaceContent(Document doc, String path, boolean authenticated) {
-        Map<String, ContentItem> contentItems = this.contentStore.findForPath(path);
+    private Document replaceContent(Document doc, String domain, String path, boolean authenticated) {
+        Map<String, ContentItem> contentItems = this.contentStore.findForDomainAndPath(domain, path);
 
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
@@ -197,9 +202,9 @@ public class EditableFileRoute extends Route {
         return selector.substring(0, selector.length() - 3).endsWith("nth-of-type");
     }
 
-    private String editableContentFor(String path, String fileContent, boolean authenticated) {
+    private String editableContentFor(String domain, String path, String fileContent, boolean authenticated) {
         Document doc = Jsoup.parse(fileContent);
-        doc = replaceContent(doc, path, authenticated);
+        doc = replaceContent(doc, domain, path, authenticated);
 
         if (authenticated) {
             LOG.debug("Making page editable");

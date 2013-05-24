@@ -35,4 +35,5 @@ public class PathsAndRoutes {
     public static final String STATIK_AUTH = "/statik-auth";
     public static final String STATIK_RESOURCES = "/statik-resources";
     public static final String STATIK_RESOURCES_GLOB = "/statik-resources/*";
+    public static final String COOKIE_CREATION_ROUTE = "/statik-cookie";
 }
