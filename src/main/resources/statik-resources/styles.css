@@ -99,22 +99,30 @@ p.flash {
     text-align: center;
 }
 
-#statik-auth-box {
+.cms-box {
     display: block;
     position: absolute;
-    top: 20px;
-    right: 20px;
     border: solid lightgray 1px;
     background-color: lightgray;
     border-radius: 2px;
-    padding: 5px
+    padding: 5px;
 }
 
-#statik-auth-box li {
+#statik-auth-box {
+    top: 20px;
+    right: 20px;
+}
+
+#statik-sites-list {
+    top: 150px;
+    right: 20px;
+}
+
+.cms-box li {
     list-style-type: none;
 }
 
-#statik-auth-box a {
+.cms-box a {
     color: blue;
 }
 

@@ -27,12 +27,10 @@ public class EditableFileRoute extends Route {
     private static final String AUTH_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script>";
 
     private static final String HTML_SUFFIX = ".html";
-    private static final String NO_DOMAIN = "";
     private final SessionStore sessionStore;
     private final ContentStore contentStore;
     private final String fileBase;
     private String namedFile = null;
-    private File fileNotFoundPage;
     private static final Logger LOG = LoggerFactory.getLogger(EditableFileRoute.class);
     private String notFoundPageFilename;
 

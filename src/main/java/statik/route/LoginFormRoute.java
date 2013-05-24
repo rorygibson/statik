@@ -21,24 +21,54 @@ public class LoginFormRoute extends ThymeLeafResourceRoute {
 
     @Override
     public Object handle(Request request, Response response) {
-        String serverName = request.raw().getServerName();
+        String currentDomain = domainFrom(request);
+        String referringDomain = referringDomainFrom(request);
 
-        // if asked to login on http://non-auth-domain/statik-login, redirect to self on auth domain and set return header
-        if (!serverName.equals(this.authDomain)) {
-            response.redirect("http://" + this.authDomain + PathsAndRoutes.STATIK_LOGIN + "?originalDomain=" + serverName);
+        // if asked to login on http://<non-auth-domain>/statik-login,
+        // redirect to this path on the auth domain and set return parameter
+        if (!currentDomain.equals(this.authDomain)) {
+            response.redirect(authenticationRedirectFor(currentDomain));
             return Http.EMPTY_RESPONSE;
         }
 
-        if (sessionStore.hasSession(request.cookie(Http.COOKIE_NAME))) {
-            return processWithThymeLeaf(PathsAndRoutes.LOGIN_ALREADY_VIEWNAME);
+        if (hasSession(request) && StringUtils.isNotBlank(referringDomain)) {
+            response.redirect("http://" + referringDomain + PathsAndRoutes.COOKIE_CREATION_ROUTE + "?sessionId=" + sessionIdFrom(request));
+            return Http.EMPTY_RESPONSE;
+        }
+
+        if (hasSession(request)) {
+            return alreadyLoggedInPage();
         }
 
         Context ctx = new Context();
-        String originalDomain = request.raw().getParameter(LoginFormRoute.STATIK_ORIGINAL_DOMAIN);
-        if (StringUtils.isNotBlank(originalDomain)) {
-            ctx.setVariable("originalDomain", originalDomain);
+        if (StringUtils.isNotBlank(referringDomain)) {
+            ctx.setVariable("originalDomain", referringDomain);
         }
         return processWithThymeLeaf(PathsAndRoutes.LOGIN_FORM_VIEWNAME, ctx);
+    }
+
+    private String referringDomainFrom(Request request) {
+        return request.raw().getParameter(LoginFormRoute.STATIK_ORIGINAL_DOMAIN);
+    }
+
+    private String authenticationRedirectFor(String domain) {
+        return "http://" + this.authDomain + PathsAndRoutes.STATIK_LOGIN + "?originalDomain=" + domain;
+    }
+
+    private String domainFrom(Request request) {
+        return request.raw().getServerName();
+    }
+
+    private boolean hasSession(Request request) {
+        return sessionStore.hasSession(sessionIdFrom(request));
+    }
+
+    private String sessionIdFrom(Request request) {
+        return request.cookie(Http.COOKIE_NAME);
+    }
+
+    private String alreadyLoggedInPage() {
+        return processWithThymeLeaf(PathsAndRoutes.LOGIN_ALREADY_VIEWNAME);
     }
 
 }

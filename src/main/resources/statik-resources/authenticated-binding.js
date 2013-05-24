@@ -6,6 +6,7 @@ $(document).ready(function () {
     addControlBoxToScreen();
     setupContextMenu();
     setupEditorContainer();
+    addSitesListToScreen();
 
     var editableElements = $('section, a, p, li');
     var pagePath = window.location.pathname;

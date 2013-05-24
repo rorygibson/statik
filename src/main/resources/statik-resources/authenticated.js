@@ -1,8 +1,23 @@
 function addControlBoxToScreen() {
-    $('body').append('<ul id="statik-auth-box"></ul>');
+    $('body').append('<ul class="cms-box" id="statik-auth-box"></ul>');
     $('#statik-auth-box').append('<li><a href="/statik/logout" id="logout">Log out</a></li>')
         .append('<li><a href="#" id="publish">Publish</a></li>')
         .append('<li><a href="/statik/users" id="users">Users</a></li>');
+}
+
+function addSitesListToScreen() {
+    $('body').append('<ul class="cms-box" id="statik-sites-list"></ul>');
+
+    $.ajax({
+        type: 'GET',
+        url: '/statik/list-sites',
+        success: function (data) {
+            for (i=0; i<data.length;i++) {
+                $('#statik-sites-list').append('<li><a href="http://' + data[i] + '/edit">' + data[i] + '</a></li>');
+            }
+        }
+    });
+
 }
 
 function setupContextMenu() {

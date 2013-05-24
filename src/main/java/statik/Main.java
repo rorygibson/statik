@@ -94,12 +94,14 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.get(new LoginErrorRoute(PathsAndRoutes.STATIK_LOGIN_ERROR));
         Spark.post(new LoginRoute(PathsAndRoutes.STATIK_AUTH, this.authStore, this.sessionStore, this.authDomain));
         Spark.get(new CookieRoute(PathsAndRoutes.COOKIE_CREATION_ROUTE, this.sessionStore));
+        Spark.get(new EditRedirectRoute(PathsAndRoutes .EDIT_ROUTE, this.authDomain));
 
         Spark.get(new UserListRoute(PathsAndRoutes.STATIK_ADMIN_USERS, this.authStore));
         Spark.get(new AddUserRoute(PathsAndRoutes.STATIK_ADMIN_USER, this.authStore));
         Spark.post(new AddUserRoute(PathsAndRoutes.STATIK_ADMIN_USER, this.authStore));
         Spark.get(new DeleteUserRoute(PathsAndRoutes.STATIK_DELETE_USER, this.authStore));
 
+        Spark.get(new ListSitesRoute(PathsAndRoutes.LIST_SITES, this.fileBase));
         Spark.get(new ResourceRoute(PathsAndRoutes.STATIK_RESOURCES_GLOB));
         Spark.post(new ContentRoute(PathsAndRoutes.STATIK_CONTENT, this.contentStore));
         Spark.get(new EditorRoute(PathsAndRoutes.STATIK_EDITOR, this.contentStore));
