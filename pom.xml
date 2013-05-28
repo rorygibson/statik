@@ -17,6 +17,9 @@
         <jetty.base.url>http://localhost:8080</jetty.base.url>
         <standalone.shutdown.url>${standalone.base.url}/shutdown</standalone.shutdown.url>
         <standalone.base.url>http://localhost:4567</standalone.base.url>
+
+        <it.include>**/*IT.java</it.include>
+        <it.exclude>**/MultiSiteEditingIT.java</it.exclude>
     </properties>
 
     <repositories>
@@ -39,6 +42,14 @@
     </repositories>
 
     <profiles>
+        <profile>
+            <id>multi-site</id>
+
+            <properties>
+                <it.include>**/*IT.java</it.include>
+                <it.exclude></it.exclude>
+            </properties>
+        </profile>
 
         <profile>
             <id>standalone</id>
@@ -170,6 +181,13 @@
                                     <systemPropertyVariables>
                                         <baseUrl>${jetty.base.url}</baseUrl>
                                     </systemPropertyVariables>
+
+                                    <includes>
+                                        <include>${it.include}</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>${it.exclude}</exclude>
+                                    </excludes>
                                 </configuration>
                             </execution>
                         </executions>

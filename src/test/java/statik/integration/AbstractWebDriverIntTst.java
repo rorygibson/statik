@@ -1,17 +1,22 @@
 package statik.integration;
 
 import com.google.common.base.Function;
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.junit.Rule;
+import org.junit.rules.MethodRule;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.Statement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import statik.route.PathsAndRoutes;
+
+import java.io.File;
 
 public class AbstractWebDriverIntTst {
 
@@ -37,7 +42,6 @@ public class AbstractWebDriverIntTst {
 
     public static final int PERIOD_TO_WAIT_FOR_EDITOR = 500;
     public static final int PERIOD_TO_WAIT_FOR_CHANGES = 500;
-
 
 
     static {
@@ -73,6 +77,44 @@ public class AbstractWebDriverIntTst {
 
         driver = runningDriver();
     }
+
+
+    public class ScreenshotOnFailureStatement extends Statement {
+
+        private final String methodName;
+        private final String className;
+        private final Statement base;
+
+        public ScreenshotOnFailureStatement(Statement base, String className, String methodName) {
+            this.base = base;
+            this.className = className;
+            this.methodName = methodName;
+        }
+
+        @Override
+        public void evaluate() throws Throwable {
+            try {
+                base.evaluate();
+            } catch (Throwable t) {
+                File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                File destFile = new File("/tmp/" + this.className + "_" + this.methodName + ".jpg");
+                FileUtils.copyFile(screenshot, destFile);
+                LOG.info("Screenshot stored to: " + destFile.getAbsolutePath());
+                throw t;
+            }
+        }
+    }
+
+
+    @Rule
+    public MethodRule screenshotOnFailure = new MethodRule() {
+        @Override
+        public Statement apply(Statement statement, FrameworkMethod frameworkMethod, Object o) {
+            String className = frameworkMethod.getMethod().getDeclaringClass().getSimpleName();
+            String methodName = frameworkMethod.getName();
+            return new ScreenshotOnFailureStatement(statement, className, methodName);
+        }
+    };
 
 
     @After
@@ -161,7 +203,7 @@ public class AbstractWebDriverIntTst {
         waitForPresenceOf("iframe");
 
         sleepForMs(PERIOD_TO_WAIT_FOR_EDITOR);
-        ((FirefoxDriver)driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
+        ((FirefoxDriver) driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
         driver.findElement(By.id("submit")).click();
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);

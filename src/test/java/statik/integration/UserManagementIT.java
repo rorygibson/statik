@@ -5,6 +5,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class UserManagementIT extends AbstractWebDriverIntTst {
+
+    private static Logger LOG = LoggerFactory.getLogger(UserManagementIT.class);
 
     @Before
     public void performLogin() {
