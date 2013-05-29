@@ -59,6 +59,17 @@ public class InMemoryAuthStore implements AuthStore {
         this.users.put(user.getUsername(), user);
     }
 
+    @Override
+    public User user(String username) {
+        return this.users.get(username);
+    }
+
+    @Override
+    public void updateUser(String username, User user) {
+        this.users.remove(username);
+        this.users.put(user.getUsername(), user);
+    }
+
     private Map<String, User> usersFrom(CompositeConfiguration config) {
         LOG.info("Loading users");
 

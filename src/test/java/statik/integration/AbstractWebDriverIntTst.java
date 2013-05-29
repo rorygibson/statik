@@ -129,14 +129,18 @@ public class AbstractWebDriverIntTst {
         return d;
     }
 
-    protected void waitForPresenceOf(final String tagName) {
+    protected Object findEventually(final By selector) {
         WebDriverWait wait = new WebDriverWait(driver, 3);
-        wait.until(new Function<WebDriver, Object>() {
+        return wait.until(new Function<WebDriver, Object>() {
             @Override
             public Object apply(WebDriver webDriver) {
-                return driver.findElement(By.tagName(tagName));
+                return driver.findElement(selector);
             }
         });
+    }
+
+    protected void waitForPresenceOf(final String tagName) {
+        findEventually(By.tagName(tagName));
     }
 
     protected void sendLogin(String wrongUsername, String wrongPassword) {

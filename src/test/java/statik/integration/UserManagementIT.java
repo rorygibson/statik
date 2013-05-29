@@ -1,21 +1,15 @@
 package statik.integration;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class UserManagementIT extends AbstractWebDriverIntTst {
-
-    private static Logger LOG = LoggerFactory.getLogger(UserManagementIT.class);
 
     @Before
     public void performLogin() {
@@ -56,30 +50,46 @@ public class UserManagementIT extends AbstractWebDriverIntTst {
     public void deleteUser() {
         addUserWith("tester", "password", "password");
         driver.get(USERS_PAGE);
-        List<WebElement> users = driver.findElements(By.tagName("li"));
-        int startingSize = users.size();
 
-        for (WebElement el : users) {
-            if (el.getText().contains("tester")) {
-                el.findElement(By.linkText("Delete")).click();
-                WebElement flash = driver.findElement(By.className("flash"));
-                assertEquals("Should have been shown a success message", "User deleted", flash.getText());
-            }
-        }
-        assertEquals("Should have deleted one user", startingSize - 1, driver.findElements(By.tagName("li")).size());
+        WebElement deleteLink = driver.findElement(By.linkText("Delete"));
+        deleteLink.click();
+
+        WebElement flash = driver.findElement(By.className("flash"));
+        assertEquals("Should have been shown a success message", "User deleted", flash.getText());
     }
 
-    @Test @Ignore
-    public void editUser() {
-        fail("todo");
+    @Test
+    public void editUsername() {
+        addUserWith("tester", "password", "password");
+        driver.get(USERS_PAGE);
+
+        List<WebElement> users = driver.findElements(By.tagName("li"));
+        for (WebElement el : users) {
+            if (el.getText().contains("tester")) {
+                el.findElement(By.linkText("Edit")).click();
+            }
+        }
+
+        WebElement username = driver.findElement(By.name("username"));
+        assertEquals("Username field should hold value of current username", "tester", username.getAttribute("value"));
+
+        username.clear();
+        username.sendKeys("new-user-name");
+        username.submit();
+
+        WebElement flash = driver.findElement(By.className("flash"));
+        assertEquals("Should have been shown a success message", "User changed", flash.getText());
     }
 
     private void addUserWith(String username, String password, String passwordAgain) {
         driver.get(USERS_PAGE);
         driver.findElement(By.linkText("Add a user")).click();
-        driver.findElement(By.name("password-again")).sendKeys(passwordAgain);
+
+        findEventually(By.name("password-again"));
+
         driver.findElement(By.name("username")).sendKeys(username);
         driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.name("password-again")).sendKeys(passwordAgain);
         driver.findElement(By.name("username")).submit();
     }
 

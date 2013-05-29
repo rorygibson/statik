@@ -16,4 +16,8 @@ public interface AuthStore {
     void deleteAllUsersExceptDefault();
 
     void addUser(User user);
+
+    User user(String username);
+
+    void updateUser(String username, User user);
 }

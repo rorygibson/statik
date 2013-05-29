@@ -21,9 +21,11 @@
             <span class="command" th:if="${user.default}" th:text="#{delete}">Delete</span>
             <a class="command" th:unless="${user.default}" th:text="#{delete}" th:href="'/statik/delete-user?username=' + ${user.username}">Delete</a>
 
-            <a class="command" th:text="#{edit}" href="">Edit</a>
+            <a class="command" th:text="#{edit}" th:href="'/statik/user?u=' + ${user.username}">Edit</a>
         </li>
     </ul>
+
+    <a id="back-link" href="/" th:text="#{back}">Back</a>
 </section>
 
 </body>

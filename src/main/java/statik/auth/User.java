@@ -16,6 +16,10 @@ public class User {
         this(username, password, false);
     }
 
+    public User(String username) {
+        this.username = username;
+    }
+
     public boolean isDefault() {
         return this.isDefaultUser;
     }
@@ -34,5 +38,11 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void updateWith(User other) {
+        this.username = other.getUsername();
+        this.password = other.getPassword();
+        this.isDefaultUser = other.isDefault();
     }
 }

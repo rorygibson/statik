@@ -7,16 +7,19 @@
 
 <body>
 
-<h1 th:text="#{heading}">Add a user</h1>
+<h1 th:if="${!editMode}" th:text="#{add.heading}">Add a user</h1>
+<h1 th:if="${editMode}" th:text="#{edit.heading}">Edit user</h1>
 
 <section>
     <form method="post">
+        <input type="hidden" th:value="${editMode}" name="edit" />
+        <input type="hidden" th:value="${username}" name="originalUsername" />
 
-        <p class="flash" th:if="${addedUser == true}" th:text="#{user.added}">User added</p>
-        <p class="error" th:if="${addedUser == false}" th:text="${errorMessage}">Error message</p>
+        <p class="flash" th:if="${flash == true}" th:text="#{${flashMessage}}">User added</p>
+        <p class="error" th:if="${error == true}" th:text="#{${errorMessage}}">Error!</p>
 
         <div>
-            <label th:text="#{username}" for="username" autoocus="autofocus">Username</label>
+            <label th:text="#{username}" for="username" autofocus="autofocus">Username</label>
             <input type="text" required="required" name="username" th:value="${username}" />
         </div>
 
@@ -32,11 +35,12 @@
             <input type="password" required="required" name="password-again" />
         </div>
         
-        <input type="submit" value="Add" th:value="#{add}" />
+        <input type="submit" th:if="${editMode}" value="Add" th:value="#{edit}" />
+        <input type="submit" th:if="${!editMode}" value="Add" th:value="#{add}" />
 
     </form>
 
-    <a id="back-link" href="/statik/users">Back to users</a>
+    <a id="back-link" href="/statik/users" th:text="#{back.to.users}">Back to users</a>
 </section>
 
 </body>
