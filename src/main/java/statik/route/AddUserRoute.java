@@ -8,6 +8,7 @@ import spark.Request;
 import spark.Response;
 import statik.auth.AuthStore;
 import statik.auth.User;
+import statik.util.PasswordValidator;
 
 public class AddUserRoute extends ThymeLeafResourceRoute {
 
@@ -38,6 +39,7 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
 
     private final AuthStore authStore;
     private static final Logger LOG = LoggerFactory.getLogger(AddUserRoute.class);
+    private final PasswordValidator passwordValidator = new PasswordValidator();
 
     public AddUserRoute(String route, AuthStore authStore) {
         super(route);
@@ -78,7 +80,7 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
 
         Context ctx = new Context();
 
-        if (!validPasswords(password, passwordAgain)) {
+        if (!passwordValidator.validPasswords(password, passwordAgain)) {
             ctx.setVariable(ERROR_MESSAGE, PASSWORDS_MUST_MATCH_MSG); // TODO i18n
             ctx.setVariable(ERROR, true);
             ctx.setVariable(USERNAME, username);
@@ -97,7 +99,7 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
         User u = this.authStore.user(originalUsername);
         u.setUsername(username);
         if (StringUtils.isNotBlank(password)) {
-            if (validPasswords(password, passwordAgain)) {
+            if (passwordValidator.validPasswords(password, passwordAgain)) {
                 u.setPassword(password);
             }
         }
@@ -118,7 +120,7 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
     }
 
     private boolean validPasswords(String password, String passwordAgain) {
-        return StringUtils.isNotBlank(password) && password.equals(passwordAgain);
+        return passwordValidator.validPasswords(password, passwordAgain);
     }
 
     private Object doGetForEdit(User user) {
