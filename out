@@ -1,0 +1,910 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building statik 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ statik ---
+[INFO] Deleting /Users/rory/work/personal/statik/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ statik ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 53 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ statik ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 37 source files to /Users/rory/work/personal/statik/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:testResources (default-testResources) @ statik ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ statik ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 18 source files to /Users/rory/work/personal/statik/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.10:test (default-test) @ statik ---
+[INFO] Surefire report directory: /Users/rory/work/personal/statik/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running statik.auth.AuthStoreTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.731 sec
+Running statik.content.ContentItemTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec
+Running statik.session.InMemorySessionStoreTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 sec
+Running statik.util.InternationalisationReplacerTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.814 sec
+Running statik.util.PasswordValidatorTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 sec
+Running statik.util.PropertiesLoaderTest
+2013-05-30 16:12:02,019 DEBUG - PropertiesLoader           - Loaded 1 properties
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 sec
+Running statik.util.UsernameValidatorTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 sec
+
+Results :
+
+Tests run: 25, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-war-plugin:2.1.1:war (default-war) @ statik ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [statik] in [/Users/rory/work/personal/statik/target/ROOT]
+[INFO] Processing war project
+[INFO] Copying webapp resources [/Users/rory/work/personal/statik/src/main/webapp]
+[INFO] Webapp assembled in [892 msecs]
+[INFO] Building war: /Users/rory/work/personal/statik/target/ROOT.war
+[INFO] WEB-INF/web.xml already added, skipping
+[INFO] 
+[INFO] >>> jetty-maven-plugin:8.1.10.v20130312:start (start-jetty) @ statik >>>
+[INFO] 
+[INFO] <<< jetty-maven-plugin:8.1.10.v20130312:start (start-jetty) @ statik <<<
+[INFO] 
+[INFO] --- jetty-maven-plugin:8.1.10.v20130312:start (start-jetty) @ statik ---
+[INFO] Configuring Jetty for project: statik
+[INFO] webAppSourceDirectory not set. Defaulting to /Users/rory/work/personal/statik/src/main/webapp
+[INFO] Reload Mechanic: automatic
+[INFO] Classes = /Users/rory/work/personal/statik/target/classes
+[INFO] Context path = /
+[INFO] Tmp directory = /Users/rory/work/personal/statik/target/tmp
+[INFO] Web defaults = org/eclipse/jetty/webapp/webdefault.xml
+[INFO] Web overrides =  none
+[INFO] web.xml file = file:/Users/rory/work/personal/statik/src/main/webapp/WEB-INF/web.xml
+[INFO] Webapp directory = /Users/rory/work/personal/statik/src/main/webapp
+2013-05-30 16:12:17,299 INFO  - Main                       - Configuring from [config.properties]
+2013-05-30 16:12:17,424 DEBUG - Main                       - Test mode is true
+2013-05-30 16:12:17,424 DEBUG - Main                       - File base is /Users/rory/work/personal/statik/test-website
+2013-05-30 16:12:17,424 DEBUG - Main                       - Welcome file is index.html
+2013-05-30 16:12:17,425 DEBUG - Main                       - 404 file is 404.html
+2013-05-30 16:12:17,425 DEBUG - Main                       - Port is 4567
+2013-05-30 16:12:17,427 INFO  - UsesMongo                  - Loading config
+2013-05-30 16:12:17,428 INFO  - UsesMongo                  - Connecting to MongoDB on localhost:27017
+2013-05-30 16:12:17,862 INFO  - UsesMongo                  - Loading config
+2013-05-30 16:12:17,863 INFO  - UsesMongo                  - Connecting to MongoDB on localhost:27017
+2013-05-30 16:12:17,870 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:12:17,874 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:12:17,876 INFO  - UsesMongo                  - Loading config
+2013-05-30 16:12:17,877 INFO  - UsesMongo                  - Connecting to MongoDB on localhost:27017
+2013-05-30 16:12:17,884 INFO  - Main                       - Setting up test-only routes
+2013-05-30 16:12:17,886 INFO  - Main                       - Setting up statik routes
+2013-05-30 16:12:17,890 INFO  - Main                       - Setting up editable site routes
+[INFO] Started Jetty Server
+[INFO] Starting scanner at interval of 10 seconds.
+[INFO] 
+[INFO] --- maven-failsafe-plugin:2.14:integration-test (default) @ statik ---
+[INFO] Failsafe report directory: /Users/rory/work/personal/statik/target/failsafe-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running statik.integration.EditingIT
+2013-05-30 16:12:40,685 DEBUG - EditableFileRoute          - GET on [localhost], path=/favicon.ico
+2013-05-30 16:12:40,966 DEBUG - EditableFileRoute          - GET on [localhost], path=/favicon.ico
+2013-05-30 16:12:41,132 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:12:41,132 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:12:41,138 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:12:41,263 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:12:41,263 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:12:41,581 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:12:41,668 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:12:41,953 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:12:41,955 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:42,989 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:12:42,989 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:12:43,041 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:12:43,136 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:12:43,379 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:12:43,383 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:44,227 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-05-30 16:12:44,228 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:44,269 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-05-30 16:12:49,380 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:12:49,382 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:49,383 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [new content]
+2013-05-30 16:12:49,384 DEBUG - MongoContentStore          - Updating with content, size [11] and selector [html > body > section > p]
+2013-05-30 16:12:49,386 DEBUG - MongoContentStore          - No rows updated, trying insert
+2013-05-30 16:12:49,420 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:12:49,421 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:12:49,426 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with content [new content]
+2013-05-30 16:12:49,427 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:12:49,873 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:12:50,533 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:12:50,534 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:52,173 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:12:52,175 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:52,175 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:12:52,184 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:12:52,186 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:12:54,218 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:12:54,219 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:12:54,220 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:12:54,572 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:12:54,572 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:12:54,579 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:12:54,611 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:12:55,198 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:12:55,199 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:56,320 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:12:56,320 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:12:56,334 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:12:56,943 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:12:58,229 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:12:58,235 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:59,633 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:12:59,634 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:12:59,635 DEBUG - ContentRoute               - POST with selector [html > body > section > p:nth-of-type(2)], domain [localhost], path [/one-para.html], content [content]
+2013-05-30 16:12:59,635 DEBUG - MongoContentStore          - Updating with content, size [7] and selector [html > body > section > p:nth-of-type(2)]
+2013-05-30 16:12:59,636 DEBUG - MongoContentStore          - No rows updated, trying insert
+2013-05-30 16:13:00,713 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-05-30 16:13:00,714 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:00,736 DEBUG - EditorRoute                - Found the content in the DB, passing that to load the editor
+2013-05-30 16:13:02,008 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:13:02,010 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:02,013 DEBUG - ContentRoute               - POST with selector [html > body > section > p:nth-of-type(2)], domain [localhost], path [/one-para.html], content [copied]
+2013-05-30 16:13:02,014 DEBUG - MongoContentStore          - Updating with content, size [6] and selector [html > body > section > p:nth-of-type(2)]
+2013-05-30 16:13:02,015 DEBUG - MongoContentStore          - Updated in DB
+2013-05-30 16:13:02,030 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:02,030 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:02,054 DEBUG - EditableFileRoute          - Element doesn't exist; must be a copy. Creating and inserting
+2013-05-30 16:13:02,054 DEBUG - EditableFileRoute          - Creating element with sibling selector [html > body > section > p], tagName [p]
+2013-05-30 16:13:02,055 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:02,103 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:02,541 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:02,542 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:02,691 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:02,692 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:02,695 DEBUG - EditableFileRoute          - Element doesn't exist; must be a copy. Creating and inserting
+2013-05-30 16:13:02,695 DEBUG - EditableFileRoute          - Creating element with sibling selector [html > body > section > p], tagName [p]
+2013-05-30 16:13:02,695 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:02,793 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:03,240 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:03,241 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:03,535 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:03,537 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:03,538 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:03,557 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:03,563 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:05,264 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:05,264 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:05,265 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:05,278 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:05,278 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:05,296 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:05,396 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:05,726 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:05,732 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:06,159 DEBUG - EditableFileRoute          - GET on [localhost], path=/list.html
+2013-05-30 16:13:06,160 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:06,173 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:06,203 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:06,540 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:06,543 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:07,576 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-05-30 16:13:07,582 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:07,600 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [four]
+2013-05-30 16:13:09,169 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:13:09,172 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:09,173 DEBUG - ContentRoute               - POST with selector [html > body > section > ul > li:nth-of-type(4)], domain [localhost], path [/list.html], content [still the 4th, but different]
+2013-05-30 16:13:09,173 DEBUG - MongoContentStore          - Updating with content, size [28] and selector [html > body > section > ul > li:nth-of-type(4)]
+2013-05-30 16:13:09,174 DEBUG - MongoContentStore          - No rows updated, trying insert
+2013-05-30 16:13:09,193 DEBUG - EditableFileRoute          - GET on [localhost], path=/list.html
+2013-05-30 16:13:09,193 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:09,198 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > ul > li:nth-of-type(4)] with content [still the 4th, but different]
+2013-05-30 16:13:09,198 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:09,313 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:09,697 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:09,706 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:09,779 DEBUG - EditableFileRoute          - GET on [localhost], path=/list.html
+2013-05-30 16:13:09,780 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:09,792 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > ul > li:nth-of-type(4)] with content [still the 4th, but different]
+2013-05-30 16:13:09,792 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:09,918 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:10,298 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:10,299 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:10,422 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:10,423 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:10,423 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:10,436 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:10,437 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:11,235 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:11,235 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:11,236 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:11,347 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:11,347 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:11,351 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:11,400 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:11,785 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:11,793 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:12,248 DEBUG - EditableFileRoute          - GET on [localhost], path=/links.html
+2013-05-30 16:13:12,250 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:12,275 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:12,368 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:12,742 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:12,743 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:13,852 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-05-30 16:13:13,854 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:13,872 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [one para page]
+2013-05-30 16:13:15,416 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:13:15,417 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:15,420 DEBUG - ContentRoute               - POST with selector [html > body > section > a#first-link], domain [localhost], path [/links.html], content [new link text]
+2013-05-30 16:13:15,420 DEBUG - MongoContentStore          - Updating with content, size [13] and selector [html > body > section > a#first-link]
+2013-05-30 16:13:15,421 DEBUG - MongoContentStore          - No rows updated, trying insert
+2013-05-30 16:13:15,512 DEBUG - EditableFileRoute          - GET on [localhost], path=/links.html
+2013-05-30 16:13:15,512 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:15,533 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > a#first-link] with content [new link text]
+2013-05-30 16:13:15,534 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:15,651 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:16,164 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:16,168 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:16,475 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:16,477 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:16,477 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:16,496 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:16,504 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:17,731 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:17,731 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:17,733 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:17,788 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:17,788 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:17,798 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:17,909 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:18,400 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:18,408 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:18,657 DEBUG - EditableFileRoute          - GET on [localhost], path=/two-paras.html
+2013-05-30 16:13:18,657 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:18,686 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:18,738 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:18,998 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:18,999 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:20,010 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-05-30 16:13:20,011 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:20,056 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [two]
+2013-05-30 16:13:21,422 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:13:21,424 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:21,424 DEBUG - ContentRoute               - POST with selector [html > body > section > p:nth-of-type(2)], domain [localhost], path [/two-paras.html], content [new content]
+2013-05-30 16:13:21,424 DEBUG - MongoContentStore          - Updating with content, size [11] and selector [html > body > section > p:nth-of-type(2)]
+2013-05-30 16:13:21,426 DEBUG - MongoContentStore          - No rows updated, trying insert
+2013-05-30 16:13:21,448 DEBUG - EditableFileRoute          - GET on [localhost], path=/two-paras.html
+2013-05-30 16:13:21,448 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:21,451 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p:nth-of-type(2)] with content [new content]
+2013-05-30 16:13:21,452 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:21,544 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:21,860 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:21,861 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:22,100 DEBUG - EditableFileRoute          - GET on [localhost], path=/two-paras.html
+2013-05-30 16:13:22,100 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:22,105 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p:nth-of-type(2)] with content [new content]
+2013-05-30 16:13:22,105 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:22,214 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:22,704 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:22,707 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:22,921 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:22,922 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:22,922 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:22,929 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:22,930 INFO  - MongoAuthStore             - Deleted [0] users
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 62.798 sec
+Running statik.integration.ElementCloningIT
+2013-05-30 16:13:23,869 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:23,869 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:23,873 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:23,920 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:23,920 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:23,947 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:24,056 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:24,345 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:24,352 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:24,748 DEBUG - EditableFileRoute          - GET on [localhost], path=/list.html
+2013-05-30 16:13:24,748 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:24,767 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:24,896 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:25,357 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:25,358 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:26,174 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:26,176 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:26,176 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:26,182 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:26,183 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:27,229 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:27,230 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:27,231 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:27,257 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:27,257 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:27,288 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:27,323 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:27,750 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:27,751 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:28,165 DEBUG - EditableFileRoute          - GET on [localhost], path=/links.html
+2013-05-30 16:13:28,165 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:28,168 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:28,313 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:28,714 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:28,722 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:29,508 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:29,509 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:29,509 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:29,522 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:29,524 INFO  - MongoAuthStore             - Deleted [0] users
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.567 sec
+Running statik.integration.FileNotFoundIT
+2013-05-30 16:13:29,702 DEBUG - EditableFileRoute          - GET on [localhost], path=/i-dont-exist
+2013-05-30 16:13:29,703 ERROR - EditableFileRoute          - Error reading file /i-dont-exist
+2013-05-30 16:13:29,791 DEBUG - EditableFileRoute          - GET on [localhost], path=/localhost/styles.css
+2013-05-30 16:13:29,792 ERROR - EditableFileRoute          - Error reading file /localhost/styles.css
+2013-05-30 16:13:29,934 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:29,936 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:29,938 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:29,939 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:30,284 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit-tests.html
+2013-05-30 16:13:30,284 DEBUG - EditableFileRoute          - File is candidate for content editing
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.596 sec
+Running statik.integration.JavaScriptUnitTestsIT
+2013-05-30 16:13:30,451 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/qunit-1.11.0.css
+2013-05-30 16:13:30,453 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/sinon-qunit-1.0.0.js
+2013-05-30 16:13:30,454 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit-tests.js
+2013-05-30 16:13:30,466 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/qunit-1.11.0.js
+2013-05-30 16:13:30,471 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/jquery-1.7.2.js
+2013-05-30 16:13:30,472 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/sinon-1.6.0.js
+2013-05-30 16:13:31,581 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:31,583 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:31,644 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:31,654 INFO  - MongoAuthStore             - Deleted [0] users
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.843 sec
+Running statik.integration.LoginIT
+2013-05-30 16:13:32,997 DEBUG - LoginRoute                 - POST to /statik-auth for user [fred], originalDomain is []
+2013-05-30 16:13:32,997 INFO  - MongoAuthStore             - Authenticating user [fred]
+2013-05-30 16:13:33,000 INFO  - MongoAuthStore             - User [fred] not found
+2013-05-30 16:13:33,556 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:33,557 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:33,572 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:33,573 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:34,851 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:34,851 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:34,852 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:34,888 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:34,889 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:34,897 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:34,937 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:36,427 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:36,431 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:36,793 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:36,795 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:36,795 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:36,808 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:36,812 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:37,393 DEBUG - LoginRoute                 - POST to /statik-auth for user [dont-exist], originalDomain is []
+2013-05-30 16:13:37,393 INFO  - MongoAuthStore             - Authenticating user [dont-exist]
+2013-05-30 16:13:37,394 INFO  - MongoAuthStore             - User [dont-exist] not found
+2013-05-30 16:13:37,674 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:37,676 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:37,678 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:37,679 INFO  - MongoAuthStore             - Deleted [0] users
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.7 sec
+Running statik.integration.MongoSessionStoreIT
+2013-05-30 16:13:37,921 INFO  - UsesMongo                  - Loading config
+2013-05-30 16:13:38,008 INFO  - UsesMongo                  - Connecting to MongoDB on localhost:27017
+2013-05-30 16:13:38,288 INFO  - UsesMongo                  - Loading config
+2013-05-30 16:13:38,289 INFO  - UsesMongo                  - Connecting to MongoDB on localhost:27017
+2013-05-30 16:13:38,300 INFO  - UsesMongo                  - Loading config
+2013-05-30 16:13:38,301 INFO  - UsesMongo                  - Connecting to MongoDB on localhost:27017
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.452 sec
+Running statik.integration.PublishingIT
+2013-05-30 16:13:39,030 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:39,031 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:39,036 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:39,076 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:39,077 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:39,105 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:39,163 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:39,445 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:39,451 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:39,747 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:39,748 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:39,764 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:39,892 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:40,137 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:40,138 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:40,998 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-05-30 16:13:41,002 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:41,058 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-05-30 16:13:42,286 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:13:42,287 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:42,288 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [new content]
+2013-05-30 16:13:42,288 DEBUG - MongoContentStore          - Updating with content, size [11] and selector [html > body > section > p]
+2013-05-30 16:13:42,289 DEBUG - MongoContentStore          - No rows updated, trying insert
+2013-05-30 16:13:42,394 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:42,394 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:42,401 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with content [new content]
+2013-05-30 16:13:42,402 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:42,438 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:42,822 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:42,823 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:43,189 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-05-30 16:13:43,203 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:43,205 DEBUG - LogoutRoute                - Log out [admin]
+2013-05-30 16:13:43,216 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:43,216 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:43,270 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:43,270 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:43,391 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:43,505 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:43,507 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:43,514 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:43,515 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:44,268 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:44,268 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:44,270 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:44,296 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:44,296 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:44,305 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:44,404 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:44,719 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:44,721 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:44,983 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:44,983 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:44,991 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:45,106 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:45,560 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:45,562 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:46,272 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-05-30 16:13:46,274 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:46,305 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-05-30 16:13:47,515 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:13:47,517 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:47,517 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [new content]
+2013-05-30 16:13:47,517 DEBUG - MongoContentStore          - Updating with content, size [11] and selector [html > body > section > p]
+2013-05-30 16:13:47,520 DEBUG - MongoContentStore          - No rows updated, trying insert
+2013-05-30 16:13:47,538 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:47,538 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:47,541 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with content [new content]
+2013-05-30 16:13:47,541 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:47,748 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:48,021 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:48,022 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:48,345 DEBUG - SecureFilter               - Secured path [/statik/make-it-so]
+2013-05-30 16:13:48,347 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:48,347 INFO  - MakeContentLiveRoute       - Making the content live for page [/one-para.html]
+2013-05-30 16:13:48,348 DEBUG - MongoContentStore          - Setting content with domain [localhost], path [/one-para.html] live
+2013-05-30 16:13:48,349 DEBUG - MongoContentStore          - Updated page with domain [localhost] and path [/one-para.html], setting 1 content items live
+2013-05-30 16:13:48,643 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-05-30 16:13:48,644 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:48,646 DEBUG - LogoutRoute                - Log out [admin]
+2013-05-30 16:13:48,652 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:48,652 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:48,716 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:48,716 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:48,718 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with content [new content]
+2013-05-30 16:13:48,856 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:49,104 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:49,106 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:49,117 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:49,126 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:13:50,152 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:50,152 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:50,162 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:50,295 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:50,296 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:50,301 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:50,373 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:51,016 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:51,017 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:51,460 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:51,460 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:51,467 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:51,568 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:51,915 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:51,921 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:52,701 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-05-30 16:13:52,702 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:52,724 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-05-30 16:13:53,939 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-05-30 16:13:53,941 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:53,941 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [new content]
+2013-05-30 16:13:53,941 DEBUG - MongoContentStore          - Updating with content, size [11] and selector [html > body > section > p]
+2013-05-30 16:13:53,942 DEBUG - MongoContentStore          - No rows updated, trying insert
+2013-05-30 16:13:53,959 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:53,960 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:53,963 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with content [new content]
+2013-05-30 16:13:53,963 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:54,056 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:54,273 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:54,295 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:54,589 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-05-30 16:13:54,589 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:54,592 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with content [new content]
+2013-05-30 16:13:54,592 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:54,648 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:54,891 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:54,893 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:55,198 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:13:55,199 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:13:55,199 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:13:55,205 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:13:55,206 INFO  - MongoAuthStore             - Deleted [0] users
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.968 sec
+Running statik.integration.SessionPersistenceIT
+2013-05-30 16:13:55,709 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:13:55,710 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:13:55,711 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:13:55,739 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:13:55,739 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:13:55,742 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:13:55,805 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:13:56,014 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:13:56,015 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:03,169 DEBUG - EditableFileRoute          - GET on [localhost], path=/index.html
+2013-05-30 16:14:03,169 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:03,224 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:03,333 DEBUG - EditableFileRoute          - GET on [localhost], path=/favicon.ico
+2013-05-30 16:14:03,469 DEBUG - EditableFileRoute          - GET on [localhost], path=/favicon.ico
+2013-05-30 16:14:03,763 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-05-30 16:14:03,764 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:03,775 DEBUG - LogoutRoute                - Log out [admin]
+2013-05-30 16:14:03,784 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:03,784 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:03,818 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:03,894 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:03,895 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:03,898 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:03,899 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:14:04,487 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:04,487 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:04,488 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:04,901 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:04,901 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:04,909 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:04,928 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:05,423 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:05,424 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:05,662 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-05-30 16:14:05,674 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:05,675 DEBUG - LogoutRoute                - Log out [admin]
+2013-05-30 16:14:05,686 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:05,686 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:05,704 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:06,032 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-05-30 16:14:06,336 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:06,338 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:06,341 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:06,342 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:14:07,288 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-05-30 16:14:07,494 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:07,496 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:07,503 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:07,505 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:14:08,006 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:08,006 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:08,007 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:08,023 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:08,023 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:08,027 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:08,073 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:08,303 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:08,303 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:08,746 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-05-30 16:14:08,747 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:08,748 DEBUG - LogoutRoute                - Log out [admin]
+2013-05-30 16:14:08,773 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:08,773 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:08,789 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:08,879 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:08,880 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:08,896 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:08,897 INFO  - MongoAuthStore             - Deleted [0] users
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.825 sec
+Running statik.integration.UserManagementIT
+2013-05-30 16:14:11,080 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:11,080 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:11,087 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:11,097 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:11,097 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:11,104 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:11,151 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:11,960 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:11,962 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:12,404 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:12,405 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:12,405 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:12,411 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:12,411 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:13,230 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:13,231 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:14,162 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:14,163 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:14,164 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-05-30 16:14:14,165 INFO  - MongoAuthStore             - Adding user [test@example.com]
+2013-05-30 16:14:14,826 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:14,831 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:14,831 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:14,851 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:14,852 INFO  - MongoAuthStore             - Deleted [1] users
+2013-05-30 16:14:18,908 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:18,909 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:18,910 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:19,288 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:19,289 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:19,293 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:19,375 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:20,546 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:20,554 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:21,762 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:21,778 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:21,778 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:21,780 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:21,780 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:22,660 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:22,661 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:24,131 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:24,132 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:24,133 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-05-30 16:14:24,134 INFO  - MongoAuthStore             - Adding user [test@example.com]
+2013-05-30 16:14:24,300 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:24,305 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:24,305 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:24,310 DEBUG - MongoAuthStore             - Found 2 users
+2013-05-30 16:14:24,311 INFO  - UserListRoute              - Listing [2] users, [admin, test@example.com]
+2013-05-30 16:14:24,760 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:24,762 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:25,123 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:25,124 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:25,124 INFO  - AddUserRoute               - Editing user with original username [test@example.com], new username is [new-user-name]
+2013-05-30 16:14:25,413 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:25,414 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:25,414 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:25,422 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:25,423 INFO  - MongoAuthStore             - Deleted [1] users
+2013-05-30 16:14:25,945 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:25,945 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:25,946 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:25,989 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:25,989 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:25,993 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:26,086 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:26,298 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:26,302 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:26,795 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:26,796 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:26,796 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:26,797 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:26,798 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:27,081 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:27,082 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:27,536 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:27,537 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:27,537 INFO  - AddUserRoute               - Creating user [invalid]
+2013-05-30 16:14:27,537 INFO  - MongoAuthStore             - Adding user [invalid]
+2013-05-30 16:14:27,734 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:27,735 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:27,735 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:27,739 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:27,742 INFO  - MongoAuthStore             - Deleted [1] users
+2013-05-30 16:14:28,084 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:28,084 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:28,086 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:28,093 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:28,094 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:28,098 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:28,148 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:28,412 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:28,415 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:28,722 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:28,750 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:28,750 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:28,751 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:28,751 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:29,224 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:29,225 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:29,718 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:29,723 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:29,724 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-05-30 16:14:29,724 INFO  - MongoAuthStore             - Adding user [test@example.com]
+2013-05-30 16:14:30,243 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:30,244 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:30,244 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:30,249 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:30,252 INFO  - MongoAuthStore             - Deleted [1] users
+2013-05-30 16:14:30,731 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:30,731 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:30,732 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:30,758 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:30,758 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:30,761 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:30,805 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:31,047 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:31,047 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:31,277 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-05-30 16:14:31,278 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:31,280 DEBUG - LogoutRoute                - Log out [admin]
+2013-05-30 16:14:31,296 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:31,297 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:31,323 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:31,440 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:31,443 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:31,445 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:31,446 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:31,827 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:31,828 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:31,835 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:31,836 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:14:32,689 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:32,690 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:32,691 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:32,711 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:32,711 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:32,721 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:32,749 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:32,964 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:32,968 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:33,263 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:33,264 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:33,269 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:33,272 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:33,272 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:33,773 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:33,774 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:34,789 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:34,790 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:34,790 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-05-30 16:14:34,790 INFO  - MongoAuthStore             - Adding user [test@example.com]
+2013-05-30 16:14:35,044 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:35,045 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:35,045 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:35,057 DEBUG - MongoAuthStore             - Found 2 users
+2013-05-30 16:14:35,057 INFO  - UserListRoute              - Listing [2] users, [admin, test@example.com]
+2013-05-30 16:14:35,496 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:35,509 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:35,896 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:35,897 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:35,898 INFO  - AddUserRoute               - Editing user with original username [test@example.com], new username is [test@example.com]
+2013-05-30 16:14:36,106 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:36,108 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:36,108 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:36,116 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:36,118 INFO  - MongoAuthStore             - Deleted [1] users
+2013-05-30 16:14:36,531 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:36,531 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:36,532 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:36,553 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:36,554 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:36,557 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:36,601 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:36,859 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:36,863 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:37,092 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:37,099 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:37,099 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:37,100 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:37,100 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:37,544 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:37,545 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:38,618 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:38,623 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:38,623 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-05-30 16:14:38,624 INFO  - MongoAuthStore             - Adding user [test@example.com]
+2013-05-30 16:14:38,815 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:38,816 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:38,816 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:38,824 DEBUG - MongoAuthStore             - Found 2 users
+2013-05-30 16:14:38,824 INFO  - UserListRoute              - Listing [2] users, [admin, test@example.com]
+2013-05-30 16:14:39,226 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:39,229 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:39,728 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:39,729 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:39,730 INFO  - AddUserRoute               - Editing user with original username [test@example.com], new username is [test@example.com]
+2013-05-30 16:14:39,930 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:39,931 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:39,931 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:39,936 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:39,944 INFO  - MongoAuthStore             - Deleted [1] users
+2013-05-30 16:14:40,514 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:40,514 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:40,515 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:40,552 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:40,553 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:40,559 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:40,606 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:40,812 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:40,813 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:41,047 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:41,050 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:41,050 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:41,058 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:41,058 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:41,351 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:41,353 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:41,353 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:41,356 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:41,357 INFO  - MongoAuthStore             - Deleted [0] users
+2013-05-30 16:14:41,769 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-05-30 16:14:41,769 INFO  - MongoAuthStore             - Authenticating user [admin]
+2013-05-30 16:14:41,770 INFO  - MongoAuthStore             - Successfully authenticated user [admin]
+2013-05-30 16:14:41,793 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-05-30 16:14:41,794 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-05-30 16:14:41,796 DEBUG - EditableFileRoute          - Making page editable
+2013-05-30 16:14:41,824 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-05-30 16:14:42,025 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-05-30 16:14:42,026 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:42,301 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:42,302 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:42,302 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:42,302 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:42,302 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-05-30 16:14:42,539 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:42,540 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:42,930 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-05-30 16:14:42,931 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:42,934 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-05-30 16:14:42,934 INFO  - MongoAuthStore             - Adding user [test@example.com]
+2013-05-30 16:14:43,115 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-05-30 16:14:43,116 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:43,116 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:43,117 DEBUG - MongoAuthStore             - Found 2 users
+2013-05-30 16:14:43,117 INFO  - UserListRoute              - Listing [2] users, [admin, test@example.com]
+2013-05-30 16:14:43,395 DEBUG - SecureFilter               - Secured path [/statik/delete-user]
+2013-05-30 16:14:43,397 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:43,397 INFO  - DeleteUserRoute            - Deleting user [test@example.com]
+2013-05-30 16:14:43,397 INFO  - MongoAuthStore             - Removing user [test@example.com]
+2013-05-30 16:14:43,398 DEBUG - MongoAuthStore             - Fetching all users
+2013-05-30 16:14:43,400 DEBUG - MongoAuthStore             - Found 1 users
+2013-05-30 16:14:43,688 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-05-30 16:14:43,689 DEBUG - SecureFilter               - Already cookied
+2013-05-30 16:14:43,689 WARN  - MongoContentStore          - Dropping contentItems collection
+2013-05-30 16:14:43,705 INFO  - MongoAuthStore             - Deleting all users except default (admin)
+2013-05-30 16:14:43,706 INFO  - MongoAuthStore             - Deleted [0] users
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 34.596 sec
+2013-05-30 16:14:43,781 INFO  - DefaultHttpClient          - I/O exception (org.apache.http.NoHttpResponseException) caught when processing request: The target server failed to respond
+2013-05-30 16:14:43,781 INFO  - DefaultHttpClient          - Retrying request
+2013-05-30 16:14:43,787 INFO  - DefaultHttpClient          - I/O exception (org.apache.http.NoHttpResponseException) caught when processing request: The target server failed to respond
+2013-05-30 16:14:43,787 INFO  - DefaultHttpClient          - Retrying request
+2013-05-30 16:14:43,793 INFO  - DefaultHttpClient          - I/O exception (org.apache.http.NoHttpResponseException) caught when processing request: The target server failed to respond
+2013-05-30 16:14:43,793 INFO  - DefaultHttpClient          - Retrying request
+2013-05-30 16:14:45,814 INFO  - DefaultHttpClient          - I/O exception (org.apache.http.NoHttpResponseException) caught when processing request: The target server failed to respond
+2013-05-30 16:14:45,815 INFO  - DefaultHttpClient          - Retrying request
+2013-05-30 16:14:45,821 INFO  - DefaultHttpClient          - I/O exception (org.apache.http.NoHttpResponseException) caught when processing request: The target server failed to respond
+2013-05-30 16:14:45,821 INFO  - DefaultHttpClient          - Retrying request
+2013-05-30 16:14:45,826 INFO  - DefaultHttpClient          - I/O exception (org.apache.http.NoHttpResponseException) caught when processing request: The target server failed to respond
+2013-05-30 16:14:45,827 INFO  - DefaultHttpClient          - Retrying request
+
+Results :
+
+Tests run: 31, Failures: 0, Errors: 0, Skipped: 0
+
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] 
+[INFO] --- jetty-maven-plugin:8.1.10.v20130312:stop (stop-jetty) @ statik ---
+[INFO] 
+[INFO] --- maven-failsafe-plugin:2.14:verify (default) @ statik ---
+[INFO] Failsafe report directory: /Users/rory/work/personal/statik/target/failsafe-reports
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3:20.879s
+[INFO] Finished at: Thu May 30 16:14:46 BST 2013
+[INFO] Final Memory: 31M/75M
+[INFO] ------------------------------------------------------------------------

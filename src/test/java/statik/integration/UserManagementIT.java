@@ -41,6 +41,12 @@ public class UserManagementIT extends AbstractWebDriverIntTst {
     }
 
     @Test
+    public void invalidUsername() {
+        addUserWith("invalid", "password", "password");
+        assertEquals("Should have been shown an error", "Email address must be valid", driver.findElement(By.className("error")).getText());
+    }
+
+    @Test
     public void passwordsMustMatchWhenAddingUser() {
         addUserWith("test@example.com", "password", "doesnt-match");
         assertEquals("Should have been shown an error", "Passwords must match, must not be blank and must be 8+ characters long", driver.findElement(By.className("error")).getText());

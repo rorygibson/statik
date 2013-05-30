@@ -1,0 +1,70 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+
+<html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="/statik-resources/control-box-styles.css"/>
+    <script type="text/javascript" src="/statik-resources/jquery-1.9.1.js" />
+</head>
+
+<body>
+
+<ul id="statik-auth-box">
+    <li><a href="#" id="logout">Log out</a></li>
+    <li><a href="#" id="publish">Publish</a></li>
+    <li><a href="#" id="users">Users</a></li>
+</ul>
+
+<ul id="statik-sites-list">
+    <li th:each="site : ${sites}">
+        <a class="site" th:href="${'http://' + site + '/edit'}" th:text="${site}">sitename</a>
+    </li>
+</ul>
+
+<script type="text/javascript">
+    function logout(e) {
+        $.get("/statik/logout").done(function() {
+            var element = parent.document.getElementById("control-box");
+            element.parentNode.removeChild(element);
+        });
+
+        e.preventDefault();
+    }
+
+    function publish(e) {
+        $.ajax({
+            type: 'POST',
+            url: '/statik/make-it-so',
+            data: {
+                domain: parent.window.location.hostname,
+                path: parent.window.location.pathname
+            },
+            success: function (msg) {
+                if (!msg) {
+                    console.error('publish failure');
+                }
+            }
+        });
+
+        e.preventDefault();
+    }
+
+    function users(e) {
+        parent.window.location = "/statik/users";
+        e.preventDefault();
+    }
+
+    function openSite(e) {
+        parent.window.location = $(this).attr('href');
+        e.preventDefault();
+    }
+
+    $(document).ready(function () {
+        $('#publish').click(publish);
+        $('#logout').click(logout);
+        $('#users').click(users);
+        $('a.site').click(openSite);
+    });
+</script>
+
+</body>
+</html>

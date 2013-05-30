@@ -29,12 +29,4 @@ public class LoginIT extends AbstractWebDriverIntTst {
         assertEquals("Should have been redirected to the login error page", "Sign in - error", driver.findElement(By.tagName("h1")).getText());
     }
 
-
-    @Test
-    public void logout() {
-        doLoginWith("admin", "password");
-        driver.findElement(By.id("statik-auth-box"));
-    }
-
-
 }

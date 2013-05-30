@@ -1,18 +1,18 @@
 package statik.route;
 
-import org.json.simple.JSONArray;
+import org.thymeleaf.context.Context;
 import spark.Request;
 import spark.Response;
-import spark.Route;
 
 import java.io.File;
 import java.io.FileFilter;
 
-public class ListSitesRoute extends Route {
+public class ControlBoxRoute extends ThymeLeafResourceRoute {
 
+    private static final String CONTROL_BOX_HTML = "control-box";
     private final String siteRoot;
 
-    public ListSitesRoute(String route, String siteRoot) {
+    public ControlBoxRoute(String route, String siteRoot) {
         super(route);
         this.siteRoot = siteRoot;
     }
@@ -27,13 +27,16 @@ public class ListSitesRoute extends Route {
             }
         });
 
-        JSONArray arr = new JSONArray();
+        String[] arr = new String[directories.length];
+        int i = 0;
         for (File f : directories) {
-            arr.add(f.getName());
+            arr[i++] = f.getName();
         }
 
-        response.raw().setContentType("application/json");
-        return arr.toJSONString();
+        Context ctx = new Context();
+        ctx.setVariable("sites", arr);
+
+        return processWithThymeLeaf(CONTROL_BOX_HTML, ctx);
     }
 
 }

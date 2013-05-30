@@ -1,0 +1,15 @@
+body {
+    font-family: sans-serif;
+    font-size: 12pt;
+    background-color: lightgrey;
+    color: white;
+    padding-top: 5px;
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    color: blue;
+}

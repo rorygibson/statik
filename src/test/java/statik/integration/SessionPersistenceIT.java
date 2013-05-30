@@ -13,13 +13,13 @@ public class SessionPersistenceIT extends AbstractWebDriverIntTst {
 
     @After
     public void tearDown() {
-        doLogout();
+        driver.get(LOGOUT_PAGE);
     }
 
     @Test
     public void ifYouHaveLoggedOutYouSeeTheLoginForm() {
         doLoginWith("admin", "password");
-        doLogout();
+        tearDown();
 
         driver.get(LOGIN_PAGE);
         WebElement h1 = driver.findElement(By.tagName("h1"));

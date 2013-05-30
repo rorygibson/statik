@@ -99,33 +99,6 @@ p.flash {
     text-align: center;
 }
 
-.cms-box {
-    display: block;
-    position: absolute;
-    border: solid lightgray 1px;
-    background-color: lightgray;
-    border-radius: 2px;
-    padding: 5px;
-}
-
-#statik-auth-box {
-    top: 20px;
-    right: 20px;
-}
-
-#statik-sites-list {
-    top: 100px;
-    right: 20px;
-}
-
-.cms-box li {
-    list-style-type: none;
-}
-
-.cms-box a {
-    color: blue;
-}
-
 #editMenu {
     display: none;
 }

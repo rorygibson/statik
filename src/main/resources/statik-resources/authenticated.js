@@ -1,23 +1,6 @@
+
 function addControlBoxToScreen() {
-    $('body').append('<ul class="cms-box" id="statik-auth-box"></ul>');
-    $('#statik-auth-box').append('<li><a href="/statik/logout" id="logout">Log out</a></li>')
-        .append('<li><a href="#" id="publish">Publish</a></li>')
-        .append('<li><a href="/statik/users" id="users">Users</a></li>');
-}
-
-function addSitesListToScreen() {
-    $('body').append('<ul class="cms-box" id="statik-sites-list"></ul>');
-
-    $.ajax({
-        type: 'GET',
-        url: '/statik/list-sites',
-        success: function (data) {
-            for (i=0; i<data.length;i++) {
-                $('#statik-sites-list').append('<li><a href="http://' + data[i] + '/edit">' + data[i] + '</a></li>');
-            }
-        }
-    });
-
+  $('body').append('<iframe style="position:absolute; top:20px; right:20px; width: 180px" id="control-box" src="/statik/control-box" width="200px" height="300px" />');
 }
 
 function setupContextMenu() {
@@ -34,8 +17,7 @@ function setupEditorContainer() {
 }
 
 function setupScripts() {
-    $('head').append('<link type="text/css" rel="stylesheet" href="/statik-resources/styles.css" />')
-        .append('<script type="text/javascript" src="/statik-resources/dom.js"></script>')
+    $('head').append('<script type="text/javascript" src="/statik-resources/dom.js"></script>')
         .append('<script type="text/javascript" src="/statik-resources/getpath.js"></script>')
         .append('<script type="text/javascript" src="/statik-resources/jquery.contextmenu.r2.packed.js"></script>');
 }

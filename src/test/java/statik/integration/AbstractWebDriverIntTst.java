@@ -1,14 +1,16 @@
 package statik.integration;
 
 import com.google.common.base.Function;
-import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.MethodRule;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import statik.route.PathsAndRoutes;
 
-import java.io.File;
+import static org.junit.Assert.assertEquals;
 
 public class AbstractWebDriverIntTst {
 
@@ -79,16 +81,12 @@ public class AbstractWebDriverIntTst {
     }
 
 
-    public class ScreenshotOnFailureStatement extends Statement {
+    public class DumpSourceOnFailureStatement extends Statement {
 
-        private final String methodName;
-        private final String className;
         private final Statement base;
 
-        public ScreenshotOnFailureStatement(Statement base, String className, String methodName) {
+        public DumpSourceOnFailureStatement(Statement base) {
             this.base = base;
-            this.className = className;
-            this.methodName = methodName;
         }
 
         @Override
@@ -96,10 +94,7 @@ public class AbstractWebDriverIntTst {
             try {
                 base.evaluate();
             } catch (Throwable t) {
-                File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                File destFile = new File("/tmp/" + this.className + "_" + this.methodName + ".jpg");
-                FileUtils.copyFile(screenshot, destFile);
-                LOG.info("Screenshot stored to: " + destFile.getAbsolutePath());
+                LOG.error(driver.getPageSource());
                 throw t;
             }
         }
@@ -107,12 +102,10 @@ public class AbstractWebDriverIntTst {
 
 
     @Rule
-    public MethodRule screenshotOnFailure = new MethodRule() {
+    public MethodRule dumpSourceOnFailure = new MethodRule() {
         @Override
         public Statement apply(Statement statement, FrameworkMethod frameworkMethod, Object o) {
-            String className = frameworkMethod.getMethod().getDeclaringClass().getSimpleName();
-            String methodName = frameworkMethod.getName();
-            return new ScreenshotOnFailureStatement(statement, className, methodName);
+            return new DumpSourceOnFailureStatement(statement);
         }
     };
 
@@ -144,10 +137,18 @@ public class AbstractWebDriverIntTst {
     }
 
     protected void sendLogin(String wrongUsername, String wrongPassword) {
+        try {
+            assertEquals("Should show sign in page", "Sign in", driver.findElement(By.tagName("h1")).getText());
+        } catch (NoSuchElementException e) {
+            LOG.error(driver.getPageSource());
+        }
+
         WebElement username = driver.findElement(By.name("username"));
-        username.sendKeys(wrongUsername);
         WebElement password = driver.findElement(By.name("password"));
+
+        username.sendKeys(wrongUsername);
         password.sendKeys(wrongPassword);
+
         password.submit();
     }
 
@@ -158,7 +159,9 @@ public class AbstractWebDriverIntTst {
 
 
     protected void doLogout() {
-        driver.get(LOGOUT_PAGE);
+        driver.switchTo().frame("control-box");
+        driver.findElement(By.id("logout")).click();
+        driver.switchTo().defaultContent();
     }
 
     protected static WebDriver createDriver() {

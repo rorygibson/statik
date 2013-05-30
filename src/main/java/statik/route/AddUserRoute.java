@@ -9,6 +9,7 @@ import spark.Response;
 import statik.auth.AuthStore;
 import statik.auth.User;
 import statik.util.PasswordValidator;
+import statik.util.UsernameValidator;
 
 public class AddUserRoute extends ThymeLeafResourceRoute {
 
@@ -41,6 +42,7 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
     private final AuthStore authStore;
     private static final Logger LOG = LoggerFactory.getLogger(AddUserRoute.class);
     private final PasswordValidator passwordValidator = new PasswordValidator();
+    private final UsernameValidator usernameValidator = new UsernameValidator();
 
     public AddUserRoute(String route, AuthStore authStore) {
         super(route);
@@ -81,9 +83,15 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
 
         Context ctx = new Context();
 
-        if (!passwordValidator.validPasswords(password, passwordAgain)) {
-            ctx.setVariable(ERROR_MESSAGE, PASSWORD_FORMAT_MSG); // TODO i18n
+        if (!usernameValidator.validUsername(username)) {
             ctx.setVariable(ERROR, true);
+            ctx.setVariable(ERROR_MESSAGE, USERNAME_FORMAT_MSG);
+            ctx.setVariable(USERNAME, username);
+        }
+
+        if (!passwordValidator.validPasswords(password, passwordAgain)) {
+            ctx.setVariable(ERROR, true);
+            ctx.setVariable(ERROR_MESSAGE, PASSWORD_FORMAT_MSG);
             ctx.setVariable(USERNAME, username);
         } else {
             ctx.setVariable(FLASH, true);
