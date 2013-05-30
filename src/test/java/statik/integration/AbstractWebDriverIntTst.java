@@ -129,9 +129,9 @@ public class AbstractWebDriverIntTst {
         return d;
     }
 
-    protected Object findEventually(final By selector) {
+    protected WebElement findEventually(final By selector) {
         WebDriverWait wait = new WebDriverWait(driver, 3);
-        return wait.until(new Function<WebDriver, Object>() {
+        return (WebElement) wait.until(new Function<WebDriver, Object>() {
             @Override
             public Object apply(WebDriver webDriver) {
                 return driver.findElement(selector);

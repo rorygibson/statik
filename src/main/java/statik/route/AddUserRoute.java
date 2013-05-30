@@ -32,10 +32,11 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
     // message bundle keys
     public static final String USER_EDITED_MSG = "user.edited";
     public static final String USER_ADDED_MSG = "user.added";
-    public static final String PASSWORDS_MUST_MATCH_MSG = "passwords.must.match";
+    public static final String PASSWORD_FORMAT_MSG = "password.format";
 
     // other
     public static final String TRUE = "true";
+    public static final String USERNAME_FORMAT_MSG = "username.format";
 
     private final AuthStore authStore;
     private static final Logger LOG = LoggerFactory.getLogger(AddUserRoute.class);
@@ -81,7 +82,7 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
         Context ctx = new Context();
 
         if (!passwordValidator.validPasswords(password, passwordAgain)) {
-            ctx.setVariable(ERROR_MESSAGE, PASSWORDS_MUST_MATCH_MSG); // TODO i18n
+            ctx.setVariable(ERROR_MESSAGE, PASSWORD_FORMAT_MSG); // TODO i18n
             ctx.setVariable(ERROR, true);
             ctx.setVariable(USERNAME, username);
         } else {
@@ -94,21 +95,44 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
         return ctx;
     }
 
-    private Context updateUser(String username, String originalUsername, String password, String passwordAgain) {
-        LOG.info("Editing user with original username [" + originalUsername + "], new username is [" + username + "]");
+    private Context updateUser(String newUsername, String originalUsername, String password, String passwordAgain) {
+        LOG.info("Editing user with original username [" + originalUsername + "], new username is [" + newUsername + "]");
+        boolean error = false;
+        String errorMessage = "";
+        Context ctx = new Context();
+
         User u = this.authStore.user(originalUsername);
-        u.setUsername(username);
+
+        if (validUsername(newUsername)) {
+            u.setUsername(newUsername);
+        } else {
+            error = true;
+            errorMessage = USERNAME_FORMAT_MSG;
+        }
+
         if (StringUtils.isNotBlank(password)) {
             if (passwordValidator.validPasswords(password, passwordAgain)) {
                 u.setPassword(password);
+            } else {
+                error = true;
+                errorMessage = PASSWORD_FORMAT_MSG;
             }
         }
-        this.authStore.updateUser(originalUsername, u);
 
-        Context ctx = new Context();
-        ctx.setVariable(FLASH, true); // TODO i18n
-        ctx.setVariable(FLASH_MESSAGE, USER_EDITED_MSG);
+        if (!error) {
+            this.authStore.updateUser(originalUsername, u);
+            ctx.setVariable(FLASH, true); // TODO i18n
+            ctx.setVariable(FLASH_MESSAGE, USER_EDITED_MSG);
+        } else {
+            ctx.setVariable(ERROR, true);
+            ctx.setVariable(ERROR_MESSAGE, errorMessage);
+        }
+
         return ctx;
+    }
+
+    private boolean validUsername(String username) {
+        return StringUtils.isNotBlank(username);
     }
 
     private boolean isUserUpdate(Request request) {
@@ -117,10 +141,6 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
             return true;
         }
         return false;
-    }
-
-    private boolean validPasswords(String password, String passwordAgain) {
-        return passwordValidator.validPasswords(password, passwordAgain);
     }
 
     private Object doGetForEdit(User user) {

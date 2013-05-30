@@ -36,19 +36,19 @@ public class UserManagementIT extends AbstractWebDriverIntTst {
 
     @Test
     public void addUser() {
-        addUserWith("tester", "password", "password");
+        addUserWith("test@example.com", "password", "password");
         assertEquals("Should have been shown a success message", "Added the user", driver.findElement(By.className("flash")).getText());
     }
 
     @Test
     public void passwordsMustMatchWhenAddingUser() {
-        addUserWith("tester", "password", "doesnt-match");
-        assertEquals("Should have been shown an error", "Passwords must match and must not be blank", driver.findElement(By.className("error")).getText());
+        addUserWith("test@example.com", "password", "doesnt-match");
+        assertEquals("Should have been shown an error", "Passwords must match, must not be blank and must be 8+ characters long", driver.findElement(By.className("error")).getText());
     }
 
     @Test
     public void deleteUser() {
-        addUserWith("tester", "password", "password");
+        addUserWith("test@example.com", "password", "password");
         driver.get(USERS_PAGE);
 
         WebElement deleteLink = driver.findElement(By.linkText("Delete"));
@@ -58,39 +58,81 @@ public class UserManagementIT extends AbstractWebDriverIntTst {
         assertEquals("Should have been shown a success message", "User deleted", flash.getText());
     }
 
+
+    @Test
+    public void changePassword() {
+        addUserWith("test@example.com", "password", "password");
+        driver.get(USERS_PAGE);
+        changePasswordOf("test@example.com", "new-password");
+        assertEquals("Should have been shown a success message", "User changed", flashText());
+    }
+
+    @Test
+    public void changePasswordFailsWithPasswordProblem() {
+        addUserWith("test@example.com", "password", "different");
+        driver.get(USERS_PAGE);
+        changePasswordOf("test@example.com", "new-password", "different");
+        assertEquals("Should have been shown an error message", "Passwords must match, must not be blank and must be 8+ characters long", errorText());
+    }
+
     @Test
     public void editUsername() {
-        addUserWith("tester", "password", "password");
+        addUserWith("test@example.com", "password", "password");
         driver.get(USERS_PAGE);
 
-        List<WebElement> users = driver.findElements(By.tagName("li"));
-        for (WebElement el : users) {
-            if (el.getText().contains("tester")) {
-                el.findElement(By.linkText("Edit")).click();
-            }
-        }
+        clickEditFor("test@example.com");
 
-        WebElement username = driver.findElement(By.name("username"));
-        assertEquals("Username field should hold value of current username", "tester", username.getAttribute("value"));
+        WebElement username = findEventually(By.name("username"));
+        assertEquals("Username field should hold value of current username", "test@example.com", username.getAttribute("value"));
 
         username.clear();
         username.sendKeys("new-user-name");
         username.submit();
 
-        WebElement flash = driver.findElement(By.className("flash"));
-        assertEquals("Should have been shown a success message", "User changed", flash.getText());
+        assertEquals("Should have been shown a success message", "User changed", flashText());
+    }
+
+    private void clickEditFor(String username) {
+        List<WebElement> users = driver.findElements(By.tagName("li"));
+        for (WebElement el : users) {
+            if (el.getText().contains(username)) {
+                WebElement edit = el.findElement(By.linkText("Edit"));
+                edit.click();
+            }
+        }
     }
 
     private void addUserWith(String username, String password, String passwordAgain) {
         driver.get(USERS_PAGE);
         driver.findElement(By.linkText("Add a user")).click();
 
-        findEventually(By.name("password-again"));
+        findEventually(By.name("username")).sendKeys(username);
+        findEventually(By.name("password")).sendKeys(password);
+        findEventually(By.name("password-again")).sendKeys(passwordAgain);
+        findEventually(By.name("username")).submit();
+    }
 
-        driver.findElement(By.name("username")).sendKeys(username);
-        driver.findElement(By.name("password")).sendKeys(password);
-        driver.findElement(By.name("password-again")).sendKeys(passwordAgain);
-        driver.findElement(By.name("username")).submit();
+    private void changePasswordOf(String username, String newPassword) {
+        changePasswordOf(username, newPassword, newPassword);
+    }
+
+    private void changePasswordOf(String username, String newPassword, String newPasswordAgain) {
+        clickEditFor(username);
+
+        findEventually(By.name("password")).sendKeys(newPassword);
+        findEventually(By.name("password-again")).sendKeys(newPasswordAgain);
+        findEventually(By.name("password")).submit();
+    }
+
+
+    private String flashText() {
+        WebElement flash = findEventually(By.className("flash"));
+        return flash.getText();
+    }
+
+    private String errorText() {
+        WebElement error = findEventually(By.className("error"));
+        return error.getText();
     }
 
 }
