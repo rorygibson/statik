@@ -8,6 +8,7 @@ import spark.Route;
 import statik.content.ContentItem;
 import statik.content.ContentStore;
 import statik.util.Http;
+import statik.util.Language;
 
 import java.util.Map;
 
@@ -29,10 +30,11 @@ public class ContentRoute extends Route {
         String domain = parameterMap.get(ContentItem.DOMAIN)[0];
         String selector = parameterMap.get(ContentItem.SELECTOR)[0];
         String path = parameterMap.get(ContentItem.PATH)[0];
+        String lang = parameterMap.get(ContentItem.LANGUAGE)[0];
 
-        LOG.debug("POST with selector [" + selector + "], domain [" + domain + "], path [" + path + "], content [" + newContent + "]");
+        LOG.debug("POST with selector [" + selector + "], domain [" + domain + "], path [" + path + "], content [" + newContent + "], lang [" + lang + "]");
 
-        ContentItem contentItem = new ContentItem(domain, path, selector, newContent, false, false);
+        ContentItem contentItem = new ContentItem(domain, path, selector, newContent, false, false, Language.from(lang));
         contentStore.insertOrUpdate(contentItem);
 
         response.status(200);

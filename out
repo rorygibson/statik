@@ -405,7 +405,7 @@ Running statik.integration.LoginIT
 2013-05-30 16:13:37,678 INFO  - MongoAuthStore             - Deleting all users except default (admin)
 2013-05-30 16:13:37,679 INFO  - MongoAuthStore             - Deleted [0] users
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.7 sec
-Running statik.integration.MongoSessionStoreIT
+Running statik.session.MongoSessionStoreIT
 2013-05-30 16:13:37,921 INFO  - UsesMongo                  - Loading config
 2013-05-30 16:13:38,008 INFO  - UsesMongo                  - Connecting to MongoDB on localhost:27017
 2013-05-30 16:13:38,288 INFO  - UsesMongo                  - Loading config

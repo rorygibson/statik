@@ -3,6 +3,7 @@ package statik.content;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import statik.UsesRDBMS;
+import statik.util.Language;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,17 +19,18 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
 
     @Override
     public void insertOrUpdate(ContentItem contentItem) {
-        LOG.debug("Inserting or updating content item with domain [" + contentItem.domain() + "], path [" + contentItem.path() + "] and selector [" + contentItem.selector() + "]");
+        LOG.debug("Inserting or updating content item with domain [" + contentItem.domain() + "], path [" + contentItem.path() + "], language [" + contentItem.language().code() + "] and selector [" + contentItem.selector() + "]");
         Connection connection = null;
         try {
             connection = this.connectionPool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("insert into statik_content(domain,path,selector,content,is_copy,is_live) values(?,?,?,?,?,?)");
+            PreparedStatement stmt = connection.prepareStatement("insert into statik_content(domain,path,selector,content,is_copy,is_live,language) values(?,?,?,?,?,?,?)");
             stmt.setString(1, contentItem.domain());
             stmt.setString(2, contentItem.path());
             stmt.setString(3, contentItem.selector());
             stmt.setString(4, contentItem.content());
             stmt.setBoolean(5, contentItem.isCopy());
             stmt.setBoolean(6, contentItem.live());
+            stmt.setString(7, contentItem.language().code());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -43,16 +45,17 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
     }
 
     @Override
-    public Map<String, ContentItem> findForDomainAndPath(String domain, String path) {
-        LOG.info("Retrieving content for domain [" + domain + "] and path [" + path + "]");
+    public Map<String, ContentItem> findForDomainAndPath(String domain, String path, String language) {
+        LOG.info("Retrieving content for domain [" + domain + "], language [" + language + "] and path [" + path + "]");
 
         Map<String, ContentItem> map = new HashMap<>();
         Connection connection = null;
         try {
             connection = this.connectionPool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("select domain,path,selector,content,is_copy,is_live from statik_content where domain=? and path=?");
+            PreparedStatement stmt = connection.prepareStatement("select domain,path,selector,content,is_copy,is_live, language from statik_content where domain=? and path=? and language=?");
             stmt.setString(1, domain);
             stmt.setString(2, path);
+            stmt.setString(3, language);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 ContentItem item = contentItemFrom(rs);
@@ -93,17 +96,18 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
 
 
     @Override
-    public ContentItem findBy(String domain, String path, String selector) {
-        LOG.info("Retrieving content for domain [" + domain + "], path [" + path + "] and selector [" + selector + "]");
+    public ContentItem findBy(String domain, String path, String selector, Language language) {
+        LOG.info("Retrieving content for domain [" + domain + "], path [" + path + "], selector [" + selector + "] and language [" + language.code() + "]");
 
         ContentItem item = null;
         Connection connection = null;
         try {
             connection = this.connectionPool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("select domain,path,selector,content,is_copy,is_live from statik_content where domain=? and path=? and selector=?");
+            PreparedStatement stmt = connection.prepareStatement("select domain,path,selector,content,is_copy,is_live,language from statik_content where domain=? and path=? and selector=? and language=?");
             stmt.setString(1, domain);
             stmt.setString(2, path);
             stmt.setString(3, selector);
+            stmt.setString(4, language.code());
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 item = contentItemFrom(rs);
@@ -144,10 +148,10 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
     }
 
     private ContentItem contentItemFrom(ResultSet rs) throws SQLException {
-        return contentItemFrom(rs.getString(ContentItem.DOMAIN), rs.getString(ContentItem.PATH), rs.getString(ContentItem.SELECTOR), rs.getString(ContentItem.CONTENT), rs.getBoolean(ContentItem.IS_COPY), rs.getBoolean(ContentItem.LIVE));
+        return contentItemFrom(rs.getString(ContentItem.DOMAIN), rs.getString(ContentItem.PATH), rs.getString(ContentItem.SELECTOR), rs.getString(ContentItem.CONTENT), rs.getBoolean(ContentItem.IS_COPY), rs.getBoolean(ContentItem.LIVE), rs.getString(ContentItem.LANGUAGE));
     }
 
-    private ContentItem contentItemFrom(String domain, String path, String selector, String content, boolean copy, boolean live) {
-        return new ContentItem(domain, path, selector, content, copy, live);
+    private ContentItem contentItemFrom(String domain, String path, String selector, String content, boolean copy, boolean live, String lang) {
+        return new ContentItem(domain, path, selector, content, copy, live, Language.from(lang));
     }
 }

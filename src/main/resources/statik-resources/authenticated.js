@@ -55,7 +55,7 @@ function copy(item, path) {
     });
 }
 
-function loadEditor(item, path) {
+function loadEditor(item, path, language) {
     var selector = getPath(item);
     var content = $(item).html();
 
@@ -63,15 +63,22 @@ function loadEditor(item, path) {
     var encodedSelector = encodeURIComponent(selector);
     var encodedPath = encodeURIComponent(path);
     var encodedContent = encodeURIComponent(content);
+    var encodedLanguage = encodeURIComponent(language);
 
-    loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent);
+    window.statik = {};
+    window.statik.item = item;
+    window.statik.path = path;
+    window.statik.language = language;
+
+    loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent, encodedLanguage);
 }
+
 
 function addContextMenuTo(item, path) {
     $(item).contextMenu('editMenu', {
         bindings: {
             'edit': function (t) {
-                loadEditor(item, path);
+                loadEditor(item, path, "en");
             },
             'copy': function (t) {
                 copy(item, path);
@@ -110,9 +117,9 @@ function addHoverState(item) {
 }
 
 
-function loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent, encodedParentSelector) {
+function loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent, encodedLanguage) {
     $.ajax({
-        url: "/statik/editor?selector=" + encodedSelector + "&domain=" + encodedDomain + "&path=" + encodedPath + "&content=" + encodedContent,
+        url: "/statik/editor?selector=" + encodedSelector + "&language=" + encodedLanguage + "&domain=" + encodedDomain + "&path=" + encodedPath + "&content=" + encodedContent,
         success: function (data) {
             $("#statik-editor-dialog").html(data);
 

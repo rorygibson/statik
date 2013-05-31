@@ -13,6 +13,7 @@ import statik.content.ContentItem;
 import statik.content.ContentStore;
 import statik.session.SessionStore;
 import statik.util.Http;
+import statik.util.Language;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -56,6 +57,7 @@ public class EditableFileRoute extends Route {
     public Object handle(Request request, Response response) {
         String path = pathFrom(request);
         String domain = domainFrom(request);
+        String language = languageFrom(request);
 
         LOG.debug("GET on [" + domain + "], path=" + path);
 
@@ -67,12 +69,17 @@ public class EditableFileRoute extends Route {
 
         try {
             response.status(200);
-            return dataMatching(domain, request, path, fileToServe);
+            return dataMatching(domain, request, path, language, fileToServe);
         } catch (IOException e) {
             do404(response, path, findRequestedFileFrom(domain, this.notFoundPageFilename));
         }
 
         return Http.EMPTY_RESPONSE;
+    }
+
+    private String languageFrom(Request request) {
+        Object language = request.raw().getAttribute("language");
+        return language == null ? Language.Default.code() : language.toString();
     }
 
     private String domainFrom(Request request) {
@@ -84,13 +91,13 @@ public class EditableFileRoute extends Route {
         return httpReq.getPathInfo() == null ? httpReq.getServletPath() : httpReq.getPathInfo();
     }
 
-    private String dataMatching(String domain, Request request, String path, File fileToServe) throws IOException {
+    private String dataMatching(String domain, Request request, String path, String language, File fileToServe) throws IOException {
         if (mightContainCmsContent(fileToServe)) {
             LOG.debug("File is candidate for content editing");
             String fileContent;
             fileContent = FileUtils.readFileToString(fileToServe);
 
-            return editableContentFor(domain, path, fileContent, isAuthenticated(request));
+            return editableContentFor(domain, path, fileContent, isAuthenticated(request), language);
         }
         return rawDataFrom(fileToServe);
     }
@@ -153,8 +160,8 @@ public class EditableFileRoute extends Route {
         return theFile.getName().endsWith(HTML_SUFFIX);
     }
 
-    private Document replaceContent(Document doc, String domain, String path, boolean authenticated) {
-        Map<String, ContentItem> contentItems = this.contentStore.findForDomainAndPath(domain, path);
+    private Document replaceContent(Document doc, String domain, String path, boolean authenticated, String language) {
+        Map<String, ContentItem> contentItems = this.contentStore.findForDomainAndPath(domain, path, language);
 
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
@@ -200,9 +207,9 @@ public class EditableFileRoute extends Route {
         return selector.substring(0, selector.length() - 3).endsWith("nth-of-type");
     }
 
-    private String editableContentFor(String domain, String path, String fileContent, boolean authenticated) {
+    private String editableContentFor(String domain, String path, String fileContent, boolean authenticated, String language) {
         Document doc = Jsoup.parse(fileContent);
-        doc = replaceContent(doc, domain, path, authenticated);
+        doc = replaceContent(doc, domain, path, authenticated, language);
 
         if (authenticated) {
             LOG.debug("Making page editable");

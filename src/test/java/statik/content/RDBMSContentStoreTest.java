@@ -2,6 +2,7 @@ package statik.content;
 
 import org.junit.Before;
 import org.junit.Test;
+import statik.util.Language;
 
 import java.util.Map;
 
@@ -20,25 +21,33 @@ public class RDBMSContentStoreTest {
         store.clearContentItems();
     }
 
+    @Test
+    public void persistsLanguageAttribute() {
+        ContentItem c = new ContentItem("domain", "/path", "selector", "content", false, false, Language.French);
+
+        store.insertOrUpdate(c);
+        ContentItem contentItem = store.findBy("domain", "/path", "selector", Language.French);
+        assertEquals("Should have correct language", Language.French, contentItem.language());
+    }
 
     @Test
     public void insertsNewContentItem() {
-        assertEquals("Should have no content items", 0, store.findForDomainAndPath("domain", "/path").size());
+        assertEquals("Should have no content items", 0, store.findForDomainAndPath("domain", "/path", Language.Default.code()).size());
         ContentItem c = new ContentItem("domain", "/path", "selector", "content", false);
 
         store.insertOrUpdate(c);
 
-        assertEquals("Should now have an item", 1, store.findForDomainAndPath("domain", "/path").size());
+        assertEquals("Should now have an item", 1, store.findForDomainAndPath("domain", "/path", Language.Default.code()).size());
     }
 
     @Test
     public void clearsAllContentItems() {
         int expected = insertSomeContent();
-        assertEquals("Should have multiple content items", expected, store.findForDomainAndPath("domain", "/path").size());
+        assertEquals("Should have multiple content items", expected, store.findForDomainAndPath("domain", "/path", Language.Default.code()).size());
 
         store.clearContentItems();
 
-        assertEquals("Should have NO content items", 0, store.findForDomainAndPath("domain", "/path").size());
+        assertEquals("Should have NO content items", 0, store.findForDomainAndPath("domain", "/path", Language.Default.code()).size());
     }
 
     @Test
@@ -49,7 +58,7 @@ public class RDBMSContentStoreTest {
         ContentItem updated = new ContentItem("domain", "/path", "p", "this is the UPDATED content", false);
         store.insertOrUpdate(updated);
 
-        Map<String, ContentItem> items = store.findForDomainAndPath("domain", "/path");
+        Map<String, ContentItem> items = store.findForDomainAndPath("domain", "/path", Language.Default.code());
         assertEquals("Should have only found one content item for domain and /path", 1, items.size());
         ContentItem found = items.get("p");
         assertEquals("Content should have been updated", "this is the UPDATED content", found.content());
@@ -60,7 +69,7 @@ public class RDBMSContentStoreTest {
         store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > p", "this is the content", false));
         store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > div > span", "this is the other bit of content", false));
 
-        ContentItem found = store.findBy("domain", "/path", "html > body > p");
+        ContentItem found = store.findBy("domain", "/path", "html > body > p", Language.Default);
         assertEquals("Should have returned the correct bit of content", "this is the content", found.content());
     }
 
@@ -70,7 +79,7 @@ public class RDBMSContentStoreTest {
         store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > p.2", "this is the content 2", false));
 
         store.makeContentLiveFor("domain", "/path");
-        Map<String,ContentItem> content = store.findForDomainAndPath("domain", "/path");
+        Map<String,ContentItem> content = store.findForDomainAndPath("domain", "/path", Language.Default.code());
 
         assertTrue(content.get("html > body > p.1").live());
         assertTrue(content.get("html > body > p.2").live());

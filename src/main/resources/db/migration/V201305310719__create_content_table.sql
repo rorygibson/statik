@@ -4,5 +4,6 @@ create table statik_content (
     selector varchar(255) not null,
     content clob,
     is_copy boolean default false,
-    is_live boolean default false
+    is_live boolean default false,
+    language varchar(2) default 'en'
 )

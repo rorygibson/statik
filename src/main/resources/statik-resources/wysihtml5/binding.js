@@ -21,11 +21,17 @@ $(document).ready(function () {
         link.href = "/statik-resources/wysihtml5/editor.css";
         link.rel = "stylesheet";
         doc.querySelector("head").appendChild(link);
-
-        debugger;
     });
 
     document.editor = editor;
+
+    $('#language-switcher').change(function(){
+        debugger;
+        $('input[name="language"]').val($(this).val());
+        loadEditor(parent.window.statik.item, parent.window.statik.path, $(this).val());
+    });
+
+    $('#language-switcher').val($('input[name="language"]').val());
 
     $('#editorForm').ajaxForm(function () {
         window.location.reload();

@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import statik.route.PathsAndRoutes;
+import statik.util.Language;
 
 import static org.junit.Assert.assertEquals;
 
@@ -46,6 +47,8 @@ public class AbstractWebDriverIntTst {
     public static final int PERIOD_TO_WAIT_FOR_CHANGES = 500;
 
 
+    public static final String ONE_PARA_TEST_PAGE_PATH = "/one-para.html";
+
     static {
         BASE_URL = System.getProperty("baseUrl");
 
@@ -63,7 +66,7 @@ public class AbstractWebDriverIntTst {
 
         // test pages in test-website directory
         ROOT_PAGE = BASE_URL + "/index.html";
-        ONE_PARA_TEST_PAGE = BASE_URL + "/one-para.html";
+        ONE_PARA_TEST_PAGE = BASE_URL + ONE_PARA_TEST_PAGE_PATH;
         TWO_PARA_TEST_PAGE = BASE_URL + "/two-paras.html";
         LIST_TEST_PAGE = BASE_URL + "/list.html";
         QUNIT_TESTS_PAGE = BASE_URL + "/qunit-tests.html";
@@ -199,7 +202,7 @@ public class AbstractWebDriverIntTst {
         }
     }
 
-    protected void changeContentOf(WebElement el, String newContent) {
+    protected void changeContentOf(WebElement el, String newContent, Language lang) {
         Actions a = new Actions(driver);
         a.contextClick(el);
         a.perform();
@@ -214,6 +217,10 @@ public class AbstractWebDriverIntTst {
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
         driver.findElement(By.id("submit")).click();
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
+    }
+
+    protected void changeContentOf(WebElement el, String newContent) {
+        changeContentOf(el, newContent, Language.English);
     }
 
     protected void changeContentOf(String tag, String newContent) {

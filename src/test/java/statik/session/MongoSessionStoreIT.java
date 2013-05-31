@@ -1,14 +1,11 @@
-package statik.integration;
+package statik.session;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import statik.session.MongoSessionStore;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 @Ignore
 public class MongoSessionStoreIT {

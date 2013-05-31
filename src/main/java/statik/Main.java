@@ -13,7 +13,7 @@ import statik.auth.RDBMSAuthStore;
 import statik.auth.SecureFilter;
 import statik.auth.User;
 import statik.content.ContentStore;
-import statik.content.RDBMSContentStore;
+import statik.content.LanguageFilter;import statik.content.RDBMSContentStore;
 import statik.route.*;
 import statik.session.RDBMSSessionStore;
 import statik.session.SessionStore;
@@ -83,6 +83,7 @@ public class Main implements spark.servlet.SparkApplication {
     }
 
     private void addStatikRoutes() {
+        Spark.before(new LanguageFilter("/*"));
         Spark.before(new SecureFilter("/statik/", this.sessionStore));
 
         LOG.info("Setting up statik routes");

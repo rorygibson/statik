@@ -4,6 +4,7 @@ import com.mongodb.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import statik.UsesMongo;
+import statik.util.Language;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,9 +20,9 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
     public void insertOrUpdate(ContentItem contentItem) {
         LOG.debug("Updating with content, size [" + contentItem.size() + "] and selector [" + contentItem.selector() + "]");
 
-        BasicDBObject queryObject = new BasicDBObject(ContentItem.DOMAIN, contentItem.domain()).append(ContentItem.SELECTOR, contentItem.selector());
+        BasicDBObject queryObject = new BasicDBObject(ContentItem.DOMAIN, contentItem.domain()).append(ContentItem.SELECTOR, contentItem.selector()).append(ContentItem.LANGUAGE, contentItem.language().code());
         BasicDBObject updateObject = new BasicDBObject(ContentItem.SELECTOR, contentItem.selector()).append(ContentItem.DOMAIN, contentItem.domain()).append(ContentItem.CONTENT, contentItem.content()).append(ContentItem.PATH
-                , contentItem.path());
+                , contentItem.path()).append(ContentItem.LANGUAGE, contentItem.language().code());
         WriteResult update = items.update(queryObject, updateObject);
 
         if (update.getN() == 0) {
@@ -39,8 +40,8 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
     }
 
     @Override
-    public Map<String, ContentItem> findForDomainAndPath(String domain, String path) {
-        BasicDBObject query = new BasicDBObject(ContentItem.DOMAIN, domain).append(ContentItem.PATH, path);
+    public Map<String, ContentItem> findForDomainAndPath(String domain, String path, String language) {
+        BasicDBObject query = new BasicDBObject(ContentItem.DOMAIN, domain).append(ContentItem.PATH, path).append(ContentItem.LANGUAGE, language);
         DBCursor cursor = this.items.find(query);
 
         Map<String, ContentItem> items = new HashMap<>();
@@ -59,8 +60,8 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
     }
 
     @Override
-    public ContentItem findBy(String domain, String path, String selector) {
-        DBObject q = new BasicDBObject(ContentItem.DOMAIN, domain).append(ContentItem.PATH, path).append(ContentItem.SELECTOR, selector);
+    public ContentItem findBy(String domain, String path, String selector, Language language) {
+        DBObject q = new BasicDBObject(ContentItem.DOMAIN, domain).append(ContentItem.PATH, path).append(ContentItem.SELECTOR, selector).append(ContentItem.LANGUAGE, language.code());
         DBObject dbObject = items.findOne(q);
         if (dbObject == null) {
             return null;
