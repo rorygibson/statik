@@ -9,13 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Spark;
 import statik.auth.AuthStore;
-import statik.auth.MongoAuthStore;
+import statik.auth.RDBMSAuthStore;
 import statik.auth.SecureFilter;
 import statik.auth.User;
 import statik.content.ContentStore;
-import statik.content.MongoContentStore;
+import statik.content.RDBMSContentStore;
 import statik.route.*;
-import statik.session.MongoSessionStore;
+import statik.session.RDBMSSessionStore;
 import statik.session.SessionStore;
 
 public class Main implements spark.servlet.SparkApplication {
@@ -23,7 +23,6 @@ public class Main implements spark.servlet.SparkApplication {
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
 
     private static final String CONFIG_FILENAME = "config.properties";
-    private static final String USERS_DB_FILENAME = "users.properties";
 
     private static final String FILE_BASE = "fileBase";
     private static final String WELCOME_FILE = "welcomeFile";
@@ -32,8 +31,6 @@ public class Main implements spark.servlet.SparkApplication {
     private static final String PORT = "port";
     private static final int DEFAULT_PORT = 4567;
     private static final String AUTH_DOMAIN = "authDomain";
-
-    private boolean configured = false;
 
     private ContentStore contentStore;
     private AuthStore authStore;
@@ -65,17 +62,17 @@ public class Main implements spark.servlet.SparkApplication {
     }
 
     private void populate() {
-        this.contentStore = new MongoContentStore();
+        this.contentStore = new RDBMSContentStore();
         this.contentStore.configure(CONFIG_FILENAME);
 
-        this.authStore = new MongoAuthStore();
+        this.authStore = new RDBMSAuthStore();
         this.authStore.configure(CONFIG_FILENAME);
 
         if (this.authStore.users().isEmpty()) {
             addDefaultUser();
         }
 
-        this.sessionStore = new MongoSessionStore();
+        this.sessionStore = new RDBMSSessionStore();
         this.sessionStore.configure(CONFIG_FILENAME);
     }
 
@@ -141,7 +138,6 @@ public class Main implements spark.servlet.SparkApplication {
         this.port = Integer.valueOf(StringUtils.defaultIfEmpty(config.getString(PORT), "" + DEFAULT_PORT));
         this.authDomain = config.getString(AUTH_DOMAIN, "http://localhost:" + this.port);
 
-        this.configured = true;
         LOG.debug("Test mode is " + testMode);
         LOG.debug("File base is " + fileBase);
         LOG.debug("Welcome file is " + welcomeFile);

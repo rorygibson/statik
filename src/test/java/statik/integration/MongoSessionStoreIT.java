@@ -2,6 +2,7 @@ package statik.integration;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import statik.session.MongoSessionStore;
 
@@ -9,6 +10,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 
+@Ignore
 public class MongoSessionStoreIT {
 
     private MongoSessionStore store;
@@ -16,7 +18,7 @@ public class MongoSessionStoreIT {
     @Before
     public void setUp() {
         this.store = new MongoSessionStore();
-        this.store.configure("config.properties");
+        this.store.configure("mongo-config.properties");
     }
 
     @After

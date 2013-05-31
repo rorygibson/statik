@@ -118,7 +118,7 @@
                                 <phase>post-integration-test</phase>
                                 <configuration>
                                     <target>
-                                        <get ignoreerrors="true" src="${standalone.shutdown.url}" dest="${project.build.outputDirectory}" />
+                                        <get ignoreerrors="true" src="${standalone.shutdown.url}" dest="${project.build.outputDirectory}"/>
                                     </target>
                                 </configuration>
                                 <goals>
@@ -272,6 +272,24 @@
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <version>2.11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jolbox</groupId>
+            <artifactId>bonecp</artifactId>
+            <version>0.7.1.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.flyway</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <dependency>
+        	<groupId>org.hsqldb</groupId>
+        	<artifactId>hsqldb</artifactId>
+        	<version>2.2.9</version>
         </dependency>
 
         <dependency>

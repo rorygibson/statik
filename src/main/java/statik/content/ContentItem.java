@@ -2,9 +2,9 @@ package statik.content;
 
 public class ContentItem {
 
-    public static final String LIVE = "live";
+    public static final String LIVE = "is_live";
     public static final String DOMAIN = "domain";
-    public static final String IS_COPY = "isCopy";
+    public static final String IS_COPY = "is_copy";
     public static final String PATH = "path";
     public static final String SELECTOR = "selector";
     public static final String CONTENT = "content";
@@ -24,8 +24,8 @@ public class ContentItem {
         this.live = live;
     }
 
-    public ContentItem(String domain, String path, String selector, String content, boolean committed) {
-        this(domain, path, selector, content, false, committed);
+    public ContentItem(String domain, String path, String selector, String content, boolean live) {
+        this(domain, path, selector, content, false, live);
     }
 
     public boolean isCopy() {

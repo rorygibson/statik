@@ -20,6 +20,10 @@ public class User {
         this.username = username;
     }
 
+    public boolean isAnonymous() {
+        return false;
+    }
+
     public boolean isDefault() {
         return this.isDefaultUser;
     }
