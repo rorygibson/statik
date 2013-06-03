@@ -4,12 +4,16 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class UserManagementIT extends AbstractWebDriverIntTst {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserManagementIT.class);
 
     @Before
     public void performLogin() {
@@ -60,8 +64,15 @@ public class UserManagementIT extends AbstractWebDriverIntTst {
         WebElement deleteLink = driver.findElement(By.linkText("Delete"));
         deleteLink.click();
 
-        WebElement flash = driver.findElement(By.className("flash"));
-        assertEquals("Should have been shown a success message", "User deleted", flash.getText());
+        String src = driver.getPageSource();
+        try {
+            WebElement flash = driver.findElement(By.className("flash"));
+            assertEquals("Should have been shown a success message", "User deleted", flash.getText());
+        } catch (Throwable t) {
+            LOG.error("Timed out finding flash.");
+            LOG.error(src);
+            throw t;
+        }
     }
 
 

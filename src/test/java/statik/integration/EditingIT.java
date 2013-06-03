@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ import static org.junit.Assert.assertTrue;
 
 public class EditingIT extends AbstractWebDriverIntTst {
 
+
+    private static final Logger LOG = LoggerFactory.getLogger(EditingIT.class);
 
     @Before
     public void performLogin() {
@@ -23,10 +27,18 @@ public class EditingIT extends AbstractWebDriverIntTst {
         driver.get(ONE_PARA_TEST_PAGE);
         assertEquals("Text not as expected", "content", driver.findElement(By.tagName("p")).getText());
 
-        changeContentOf("p", "new content");
+        String src = null;
+        try {
+            changeContentOf("p", "new content");
 
-        WebElement again = findEventually(By.tagName("p"));
-        assertEquals("Text not as expected", "new content", again.getText());
+            src = driver.getPageSource();
+            WebElement again = findEventually(By.tagName("p"));
+            assertEquals("Text not as expected", "new content", again.getText());
+        } catch (Throwable t) {
+            LOG.error("Timed out finding content.");
+            LOG.error(src);
+            throw t;
+        }
     }
 
     @Test
@@ -37,11 +49,19 @@ public class EditingIT extends AbstractWebDriverIntTst {
         assertEquals("Link text wrong", "one para page", originalLink.getText());
         assertTrue("Link target wrong", originalLink.getAttribute("href").endsWith("one-para.html"));
 
-        changeContentOf("#first-link", "new link text");
+        String src = null;
+        try {
+            changeContentOf("#first-link", "new link text");
 
-        WebElement changedLink = driver.findElement(By.id("first-link"));
-        assertEquals("Link text wrong", "new link text", changedLink.getText());
-        assertTrue("Link target wrong", changedLink.getAttribute("href").endsWith("one-para.html"));
+            src = driver.getPageSource();
+            WebElement changedLink = driver.findElement(By.id("first-link"));
+            assertEquals("Link text wrong", "new link text", changedLink.getText());
+            assertTrue("Link target wrong", changedLink.getAttribute("href").endsWith("one-para.html"));
+        } catch (Throwable t) {
+            LOG.error("Timed out finding content.");
+            LOG.error(src);
+            throw t;
+        }
     }
 
 
@@ -53,12 +73,20 @@ public class EditingIT extends AbstractWebDriverIntTst {
 
         changeContentOf(secondPara, "new content");
 
-        driver.get(TWO_PARA_TEST_PAGE);
-        WebElement section = driver.findElement(By.tagName("section"));
-        List<WebElement> paras = section.findElements(By.tagName("p"));
-        assertEquals("Should still have 2 paras", 2, paras.size());
-        WebElement secondParaAfterEdit = paras.get(1);
-        assertEquals("Should now have some different content", "new content", secondParaAfterEdit.getText());
+        String src = null;
+        try {
+            driver.get(TWO_PARA_TEST_PAGE);
+            src = driver.getPageSource();
+            WebElement section = driver.findElement(By.tagName("section"));
+            List<WebElement> paras = section.findElements(By.tagName("p"));
+            assertEquals("Should still have 2 paras", 2, paras.size());
+            WebElement secondParaAfterEdit = paras.get(1);
+            assertEquals("Should now have some different content", "new content", secondParaAfterEdit.getText());
+        } catch (Throwable t) {
+            LOG.error("Timed out finding content.");
+            LOG.error(src);
+            throw t;
+        }
     }
 
     @Test
@@ -70,8 +98,15 @@ public class EditingIT extends AbstractWebDriverIntTst {
         changeContentOf(atFirst, "still the 4th, but different");
 
         driver.get(LIST_TEST_PAGE);
-        WebElement afterEdit = driver.findElements(By.tagName("li")).get(3);
-        assertEquals("Should now have some different content", "still the 4th, but different", afterEdit.getText());
+        String src = driver.getPageSource();
+        try {
+            WebElement afterEdit = driver.findElements(By.tagName("li")).get(3);
+            assertEquals("Should now have some different content", "still the 4th, but different", afterEdit.getText());
+        } catch (Throwable t) {
+            LOG.error("Timed out finding content.");
+            LOG.error(src);
+            throw t;
+        }
     }
 
     @Test
@@ -82,12 +117,19 @@ public class EditingIT extends AbstractWebDriverIntTst {
         copy(original);
         WebElement theCopy = driver.findElements(By.tagName("p")).get(1);
         changeContentOf(theCopy, "copied");
-
-        driver.get(ONE_PARA_TEST_PAGE);
-        List<WebElement> afterEdit = driver.findElements(By.tagName("p"));
-        assertEquals("Should have two paras", 2, afterEdit.size());
-        assertEquals("Original element text", "content", afterEdit.get(0).getText());
-        assertEquals("Copied element text", "copied", afterEdit.get(1).getText());
+        String src = null;
+        try {
+            driver.get(ONE_PARA_TEST_PAGE);
+            src = driver.getPageSource();
+            List<WebElement> afterEdit = driver.findElements(By.tagName("p"));
+            assertEquals("Should have two paras", 2, afterEdit.size());
+            assertEquals("Original element text", "content", afterEdit.get(0).getText());
+            assertEquals("Copied element text", "copied", afterEdit.get(1).getText());
+        } catch (Throwable t) {
+            LOG.error("Timed out finding content.");
+            LOG.error(src);
+            throw t;
+        }
     }
 
 }
