@@ -3,9 +3,6 @@ package statik.integration;
 import com.google.common.base.Function;
 import org.junit.After;
 import org.junit.BeforeClass;
-import org.junit.Rule;
-import org.junit.rules.MethodRule;
-import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -43,8 +40,7 @@ public class AbstractWebDriverIntTst {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractWebDriverIntTst.class);
     private static boolean running;
 
-    public static final int PERIOD_TO_WAIT_FOR_EDITOR = 500;
-    public static final int PERIOD_TO_WAIT_FOR_CHANGES = 500;
+    public static final int PERIOD_TO_WAIT_FOR_CHANGES = 1000;
 
 
     public static final String ONE_PARA_TEST_PAGE_PATH = "/one-para.html";
@@ -74,12 +70,16 @@ public class AbstractWebDriverIntTst {
     }
 
     @BeforeClass
-    public static void setUp() {
+    public static void classSetUp() {
+        if (driver != null) {
+            driver.manage().deleteAllCookies();
+        }
+
         if (running) {
             return;
         }
-        running = true;
 
+        running = true;
         driver = runningDriver();
     }
 
@@ -97,20 +97,26 @@ public class AbstractWebDriverIntTst {
             try {
                 base.evaluate();
             } catch (Throwable t) {
+                LOG.error("\n\n\n");
+                LOG.error("********** TEST FAILURE *********");
+                LOG.error("Current URL: " + driver.getCurrentUrl());
+                LOG.error("Current page title: " + driver.getTitle());
                 LOG.error(driver.getPageSource());
+                LOG.error("*********************************");
+                LOG.error("\n\n\n");
                 throw t;
             }
         }
     }
 
 
-    @Rule
-    public MethodRule dumpSourceOnFailure = new MethodRule() {
-        @Override
-        public Statement apply(Statement statement, FrameworkMethod frameworkMethod, Object o) {
-            return new DumpSourceOnFailureStatement(statement);
-        }
-    };
+    //@Rule
+    //public MethodRule dumpSourceOnFailure = new MethodRule() {
+    //    @Override
+    //    public Statement apply(Statement statement, FrameworkMethod frameworkMethod, Object o) {
+    //        return new DumpSourceOnFailureStatement(statement);
+    //    }
+    //};
 
 
     @After
@@ -135,8 +141,12 @@ public class AbstractWebDriverIntTst {
         });
     }
 
-    protected void waitForPresenceOf(final String tagName) {
-        findEventually(By.tagName(tagName));
+    protected void waitForPresenceOfItemByClassName(final String className) {
+        findEventually(By.className(className));
+    }
+
+    protected void waitForPresenceOfItemById(final String id) {
+        findEventually(By.id(id));
     }
 
     protected void sendLogin(String wrongUsername, String wrongPassword) {
@@ -162,9 +172,7 @@ public class AbstractWebDriverIntTst {
 
 
     protected void doLogout() {
-        driver.switchTo().frame("control-box");
-        driver.findElement(By.id("logout")).click();
-        driver.switchTo().defaultContent();
+        driver.get(LOGOUT_PAGE);
     }
 
     protected static WebDriver createDriver() {
@@ -210,13 +218,16 @@ public class AbstractWebDriverIntTst {
         WebElement menu = driver.findElement(By.id("jqContextMenu"));
         menu.findElement(By.id("edit")).click();
 
-        waitForPresenceOf("iframe");
+        waitForPresenceOfItemByClassName("wysihtml5-sandbox");
 
-        sleepForMs(PERIOD_TO_WAIT_FOR_EDITOR);
+        driver.findElement(By.id("language-switcher")).findElement(By.xpath("./option[@value='" + lang.code() + "']")).click();
+        sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
         ((FirefoxDriver) driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
+
         driver.findElement(By.id("submit")).click();
-        sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
+
+        driver.switchTo().defaultContent();
     }
 
     protected void changeContentOf(WebElement el, String newContent) {

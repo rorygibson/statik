@@ -52,11 +52,11 @@ public class ResourceRoute extends Route {
             if (resourceAsStream != null) {
                 IOUtils.copy(resourceAsStream, response.raw().getOutputStream());
             } else {
-                LOG.error("Error retrieving resource " + filename);
+                LOG.error("Error retrieving resource [" + filename + "]");
                 response.status(404);
             }
         } catch (IOException e) {
-            LOG.error("Error retrieving resource", e);
+            LOG.error("Error retrieving resource [" + filename + "]", e);
             response.status(404);
         }
         return Http.EMPTY_RESPONSE;

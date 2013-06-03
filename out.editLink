@@ -1,0 +1,1674 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building statik 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ statik ---
+[INFO] Deleting /Users/rory/work/personal/statik/target
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ statik ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 56 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ statik ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 44 source files to /Users/rory/work/personal/statik/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:testResources (default-testResources) @ statik ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:testCompile (default-testCompile) @ statik ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 22 source files to /Users/rory/work/personal/statik/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.10:test (default-test) @ statik ---
+[INFO] Surefire report directory: /Users/rory/work/personal/statik/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running statik.auth.AuthStoreTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.322 sec
+Running statik.auth.RDBMSAuthStoreTest
+2013-06-03 11:25:33,617 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:33,718 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:34,570 INFO  - MetaDataTableImpl          - Creating Metadata table: "PUBLIC"."schema_version"
+2013-06-03 11:25:34,797 INFO  - DbMigrate                  - Current version of schema "PUBLIC": << Empty Schema >>
+2013-06-03 11:25:34,797 INFO  - DbMigrate                  - Migrating schema "PUBLIC" to version 201305301300
+2013-06-03 11:25:34,888 INFO  - DbMigrate                  - Migrating schema "PUBLIC" to version 201305310719
+2013-06-03 11:25:34,952 INFO  - DbMigrate                  - Migrating schema "PUBLIC" to version 201305311019
+2013-06-03 11:25:35,002 INFO  - DbMigrate                  - Successfully applied 3 migrations to schema "PUBLIC" (execution time 00:00.446s).
+2013-06-03 11:25:35,004 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:35,050 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:35,259 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:35,259 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:35,264 INFO  - RDBMSAuthStore             - Adding user [admin], isDefault [true]
+2013-06-03 11:25:35,267 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:35,267 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:35,272 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:35,274 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:35,490 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:35,496 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:35,496 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:35,497 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:35,501 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:35,501 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:35,502 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:35,503 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:35,507 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:35,509 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:35,626 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:35,633 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:35,633 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:35,634 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:35,636 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:35,636 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:35,637 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:35,639 INFO  - RDBMSAuthStore             - Adding user [fred], isDefault [false]
+2013-06-03 11:25:35,640 INFO  - RDBMSAuthStore             - Querying for user [fred]
+2013-06-03 11:25:35,643 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:35,645 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:35,892 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:35,899 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:35,899 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:35,901 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:35,902 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:35,903 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:35,904 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:35,905 INFO  - RDBMSAuthStore             - Adding user [fred], isDefault [false]
+2013-06-03 11:25:35,905 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:25:35,906 INFO  - RDBMSAuthStore             - Deleting user [fred]
+2013-06-03 11:25:35,907 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:25:35,910 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:35,912 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:36,036 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:36,041 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:36,041 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:36,042 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:36,065 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:36,066 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:36,067 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:36,068 INFO  - RDBMSAuthStore             - Adding user [fred], isDefault [false]
+2013-06-03 11:25:36,072 INFO  - RDBMSAuthStore             - Updating user [fred]
+2013-06-03 11:25:36,074 INFO  - RDBMSAuthStore             - Querying for user [frederick]
+2013-06-03 11:25:36,085 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:36,087 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:36,232 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:36,236 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:36,237 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:36,249 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:36,262 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:36,262 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:36,269 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:36,286 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:36,287 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:36,288 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:36,388 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:36,391 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:36,391 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:36,396 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:36,398 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:36,398 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:36,399 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:36,400 INFO  - RDBMSAuthStore             - Adding user [one], isDefault [false]
+2013-06-03 11:25:36,400 INFO  - RDBMSAuthStore             - Adding user [two], isDefault [false]
+2013-06-03 11:25:36,401 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:25:36,402 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:36,403 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:36,516 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:36,523 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:36,524 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:36,524 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:36,529 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:36,529 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:36,530 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:36,530 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:25:36,534 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:36,536 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:36,627 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:36,632 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:36,632 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:36,632 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:36,635 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:36,635 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:36,636 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:36,638 INFO  - RDBMSAuthStore             - Adding user [fred], isDefault [false]
+2013-06-03 11:25:36,639 INFO  - RDBMSAuthStore             - Updating user [fred]
+2013-06-03 11:25:36,640 INFO  - RDBMSAuthStore             - Querying for user [fred]
+2013-06-03 11:25:36,643 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:36,647 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:36,759 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:36,763 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:36,763 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:36,764 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:36,766 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:36,766 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:36,767 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:36,768 INFO  - RDBMSAuthStore             - Querying for user [missing]
+2013-06-03 11:25:36,771 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:36,772 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:36,943 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:36,960 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:36,961 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:36,967 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:36,994 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:36,999 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:37,001 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:37,002 INFO  - RDBMSAuthStore             - Adding user [one], isDefault [false]
+2013-06-03 11:25:37,003 INFO  - RDBMSAuthStore             - Querying for user [one]
+2013-06-03 11:25:37,005 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:37,006 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:37,200 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:37,204 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:37,204 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:37,205 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:37,209 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:37,210 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:37,211 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:37,212 INFO  - RDBMSAuthStore             - Adding user [one], isDefault [false]
+2013-06-03 11:25:37,212 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:25:37,214 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:25:37,215 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:25:37,216 INFO  - RDBMSAuthStore             - Retrieving all users
+Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.628 sec
+Running statik.content.ContentItemTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 sec
+Running statik.content.RDBMSContentStoreTest
+2013-06-03 11:25:37,243 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:37,244 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:37,411 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:37,414 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:37,421 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:37,422 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:37,427 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:25:37,431 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [html > body > p]
+2013-06-03 11:25:37,487 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [html > body > div > span]
+2013-06-03 11:25:37,490 INFO  - RDBMSContentStore          - Retrieving content for domain [domain], path [/path], selector [html > body > p] and language [en]
+2013-06-03 11:25:37,493 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:37,494 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:37,726 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:37,733 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:37,734 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:37,735 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:37,739 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:25:37,741 INFO  - RDBMSContentStore          - Retrieving content for domain [domain], language [en] and path [/path]
+2013-06-03 11:25:37,744 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [selector]
+2013-06-03 11:25:37,747 INFO  - RDBMSContentStore          - Retrieving content for domain [domain], language [en] and path [/path]
+2013-06-03 11:25:37,749 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:37,752 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:37,848 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:37,852 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:37,853 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:37,854 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:37,860 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:25:37,861 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [fr] and selector [selector]
+2013-06-03 11:25:37,863 INFO  - RDBMSContentStore          - Retrieving content for domain [domain], path [/path], selector [selector] and language [fr]
+2013-06-03 11:25:37,868 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:37,870 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:38,021 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:38,024 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:38,025 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:38,028 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:38,033 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:25:38,034 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [html > body > p.1]
+2013-06-03 11:25:38,041 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [html > body > p.2]
+2013-06-03 11:25:38,043 DEBUG - RDBMSContentStore          - Making content items for domain [domain] and path [/path] live
+2013-06-03 11:25:38,046 INFO  - RDBMSContentStore          - Retrieving content for domain [domain], language [en] and path [/path]
+2013-06-03 11:25:38,051 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:38,053 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:38,146 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:38,155 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:38,155 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:38,156 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:38,159 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:25:38,161 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [selector0]
+2013-06-03 11:25:38,164 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [selector1]
+2013-06-03 11:25:38,166 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [selector2]
+2013-06-03 11:25:38,170 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [selector3]
+2013-06-03 11:25:38,171 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [selector4]
+2013-06-03 11:25:38,173 INFO  - RDBMSContentStore          - Retrieving content for domain [domain], language [en] and path [/path]
+2013-06-03 11:25:38,176 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:25:38,177 INFO  - RDBMSContentStore          - Retrieving content for domain [domain], language [en] and path [/path]
+2013-06-03 11:25:38,178 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:38,180 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:38,250 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:38,254 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:38,255 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:38,256 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:38,261 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:25:38,262 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [p]
+2013-06-03 11:25:38,265 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [domain], path [/path], language [en] and selector [p]
+2013-06-03 11:25:38,268 INFO  - RDBMSContentStore          - Retrieving content for domain [domain], language [en] and path [/path]
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.046 sec
+Running statik.session.InMemorySessionStoreTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running statik.session.RDBMSSessionStoreTest
+2013-06-03 11:25:38,292 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:38,300 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:38,572 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:38,575 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:38,576 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:38,577 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:38,580 DEBUG - RDBMSSessionStore          - creating session for [bob]
+2013-06-03 11:25:38,581 INFO  - RDBMSSessionStore          - Checking for existing session for [ef69c82e-416a-4ab9-afb4-5100eb34e7bb]
+2013-06-03 11:25:38,583 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:38,584 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:38,655 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:38,659 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:38,659 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:38,659 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:38,665 DEBUG - RDBMSSessionStore          - creating session for [bob]
+2013-06-03 11:25:38,667 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:38,669 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:38,969 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:38,973 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:38,973 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:38,975 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:38,977 DEBUG - RDBMSSessionStore          - creating session for [bob]
+2013-06-03 11:25:38,980 INFO  - RDBMSSessionStore          - Retrieving username for sessionId [335941a2-36da-4569-bb1e-a8c1c93f7234]
+2013-06-03 11:25:38,984 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:38,985 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:39,069 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:39,092 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:39,093 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:39,093 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:39,098 DEBUG - RDBMSSessionStore          - creating session for [bob]
+2013-06-03 11:25:39,100 DEBUG - RDBMSSessionStore          - creating session for [fred]
+2013-06-03 11:25:39,101 INFO  - RDBMSSessionStore          - Checking for existing session for [dabf5216-5649-46bb-940f-5f88755fcd8f]
+2013-06-03 11:25:39,104 INFO  - RDBMSSessionStore          - Checking for existing session for [efad7d84-4d7e-44e4-bee8-0618759fa9f8]
+2013-06-03 11:25:39,106 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:25:39,107 INFO  - RDBMSSessionStore          - Checking for existing session for [dabf5216-5649-46bb-940f-5f88755fcd8f]
+2013-06-03 11:25:39,108 INFO  - RDBMSSessionStore          - Checking for existing session for [efad7d84-4d7e-44e4-bee8-0618759fa9f8]
+2013-06-03 11:25:39,110 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:39,112 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:39,450 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:39,454 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:39,454 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:39,455 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:39,463 DEBUG - RDBMSSessionStore          - creating session for [bob]
+2013-06-03 11:25:39,466 INFO  - RDBMSSessionStore          - Deleting session with sessionId [b66bfae5-267b-4534-936d-5721b41dc72b]
+2013-06-03 11:25:39,475 INFO  - RDBMSSessionStore          - Checking for existing session for [b66bfae5-267b-4534-936d-5721b41dc72b]
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.194 sec
+Running statik.util.InternationalisationReplacerTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.219 sec
+Running statik.util.PasswordValidatorTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+Running statik.util.PropertiesLoaderTest
+2013-06-03 11:25:39,739 DEBUG - PropertiesLoader           - Loaded 1 properties
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
+Running statik.util.UsernameValidatorTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 sec
+
+Results :
+
+Tests run: 48, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-war-plugin:2.1.1:war (default-war) @ statik ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [statik] in [/Users/rory/work/personal/statik/target/ROOT]
+[INFO] Processing war project
+[INFO] Copying webapp resources [/Users/rory/work/personal/statik/src/main/webapp]
+[INFO] Webapp assembled in [760 msecs]
+[INFO] Building war: /Users/rory/work/personal/statik/target/ROOT.war
+[INFO] WEB-INF/web.xml already added, skipping
+[INFO] 
+[INFO] >>> jetty-maven-plugin:8.1.10.v20130312:start (start-jetty) @ statik >>>
+[INFO] 
+[INFO] <<< jetty-maven-plugin:8.1.10.v20130312:start (start-jetty) @ statik <<<
+[INFO] 
+[INFO] --- jetty-maven-plugin:8.1.10.v20130312:start (start-jetty) @ statik ---
+[INFO] Configuring Jetty for project: statik
+[INFO] webAppSourceDirectory not set. Defaulting to /Users/rory/work/personal/statik/src/main/webapp
+[INFO] Reload Mechanic: automatic
+[INFO] Classes = /Users/rory/work/personal/statik/target/classes
+[INFO] Context path = /
+[INFO] Tmp directory = /Users/rory/work/personal/statik/target/tmp
+[INFO] Web defaults = org/eclipse/jetty/webapp/webdefault.xml
+[INFO] Web overrides =  none
+[INFO] web.xml file = file:/Users/rory/work/personal/statik/src/main/webapp/WEB-INF/web.xml
+[INFO] Webapp directory = /Users/rory/work/personal/statik/src/main/webapp
+2013-06-03 11:25:52,129 INFO  - Main                       - Configuring from [config.properties]
+2013-06-03 11:25:52,429 DEBUG - Main                       - Test mode is true
+2013-06-03 11:25:52,429 DEBUG - Main                       - File base is /Users/rory/work/personal/statik/test-website
+2013-06-03 11:25:52,429 DEBUG - Main                       - Welcome file is index.html
+2013-06-03 11:25:52,429 DEBUG - Main                       - 404 file is 404.html
+2013-06-03 11:25:52,429 DEBUG - Main                       - Port is 4567
+2013-06-03 11:25:52,436 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:52,439 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:53,282 INFO  - MetaDataTableImpl          - Creating Metadata table: "PUBLIC"."schema_version"
+2013-06-03 11:25:53,463 INFO  - DbMigrate                  - Current version of schema "PUBLIC": << Empty Schema >>
+2013-06-03 11:25:53,464 INFO  - DbMigrate                  - Migrating schema "PUBLIC" to version 201305301300
+2013-06-03 11:25:53,552 INFO  - DbMigrate                  - Migrating schema "PUBLIC" to version 201305310719
+2013-06-03 11:25:53,640 INFO  - DbMigrate                  - Migrating schema "PUBLIC" to version 201305311019
+2013-06-03 11:25:53,698 INFO  - DbMigrate                  - Successfully applied 3 migrations to schema "PUBLIC" (execution time 00:00.421s).
+2013-06-03 11:25:53,698 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:53,747 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:53,920 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:53,927 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:54,147 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:54,153 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:54,154 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:54,163 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:54,171 INFO  - RDBMSAuthStore             - Checking for default user
+2013-06-03 11:25:54,172 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:25:54,175 INFO  - RDBMSAuthStore             - Adding user [admin], isDefault [true]
+2013-06-03 11:25:54,175 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:25:54,178 INFO  - UsesRDBMS                  - Loading config
+2013-06-03 11:25:54,178 INFO  - UsesRDBMS                  - Performing any DB migrations
+2013-06-03 11:25:54,291 INFO  - DbMigrate                  - Current version of schema "PUBLIC": 201305311019
+2013-06-03 11:25:54,299 INFO  - DbMigrate                  - Schema "PUBLIC" is up to date. No migration necessary.
+2013-06-03 11:25:54,299 INFO  - UsesRDBMS                  - Creating connection pool
+2013-06-03 11:25:54,305 WARN  - BoneCPConfig               - Max Connections < 1. Setting to 20
+2013-06-03 11:25:54,309 INFO  - Main                       - Setting up test-only routes
+2013-06-03 11:25:54,312 INFO  - Main                       - Setting up statik routes
+2013-06-03 11:25:54,317 INFO  - Main                       - Setting up editable site routes
+[INFO] Started Jetty Server
+[INFO] Starting scanner at interval of 10 seconds.
+[INFO] 
+[INFO] --- maven-failsafe-plugin:2.14:integration-test (default) @ statik ---
+[INFO] Failsafe report directory: /Users/rory/work/personal/statik/target/failsafe-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running statik.integration.EditingIT
+2013-06-03 11:26:13,356 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:26:13,359 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:26:15,600 DEBUG - EditableFileRoute          - GET on [localhost], path=/favicon.ico
+2013-06-03 11:26:15,730 DEBUG - EditableFileRoute          - GET on [localhost], path=/favicon.ico
+2013-06-03 11:26:15,895 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:26:15,895 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:26:15,896 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:26:15,949 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:26:15,949 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:26:15,950 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:16,098 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:26:16,099 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:26:16,123 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:26:17,060 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:26:17,060 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:17,063 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:18,156 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:26:18,157 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:26:18,157 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:18,159 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:26:18,168 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:26:18,191 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:26:18,786 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:26:18,786 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:18,797 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:24,663 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:26:24,663 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:24,665 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:24,666 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p] and language [en]
+2013-06-03 11:26:24,849 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-06-03 11:26:34,577 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:26:34,577 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:34,587 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:34,587 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [new content], lang [en]
+2013-06-03 11:26:34,588 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/one-para.html], language [en] and selector [html > body > section > p]
+2013-06-03 11:26:35,040 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:26:35,040 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:26:35,041 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:35,045 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:26:35,049 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with English content [new content]
+2013-06-03 11:26:35,049 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:26:35,318 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:26:38,221 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:26:38,221 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:38,222 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:38,745 ERROR - ResourceRoute              - Error retrieving resource [jquery-1.9.1.js]
+org.eclipse.jetty.io.EofException
+	at org.eclipse.jetty.http.HttpGenerator.flushBuffer(HttpGenerator.java:914)
+	at org.eclipse.jetty.http.AbstractGenerator.blockForOutput(AbstractGenerator.java:523)
+	at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:170)
+	at org.eclipse.jetty.server.HttpOutput.write(HttpOutput.java:107)
+	at org.apache.commons.io.IOUtils.copyLarge(IOUtils.java:1384)
+	at org.apache.commons.io.IOUtils.copy(IOUtils.java:1357)
+	at statik.route.ResourceRoute.writeClasspathFileToResponse(ResourceRoute.java:53)
+	at statik.route.ResourceRoute.handle(ResourceRoute.java:34)
+	at spark.webserver.MatcherFilter.doFilter(MatcherFilter.java:136)
+	at spark.servlet.SparkFilter.doFilter(SparkFilter.java:98)
+	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1419)
+	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:455)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
+	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:557)
+	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
+	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1075)
+	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:384)
+	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
+	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1009)
+	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:255)
+	at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:154)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
+	at org.eclipse.jetty.server.Server.handle(Server.java:368)
+	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:489)
+	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:942)
+	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:1004)
+	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:640)
+	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
+	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
+	at java.lang.Thread.run(Thread.java:722)
+Caused by: java.io.IOException: Broken pipe
+	at sun.nio.ch.FileDispatcherImpl.write0(Native Method)
+	at sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:47)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:94)
+	at sun.nio.ch.IOUtil.write(IOUtil.java:65)
+	at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:450)
+	at org.eclipse.jetty.io.nio.ChannelEndPoint.flush(ChannelEndPoint.java:293)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.flush(SelectChannelEndPoint.java:362)
+	at org.eclipse.jetty.io.nio.ChannelEndPoint.flush(ChannelEndPoint.java:341)
+	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.flush(SelectChannelEndPoint.java:336)
+	at org.eclipse.jetty.http.HttpGenerator.flushBuffer(HttpGenerator.java:841)
+	... 34 more
+2013-06-03 11:26:38,754 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:26:38,756 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:38,757 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:38,757 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:26:38,763 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:26:38,764 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:26:39,390 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:39,391 INFO  - RDBMSSessionStore          - Checking for existing session for [ec06c7d0-7359-42bf-a5e8-462277c2dd4d]
+2013-06-03 11:26:40,565 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:26:40,566 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:26:40,580 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:26:40,587 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:26:40,587 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:26:40,588 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:40,591 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:26:40,592 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:26:41,190 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:26:44,400 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:26:44,400 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:44,418 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:44,987 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:26:44,988 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:26:44,988 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:44,989 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:26:44,997 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:26:45,030 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:26:46,007 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:26:46,007 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:46,008 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:49,222 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:26:49,222 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:49,223 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:49,224 DEBUG - ContentRoute               - POST with selector [html > body > section > p:nth-of-type(2)], domain [localhost], path [/one-para.html], content [content], lang []
+2013-06-03 11:26:49,224 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/one-para.html], language [en] and selector [html > body > section > p:nth-of-type(2)]
+2013-06-03 11:26:50,879 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:26:50,879 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:50,880 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:50,888 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p:nth-of-type(2)] and language [en]
+2013-06-03 11:26:51,070 DEBUG - EditorRoute                - Found the content in the DB, passing that to load the editor
+2013-06-03 11:26:57,165 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:26:57,165 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:57,166 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:57,166 DEBUG - ContentRoute               - POST with selector [html > body > section > p:nth-of-type(2)], domain [localhost], path [/one-para.html], content [copied], lang [en]
+2013-06-03 11:26:57,166 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/one-para.html], language [en] and selector [html > body > section > p:nth-of-type(2)]
+2013-06-03 11:26:57,707 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:26:57,708 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:26:57,708 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:57,715 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:26:57,735 DEBUG - EditableFileRoute          - Element doesn't exist; must be a copy. Creating and inserting
+2013-06-03 11:26:57,736 DEBUG - EditableFileRoute          - Creating element with sibling selector [html > body > section > p], tagName [p]
+2013-06-03 11:26:57,736 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:26:57,763 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:26:59,503 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:26:59,503 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:59,504 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:26:59,609 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:26:59,609 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:26:59,609 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:26:59,611 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:26:59,613 DEBUG - EditableFileRoute          - Element doesn't exist; must be a copy. Creating and inserting
+2013-06-03 11:26:59,613 DEBUG - EditableFileRoute          - Creating element with sibling selector [html > body > section > p], tagName [p]
+2013-06-03 11:26:59,613 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:26:59,708 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:01,156 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:01,156 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:27:01,165 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:01,633 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:27:01,633 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:27:01,638 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:01,638 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:27:01,639 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:27:01,639 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:27:02,065 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:27:02,069 INFO  - RDBMSSessionStore          - Checking for existing session for [6d851e37-5dbb-44f0-9dd8-7deff4ce49bf]
+2013-06-03 11:27:05,339 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:27:05,339 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:27:05,341 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:27:05,385 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:27:05,386 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:05,387 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:05,402 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:27:05,403 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:05,436 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:06,480 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:06,480 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:06,481 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:07,111 DEBUG - EditableFileRoute          - GET on [localhost], path=/list.html
+2013-06-03 11:27:07,111 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:07,164 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:07,167 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/list.html]
+2013-06-03 11:27:07,169 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:07,341 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:09,612 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:09,612 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:09,613 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:12,642 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:27:12,642 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:12,643 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:12,647 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/list.html], selector [html > body > section > ul > li:nth-of-type(4)] and language [en]
+2013-06-03 11:27:12,754 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [four]
+2013-06-03 11:27:17,877 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:27:17,877 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:17,878 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:17,878 DEBUG - ContentRoute               - POST with selector [html > body > section > ul > li:nth-of-type(4)], domain [localhost], path [/list.html], content [still the 4th, but different], lang [en]
+2013-06-03 11:27:17,879 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/list.html], language [en] and selector [html > body > section > ul > li:nth-of-type(4)]
+2013-06-03 11:27:18,200 DEBUG - EditableFileRoute          - GET on [localhost], path=/list.html
+2013-06-03 11:27:18,200 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:18,200 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:18,202 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/list.html]
+2013-06-03 11:27:18,215 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > ul > li:nth-of-type(4)] with English content [still the 4th, but different]
+2013-06-03 11:27:18,215 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:19,168 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:20,394 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:20,394 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:20,399 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:20,481 DEBUG - EditableFileRoute          - GET on [localhost], path=/list.html
+2013-06-03 11:27:20,482 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:20,482 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:20,484 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/list.html]
+2013-06-03 11:27:20,490 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > ul > li:nth-of-type(4)] with English content [still the 4th, but different]
+2013-06-03 11:27:20,490 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:20,518 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:21,184 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:21,187 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:21,201 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:21,395 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:27:21,395 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:21,413 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:21,414 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:27:21,414 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:27:21,415 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:27:21,549 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:21,549 INFO  - RDBMSSessionStore          - Checking for existing session for [e4da6fa0-387a-4f47-a084-04cf52eb373b]
+2013-06-03 11:27:22,112 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:27:22,124 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:27:22,125 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:27:22,167 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:27:22,167 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:22,168 INFO  - RDBMSSessionStore          - Checking for existing session for [9e47aece-d4d4-451e-9194-018125336017]
+2013-06-03 11:27:22,181 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:27:22,182 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:22,261 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:23,891 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:23,891 INFO  - RDBMSSessionStore          - Checking for existing session for [9e47aece-d4d4-451e-9194-018125336017]
+2013-06-03 11:27:23,892 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:25,704 DEBUG - EditableFileRoute          - GET on [localhost], path=/links.html
+2013-06-03 11:27:25,704 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:25,704 INFO  - RDBMSSessionStore          - Checking for existing session for [9e47aece-d4d4-451e-9194-018125336017]
+2013-06-03 11:27:25,707 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/links.html]
+2013-06-03 11:27:25,712 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:25,764 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:27,584 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:27,584 INFO  - RDBMSSessionStore          - Checking for existing session for [9e47aece-d4d4-451e-9194-018125336017]
+2013-06-03 11:27:27,586 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:32,337 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:27:32,337 INFO  - RDBMSSessionStore          - Checking for existing session for [9e47aece-d4d4-451e-9194-018125336017]
+2013-06-03 11:27:32,338 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:32,339 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/links.html], selector [html > body > section > a#first-link] and language [en]
+2013-06-03 11:27:32,539 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [one para page]
+2013-06-03 11:27:37,350 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:27:37,350 INFO  - RDBMSSessionStore          - Checking for existing session for [9e47aece-d4d4-451e-9194-018125336017]
+2013-06-03 11:27:37,353 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:37,353 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:27:37,354 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:27:37,354 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:27:37,576 INFO  - RDBMSSessionStore          - Checking for existing session for [9e47aece-d4d4-451e-9194-018125336017]
+2013-06-03 11:27:37,577 INFO  - RDBMSSessionStore          - Checking for existing session for [9e47aece-d4d4-451e-9194-018125336017]
+2013-06-03 11:27:41,611 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:27:41,611 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:27:41,613 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:27:42,027 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:27:42,027 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:42,043 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:42,045 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:27:42,046 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:42,092 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:44,090 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:44,090 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:44,091 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:44,549 DEBUG - EditableFileRoute          - GET on [localhost], path=/two-paras.html
+2013-06-03 11:27:44,549 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:44,564 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:44,566 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/two-paras.html]
+2013-06-03 11:27:44,567 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:44,613 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:45,158 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:45,159 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:45,160 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:46,838 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:27:46,838 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:46,841 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:46,841 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/two-paras.html], selector [html > body > section > p:nth-of-type(2)] and language [en]
+2013-06-03 11:27:47,112 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [two]
+2013-06-03 11:27:50,853 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:27:50,854 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:50,854 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:50,854 DEBUG - ContentRoute               - POST with selector [html > body > section > p:nth-of-type(2)], domain [localhost], path [/two-paras.html], content [new content], lang [en]
+2013-06-03 11:27:50,854 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/two-paras.html], language [en] and selector [html > body > section > p:nth-of-type(2)]
+2013-06-03 11:27:50,917 DEBUG - EditableFileRoute          - GET on [localhost], path=/two-paras.html
+2013-06-03 11:27:50,917 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:50,930 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:50,932 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/two-paras.html]
+2013-06-03 11:27:50,933 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p:nth-of-type(2)] with English content [new content]
+2013-06-03 11:27:50,934 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:51,045 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:51,707 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:51,707 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:51,708 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:51,805 DEBUG - EditableFileRoute          - GET on [localhost], path=/two-paras.html
+2013-06-03 11:27:51,805 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:51,806 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:51,808 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/two-paras.html]
+2013-06-03 11:27:51,810 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p:nth-of-type(2)] with English content [new content]
+2013-06-03 11:27:51,810 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:51,861 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:52,175 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:52,175 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:52,176 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:52,590 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:27:52,590 INFO  - RDBMSSessionStore          - Checking for existing session for [d1c60238-15b6-4f13-867e-284311fdc850]
+2013-06-03 11:27:52,591 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:52,591 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:27:52,592 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:27:52,592 INFO  - RDBMSAuthStore             - Deleting all users except default
+Tests run: 5, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 116.471 sec <<< FAILURE!
+editLink(statik.integration.EditingIT)  Time elapsed: 16.061 sec  <<< ERROR!
+org.openqa.selenium.TimeoutException: Timed out after 3 seconds waiting for statik.integration.AbstractWebDriverIntTst$1@243250b1
+Build info: version: '2.31.0', revision: '1bd294d185a80fa4206dfeab80ba773c04ac33c0', time: '2013-02-27 13:51:26'
+System info: os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.8.3', java.version: '1.7.0_17'
+Driver info: driver.version: unknown
+	at <anonymous class>.<anonymous method>(file:///var/folders/kw/xdzldybs6_zgx3b4_mfxs13m0000gn/T/anonymous1405709652464962515webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:8405)
+	at <anonymous class>.<anonymous method>(file:///var/folders/kw/xdzldybs6_zgx3b4_mfxs13m0000gn/T/anonymous1405709652464962515webdriver-profile/extensions/fxdriver@googlecode.com/components/driver_component.js:8414)
+	at <anonymous class>.<anonymous method>(file:///var/folders/kw/xdzldybs6_zgx3b4_mfxs13m0000gn/T/anonymous1405709652464962515webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10421)
+	at <anonymous class>.<anonymous method>(file:///var/folders/kw/xdzldybs6_zgx3b4_mfxs13m0000gn/T/anonymous1405709652464962515webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10426)
+	at <anonymous class>.<anonymous method>(file:///var/folders/kw/xdzldybs6_zgx3b4_mfxs13m0000gn/T/anonymous1405709652464962515webdriver-profile/extensions/fxdriver@googlecode.com/components/command_processor.js:10366)
+
+Running statik.integration.ElementCloningIT
+2013-06-03 11:27:52,916 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:27:52,917 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:27:53,343 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:27:53,343 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:27:53,345 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:27:54,038 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:27:54,038 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:54,038 INFO  - RDBMSSessionStore          - Checking for existing session for [396e1b1b-38ce-4505-b35c-6e99187a05e9]
+2013-06-03 11:27:54,044 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:27:54,045 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:54,093 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:54,506 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:54,506 INFO  - RDBMSSessionStore          - Checking for existing session for [396e1b1b-38ce-4505-b35c-6e99187a05e9]
+2013-06-03 11:27:54,508 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:54,826 DEBUG - EditableFileRoute          - GET on [localhost], path=/list.html
+2013-06-03 11:27:54,826 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:54,875 INFO  - RDBMSSessionStore          - Checking for existing session for [396e1b1b-38ce-4505-b35c-6e99187a05e9]
+2013-06-03 11:27:54,878 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/list.html]
+2013-06-03 11:27:54,879 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:54,948 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:55,351 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:55,351 INFO  - RDBMSSessionStore          - Checking for existing session for [396e1b1b-38ce-4505-b35c-6e99187a05e9]
+2013-06-03 11:27:55,352 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:56,233 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:27:56,233 INFO  - RDBMSSessionStore          - Checking for existing session for [396e1b1b-38ce-4505-b35c-6e99187a05e9]
+2013-06-03 11:27:56,233 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:27:56,234 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:27:56,234 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:27:56,234 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:27:56,491 INFO  - RDBMSSessionStore          - Checking for existing session for [396e1b1b-38ce-4505-b35c-6e99187a05e9]
+2013-06-03 11:27:56,492 INFO  - RDBMSSessionStore          - Checking for existing session for [396e1b1b-38ce-4505-b35c-6e99187a05e9]
+2013-06-03 11:27:58,058 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:27:58,058 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:27:58,064 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:27:58,158 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:27:58,158 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:27:58,158 INFO  - RDBMSSessionStore          - Checking for existing session for [299be816-7fc5-458b-b75a-caa34e572757]
+2013-06-03 11:27:58,161 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:27:58,162 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:27:58,192 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:27:59,197 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:27:59,197 INFO  - RDBMSSessionStore          - Checking for existing session for [299be816-7fc5-458b-b75a-caa34e572757]
+2013-06-03 11:27:59,202 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:00,329 DEBUG - EditableFileRoute          - GET on [localhost], path=/links.html
+2013-06-03 11:28:00,329 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:00,540 INFO  - RDBMSSessionStore          - Checking for existing session for [299be816-7fc5-458b-b75a-caa34e572757]
+2013-06-03 11:28:00,543 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/links.html]
+2013-06-03 11:28:00,544 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:00,571 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:02,274 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:02,274 INFO  - RDBMSSessionStore          - Checking for existing session for [299be816-7fc5-458b-b75a-caa34e572757]
+2013-06-03 11:28:02,275 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:03,099 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:28:03,099 INFO  - RDBMSSessionStore          - Checking for existing session for [299be816-7fc5-458b-b75a-caa34e572757]
+2013-06-03 11:28:03,100 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:03,100 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:28:03,100 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:28:03,100 INFO  - RDBMSAuthStore             - Deleting all users except default
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.481 sec
+Running statik.integration.FileNotFoundIT
+2013-06-03 11:28:04,149 DEBUG - EditableFileRoute          - GET on [localhost], path=/i-dont-exist
+2013-06-03 11:28:04,150 ERROR - EditableFileRoute          - Error reading file /i-dont-exist
+2013-06-03 11:28:04,287 DEBUG - EditableFileRoute          - GET on [localhost], path=/localhost/styles.css
+2013-06-03 11:28:04,287 ERROR - EditableFileRoute          - Error reading file /localhost/styles.css
+2013-06-03 11:28:04,517 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:28:04,517 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:04,518 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:28:04,519 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:28:04,520 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:28:04,531 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:04,534 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.701 sec
+Running statik.integration.I18nIT
+2013-06-03 11:28:04,882 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:28:04,883 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:04,884 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:04,956 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:04,957 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:05,417 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:05,419 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:06,733 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:28:06,733 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:28:06,735 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:28:06,963 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:28:06,963 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:06,963 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:06,966 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:28:06,968 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:07,010 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:07,681 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:07,682 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:07,684 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:08,314 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:28:08,314 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:08,515 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:08,517 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:28:08,518 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:08,574 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:10,922 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:10,922 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:10,925 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:11,800 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:28:11,800 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:11,801 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:11,801 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p] and language [en]
+2013-06-03 11:28:11,923 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-06-03 11:28:12,816 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:28:12,816 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:12,819 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:12,819 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p] and language [pt]
+2013-06-03 11:28:12,927 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-06-03 11:28:14,946 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:28:14,946 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:14,948 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:14,948 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [Statik páginas de teste], lang [pt]
+2013-06-03 11:28:14,948 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/one-para.html], language [pt] and selector [html > body > section > p]
+2013-06-03 11:28:14,977 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:28:14,977 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:14,977 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:14,978 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:28:14,981 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:15,133 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:15,646 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:15,646 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:15,648 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:15,785 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:28:15,785 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:15,787 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:15,789 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:28:15,791 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:15,897 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:16,487 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:16,488 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:16,488 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:19,968 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:28:19,968 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:19,971 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:19,971 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p] and language [en]
+2013-06-03 11:28:20,125 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-06-03 11:28:22,760 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:28:22,760 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:22,761 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:22,761 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p] and language [fr]
+2013-06-03 11:28:22,877 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-06-03 11:28:26,113 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:28:26,113 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:26,114 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:26,114 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [Le Statik test pages], lang [fr]
+2013-06-03 11:28:26,114 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/one-para.html], language [fr] and selector [html > body > section > p]
+2013-06-03 11:28:26,388 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:28:26,388 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:26,389 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:26,391 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:28:26,392 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:26,950 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:28,896 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:28:28,896 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:28,896 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:28,898 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [pt] and path [/one-para.html]
+2013-06-03 11:28:28,899 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with Portuguese content [Statik páginas de teste]
+2013-06-03 11:28:28,900 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:28,973 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:28,976 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:28,976 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:28,977 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:31,129 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:31,129 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:31,131 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:31,267 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:28:31,279 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:31,279 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:31,281 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [fr] and path [/one-para.html]
+2013-06-03 11:28:31,282 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with French content [Le Statik test pages]
+2013-06-03 11:28:31,282 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:31,477 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:32,732 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:32,732 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:32,733 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:33,772 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:28:33,772 INFO  - RDBMSSessionStore          - Checking for existing session for [0cb5aa63-52f6-4484-8474-db9daeafe4df]
+2013-06-03 11:28:33,773 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:33,773 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:28:33,774 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:28:33,774 INFO  - RDBMSAuthStore             - Deleting all users except default
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 29.358 sec
+Running statik.integration.JavaScriptUnitTestsIT
+2013-06-03 11:28:34,642 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit-tests.html
+2013-06-03 11:28:34,643 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:34,993 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:34,998 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/qunit-tests.html]
+2013-06-03 11:28:35,189 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/sinon-1.6.0.js
+2013-06-03 11:28:35,190 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/jquery-1.7.2.js
+2013-06-03 11:28:35,192 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/qunit-1.11.0.css
+2013-06-03 11:28:35,194 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/qunit-1.11.0.js
+2013-06-03 11:28:35,195 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit/sinon-qunit-1.0.0.js
+2013-06-03 11:28:35,196 DEBUG - EditableFileRoute          - GET on [localhost], path=/qunit-tests.js
+2013-06-03 11:28:37,380 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:28:37,380 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:37,384 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:28:37,385 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:28:37,385 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:28:37,427 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:37,430 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.577 sec
+Running statik.integration.LoginIT
+2013-06-03 11:28:37,776 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:37,777 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:38,302 DEBUG - LoginRoute                 - POST to /statik-auth for user [fred], originalDomain is []
+2013-06-03 11:28:38,302 INFO  - RDBMSAuthStore             - Querying for user [fred]
+2013-06-03 11:28:38,661 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:28:38,661 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:38,662 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:28:38,662 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:28:38,663 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:28:38,692 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:38,693 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:38,909 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:38,910 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:42,428 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:28:42,428 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:28:42,429 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:28:42,812 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:28:42,813 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:42,813 INFO  - RDBMSSessionStore          - Checking for existing session for [5cb74353-ef64-4d12-9b48-4fd0e0b1836b]
+2013-06-03 11:28:42,815 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:28:42,816 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:42,845 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:44,997 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:44,997 INFO  - RDBMSSessionStore          - Checking for existing session for [5cb74353-ef64-4d12-9b48-4fd0e0b1836b]
+2013-06-03 11:28:44,999 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:45,300 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:28:45,300 INFO  - RDBMSSessionStore          - Checking for existing session for [5cb74353-ef64-4d12-9b48-4fd0e0b1836b]
+2013-06-03 11:28:45,302 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:45,302 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:28:45,303 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:28:45,303 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:28:45,454 INFO  - RDBMSSessionStore          - Checking for existing session for [5cb74353-ef64-4d12-9b48-4fd0e0b1836b]
+2013-06-03 11:28:45,454 INFO  - RDBMSSessionStore          - Checking for existing session for [5cb74353-ef64-4d12-9b48-4fd0e0b1836b]
+2013-06-03 11:28:47,313 DEBUG - LoginRoute                 - POST to /statik-auth for user [dont-exist], originalDomain is []
+2013-06-03 11:28:47,313 INFO  - RDBMSAuthStore             - Querying for user [dont-exist]
+2013-06-03 11:28:47,814 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:28:47,814 INFO  - RDBMSSessionStore          - Checking for existing session for [5cb74353-ef64-4d12-9b48-4fd0e0b1836b]
+2013-06-03 11:28:47,815 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:28:47,815 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:28:47,815 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:28:47,832 INFO  - RDBMSSessionStore          - Checking for existing session for [5cb74353-ef64-4d12-9b48-4fd0e0b1836b]
+2013-06-03 11:28:47,833 INFO  - RDBMSSessionStore          - Checking for existing session for [5cb74353-ef64-4d12-9b48-4fd0e0b1836b]
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.343 sec
+Running statik.integration.PublishingIT
+2013-06-03 11:28:48,287 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:48,288 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:28:49,808 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:28:49,808 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:28:49,809 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:28:49,817 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:28:49,818 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:49,818 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:28:49,827 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:28:49,828 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:49,934 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:51,410 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:51,410 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:28:51,411 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:52,165 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:28:52,172 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:28:52,172 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:28:52,174 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:28:52,175 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:28:52,276 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:28:53,576 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:28:53,576 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:28:53,577 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:55,413 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:28:55,414 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:28:55,418 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:28:55,418 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p] and language [en]
+2013-06-03 11:28:55,656 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-06-03 11:29:02,209 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:29:02,209 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:02,210 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:02,210 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [new content], lang [en]
+2013-06-03 11:29:02,210 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/one-para.html], language [en] and selector [html > body > section > p]
+2013-06-03 11:29:02,362 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:29:02,363 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:02,364 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:02,365 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:29:02,367 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with English content [new content]
+2013-06-03 11:29:02,367 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:02,411 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:03,701 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:03,701 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:03,702 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:03,814 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:29:03,814 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:03,815 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:03,815 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:03,822 INFO  - RDBMSSessionStore          - Retrieving username for sessionId [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:03,824 DEBUG - LogoutRoute                - Log out [admin]
+2013-06-03 11:29:03,824 INFO  - RDBMSSessionStore          - Deleting session with sessionId [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:03,833 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:03,834 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:03,835 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:03,837 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:03,899 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:29:03,899 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:03,902 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:03,904 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:29:04,008 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:04,201 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:29:04,201 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:04,203 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:29:04,204 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:29:04,204 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:29:04,219 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:04,220 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:04,393 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:04,394 INFO  - RDBMSSessionStore          - Checking for existing session for [674710af-5c8a-493c-a0a1-e4d7486be643]
+2013-06-03 11:29:05,108 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:29:05,108 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:29:05,109 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:29:05,163 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:05,163 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:05,164 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:05,170 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:05,172 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:05,227 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:05,705 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:05,705 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:05,706 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:06,319 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:29:06,319 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:06,319 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:06,320 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:29:06,327 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:06,464 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:06,709 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:06,710 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:06,713 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:07,435 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:29:07,435 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:07,436 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:07,437 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p] and language [en]
+2013-06-03 11:29:07,559 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-06-03 11:29:11,364 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:29:11,364 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:11,365 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:11,365 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [new content], lang [en]
+2013-06-03 11:29:11,365 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/one-para.html], language [en] and selector [html > body > section > p]
+2013-06-03 11:29:11,419 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:29:11,430 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:11,430 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:11,432 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:29:11,434 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with English content [new content]
+2013-06-03 11:29:11,434 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:11,546 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:12,328 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:12,328 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:12,331 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:12,826 DEBUG - SecureFilter               - Secured path [/statik/make-it-so]
+2013-06-03 11:29:12,826 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:12,827 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:12,827 INFO  - MakeContentLiveRoute       - Making the content live for page [/one-para.html]
+2013-06-03 11:29:12,827 DEBUG - RDBMSContentStore          - Making content items for domain [localhost] and path [/one-para.html] live
+2013-06-03 11:29:13,191 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:29:13,191 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:13,193 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:13,193 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:13,194 INFO  - RDBMSSessionStore          - Retrieving username for sessionId [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:13,196 DEBUG - LogoutRoute                - Log out [admin]
+2013-06-03 11:29:13,196 INFO  - RDBMSSessionStore          - Deleting session with sessionId [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:13,200 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:13,200 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:13,200 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:13,204 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:13,250 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:13,413 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:29:13,413 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:13,413 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:13,415 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:29:13,416 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with English content [new content]
+2013-06-03 11:29:13,450 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:13,794 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:29:13,794 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:13,796 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:29:13,796 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:29:13,796 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:29:13,808 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:13,809 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:14,023 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:14,024 INFO  - RDBMSSessionStore          - Checking for existing session for [0d18c8ba-a3a0-46e5-b18e-03d1f0747c90]
+2013-06-03 11:29:15,094 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:29:15,094 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:29:15,095 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:29:15,576 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:15,577 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:15,577 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:15,580 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:15,582 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:15,664 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:16,315 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:16,326 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:16,330 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:16,682 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:29:16,682 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:16,682 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:16,687 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:29:16,691 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:16,749 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:17,824 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:17,824 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:17,845 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:19,125 DEBUG - SecureFilter               - Secured path [/statik/editor]
+2013-06-03 11:29:19,125 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:19,129 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:19,129 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], path [/one-para.html], selector [html > body > section > p] and language [en]
+2013-06-03 11:29:19,268 DEBUG - EditorRoute                - Couldn't find content in the DB; assume first time we've edited this element, pass back content from page [content]
+2013-06-03 11:29:22,912 DEBUG - SecureFilter               - Secured path [/statik/content]
+2013-06-03 11:29:22,912 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:22,913 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:22,913 DEBUG - ContentRoute               - POST with selector [html > body > section > p], domain [localhost], path [/one-para.html], content [new content], lang [en]
+2013-06-03 11:29:22,913 DEBUG - RDBMSContentStore          - Inserting or updating content item with domain [localhost], path [/one-para.html], language [en] and selector [html > body > section > p]
+2013-06-03 11:29:22,975 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:29:22,976 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:22,976 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:22,977 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:29:22,978 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with English content [new content]
+2013-06-03 11:29:22,978 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:23,178 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:23,710 DEBUG - EditableFileRoute          - GET on [localhost], path=/one-para.html
+2013-06-03 11:29:23,710 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:23,710 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:23,711 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/one-para.html]
+2013-06-03 11:29:23,713 DEBUG - EditableFileRoute          - Replaced element with selector [html > body > section > p] with English content [new content]
+2013-06-03 11:29:23,713 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:24,096 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:24,693 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:24,693 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:24,694 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:25,290 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:29:25,290 INFO  - RDBMSSessionStore          - Checking for existing session for [4a889bfb-5101-4a57-ae1b-19c18195262a]
+2013-06-03 11:29:25,293 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:25,293 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:29:25,293 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:29:25,293 INFO  - RDBMSAuthStore             - Deleting all users except default
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 37.193 sec
+Running statik.integration.SessionPersistenceIT
+2013-06-03 11:29:25,972 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:29:25,973 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:29:26,779 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:29:26,780 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:29:26,802 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:29:26,827 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:26,827 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:26,827 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:26,830 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:26,832 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:26,915 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:28,799 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:28,800 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:28,801 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:43,868 DEBUG - EditableFileRoute          - GET on [localhost], path=/index.html
+2013-06-03 11:29:43,868 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:43,868 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:29:43,873 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/index.html]
+2013-06-03 11:29:43,926 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:44,018 DEBUG - EditableFileRoute          - GET on [localhost], path=/favicon.ico
+2013-06-03 11:29:44,146 DEBUG - EditableFileRoute          - GET on [localhost], path=/favicon.ico
+2013-06-03 11:29:44,174 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,176 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,418 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:29:44,418 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,419 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:44,419 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,420 INFO  - RDBMSSessionStore          - Retrieving username for sessionId [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,420 DEBUG - LogoutRoute                - Log out [admin]
+2013-06-03 11:29:44,421 INFO  - RDBMSSessionStore          - Deleting session with sessionId [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,445 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:44,445 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:44,445 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,453 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:44,467 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:44,566 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:29:44,566 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,580 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:29:44,582 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:29:44,583 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:29:44,627 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:44,628 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:45,035 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:45,037 INFO  - RDBMSSessionStore          - Checking for existing session for [58c3fa21-2562-4346-bca1-a0a88679be89]
+2013-06-03 11:29:45,835 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:29:45,835 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:29:45,837 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:29:46,209 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:46,209 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:46,209 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:46,214 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:46,216 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:46,235 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:46,741 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:46,741 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:46,742 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:47,060 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:29:47,060 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,061 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:47,061 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,062 INFO  - RDBMSSessionStore          - Retrieving username for sessionId [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,062 DEBUG - LogoutRoute                - Log out [admin]
+2013-06-03 11:29:47,062 INFO  - RDBMSSessionStore          - Deleting session with sessionId [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,077 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:47,077 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:47,077 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,080 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:47,097 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:47,195 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,197 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,484 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:29:47,484 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,485 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,503 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:47,505 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:48,419 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:29:48,419 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:48,422 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:29:48,423 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:29:48,423 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:29:48,424 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:48,426 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:48,692 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:48,692 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:49,859 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:29:49,859 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:49,860 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:49,869 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:49,870 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:52,798 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:29:52,798 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:52,801 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:29:52,802 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:29:52,802 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:29:53,211 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:53,212 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:54,368 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:54,369 INFO  - RDBMSSessionStore          - Checking for existing session for [9d5e5e75-965f-4672-9094-b1488267e8d8]
+2013-06-03 11:29:55,402 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:29:55,402 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:29:55,403 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:29:55,425 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:55,426 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:55,426 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:55,429 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:55,431 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:29:55,774 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:56,289 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:29:56,289 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:56,290 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:56,754 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:56,755 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:57,222 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:29:57,222 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:57,223 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:29:57,223 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:57,223 INFO  - RDBMSSessionStore          - Retrieving username for sessionId [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:57,224 DEBUG - LogoutRoute                - Log out [admin]
+2013-06-03 11:29:57,224 INFO  - RDBMSSessionStore          - Deleting session with sessionId [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:57,250 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:29:57,251 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:29:57,251 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:57,253 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:29:57,267 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:29:57,640 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:29:57,640 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:57,642 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:29:57,643 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:29:57,643 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:29:57,683 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+2013-06-03 11:29:57,684 INFO  - RDBMSSessionStore          - Checking for existing session for [6af705a9-a009-446d-bdfa-a56471e721df]
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 32.696 sec
+Running statik.integration.UserManagementIT
+2013-06-03 11:29:59,123 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:29:59,124 INFO  - RDBMSSessionStore          - Checking for existing session for [null]
+2013-06-03 11:30:04,875 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:04,875 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:04,876 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:05,274 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:05,274 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:05,274 INFO  - RDBMSSessionStore          - Checking for existing session for [0dd9be88-4e28-49d0-a2d1-fe871c5dd65f]
+2013-06-03 11:30:05,279 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:05,280 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:05,328 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:10,095 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:10,095 INFO  - RDBMSSessionStore          - Checking for existing session for [0dd9be88-4e28-49d0-a2d1-fe871c5dd65f]
+2013-06-03 11:30:10,096 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:13,148 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:13,148 INFO  - RDBMSSessionStore          - Checking for existing session for [0dd9be88-4e28-49d0-a2d1-fe871c5dd65f]
+2013-06-03 11:30:13,149 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:13,149 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:13,150 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:13,539 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:13,540 INFO  - RDBMSSessionStore          - Checking for existing session for [0dd9be88-4e28-49d0-a2d1-fe871c5dd65f]
+2013-06-03 11:30:13,540 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:15,010 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:15,010 INFO  - RDBMSSessionStore          - Checking for existing session for [0dd9be88-4e28-49d0-a2d1-fe871c5dd65f]
+2013-06-03 11:30:15,011 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:15,011 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-06-03 11:30:15,013 INFO  - RDBMSAuthStore             - Adding user [test@example.com], isDefault [false]
+2013-06-03 11:30:15,264 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:15,264 INFO  - RDBMSSessionStore          - Checking for existing session for [0dd9be88-4e28-49d0-a2d1-fe871c5dd65f]
+2013-06-03 11:30:15,265 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:15,265 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:15,265 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:15,265 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:30:15,391 INFO  - RDBMSSessionStore          - Checking for existing session for [0dd9be88-4e28-49d0-a2d1-fe871c5dd65f]
+2013-06-03 11:30:15,391 INFO  - RDBMSSessionStore          - Checking for existing session for [0dd9be88-4e28-49d0-a2d1-fe871c5dd65f]
+2013-06-03 11:30:15,687 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:15,687 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:15,697 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:15,809 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:15,810 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:15,810 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:15,813 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:15,815 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:15,841 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:16,320 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:16,320 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:16,321 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:16,707 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:16,707 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:16,708 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:16,708 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:16,708 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:17,248 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:17,248 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:17,249 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:18,662 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:18,662 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:18,663 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:18,663 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-06-03 11:30:18,664 INFO  - RDBMSAuthStore             - Adding user [test@example.com], isDefault [false]
+2013-06-03 11:30:18,933 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:18,933 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:18,934 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:18,934 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:18,935 INFO  - UserListRoute              - Listing [2] users, [admin, test@example.com]
+2013-06-03 11:30:21,012 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:21,012 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:21,013 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:21,013 INFO  - RDBMSAuthStore             - Querying for user [test@example.com]
+2013-06-03 11:30:22,991 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:22,991 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:22,992 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:22,992 INFO  - AddUserRoute               - Editing user with original username [test@example.com], new username is [new-user-name]
+2013-06-03 11:30:22,992 INFO  - RDBMSAuthStore             - Querying for user [test@example.com]
+2013-06-03 11:30:22,993 INFO  - RDBMSAuthStore             - Updating user [test@example.com]
+2013-06-03 11:30:23,329 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:23,329 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:23,330 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:23,330 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:23,330 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:23,330 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:30:23,441 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:23,441 INFO  - RDBMSSessionStore          - Checking for existing session for [b134a64b-2164-422b-b693-f76752444e29]
+2013-06-03 11:30:23,931 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:23,938 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:23,939 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:23,980 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:23,981 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:23,981 INFO  - RDBMSSessionStore          - Checking for existing session for [35db6b7a-a5ed-47d7-befc-fd54081b756d]
+2013-06-03 11:30:23,983 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:23,984 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:24,062 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:24,303 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:24,303 INFO  - RDBMSSessionStore          - Checking for existing session for [35db6b7a-a5ed-47d7-befc-fd54081b756d]
+2013-06-03 11:30:24,305 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:24,562 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:24,562 INFO  - RDBMSSessionStore          - Checking for existing session for [35db6b7a-a5ed-47d7-befc-fd54081b756d]
+2013-06-03 11:30:24,562 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:24,563 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:24,563 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:24,830 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:24,830 INFO  - RDBMSSessionStore          - Checking for existing session for [35db6b7a-a5ed-47d7-befc-fd54081b756d]
+2013-06-03 11:30:24,839 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:25,439 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:25,439 INFO  - RDBMSSessionStore          - Checking for existing session for [35db6b7a-a5ed-47d7-befc-fd54081b756d]
+2013-06-03 11:30:25,440 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:25,440 INFO  - AddUserRoute               - Creating user [invalid]
+2013-06-03 11:30:25,440 INFO  - RDBMSAuthStore             - Adding user [invalid], isDefault [false]
+2013-06-03 11:30:25,679 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:25,679 INFO  - RDBMSSessionStore          - Checking for existing session for [35db6b7a-a5ed-47d7-befc-fd54081b756d]
+2013-06-03 11:30:25,680 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:25,680 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:25,681 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:25,681 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:30:25,788 INFO  - RDBMSSessionStore          - Checking for existing session for [35db6b7a-a5ed-47d7-befc-fd54081b756d]
+2013-06-03 11:30:25,789 INFO  - RDBMSSessionStore          - Checking for existing session for [35db6b7a-a5ed-47d7-befc-fd54081b756d]
+2013-06-03 11:30:26,132 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:26,132 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:26,133 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:26,154 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:26,154 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:26,155 INFO  - RDBMSSessionStore          - Checking for existing session for [ed534924-1753-4d75-ab18-1fc4e9b2ed83]
+2013-06-03 11:30:26,157 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:26,157 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:26,186 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:26,428 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:26,428 INFO  - RDBMSSessionStore          - Checking for existing session for [ed534924-1753-4d75-ab18-1fc4e9b2ed83]
+2013-06-03 11:30:26,429 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:26,719 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:26,719 INFO  - RDBMSSessionStore          - Checking for existing session for [ed534924-1753-4d75-ab18-1fc4e9b2ed83]
+2013-06-03 11:30:26,720 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:26,720 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:26,721 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:27,070 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:27,070 INFO  - RDBMSSessionStore          - Checking for existing session for [ed534924-1753-4d75-ab18-1fc4e9b2ed83]
+2013-06-03 11:30:27,071 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:27,523 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:27,523 INFO  - RDBMSSessionStore          - Checking for existing session for [ed534924-1753-4d75-ab18-1fc4e9b2ed83]
+2013-06-03 11:30:27,524 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:27,525 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-06-03 11:30:27,525 INFO  - RDBMSAuthStore             - Adding user [test@example.com], isDefault [false]
+2013-06-03 11:30:27,752 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:27,752 INFO  - RDBMSSessionStore          - Checking for existing session for [ed534924-1753-4d75-ab18-1fc4e9b2ed83]
+2013-06-03 11:30:27,753 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:27,753 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:27,753 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:27,754 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:30:27,814 INFO  - RDBMSSessionStore          - Checking for existing session for [ed534924-1753-4d75-ab18-1fc4e9b2ed83]
+2013-06-03 11:30:27,817 INFO  - RDBMSSessionStore          - Checking for existing session for [ed534924-1753-4d75-ab18-1fc4e9b2ed83]
+2013-06-03 11:30:28,135 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:28,136 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:28,137 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:28,169 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:28,170 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:28,170 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,175 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:28,177 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:28,198 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:28,409 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:28,410 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,410 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:28,631 DEBUG - SecureFilter               - Secured path [/statik/logout]
+2013-06-03 11:30:28,631 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,632 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:28,632 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,632 INFO  - RDBMSSessionStore          - Retrieving username for sessionId [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,633 DEBUG - LogoutRoute                - Log out [admin]
+2013-06-03 11:30:28,633 INFO  - RDBMSSessionStore          - Deleting session with sessionId [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,647 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:28,647 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:28,647 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,650 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:28,677 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:28,747 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:28,747 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,755 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:28,758 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:28,808 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:28,809 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:29,063 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:29,063 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:29,077 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:29,088 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:29,090 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:30:29,091 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:29,092 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:29,271 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:29,272 INFO  - RDBMSSessionStore          - Checking for existing session for [cb326e21-2c41-4765-934e-31e920ff878e]
+2013-06-03 11:30:31,194 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:31,194 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:31,195 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:31,528 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:31,528 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:31,528 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:31,530 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:31,531 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:31,547 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:32,754 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:32,754 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:32,755 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:33,014 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:33,014 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:33,015 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:33,015 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:33,016 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:33,295 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:33,296 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:33,297 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:33,792 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:33,792 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:33,793 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:33,793 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-06-03 11:30:33,793 INFO  - RDBMSAuthStore             - Adding user [test@example.com], isDefault [false]
+2013-06-03 11:30:34,022 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:34,022 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:34,023 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:34,023 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:34,023 INFO  - UserListRoute              - Listing [2] users, [admin, test@example.com]
+2013-06-03 11:30:34,403 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:34,403 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:34,403 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:34,404 INFO  - RDBMSAuthStore             - Querying for user [test@example.com]
+2013-06-03 11:30:34,743 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:34,743 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:34,745 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:34,745 INFO  - AddUserRoute               - Editing user with original username [test@example.com], new username is [test@example.com]
+2013-06-03 11:30:34,745 INFO  - RDBMSAuthStore             - Querying for user [test@example.com]
+2013-06-03 11:30:34,746 INFO  - RDBMSAuthStore             - Updating user [test@example.com]
+2013-06-03 11:30:35,011 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:35,012 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:35,012 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:35,012 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:35,013 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:35,013 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:30:35,109 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:35,110 INFO  - RDBMSSessionStore          - Checking for existing session for [7d72767a-fa8f-4e1a-b919-70965d3721f3]
+2013-06-03 11:30:35,854 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:35,854 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:35,855 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:35,975 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:35,975 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:35,975 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:35,977 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:35,978 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:35,994 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:36,227 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:36,227 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:36,228 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:36,447 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:36,447 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:36,448 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:36,448 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:36,449 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:36,682 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:36,682 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:36,683 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:37,161 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:37,161 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:37,162 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:37,163 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-06-03 11:30:37,163 INFO  - RDBMSAuthStore             - Adding user [test@example.com], isDefault [false]
+2013-06-03 11:30:37,326 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:37,326 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:37,327 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:37,327 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:37,329 INFO  - UserListRoute              - Listing [2] users, [admin, test@example.com]
+2013-06-03 11:30:37,665 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:37,665 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:37,666 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:37,666 INFO  - RDBMSAuthStore             - Querying for user [test@example.com]
+2013-06-03 11:30:38,045 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:38,045 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:38,046 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:38,046 INFO  - AddUserRoute               - Editing user with original username [test@example.com], new username is [test@example.com]
+2013-06-03 11:30:38,046 INFO  - RDBMSAuthStore             - Querying for user [test@example.com]
+2013-06-03 11:30:38,234 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:38,234 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:38,237 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:38,237 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:38,238 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:38,238 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:30:38,357 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:38,358 INFO  - RDBMSSessionStore          - Checking for existing session for [5e256283-1120-49af-88f4-012c57789a8b]
+2013-06-03 11:30:38,709 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:38,709 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:38,721 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:38,733 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:38,733 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:38,733 INFO  - RDBMSSessionStore          - Checking for existing session for [ff7de652-b955-4bbe-96e3-17834d544503]
+2013-06-03 11:30:38,736 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:38,737 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:38,795 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:38,972 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:38,972 INFO  - RDBMSSessionStore          - Checking for existing session for [ff7de652-b955-4bbe-96e3-17834d544503]
+2013-06-03 11:30:38,973 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:39,265 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:39,265 INFO  - RDBMSSessionStore          - Checking for existing session for [ff7de652-b955-4bbe-96e3-17834d544503]
+2013-06-03 11:30:39,266 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:39,266 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:39,267 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:39,571 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:39,571 INFO  - RDBMSSessionStore          - Checking for existing session for [ff7de652-b955-4bbe-96e3-17834d544503]
+2013-06-03 11:30:39,572 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:39,572 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:39,576 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:39,576 INFO  - RDBMSAuthStore             - Deleting all users except default
+2013-06-03 11:30:39,648 INFO  - RDBMSSessionStore          - Checking for existing session for [ff7de652-b955-4bbe-96e3-17834d544503]
+2013-06-03 11:30:39,658 INFO  - RDBMSSessionStore          - Checking for existing session for [ff7de652-b955-4bbe-96e3-17834d544503]
+2013-06-03 11:30:42,267 DEBUG - LoginRoute                 - POST to /statik-auth for user [admin], originalDomain is []
+2013-06-03 11:30:42,267 INFO  - RDBMSAuthStore             - Querying for user [admin]
+2013-06-03 11:30:42,268 DEBUG - RDBMSSessionStore          - creating session for [admin]
+2013-06-03 11:30:42,294 DEBUG - EditableFileRoute          - GET on [localhost], path=/
+2013-06-03 11:30:42,294 DEBUG - EditableFileRoute          - File is candidate for content editing
+2013-06-03 11:30:42,294 INFO  - RDBMSSessionStore          - Checking for existing session for [b6be6f73-31bc-493d-8334-adedc162f5f2]
+2013-06-03 11:30:42,297 INFO  - RDBMSContentStore          - Retrieving content for domain [localhost], language [en] and path [/]
+2013-06-03 11:30:42,301 DEBUG - EditableFileRoute          - Making page editable
+2013-06-03 11:30:42,333 DEBUG - EditableFileRoute          - GET on [localhost], path=/styles.css
+2013-06-03 11:30:42,555 DEBUG - SecureFilter               - Secured path [/statik/control-box]
+2013-06-03 11:30:42,555 INFO  - RDBMSSessionStore          - Checking for existing session for [b6be6f73-31bc-493d-8334-adedc162f5f2]
+2013-06-03 11:30:42,557 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:42,865 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:42,865 INFO  - RDBMSSessionStore          - Checking for existing session for [b6be6f73-31bc-493d-8334-adedc162f5f2]
+2013-06-03 11:30:42,866 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:42,866 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:42,867 INFO  - UserListRoute              - Listing [1] users, [admin]
+2013-06-03 11:30:43,201 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:43,201 INFO  - RDBMSSessionStore          - Checking for existing session for [b6be6f73-31bc-493d-8334-adedc162f5f2]
+2013-06-03 11:30:43,203 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:43,741 DEBUG - SecureFilter               - Secured path [/statik/user]
+2013-06-03 11:30:43,741 INFO  - RDBMSSessionStore          - Checking for existing session for [b6be6f73-31bc-493d-8334-adedc162f5f2]
+2013-06-03 11:30:43,742 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:43,742 INFO  - AddUserRoute               - Creating user [test@example.com]
+2013-06-03 11:30:43,742 INFO  - RDBMSAuthStore             - Adding user [test@example.com], isDefault [false]
+2013-06-03 11:30:44,001 DEBUG - SecureFilter               - Secured path [/statik/users]
+2013-06-03 11:30:44,001 INFO  - RDBMSSessionStore          - Checking for existing session for [b6be6f73-31bc-493d-8334-adedc162f5f2]
+2013-06-03 11:30:44,002 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:44,002 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:44,002 INFO  - UserListRoute              - Listing [2] users, [admin, test@example.com]
+2013-06-03 11:30:44,358 DEBUG - SecureFilter               - Secured path [/statik/delete-user]
+2013-06-03 11:30:44,358 INFO  - RDBMSSessionStore          - Checking for existing session for [b6be6f73-31bc-493d-8334-adedc162f5f2]
+2013-06-03 11:30:44,359 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:44,361 INFO  - DeleteUserRoute            - Deleting user [test@example.com]
+2013-06-03 11:30:44,361 INFO  - RDBMSAuthStore             - Deleting user [test@example.com]
+2013-06-03 11:30:44,370 INFO  - RDBMSAuthStore             - Retrieving all users
+2013-06-03 11:30:44,766 DEBUG - SecureFilter               - Secured path [/statik/clear-db]
+2013-06-03 11:30:44,767 INFO  - RDBMSSessionStore          - Checking for existing session for [b6be6f73-31bc-493d-8334-adedc162f5f2]
+2013-06-03 11:30:44,769 DEBUG - SecureFilter               - Already cookied
+2013-06-03 11:30:44,770 DEBUG - RDBMSContentStore          - Clearing ALL content items
+2013-06-03 11:30:44,770 DEBUG - RDBMSSessionStore          - Clearing ALL sessions
+2013-06-03 11:30:44,771 INFO  - RDBMSAuthStore             - Deleting all users except default
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 46.682 sec
+Running statik.session.MongoSessionStoreIT
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0 sec
+
+Results :
+
+Tests in error: 
+  EditingIT.editLink:40->AbstractWebDriverIntTst.changeContentOf:239->AbstractWebDriverIntTst.changeContentOf:234->AbstractWebDriverIntTst.changeContentOf:221->AbstractWebDriverIntTst.waitForPresenceOfItemByClassName:145->AbstractWebDriverIntTst.findEventually:136 » Timeout
+
+Tests run: 30, Failures: 0, Errors: 1, Skipped: 1
+
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] 
+[INFO] --- jetty-maven-plugin:8.1.10.v20130312:stop (stop-jetty) @ statik ---
+[INFO] 
+[INFO] --- maven-failsafe-plugin:2.14:verify (default) @ statik ---
+[INFO] Failsafe report directory: /Users/rory/work/personal/statik/target/failsafe-reports
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 5:42.041s
+[INFO] Finished at: Mon Jun 03 11:30:45 BST 2013
+[INFO] Final Memory: 33M/212M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-failsafe-plugin:2.14:verify (default) on project statik: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/rory/work/personal/statik/target/failsafe-reports for the individual test results.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -181,7 +181,7 @@ public class EditableFileRoute extends Route {
 
         if (el != null) {
             el.html(contentItem.content());
-            LOG.debug("Replaced element with selector [" + selector + "] with content [" + contentItem.content() + "]");
+            LOG.debug("Replaced element with selector [" + selector + "] with " + contentItem.language().name() + " content [" + contentItem.content() + "]");
             return;
         }
 

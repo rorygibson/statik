@@ -24,13 +24,11 @@ public class ContentRoute extends Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        Map<String, String[]> parameterMap = request.raw().getParameterMap();
-
-        String newContent = parameterMap.get(ContentItem.CONTENT)[0];
-        String domain = parameterMap.get(ContentItem.DOMAIN)[0];
-        String selector = parameterMap.get(ContentItem.SELECTOR)[0];
-        String path = parameterMap.get(ContentItem.PATH)[0];
-        String lang = parameterMap.get(ContentItem.LANGUAGE)[0];
+        String newContent = parameterFrom(ContentItem.CONTENT, request);
+        String domain = parameterFrom(ContentItem.DOMAIN, request);
+        String selector = parameterFrom(ContentItem.SELECTOR, request);
+        String path = parameterFrom(ContentItem.PATH, request);
+        String lang = parameterFrom(ContentItem.LANGUAGE, request);
 
         LOG.debug("POST with selector [" + selector + "], domain [" + domain + "], path [" + path + "], content [" + newContent + "], lang [" + lang + "]");
 
@@ -39,5 +37,14 @@ public class ContentRoute extends Route {
 
         response.status(200);
         return Http.OK_RESPONSE;
+    }
+
+
+    private String parameterFrom(String param, Request r) {
+        Map<String, String[]> parameterMap = r.raw().getParameterMap();
+        if (parameterMap.containsKey(param)) {
+            return parameterMap.get(param)[0];
+        }
+        return "";
     }
 }

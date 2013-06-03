@@ -25,7 +25,7 @@ public class EditingIT extends AbstractWebDriverIntTst {
 
         changeContentOf("p", "new content");
 
-        WebElement again = driver.findElement(By.cssSelector("p"));
+        WebElement again = findEventually(By.tagName("p"));
         assertEquals("Text not as expected", "new content", again.getText());
     }
 
@@ -48,14 +48,17 @@ public class EditingIT extends AbstractWebDriverIntTst {
     @Test
     public void editOfSecondParaInASequence() throws InterruptedException {
         driver.get(TWO_PARA_TEST_PAGE);
-        WebElement atFirst = driver.findElements(By.tagName("p")).get(1);
-        assertEquals("Should be the second para", "two", atFirst.getText());
+        WebElement secondPara = driver.findElements(By.tagName("p")).get(1);
+        assertEquals("Should be the second para", "two", secondPara.getText());
 
-        changeContentOf(atFirst, "new content");
+        changeContentOf(secondPara, "new content");
 
         driver.get(TWO_PARA_TEST_PAGE);
-        WebElement afterEdit = driver.findElements(By.tagName("p")).get(1);
-        assertEquals("Should now hve some different content", "new content", afterEdit.getText());
+        WebElement section = driver.findElement(By.tagName("section"));
+        List<WebElement> paras = section.findElements(By.tagName("p"));
+        assertEquals("Should still have 2 paras", 2, paras.size());
+        WebElement secondParaAfterEdit = paras.get(1);
+        assertEquals("Should now have some different content", "new content", secondParaAfterEdit.getText());
     }
 
     @Test
