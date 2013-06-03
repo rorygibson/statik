@@ -211,6 +211,7 @@ public class AbstractWebDriverIntTst {
     }
 
     protected void changeContentOf(WebElement el, String newContent, Language lang) {
+        LOG.debug("Triggering context menu");
         Actions a = new Actions(driver);
         a.contextClick(el);
         a.perform();
@@ -218,15 +219,21 @@ public class AbstractWebDriverIntTst {
         WebElement menu = driver.findElement(By.id("jqContextMenu"));
         menu.findElement(By.id("edit")).click();
 
+        LOG.debug("Waiting for editor");
         waitForPresenceOfItemByClassName("wysihtml5-sandbox");
 
+        LOG.debug("Changing language");
         driver.findElement(By.id("language-switcher")).findElement(By.xpath("./option[@value='" + lang.code() + "']")).click();
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
+
+        LOG.debug("Setting content");
         ((FirefoxDriver) driver).executeScript("document.editor.composer.setValue('" + newContent + "')");
         sleepForMs(PERIOD_TO_WAIT_FOR_CHANGES);
 
+        LOG.debug("Submitting");
         driver.findElement(By.id("submit")).click();
 
+        LOG.debug("Switching frames again");
         driver.switchTo().defaultContent();
     }
 

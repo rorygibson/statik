@@ -29,8 +29,15 @@ public class EditingIT extends AbstractWebDriverIntTst {
 
         String src = null;
         try {
+            src = driver.getPageSource();
             changeContentOf("p", "new content");
+        } catch (Throwable t) {
+            LOG.error("Timed out changing content.");
+            LOG.error(src);
+            throw t;
+        }
 
+        try {
             src = driver.getPageSource();
             WebElement again = findEventually(By.tagName("p"));
             assertEquals("Text not as expected", "new content", again.getText());
