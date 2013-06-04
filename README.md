@@ -79,8 +79,74 @@ To run:
 
 
 
+## Site Layout
+Statik expects a single directory root, known as the ''fileBase'' to be supplied (vic configuration properties, see below).
+This directory can include multiple sub-directories, each representing a distinct website (and sharing login via SSO for editing).
 
-## Setup for using it "for real" under Tomcat
+    <fileBase>
+        |- www.example.com
+        |- www.foobar.com
+
+The directories should be named as per the actual names they'll be deployed on; Statik uses the hostname from the request to dispatch the corect content.
+One of these sites is known as the ''auth domain'', and is the domain name to which authors will be redirected while logging in, to provide single-sign-on across the sites in an instance of Statik.
+
+### Example: local development
+Directory layout:
+
+    <fileBase>
+        |- localhost
+        |- my-dev-site.localhost
+
+''authDomain'' property - "localhost"
+
+And then tweak your ''/etc/hosts'' to add
+    127.0.0.1 my-dev-site.localhost
+
+And add some Apache config;
+
+    <VirtualHost *:*>
+        ProxyPreserveHost On
+        ProxyPass / http://localhost:4567/
+        ProxyPassReverse / http://localhost:4567/
+        ServerName my-dev-site.localhost
+    </VirtualHost>
+
+
+
+### Example: QA
+Directory layout:
+
+    <fileBase>
+        |- my-qa-site-1.myagency.com
+        |- my-qa-site-2.myagency.com
+        |- my-qa-site-3.myagency.com
+
+''authDomain'' property - "my-qa-site-2.myagency.com"
+Set up DNS and domains as appropriate.
+And add some Apache config (e.g.):
+
+    <VirtualHost *:*>
+        ProxyPreserveHost On
+        ProxyPass / http://localhost:4567/
+        ProxyPassReverse / http://localhost:4567/
+        ServerName my-qa-site-1.myagency.com
+    </VirtualHost>
+
+
+### Example: production
+Directory layout:
+
+    <fileBase>
+        |- www.myeshop.com
+        |- www.myevenbetterstore.com
+        |- www.supershoppingexperience.com
+
+''authDomain'' property - "www.myevenbetterstore.com"
+Plus Apache config as above - or Varnish - and possibly with the proxy running on a spearate VM to the CMS.
+
+
+
+## Production setup (Tomcat)
 
 Example instructions (for e.g. Tomcat servlet container)
 
@@ -88,19 +154,19 @@ Example instructions (for e.g. Tomcat servlet container)
  * Make sure it's called ROOT.war (rename if necessary)
  * Copy the ROOT.war file to the deployment directory ($CATALINA_HOME/webapps)
  * Create a config.properties file in the $HOME directory of the user running Tomcat
- * Copy your website static files to the directory specified in your config.properties
+ * Copy your website static files to the directory specified in your config.properties (see Site Layout)
  * Make sure MongoDB is running (and on the port specified in config.properties)
  * Start Tomcat (./bin/startup.sh)
 
 
-## Setup for using it "for real" in standalone mode
+## Production setup (standalone)
 
 Example instructions
 
  * Obtain the JAR file
  * Copy the JAR file to the deployment directory
  * Create a config.properties file in a known location
- * Copy your website static files to the directory specified in your config.properties
+ * Copy your website static files to the directory specified in your config.properties (see Site Layout)
  * Make sure MySQL is running with a database created and a user granted access
  * Create an init script (/etc/init.d/statik ?) with the usual features for running a Java process
 
