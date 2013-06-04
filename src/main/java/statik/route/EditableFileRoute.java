@@ -1,6 +1,7 @@
 package statik.route;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
-import spark.Route;
 import statik.content.ContentItem;
 import statik.content.ContentStore;
 import statik.session.SessionStore;
@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.Map;
 
 
-public class EditableFileRoute extends Route {
+public class EditableFileRoute extends ResourceRoute {
 
     private static final String JQUERY_CSS = "<link href=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/css/smoothness/jquery-ui-1.10.3.custom.min.css\" rel=\"stylesheet\" />";
     private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/js/jquery-ui-1.10.3.custom.min.js\" type=\"text/javascript\"></script>";
@@ -68,8 +68,14 @@ public class EditableFileRoute extends Route {
         }
 
         try {
+            MetaFile metaFile = dataMatching(domain, request, path, language, fileToServe);
+
+            if (metaFile.isCacheable() && !testMode()) {
+                setCacheable(response);
+            }
+            IOUtils.write(metaFile.getData(), response.raw().getOutputStream());
+
             response.status(200);
-            return dataMatching(domain, request, path, language, fileToServe);
         } catch (IOException e) {
             do404(response, path, findRequestedFileFrom(domain, this.notFoundPageFilename));
         }
@@ -91,23 +97,48 @@ public class EditableFileRoute extends Route {
         return httpReq.getPathInfo() == null ? httpReq.getServletPath() : httpReq.getPathInfo();
     }
 
-    private String dataMatching(String domain, Request request, String path, String language, File fileToServe) throws IOException {
+    class MetaFile {
+        private byte[] data;
+        private boolean cacheable;
+
+        MetaFile(boolean cacheable, byte[] data) {
+            this.cacheable = cacheable;
+            this.data = data;
+        }
+
+        public byte[] getData() {
+            return data;
+        }
+
+
+        public boolean isCacheable() {
+            return cacheable;
+        }
+    }
+
+    private MetaFile dataMatching(String domain, Request request, String path, String language, File fileToServe) throws IOException {
+        byte[] data;
+        boolean cacheable = false;
         if (mightContainCmsContent(fileToServe)) {
             LOG.debug("File is candidate for content editing");
             String fileContent;
             fileContent = FileUtils.readFileToString(fileToServe);
-
-            return editableContentFor(domain, path, fileContent, isAuthenticated(request), language);
+            data = editableContentFor(domain, path, fileContent, isAuthenticated(request), language).getBytes();
+        } else {
+            LOG.debug("File [" + fileToServe.getAbsolutePath() + "] not editable, is cacheable");
+            data = rawDataFrom(fileToServe);
+            cacheable = true;
         }
-        return rawDataFrom(fileToServe);
+
+        return new MetaFile(cacheable,data);
     }
 
     private boolean isAuthenticated(Request request) {
         return sessionStore.hasSession(Http.sessionFrom(request));
     }
 
-    private String rawDataFrom(File fileToServe) throws IOException {
-        return FileUtils.readFileToString(fileToServe);
+    private byte[] rawDataFrom(File fileToServe) throws IOException {
+        return FileUtils.readFileToByteArray(fileToServe);
     }
 
     private Object do404(Response response, String missingFilePath, File fnfPage) {
@@ -140,8 +171,8 @@ public class EditableFileRoute extends Route {
     }
 
     private File findRequestedFileFrom(String domain, String path) {
-        String fullPath = fileBase + "/" + domain + "/" + path;
-        LOG.trace("Request for file, full path to file is [" + fullPath + "]");
+        String fullPath = fileBase + "/" + domain + path;
+        LOG.debug("Request for file, full path to file is [" + fullPath + "]");
         return new File(fullPath);
     }
 
@@ -217,12 +248,6 @@ public class EditableFileRoute extends Route {
         }
 
         return doc.toString();
-    }
-
-
-    public void writeFileToResponse(Response response, File theFile) throws IOException {
-        byte[] bytes = FileUtils.readFileToByteArray(theFile);
-        response.raw().getOutputStream().write(bytes);
     }
 
 }

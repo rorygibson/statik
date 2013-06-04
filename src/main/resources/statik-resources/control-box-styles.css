@@ -6,10 +6,17 @@ body {
     padding-top: 5px;
 }
 
+ul {
+    padding-left: 0;
+}
+
 li {
     list-style-type: none;
 }
 
 a {
-    color: blue;
+    color: black;
+    font-weight: bold;
+    line-height: 1.4em;
+    text-decoration: none;
 }

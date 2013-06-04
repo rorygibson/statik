@@ -1,5 +1,6 @@
 package statik.route;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +9,7 @@ import spark.Response;
 import spark.Route;
 import statik.util.Http;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
@@ -17,7 +19,7 @@ import java.util.GregorianCalendar;
 public class ResourceRoute extends Route {
 
     private static final Logger LOG = LoggerFactory.getLogger(ResourceRoute.class);
-    public static final int EXPIRY_IN_MONTHS = 2;
+    private static final int MAX_EXPIRY_IN_SECONDS = 300;
 
     public ResourceRoute(String route) {
         super(route);
@@ -28,21 +30,23 @@ public class ResourceRoute extends Route {
         String filename = request.splat()[0];
         LOG.trace("Request for file, path is [" + request.url() + "], file is [" + filename + "]");
 
-        if (testMode()) {
+        if (!testMode()) {
             setCacheable(response);
         }
         return writeClasspathFileToResponse(response, filename);
     }
 
-    private boolean testMode() {
-        return !Boolean.getBoolean("testMode");
+    protected boolean testMode() {
+        return Boolean.getBoolean("testMode");
     }
 
-    private static void setCacheable(Response r) {
+    protected static void setCacheable(Response r) {
         final Calendar inTwoMonths = new GregorianCalendar();
-        inTwoMonths.setTime(new Date());
-        inTwoMonths.add(Calendar.MONTH, EXPIRY_IN_MONTHS);
+        inTwoMonths.setTime(new Date(System.currentTimeMillis()));
+        inTwoMonths.add(Calendar.SECOND, MAX_EXPIRY_IN_SECONDS);
         r.raw().setDateHeader("Expires", inTwoMonths.getTimeInMillis());
+        r.raw().setIntHeader("max-age", MAX_EXPIRY_IN_SECONDS);
+        r.raw().setHeader("cache-control", "public");
     }
 
     protected Object writeClasspathFileToResponse(Response response, String filename) {
@@ -61,5 +65,11 @@ public class ResourceRoute extends Route {
         }
         return Http.EMPTY_RESPONSE;
     }
+
+    protected void writeFileToResponse(Response response, File theFile) throws IOException {
+        byte[] bytes = FileUtils.readFileToByteArray(theFile);
+        response.raw().getOutputStream().write(bytes);
+    }
+
 
 }

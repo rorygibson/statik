@@ -1,6 +1,7 @@
 
 function addControlBoxToScreen() {
-  $('body').append('<iframe style="position:absolute; top:20px; right:20px; width: 180px" id="control-box" src="/statik/control-box" width="200px" height="300px" />');
+  $('body').append('<div id="wrap" style="width:200px; position:absolute; top:20px; right:20px;  -webkit-border-radius:10px; background-color: lightgrey"></div>');
+  $('#wrap').append('<iframe style="width: 180px;" id="control-box" src="/statik/control-box" width="200px" height="300px" />');
 }
 
 function setupContextMenu() {
