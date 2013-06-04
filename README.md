@@ -19,7 +19,7 @@ Generally it's hard. You either have to know HTML, or pay someone.
 And if you're a designer, and you want to make a site content managed - then again, you're back to writing-it-in-Wordpress, instead of working in your favourite tools of HTML and CSS.
 
 Statik lets you copy a static site into a directory on the server (probably using FTP, like back in the day), where it serves from, just like Apache.
-Except, whenever you want to, you can fire a browser at http://website/login, punch in a username and password, and live-edit the content on the page.
+Except, whenever you want to, you can fire a browser at http://website/edit, punch in a username and password, and live-edit the content on the page.
 
 That's it.
 
@@ -44,13 +44,12 @@ To build:
 
  - Java 7
  - Maven 3
- - MongoDB
  - Firefox (to run the acceptance tests)
 
 To run:
 
  - Java 7
- - MongoDB
+ - MongoDB or MySQL
  - a website, expressed as a set of static .html files, CSS, JavaScript, images etc.
 
 ## Development setup
@@ -70,13 +69,18 @@ To run:
     cd statik
     mvn clean install -Pstandalone
 
-### Run locally as standalone service (port 4567)
+### Run locally as standalone service (default port 4567) with defaulted configuration and a specified filebase
     cd statik
-    java -jar -DfileBase=$PWD/demo-website target/statik-1.0-SNAPSHOT.jar
+    java -DfileBase=$PWD/demo-website -jar target/statik-1.0-SNAPSHOT.jar
+
+### Run locally with a custom config file and custom port (8080)
+    cd statik
+    java -Dconfig.filename=/etc/statik-config.properties -Dport=8080 -jar target/statik-1.0-SNAPSHOT.jar
 
 
 
-## Setup for using it "for real"
+
+## Setup for using it "for real" under Tomcat
 
 Example instructions (for e.g. Tomcat servlet container)
 
@@ -84,23 +88,30 @@ Example instructions (for e.g. Tomcat servlet container)
  * Make sure it's called ROOT.war (rename if necessary)
  * Copy the ROOT.war file to the deployment directory ($CATALINA_HOME/webapps)
  * Create a config.properties file in the $HOME directory of the user running Tomcat
- * Create a users.properties file in the $HOME directory of the user running Tomcat
  * Copy your website static files to the directory specified in your config.properties
  * Make sure MongoDB is running (and on the port specified in config.properties)
  * Start Tomcat (./bin/startup.sh)
 
-Example config.properties
 
-    dbName=statik
-    mongoHost=localhost
-    mongoPort=27017
-    mongoAuth=true
-    mongoUsername=myFirstStatik
-    mongoPassword=password
+## Setup for using it "for real" in standalone mode
+
+Example instructions
+
+ * Obtain the JAR file
+ * Copy the JAR file to the deployment directory
+ * Create a config.properties file in a known location
+ * Copy your website static files to the directory specified in your config.properties
+ * Make sure MySQL is running with a database created and a user granted access
+ * Create an init script (/etc/init.d/statik ?) with the usual features for running a Java process
+
+
+## Example config.properties (see example-config.properties for a documented version)
+
+    jdbc.driver=com.mysql.jdbc.Driver
+    jdbc.url=jdbc:mysql://localhost:3306/statik
+    jdbc.username=statik
+    jdbc.password=statik
+    port=8080
     fileBase=/home/bob/statik-websites/my-first-website
     welcomeFile=index.html
-
-Example users.properties
-
-    fred=password1
-    barney=secret-dinosaur-password
+    authDomain=www.example.com
