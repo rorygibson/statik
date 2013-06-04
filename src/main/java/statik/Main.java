@@ -45,7 +45,8 @@ public class Main implements spark.servlet.SparkApplication {
 
     public static void main(String[] args) {
         Main main = new Main();
-        main.configure(CONFIG_FILENAME);
+        String configFile = System.getProperty("config.filename", CONFIG_FILENAME);
+        main.configure(configFile);
         Spark.setPort(port);
 
         main.populate();
@@ -55,7 +56,8 @@ public class Main implements spark.servlet.SparkApplication {
 
     @Override
     public void init() {
-        configure(CONFIG_FILENAME);
+        String configFile = System.getProperty("config.filename", CONFIG_FILENAME);
+        configure(configFile);
         populate();
         addTestOnlyRoutes();
         addStatikRoutes();
