@@ -32,9 +32,6 @@
 
 
 <form action="/statik/content" method="post" id="editorForm">
-    <div id="textarea-preload"></div>
-    <textarea name="content" id="wysihtml5-textarea" autofocus="autofocus"></textarea>
-    <br />
     <input th:value="#{editor.save}" type="submit" value="" id="submit" name="save" />
 
     <select name="language-switcher" id="language-switcher">
@@ -43,6 +40,9 @@
         <option value="fr">French</option>
         <option value="sp">Spanish</option>
     </select>
+
+    <div id="textarea-preload"></div>
+    <textarea name="content" id="wysihtml5-textarea" autofocus="autofocus"></textarea>
 </form>
 
 <script type="text/javascript" src="/statik-resources/wysihtml5/jquery.form.js"></script>

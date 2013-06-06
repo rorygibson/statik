@@ -11,6 +11,7 @@ $(document).ready(function () {
         style: true
     });
 
+
     editor.on("load", function () {
         if (!editor.isCompatible()) {
             return;

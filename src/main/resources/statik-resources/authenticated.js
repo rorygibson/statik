@@ -1,7 +1,6 @@
-
 function addControlBoxToScreen() {
-  $('body').append('<div id="wrap" style="width:200px; position:absolute; top:20px; right:20px;  -webkit-border-radius:10px; background-color: lightgrey"></div>');
-  $('#wrap').append('<iframe style="width: 180px;" id="control-box" src="/statik/control-box" width="200px" height="300px" />');
+    $('body').append('<div id="wrap" style="width:200px; position:absolute; top:20px; right:20px;  -webkit-border-radius:10px; background-color: lightgrey"></div>');
+    $('#wrap').append('<iframe seamless="seamless" style="width: 180px;margin-left:10px;" id="control-box" src="/statik/control-box" width="200px" height="300px" />');
 }
 
 function setupContextMenu() {
@@ -129,9 +128,16 @@ function loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encod
                     title: "Edit",
                     bgiframe: true,
                     autoOpen: true,
-                    height: 250,
+                    height: 450,
                     width: 500,
-                    modal: true
+                    modal: true,
+                    closeOnEscape: true,
+                    open: function () {
+                        setTimeout(function () {
+                            $('iframe.statik').css('width', '440px');
+                            $('iframe.statik').css('height', '300px');
+                        }, 200);
+                    }
                 }
             );
         }

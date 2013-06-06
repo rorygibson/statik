@@ -7,10 +7,15 @@ a {
     display: none;
 }
 
-textarea {
-    min-height: 130px !important;
-}
 
 #linkBox {
     display: none;
+}
+
+textarea, iframe.statik {
+    min-width: 440px;
+    width: 440px;
+
+    min-height: 300px;
+    height: 300px;
 }
