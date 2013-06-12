@@ -23,9 +23,16 @@ import java.util.Map;
 
 public class EditableFileRoute extends ResourceRoute {
 
-    private static final String JQUERY_CSS = "<link href=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/css/smoothness/jquery-ui-1.10.3.custom.min.css\" rel=\"stylesheet\" />";
-    private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.9.1.js\" type=\"text/javascript\"></script><script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-ui/js/jquery-ui-1.10.3.custom.min.js\" type=\"text/javascript\"></script>";
-    private static final String AUTH_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script>";
+    private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.8.3.js\" type=\"text/javascript\"></script>";
+    private static final String AUTH_JS =
+            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script>\n" +
+            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated.js\" type=\"text/javascript\"></script>\n";
+
+    private static final String EDITOR_JS =
+            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/bootstrap-wysihtml5-0.0.2/libs/js/wysihtml5-0.3.0_rc2.js\" type=\"text/javascript\"></script>\n" +
+            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/bootstrap-wysihtml5-0.0.2/libs/js/bootstrap.min.js\" type=\"text/javascript\"></script>" +
+            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/bootstrap-wysihtml5-0.0.2/bootstrap-wysihtml5-0.0.2.js\" type=\"text/javascript\"></script>";
+
 
     private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
@@ -182,8 +189,8 @@ public class EditableFileRoute extends ResourceRoute {
 
     private Document makeEditable(Document doc) {
         doc.body().append(JQUERY_JS);
-        doc.head().append(JQUERY_CSS);
         doc.body().append(AUTH_JS);
+        doc.body().append(EDITOR_JS);
         return doc;
     }
 

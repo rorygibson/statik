@@ -41,19 +41,19 @@ public class UserManagementIT extends AbstractWebDriverIntTst {
     @Test
     public void addUser() {
         addUserWith("test@example.com", "password", "password");
-        assertEquals("Should have been shown a success message", "Added the user", driver.findElement(By.className("flash")).getText());
+        assertEquals("Should have been shown a success message", "Added the user", flashText());
     }
 
     @Test
     public void invalidUsername() {
         addUserWith("invalid", "password", "password");
-        assertEquals("Should have been shown an error", "Email address must be valid", driver.findElement(By.className("error")).getText());
+        assertEquals("Should have been shown an error", "Email address must be valid", errorText());
     }
 
     @Test
     public void passwordsMustMatchWhenAddingUser() {
         addUserWith("test@example.com", "password", "doesnt-match");
-        assertEquals("Should have been shown an error", "Passwords must match, must not be blank and must be 8+ characters long", driver.findElement(By.className("error")).getText());
+        assertEquals("Should have been shown an error", "Passwords must match, must not be blank and must be 8+ characters long", errorText());
     }
 
     @Test
@@ -61,13 +61,20 @@ public class UserManagementIT extends AbstractWebDriverIntTst {
         addUserWith("test@example.com", "password", "password");
         driver.get(USERS_PAGE);
 
-        WebElement deleteLink = driver.findElement(By.linkText("Delete"));
+        String src = driver.getPageSource();
+        WebElement deleteLink = null;
+        try {
+            deleteLink = driver.findElement(By.className("btn-danger"));
+        } catch (Throwable t) {
+            LOG.error("Timed out finding delete link.");
+            LOG.error(src);
+            throw t;
+        }
+
         deleteLink.click();
 
-        String src = driver.getPageSource();
         try {
-            WebElement flash = driver.findElement(By.className("flash"));
-            assertEquals("Should have been shown a success message", "User deleted", flash.getText());
+            assertEquals("Should have been shown a success message", "User deleted", flashText());
         } catch (Throwable t) {
             LOG.error("Timed out finding flash.");
             LOG.error(src);
@@ -143,12 +150,12 @@ public class UserManagementIT extends AbstractWebDriverIntTst {
 
 
     private String flashText() {
-        WebElement flash = findEventually(By.className("flash"));
+        WebElement flash = findEventually(By.className("alert-success"));
         return flash.getText();
     }
 
     private String errorText() {
-        WebElement error = findEventually(By.className("error"));
+        WebElement error = findEventually(By.className("alert-error"));
         return error.getText();
     }
 

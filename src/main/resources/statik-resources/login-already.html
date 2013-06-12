@@ -3,11 +3,15 @@
 <html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link type="text/css" rel="stylesheet" href="/statik-resources/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/statik-resources/bootstrap-wysihtml5-0.0.2/libs/css/namespaced-bootstrap.css" />
 </head>
 
-<body>
+<body class="tw-bs">
     <h1 th:text="#{login.heading}"></h1>
 
-    <div th:text="#{login.already.message}" class="error"></div>
+    <section>
+        <div th:text="#{login.already.message}" class="alert alert-info already-logged-in"></div>
+        <a href="/edit" th:text="#{back}" class="btn btn-primary">Back</a>
+    </section>
 </body>
 </html>

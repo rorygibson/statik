@@ -3,29 +3,30 @@
 <html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link type="text/css" rel="stylesheet" href="/statik-resources/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/statik-resources/bootstrap-wysihtml5-0.0.2/libs/css/namespaced-bootstrap.css" />
 </head>
 
-<body>
+<body class="tw-bs">
 
 <h1 th:text="#{heading}">Users</h1>
 
 <section>
-    <p class="flash" th:if="${deletedUser == true}" th:text="#{deleted}">User deleted</p>
+    <p class="alert alert-success" th:if="${deletedUser == true}" th:text="#{deleted}">User deleted</p>
 
-    <a id="add" th:text="#{add}" href="/statik/user">Add a user</a>
+    <a id="add" th:text="#{add}" href="/statik/user" class="btn">Add a user</a>
 
-    <ul id="users" th:each="user : ${users}">
-        <li>
+    <ul id="users">
+        <li th:each="user : ${users}">
             <span th:text="${user.username}">Andrew</span>
 
-            <span class="command" th:if="${user.default}" th:text="#{delete}">Delete</span>
-            <a class="command" th:unless="${user.default}" th:text="#{delete}" th:href="'/statik/delete-user?username=' + ${user.username}">Delete</a>
+            <a class="command btn disabled" th:if="${user.default}" th:text="#{delete}" href="#">Delete</a>
+            <a class="command btn btn-danger" th:unless="${user.default}" th:text="#{delete}" th:href="'/statik/delete-user?username=' + ${user.username}">Delete</a>
 
-            <a class="command" th:text="#{edit}" th:href="'/statik/user?u=' + ${user.username}">Edit</a>
+            <a class="command btn" th:text="#{edit}" th:href="'/statik/user?u=' + ${user.username}">Edit</a>
         </li>
     </ul>
 
-    <a id="back-link" href="/" th:text="#{back}">Back</a>
+    <a id="back-link" href="/" th:text="#{back}" class="btn">Back</a>
 </section>
 
 </body>

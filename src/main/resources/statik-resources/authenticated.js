@@ -1,19 +1,26 @@
 function addControlBoxToScreen() {
-    $('body').append('<div id="wrap" style="width:200px; position:absolute; top:20px; right:20px;  -webkit-border-radius:10px; background-color: lightgrey"></div>');
-    $('#wrap').append('<iframe seamless="seamless" style="width: 180px;margin-left:10px;" id="control-box" src="/statik/control-box" width="200px" height="300px" />');
+    $('body').append('<div id="wrap" style="width:200px; position:absolute; top:20px; right:20px; background-color: lightgrey"></div>');
+    $('#wrap').append('<iframe seamless="seamless" style="width: 180px;margin-left:10px; border:none" id="control-box" src="/statik/control-box" width="200px" height="330px" />');
 }
 
 function setupContextMenu() {
-    $('body').append('<div id="editMenu" class="contextMenu"></div>');
+    $('body').append('<div id="editMenu" class="contextMenu tw-bs"></div>');
     $('#editMenu').append('<ul></ul>');
-    $('#editMenu ul').append('<li id="edit"> <span class="ui-icon ui-icon-pencil"></span> Edit </li>')
-        .append('<li id="copy"> <span class="ui-icon ui-icon-plusthick"></span> Copy </li>');
+    $('#editMenu ul').append('<li id="edit"> <i class="icon-pencil"></i> Edit </li>')
+        .append('<li id="copy"> <i class="icon-plus"></i> Copy </li>');
 
     $('#editMenu span').css('display', 'inline-block');
 }
 
 function setupEditorContainer() {
-    $('body').append('<div id="statik-editor-dialog"></div>');
+    $('body').append('<div id="statik-editor-container" class="tw-bs"></div>');
+
+    $('head')
+        .append('<script type="text/javascript" src="/statik-resources/wysihtml5/jquery.form.js"></script>');
+
+    $('head').append('<link rel="stylesheet" type="text/css" href="/statik-resources/bootstrap-wysihtml5-0.0.2/libs/css/namespaced-bootstrap.css" />')
+        .append('<link rel="stylesheet" type="text/css" href="/statik-resources/bootstrap-wysihtml5-0.0.2/bootstrap-wysihtml5-0.0.2.css" />')
+        .append('<link rel="stylesheet" type="text/css" href="/statik-resources/wysihtml5/editor.css" />');
 }
 
 function setupScripts() {
@@ -90,6 +97,9 @@ function addContextMenuTo(item, path) {
             } else {
                 menu.find("#copy").show();
             }
+
+            menu.addClass("tw-bs");
+
             return menu;
         },
         menuStyle: {
@@ -118,29 +128,10 @@ function addHoverState(item) {
 
 
 function loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent, encodedLanguage) {
-    $.ajax({
-        url: "/statik/editor?selector=" + encodedSelector + "&language=" + encodedLanguage + "&domain=" + encodedDomain + "&path=" + encodedPath + "&content=" + encodedContent,
-        success: function (data) {
-            $("#statik-editor-dialog").html(data);
+    var url = "/statik/editor?selector=" + encodedSelector + "&language=" + encodedLanguage + "&domain=" + encodedDomain + "&path=" + encodedPath + "&content=" + encodedContent;
 
-            $("#statik-editor-dialog").dialog(
-                {
-                    title: "Edit",
-                    bgiframe: true,
-                    autoOpen: true,
-                    height: 450,
-                    width: 500,
-                    modal: true,
-                    closeOnEscape: true,
-                    open: function () {
-                        setTimeout(function () {
-                            $('iframe.statik').css('width', '440px');
-                            $('iframe.statik').css('height', '300px');
-                        }, 200);
-                    }
-                }
-            );
-        }
+    $("#statik-editor-container").load(url, function() {
+         $("#statik-editor-dialog").attr('class','modal').modal("show");
     });
 }
 

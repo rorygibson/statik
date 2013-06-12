@@ -3,28 +3,31 @@
 <html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link type="text/css" rel="stylesheet" href="/statik-resources/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/statik-resources/bootstrap-wysihtml5-0.0.2/libs/css/namespaced-bootstrap.css"/>
 </head>
 
-<body>
+<body class="tw-bs">
 <h1 th:text="#{login.heading}"></h1>
 
-<form method="post" action="/statik-auth">
-    <input type="hidden" name="originalDomain" th:value="${originalDomain}" />
+<section>
+    <form method="post" action="/statik-auth">
+        <input type="hidden" name="originalDomain" th:value="${originalDomain}"/>
 
-    <div>
-        <label th:text="#{login.username}"></label>
-        <input tabindex="1" name="username"/>
-    </div>
+        <div>
+            <label th:text="#{login.username}"></label>
+            <input tabindex="1" name="username"/>
+        </div>
 
-    <div>
-        <label th:text="#{login.password}"></label>
-        <input name="password" tabindex="2" type="password"/>
-    </div>
+        <div>
+            <label th:text="#{login.password}"></label>
+            <input name="password" tabindex="2" type="password"/>
+        </div>
 
-    <div>
-        <input type="submit" tabindex="3" th:value="#{login.submit}" value=""/>
-    </div>
-</form>
+        <div>
+            <input type="submit" tabindex="3" th:value="#{login.submit}" value=""/>
+        </div>
+    </form>
+</section>
 
 <script type="text/javascript" src="/statik-resources/login-binding.js"></script>
 <script type="text/javascript" src="/statik-resources/dom.js"></script>

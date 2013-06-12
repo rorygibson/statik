@@ -3,9 +3,10 @@
 <html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link type="text/css" rel="stylesheet" href="../statik-resources/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/statik-resources/bootstrap-wysihtml5-0.0.2/libs/css/namespaced-bootstrap.css" />
 </head>
 
-<body>
+<body class="tw-bs">
 
 <h1 th:if="${!editMode}" th:text="#{add.heading}">Add a user</h1>
 <h1 th:if="${editMode}" th:text="#{edit.heading}">Edit user</h1>
@@ -15,8 +16,8 @@
         <input type="hidden" th:value="${editMode}" name="edit" />
         <input type="hidden" th:value="${username}" name="originalUsername" />
 
-        <p class="flash" th:if="${flash == true}" th:text="#{${flashMessage}}">User added</p>
-        <p class="error" th:if="${error == true}" th:text="#{${errorMessage}}">Error!</p>
+        <p class="alert alert-success" th:if="${flash == true}" th:text="#{${flashMessage}}">User added</p>
+        <p class="alert alert-error" th:if="${error == true}" th:text="#{${errorMessage}}">Error!</p>
 
         <div>
             <label th:text="#{username}" for="username" autofocus="autofocus">Username</label>
@@ -35,12 +36,13 @@
             <input type="password" required="required" name="password-again" />
         </div>
         
-        <input type="submit" th:if="${editMode}" value="Add" th:value="#{edit}" />
-        <input type="submit" th:if="${!editMode}" value="Add" th:value="#{add}" />
+        <input class="btn btn-primary" type="submit" th:if="${editMode}" value="Add" th:value="#{edit}" />
+        <input class="btn btn-primary" type="submit" th:if="${!editMode}" value="Add" th:value="#{add}" />
 
+        <a class="btn" id="back-link" href="/statik/users" th:text="#{back.to.users}">Back to users</a>
     </form>
 
-    <a id="back-link" href="/statik/users" th:text="#{back.to.users}">Back to users</a>
+
 </section>
 
 </body>

@@ -1,7 +1,5 @@
 
 $(document).ready(function () {
-    $('body').append('<script type="text/javascript" src="/statik-resources/authenticated.js"></script>');
-
     setupScripts();
     setupContextMenu();
     setupEditorContainer();

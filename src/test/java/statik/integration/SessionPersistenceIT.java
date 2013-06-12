@@ -31,7 +31,7 @@ public class SessionPersistenceIT extends AbstractWebDriverIntTst {
         doLoginWith("admin", "password");
 
         driver.get(LOGIN_PAGE);
-        WebElement element = driver.findElement(By.className("error"));
+        WebElement element = driver.findElement(By.className("alert-info"));
         assertEquals("Wrong text", "You have already logged in.", element.getText());
     }
 
@@ -55,7 +55,7 @@ public class SessionPersistenceIT extends AbstractWebDriverIntTst {
         driver.manage().addCookie(cookie);
 
         driver.get(LOGIN_PAGE);
-        WebElement element = driver.findElement(By.className("error"));
+        WebElement element = driver.findElement(By.className("alert-info"));
         assertEquals("Wrong text", "You have already logged in.", element.getText());
     }
 }

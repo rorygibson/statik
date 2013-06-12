@@ -1,54 +1,53 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
-
 <html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <link type="text/css" rel="stylesheet" href="/statik-resources/wysihtml5/editor.css" />
-</head>
-
 <body>
 
-<div id="wysihtml5-toolbar" style="display: none;">
-    <a th:text="#{editor.bold}" data-wysihtml5-command="bold"></a>
-    <a th:text="#{editor.italic}" data-wysihtml5-command="italic"></a>
+<div id="statik-editor-dialog" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 th:text="#{edit}">Edit</h3>
+    </div>
 
-    <!-- Some wysihtml5 commands require extra parameters -->
-    <a th:text="#{editor.red}" data-wysihtml5-command="foreColor" data-wysihtml5-command-value="red"></a>
-    <a th:text="#{editor.green}" data-wysihtml5-command="foreColor" data-wysihtml5-command-value="green"></a>
-    <a th:text="#{editor.blue}" data-wysihtml5-command="foreColor" data-wysihtml5-command-value="blue"></a>
+    <div class="modal-body">
+        <form action="/statik/content" method="post" id="editorForm">
+            <input th:value="#{editor.save}" class="btn btn-primary" type="submit" value="" id="submit" name="save"/>
 
-    <!-- Some wysihtml5 commands like 'createLink' require extra paramaters specified by the user (eg. href) -->
-    <a th:text="#{editor.link}" data-wysihtml5-command="createLink">Link</a>
+            <select name="language-switcher" id="language-switcher">
+                <option value="en">English</option>
+                <option value="pt">Portuguese</option>
+                <option value="fr">French</option>
+                <option value="sp">Spanish</option>
+            </select>
 
-    <a th:text="#{editor.html}" data-wysihtml5-action="change_view" unselectable="on">HTML</a>
-
-    <div id="linkBox" data-wysihtml5-dialog="createLink">
-        <label for="url" th:text="#{editor.link}"></label>
-        <input id="url" data-wysihtml5-dialog-field="href" value="http://" class="text" />
-
-        <a th:text="#{editor.save}" data-wysihtml5-dialog-action="save"></a>
-        <a th:text="#{editor.cancel}" data-wysihtml5-dialog-action="cancel"></a>
+            <div id="textarea-preload"></div>
+            <textarea name="content" id="wysihtml5-textarea" autofocus="autofocus"></textarea>
+        </form>
     </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var txt = document.querySelector('#textarea-preload').innerHTML;
+        document.querySelector('textarea').innerHTML = txt;
 
-<form action="/statik/content" method="post" id="editorForm">
-    <input th:value="#{editor.save}" type="submit" value="" id="submit" name="save" />
 
-    <select name="language-switcher" id="language-switcher">
-        <option value="en">English</option>
-        <option value="pt">Portuguese</option>
-        <option value="fr">French</option>
-        <option value="sp">Spanish</option>
-    </select>
+        $('#wysihtml5-textarea').wysihtml5({image:false});
 
-    <div id="textarea-preload"></div>
-    <textarea name="content" id="wysihtml5-textarea" autofocus="autofocus"></textarea>
-</form>
+        document.editor = $('#wysihtml5-textarea').data("wysihtml5").editor;
 
-<script type="text/javascript" src="/statik-resources/wysihtml5/jquery.form.js"></script>
-<script type="text/javascript" src="/statik-resources/wysihtml5/simple-wysi-rules.js"></script>
-<script type="text/javascript" src="/statik-resources/wysihtml5/wysihtml5-0.3.0.js"></script>
-<script type="text/javascript" src="/statik-resources/wysihtml5/binding.js"></script>
+        $('#language-switcher').change(function(){
+            $('input[name="language"]').val($(this).val());
+            loadEditor(parent.window.statik.item, parent.window.statik.path, $(this).val());
+        });
+
+        $('#language-switcher').val($('input[name="language"]').val());
+
+        $('#editorForm').ajaxForm(function () {
+            window.location.reload();
+        });
+
+    });
+</script>
 
 </body>
 </html>

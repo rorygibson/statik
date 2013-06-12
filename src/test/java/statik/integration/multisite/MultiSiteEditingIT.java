@@ -55,7 +55,9 @@ public class MultiSiteEditingIT extends AbstractWebDriverIntTst {
     }
 
     private void selectToEditSite2() {
+        driver.switchTo().frame("control-box");
         driver.findElement(By.linkText("site2.localhost")).click();
+        driver.switchTo().defaultContent();
     }
 
 
