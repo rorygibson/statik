@@ -1,0 +1,127 @@
+body.statik-internal {
+    font-family: sans-serif;
+    font-size: 12pt;
+    background-color: #1c94c4;
+    color: white;
+    padding-top: 5px;
+}
+
+iframe#control-box {
+    border: none;
+}
+
+body.statik-internal h1 {
+    font-size: 14pt;
+    display: block;
+    text-align: center;
+}
+
+body.statik-internal section {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 400px;
+    text-align: center;
+}
+
+body.statik-internal a {
+    color: white
+}
+
+body.statik-internal .already-logged-in {
+    text-align: center;
+}
+
+body.statik-internal form {
+    display: block;
+}
+
+body.statik-internal ul#users {
+    padding: 0;
+}
+
+body.statik-internal ul#users li {
+    color: black;
+    background-color: lightgrey;
+    list-style-type: none;
+    padding: 0.5em;
+    margin-bottom: 2px;
+    margin-top: 10px;
+    line-height: 2em;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+body.statik-internal ul#users li .command {
+    float: right;
+    padding-left: 1em;
+    margin-left: 3px;
+}
+
+
+/**
+Control box
+**/
+
+
+#statik-control-box li, #statik-control-box li a {
+    font-family: sans-serif;
+    font-size: 10pt;
+}
+
+h3#statik-control-box-heading {
+    border-bottom: solid 1px #999999;
+    font-size: 18px;
+    margin-right: 20px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    color: #999999;
+}
+
+#statik-control-box .active {
+   background-color: blue;
+}
+
+
+/**
+Context menu; may appear on any page so can't be name-spaced directly
+**/
+#editMenu {
+    display: none;
+}
+
+
+/**
+Editor
+**/
+.tw-bs .modal textarea {
+    min-width: 440px;
+    width: 440px;
+
+    min-height: 250px;
+    height: 250px;
+}
+
+.tw-bs #textarea-preload {
+    display: none;
+}
+
+.tw-bs .modal {
+    width: 520px;
+    margin-left: -260px;
+}
+
+.tw-bs .modal #submit {
+    margin-top: -5px;
+}
+
+.tw-bs .modal-header h3 {
+    color: black;
+}
+
+.tw-bs .editor-toolbar ul {
+    margin-left: 0;
+}
+
+.tw-bs .editor-toolbar li {
+    float: left;
+}

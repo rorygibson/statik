@@ -1,6 +1,8 @@
 package statik.content;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
@@ -11,6 +13,7 @@ import javax.servlet.http.Cookie;
 public class LanguageFilter extends Filter {
 
     public static final String LANGUAGE = "language";
+    private static final Logger LOG = LoggerFactory.getLogger(LanguageFilter.class);
 
     public LanguageFilter(String route) {
         super(route);
@@ -29,6 +32,8 @@ public class LanguageFilter extends Filter {
         } else {
             desiredLanguage = Language.Default.code();
         }
+
+        LOG.info("Desired language [" + desiredLanguage + "]");
 
         if (desiredLanguage != null) {
             response.removeCookie(LANGUAGE);

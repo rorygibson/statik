@@ -1,12 +1,11 @@
 package statik.integration;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -28,11 +27,11 @@ public class ElementCloningIT extends AbstractWebDriverIntTst {
         a.perform();
 
         WebElement menu = driver.findElement(By.id("jqContextMenu"));
-        List<WebElement> lis = menu.findElements(By.tagName("li"));
-        assertEquals("Should have 2 menu items", 2, lis.size());
+        menu.findElement(By.id("edit"));
+        menu.findElement(By.id("copy"));
     }
 
-    @Test
+    @Test      @Ignore
     public void contextMenuHas1EntryWhenOnASingleLink() {
         driver.get(LINK_TEST_PAGE);
 

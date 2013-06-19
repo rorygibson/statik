@@ -20,11 +20,11 @@ public class MultiSiteEditingIT extends AbstractWebDriverIntTst {
         loginTo(SITE1_LOGIN_PAGE);
 
         driver.get(SITE1_PAGE);
-        assertEquals("Text not as expected", "site1 content", driver.findElement(By.tagName("section")).getText());
+        assertEquals("Text not as expected", "site1 content", driver.findElement(By.tagName("p")).getText());
 
-        changeContentOf("section", "new site1 content");
+        changeContentOf("p", "new site1 content");
 
-        WebElement again = driver.findElement(By.cssSelector("section"));
+        WebElement again = driver.findElement(By.cssSelector("p"));
         assertEquals("Text not as expected", "new site1 content", again.getText());
     }
 
@@ -35,11 +35,11 @@ public class MultiSiteEditingIT extends AbstractWebDriverIntTst {
         loginTo(SITE2_LOGIN_PAGE);
 
         driver.get(SITE2_PAGE);
-        assertEquals("Text not as expected", "site2 content", driver.findElement(By.tagName("section")).getText());
+        assertEquals("Text not as expected", "site2 content", driver.findElement(By.tagName("p")).getText());
 
-        changeContentOf("section", "new site2 content");
+        changeContentOf("p", "new site2 content");
 
-        WebElement again = driver.findElement(By.cssSelector("section"));
+        WebElement again = driver.findElement(By.cssSelector("p"));
         assertEquals("Text not as expected", "new site2 content", again.getText());
     }
 
@@ -49,8 +49,8 @@ public class MultiSiteEditingIT extends AbstractWebDriverIntTst {
         loginTo(SITE1_LOGIN_PAGE);
         selectToEditSite2();
 
-        changeContentOf("section", "new site2 content");
-        WebElement again = driver.findElement(By.cssSelector("section"));
+        changeContentOf("p", "new site2 content");
+        WebElement again = driver.findElement(By.cssSelector("p"));
         assertEquals("Text not as expected", "new site2 content", again.getText());
     }
 

@@ -11,14 +11,25 @@ public class ControlBoxRoute extends ThymeLeafResourceRoute {
 
     private static final String CONTROL_BOX_HTML = "control-box";
     private final String siteRoot;
+    private final String[] siteNames;
 
     public ControlBoxRoute(String route, String siteRoot) {
         super(route);
         this.siteRoot = siteRoot;
+        this.siteNames = siteNames();
     }
 
     @Override
     public Object handle(Request request, Response response) {
+        Context ctx = new Context();
+        String language = languageFrom(request);
+        ctx.setVariable("sites", this.siteNames);
+        ctx.setVariable("language", language);
+
+        return processWithThymeLeaf(CONTROL_BOX_HTML, ctx);
+    }
+
+    private String[] siteNames() {
         File root = new File(siteRoot);
         File[] directories = root.listFiles(new FileFilter() {
             @Override
@@ -32,11 +43,7 @@ public class ControlBoxRoute extends ThymeLeafResourceRoute {
         for (File f : directories) {
             arr[i++] = f.getName();
         }
-
-        Context ctx = new Context();
-        ctx.setVariable("sites", arr);
-
-        return processWithThymeLeaf(CONTROL_BOX_HTML, ctx);
+        return arr;
     }
 
 }

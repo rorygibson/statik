@@ -14,7 +14,7 @@ public class PathsAndRoutes {
     public static final String LOGIN_ALREADY_VIEWNAME = "login-already";
 
     // Routes
-    public static final String EDITOR_VIEWNAME = "wysihtml5/editor";
+    public static final String EDITOR_VIEWNAME = "editor";
 
 
     // Secured routes

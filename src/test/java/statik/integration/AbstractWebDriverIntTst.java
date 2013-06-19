@@ -3,12 +3,12 @@ package statik.integration;
 import com.google.common.base.Function;
 import org.junit.After;
 import org.junit.BeforeClass;
-import org.junit.runners.model.Statement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
@@ -84,41 +84,6 @@ public class AbstractWebDriverIntTst {
     }
 
 
-    public class DumpSourceOnFailureStatement extends Statement {
-
-        private final Statement base;
-
-        public DumpSourceOnFailureStatement(Statement base) {
-            this.base = base;
-        }
-
-        @Override
-        public void evaluate() throws Throwable {
-            try {
-                base.evaluate();
-            } catch (Throwable t) {
-                LOG.error("\n\n\n");
-                LOG.error("********** TEST FAILURE *********");
-                LOG.error("Current URL: " + driver.getCurrentUrl());
-                LOG.error("Current page title: " + driver.getTitle());
-                LOG.error(driver.getPageSource());
-                LOG.error("*********************************");
-                LOG.error("\n\n\n");
-                throw t;
-            }
-        }
-    }
-
-
-    //@Rule
-    //public MethodRule dumpSourceOnFailure = new MethodRule() {
-    //    @Override
-    //    public Statement apply(Statement statement, FrameworkMethod frameworkMethod, Object o) {
-    //        return new DumpSourceOnFailureStatement(statement);
-    //    }
-    //};
-
-
     @After
     public void clearContentItemsCollection() {
         driver.get(CLEAR_DB_ENDPOINT);
@@ -159,7 +124,9 @@ public class AbstractWebDriverIntTst {
         WebElement username = driver.findElement(By.name("username"));
         WebElement password = driver.findElement(By.name("password"));
 
+        username.clear();
         username.sendKeys(wrongUsername);
+        password.clear();
         password.sendKeys(wrongPassword);
 
         password.submit();
@@ -176,7 +143,10 @@ public class AbstractWebDriverIntTst {
     }
 
     protected static WebDriver createDriver() {
-        return new FirefoxDriver();
+        FirefoxProfile profile = new FirefoxProfile();
+//        profile.setEnableNativeEvents(true);
+        FirefoxDriver driver = new FirefoxDriver(profile);
+        return driver;
     }
 
     protected static void addHookToShutdownDriver(final WebDriver d) {
@@ -211,16 +181,16 @@ public class AbstractWebDriverIntTst {
     }
 
     protected void changeContentOf(WebElement el, String newContent, Language lang) {
-        LOG.debug("Triggering context menu");
+        LOG.debug("Triggering context menu on " + el.getTagName());
         Actions a = new Actions(driver);
         a.contextClick(el);
-        a.perform();
+        a.build().perform();
 
         WebElement menu = driver.findElement(By.id("jqContextMenu"));
         menu.findElement(By.id("edit")).click();
 
         LOG.debug("Waiting for editor");
-        waitForPresenceOfItemByClassName("wysihtml5-sandbox");
+        waitForPresenceOfItemByClassName("editor-sandbox");
 
         LOG.debug("Changing language");
         driver.findElement(By.id("language-switcher")).findElement(By.xpath("./option[@value='" + lang.code() + "']")).click();

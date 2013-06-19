@@ -26,27 +26,29 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var txt = document.querySelector('#textarea-preload').innerHTML;
-        document.querySelector('textarea').innerHTML = txt;
 
+    // Route class has set raw content into textarea-preload; copy it into the textarea value (avoid jQuery to avoid escaping issues)
+    var txt = document.querySelector('#textarea-preload').innerHTML;
+    document.querySelector('textarea').innerHTML = txt;
 
-        $('#wysihtml5-textarea').wysihtml5({image:false});
+    // create the editor
+    $('#wysihtml5-textarea').wysihtml5({image:false});
 
-        document.editor = $('#wysihtml5-textarea').data("wysihtml5").editor;
+    // keep a reference
+    document.editor = $('#wysihtml5-textarea').data("wysihtml5").editor;
 
-        $('#language-switcher').change(function(){
-            $('input[name="language"]').val($(this).val());
-            loadEditor(parent.window.statik.item, parent.window.statik.path, $(this).val());
-        });
-
-        $('#language-switcher').val($('input[name="language"]').val());
-
-        $('#editorForm').ajaxForm(function () {
-            window.location.reload();
-        });
-
+    // setup the language switcher
+    $('#language-switcher').change(function(){
+        $('input[name="language"]').val($(this).val());
+        parent.document.Editing.openEditorFor(parent.window.statik.item, parent.window.statik.path, $(this).val());
     });
+    $('#language-switcher').val($('input[name="language"]').val());
+
+    // and finally make sure that we refresh the main window when we submit, to pull in the edited content
+    $('#editorForm').ajaxForm(function () {
+        window.location.reload();
+    });
+
 </script>
 
 </body>

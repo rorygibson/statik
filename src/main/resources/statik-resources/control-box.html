@@ -2,29 +2,35 @@
 
 <html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link type="text/css" rel="stylesheet" href="/statik-resources/control-box-styles.css"/>
-    <link rel="stylesheet" type="text/css" href="/statik-resources/bootstrap-wysihtml5-0.0.2/libs/css/namespaced-bootstrap.css" />
-    <script type="text/javascript" src="/statik-resources/jquery-1.8.3.js" />
-    <script src="/statik-resources/bootstrap-wysihtml5-0.0.2/libs/js/bootstrap.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="/statik-resources/control-box.js"></script>
+    <link type="text/css" rel="stylesheet" href="/statik-resources/css/statik.css"/>
+    <link rel="stylesheet" type="text/css" href="/statik-resources/css/namespaced-bootstrap.css" />
 </head>
 
 <body class="tw-bs">
 
-<h3>CMS</h3>
+<h3 id="statik-control-box-heading">CMS</h3>
 
-<ul id="statik-auth-box" class="nav nav-list">
+<ul id="statik-control-box" class="nav nav-list">
     <li class="nav-header" th:text="#{about.you}">About you</li>
     <li><a href="#" id="logout" th:text="#{log.out}">Log out</a></li>
+
     <li class="nav-header" th:text="#{admin}">Admin</li>
     <li><a href="#" id="publish" th:text="#{publish}">Publish</a></li>
     <li><a href="#" id="users" th:text="#{users}">Users</a></li>
+
     <li class="nav-header" th:text="#{sites}">Sites</li>
     <li th:each="site : ${sites}">
         <a class="site" th:href="${'http://' + site + '/edit'}" th:text="${site}">sitename</a>
     </li>
+
+    <li class="nav-header" th:text="#{language}">Language</li>
+    <li><a th:class="'language ' + ${language == 'en' ? 'active' : ''}" data-lang="en" th:text="#{english}">English</a></li>
+    <li><a th:class="'language ' + ${language == 'pt' ? 'active' : ''}" data-lang="pt" th:text="#{portuguese}">Portuguese</a></li>
+    <li><a th:class="'language ' + ${language == 'sp' ? 'active' : ''}" data-lang="sp" th:text="#{spanish}">Spanish</a></li>
+    <li><a th:class="'language ' + ${language == 'fr' ? 'active' : ''}" data-lang="fr" th:text="#{french}">French</a></li>
 </ul>
 
+<script data-main="/statik-resources/appjs/control-box" src="/statik-resources/js/require.js"></script>
 
 </body>
 </html>

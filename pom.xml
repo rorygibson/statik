@@ -15,7 +15,7 @@
         <java.compiler.version>1.7</java.compiler.version>
 
         <jetty.base.url>http://localhost:8080</jetty.base.url>
-        <standalone.shutdown.url>${standalone.base.url}/shutdown</standalone.shutdown.url>
+        <standalone.shutdown.url>${standalone.base.url}/statik/shutdown</standalone.shutdown.url>
         <standalone.base.url>http://localhost:4567</standalone.base.url>
 
         <it.include>**/*IT.java</it.include>
@@ -356,16 +356,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.detro.ghostdriver</groupId>
-            <artifactId>phantomjsdriver</artifactId>
-            <version>1.0.3</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>2.32.0</version>
+            <version>2.33.0</version>
             <scope>test</scope>
         </dependency>
 

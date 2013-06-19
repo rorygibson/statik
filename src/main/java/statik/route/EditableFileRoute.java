@@ -13,7 +13,6 @@ import statik.content.ContentItem;
 import statik.content.ContentStore;
 import statik.session.SessionStore;
 import statik.util.Http;
-import statik.util.Language;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -23,16 +22,10 @@ import java.util.Map;
 
 public class EditableFileRoute extends ResourceRoute {
 
-    private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/jquery-1.8.3.js\" type=\"text/javascript\"></script>";
-    private static final String AUTH_JS =
-            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated-binding.js\" type=\"text/javascript\"></script>\n" +
-            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/authenticated.js\" type=\"text/javascript\"></script>\n";
-
-    private static final String EDITOR_JS =
-            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/bootstrap-wysihtml5-0.0.2/libs/js/wysihtml5-0.3.0_rc2.js\" type=\"text/javascript\"></script>\n" +
-            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/bootstrap-wysihtml5-0.0.2/libs/js/bootstrap.min.js\" type=\"text/javascript\"></script>" +
-            "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/bootstrap-wysihtml5-0.0.2/bootstrap-wysihtml5-0.0.2.js\" type=\"text/javascript\"></script>";
-
+    private static final String JQUERY_JS = "<script src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/js/jquery.js\" type=\"text/javascript\"></script>";
+    private static final String EDITING_JS =
+            "<script data-main=\"" + PathsAndRoutes.STATIK_RESOURCES + "/appjs/app\" src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/js/require.js\" type=\"text/javascript\"></script>\n" +
+            "<script data-main=\"" + PathsAndRoutes.STATIK_RESOURCES + "/appjs/editing\" src=\"" + PathsAndRoutes.STATIK_RESOURCES + "/js/require.js\" type=\"text/javascript\"></script>\n";
 
     private static final String HTML_SUFFIX = ".html";
     private final SessionStore sessionStore;
@@ -90,11 +83,6 @@ public class EditableFileRoute extends ResourceRoute {
         return Http.EMPTY_RESPONSE;
     }
 
-    private String languageFrom(Request request) {
-        Object language = request.raw().getAttribute("language");
-        return language == null ? Language.Default.code() : language.toString();
-    }
-
     private String domainFrom(Request request) {
         return request.raw().getServerName();
     }
@@ -137,7 +125,7 @@ public class EditableFileRoute extends ResourceRoute {
             cacheable = true;
         }
 
-        return new MetaFile(cacheable,data);
+        return new MetaFile(cacheable, data);
     }
 
     private boolean isAuthenticated(Request request) {
@@ -189,8 +177,7 @@ public class EditableFileRoute extends ResourceRoute {
 
     private Document makeEditable(Document doc) {
         doc.body().append(JQUERY_JS);
-        doc.body().append(AUTH_JS);
-        doc.body().append(EDITOR_JS);
+        doc.body().append(EDITING_JS);
         return doc;
     }
 

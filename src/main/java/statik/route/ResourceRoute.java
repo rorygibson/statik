@@ -2,12 +2,15 @@ package statik.route;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import statik.content.LanguageFilter;
 import statik.util.Http;
+import statik.util.Language;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +37,26 @@ public class ResourceRoute extends Route {
             setCacheable(response);
         }
         return writeClasspathFileToResponse(response, filename);
+    }
+
+    protected String languageFrom(Request request) {
+        String cookie = request.cookie(LanguageFilter.LANGUAGE);
+        Object attrib = request.raw().getAttribute(LanguageFilter.LANGUAGE);
+
+        LOG.debug("Detected language [" + cookie + "] from request cookie");
+        LOG.debug("Detected language [" + attrib + "] from request attribute");
+
+        // request attrib will be more up-to-date; prefer it if present
+        String language = null;
+        if (attrib != null && !attrib.equals("")) {
+            language = attrib.toString();
+        } else if (cookie != null && cookie.equals("")) {
+            language = cookie;
+        }
+        LOG.debug("Using language [" + language + "]");
+
+
+        return StringUtils.isBlank(language) ? Language.Default.code() : language.toString();
     }
 
     protected boolean testMode() {

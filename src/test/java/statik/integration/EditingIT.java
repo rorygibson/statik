@@ -1,6 +1,7 @@
 package statik.integration;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -48,7 +49,7 @@ public class EditingIT extends AbstractWebDriverIntTst {
         }
     }
 
-    @Test
+    @Test   @Ignore
     public void editLink() throws InterruptedException {
         driver.get(LINK_TEST_PAGE);
 
