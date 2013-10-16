@@ -53,14 +53,17 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
         Connection connection = null;
         try {
             connection = this.connectionPool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("select domain,path,selector,content,is_copy,is_live,img,language from statik_content where domain=? and path=? and language=?");
+            PreparedStatement stmt = connection.prepareStatement("select domain,path,selector,content,is_copy,is_live,img,language from statik_content where domain=? and path=?");
             stmt.setString(1, domain);
             stmt.setString(2, path);
-            stmt.setString(3, language);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 ContentItem item = contentItemFrom(rs);
-                map.put(item.selector(), item);
+                if (item.language().equals(language)) {
+                    map.put(item.selector(), item);
+                } else if (item.img() != null && !item.img().equals("")) {
+                    map.put(item.selector(), item);
+                }
             }
             stmt.close();
         } catch (SQLException e) {
