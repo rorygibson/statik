@@ -19,6 +19,8 @@
                 <option value="sp">Spanish</option>
             </select>
 
+            <br />
+
             <div id="textarea-preload"></div>
             <textarea name="content" id="wysihtml5-textarea" autofocus="autofocus"></textarea>
         </form>
@@ -28,8 +30,8 @@
 <script type="text/javascript">
 
     // Route class has set raw content into textarea-preload; copy it into the textarea value (avoid jQuery to avoid escaping issues)
-    var txt = document.querySelector('#textarea-preload').innerHTML;
-    document.querySelector('textarea').innerHTML = txt;
+    var txt = document.getElementById('textarea-preload').innerHTML;
+    document.getElementById('wysihtml5-textarea').innerHTML = txt;
 
     // create the editor
     $('#wysihtml5-textarea').wysihtml5({image:false});

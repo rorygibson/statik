@@ -30,7 +30,7 @@ public class UsesRDBMS {
     }
 
     private void initMigrations() {
-        LOG.info("Performing any DB migrations");
+        LOG.info("Performing any DB migrations against " + this.jdbcDriver);
         Flyway flyway = new Flyway();
         DataSource ds = new DriverDataSource(this.jdbcDriver, this.jdbcUrl, this.jdbcUsername, this.jdbcPassword);
         flyway.setDataSource(ds);

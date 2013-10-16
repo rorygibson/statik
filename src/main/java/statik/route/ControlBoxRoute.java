@@ -26,6 +26,7 @@ public class ControlBoxRoute extends ThymeLeafResourceRoute {
         ctx.setVariable("sites", this.siteNames);
         ctx.setVariable("language", language);
 
+        response.raw().setContentType("text/html");
         return processWithThymeLeaf(CONTROL_BOX_HTML, ctx);
     }
 

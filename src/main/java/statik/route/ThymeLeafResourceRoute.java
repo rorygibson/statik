@@ -24,6 +24,7 @@ public abstract class ThymeLeafResourceRoute extends ResourceRoute {
     @Override
     public Object handle(Request request, Response response) {
         String templateName = resolveTemplateName(request);
+        response.raw().setContentType("text/html");
         return processWithThymeLeaf(templateName);
     }
 

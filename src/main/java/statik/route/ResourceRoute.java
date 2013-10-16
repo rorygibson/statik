@@ -12,6 +12,7 @@ import statik.content.LanguageFilter;
 import statik.util.Http;
 import statik.util.Language;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,6 +64,53 @@ public class ResourceRoute extends Route {
         return Boolean.getBoolean("testMode");
     }
 
+
+    protected byte[] rawDataFrom(File fileToServe) throws IOException {
+        return FileUtils.readFileToByteArray(fileToServe);
+    }
+
+
+    protected String pathFrom(Request request) {
+        HttpServletRequest httpReq = request.raw();
+        return httpReq.getPathInfo() == null ? httpReq.getServletPath() : httpReq.getPathInfo();
+    }
+
+
+    protected String domainFrom(Request request) {
+        return request.raw().getServerName();
+    }
+
+    protected String contentTypeFrom(File file) {
+        String type;
+        String name = file.getName();
+        String extension = name.substring(name.lastIndexOf('.') + 1);
+        switch (extension) {
+            case "html":
+                type = "text/html";
+                break;
+            case "css":
+                type = "text/css";
+                break;
+            case "js":
+                type = "text/javascript";
+                break;
+            case "png":
+                type = "image/png";
+                break;
+            case "woff":
+                type = "application/x-font-woff";
+                break;
+            case "jpg":
+            case "jpeg":
+                type = "image/jpeg";
+                break;
+            default:
+                type = "application/x-octet-stream";
+        }
+        return type;
+    }
+
+
     protected static void setCacheable(Response r) {
         final Calendar inTwoMonths = new GregorianCalendar();
         inTwoMonths.setTime(new Date(System.currentTimeMillis()));
@@ -74,6 +122,9 @@ public class ResourceRoute extends Route {
 
     protected Object writeClasspathFileToResponse(Response response, String filename) {
         String filePath = PathsAndRoutes.RESOURCE_ROOT_PATH + filename;
+        LOG.debug("Writing classpath file " + filePath);
+        String contentType = contentTypeFrom(new File(filePath));
+        response.raw().setContentType(contentType);
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
         try {
             if (resourceAsStream != null) {
@@ -90,6 +141,10 @@ public class ResourceRoute extends Route {
     }
 
     protected void writeFileToResponse(Response response, File theFile) throws IOException {
+        LOG.debug("Writing file " + theFile.getAbsolutePath());
+        if (theFile.getAbsolutePath().endsWith(".html")) {
+            response.raw().setContentType("text/html");
+        }
         byte[] bytes = FileUtils.readFileToByteArray(theFile);
         response.raw().getOutputStream().write(bytes);
     }

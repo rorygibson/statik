@@ -28,6 +28,7 @@ public class UserListRoute extends ThymeLeafResourceRoute {
         String joined = join(users);
         LOG.info("Listing [" + users.size() + "] users, [" + joined + "]");
         ctx.setVariable("users", users);
+        response.raw().setContentType("text/html");
         return processWithThymeLeaf(templateName, ctx);
     }
 

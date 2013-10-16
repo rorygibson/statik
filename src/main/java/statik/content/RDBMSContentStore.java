@@ -23,7 +23,7 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
         Connection connection = null;
         try {
             connection = this.connectionPool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("insert into statik_content(domain,path,selector,content,is_copy,is_live,language) values(?,?,?,?,?,?,?)");
+            PreparedStatement stmt = connection.prepareStatement("insert into statik_content(domain,path,selector,content,is_copy,is_live,language,img) values(?,?,?,?,?,?,?,?)");
             stmt.setString(1, contentItem.domain());
             stmt.setString(2, contentItem.path());
             stmt.setString(3, contentItem.selector());
@@ -31,6 +31,7 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
             stmt.setBoolean(5, contentItem.isCopy());
             stmt.setBoolean(6, contentItem.live());
             stmt.setString(7, contentItem.language().code());
+            stmt.setString(8, contentItem.img());
             stmt.execute();
             stmt.close();
         } catch (SQLException e) {
@@ -52,7 +53,7 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
         Connection connection = null;
         try {
             connection = this.connectionPool.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("select domain,path,selector,content,is_copy,is_live, language from statik_content where domain=? and path=? and language=?");
+            PreparedStatement stmt = connection.prepareStatement("select domain,path,selector,content,is_copy,is_live,img,language from statik_content where domain=? and path=? and language=?");
             stmt.setString(1, domain);
             stmt.setString(2, path);
             stmt.setString(3, language);
@@ -148,10 +149,10 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
     }
 
     private ContentItem contentItemFrom(ResultSet rs) throws SQLException {
-        return contentItemFrom(rs.getString(ContentItem.DOMAIN), rs.getString(ContentItem.PATH), rs.getString(ContentItem.SELECTOR), rs.getString(ContentItem.CONTENT), rs.getBoolean(ContentItem.IS_COPY), rs.getBoolean(ContentItem.LIVE), rs.getString(ContentItem.LANGUAGE));
+        return contentItemFrom(rs.getString(ContentItem.DOMAIN), rs.getString(ContentItem.PATH), rs.getString(ContentItem.SELECTOR), rs.getString(ContentItem.CONTENT), rs.getBoolean(ContentItem.IS_COPY), rs.getBoolean(ContentItem.LIVE), rs.getString(ContentItem.LANGUAGE), rs.getString(ContentItem.IMG));
     }
 
-    private ContentItem contentItemFrom(String domain, String path, String selector, String content, boolean copy, boolean live, String lang) {
-        return new ContentItem(domain, path, selector, content, copy, live, Language.from(lang));
+    private ContentItem contentItemFrom(String domain, String path, String selector, String content, boolean copy, boolean live, String lang, String img) {
+        return new ContentItem(domain, path, selector, content, copy, live, Language.from(lang),img);
     }
 }

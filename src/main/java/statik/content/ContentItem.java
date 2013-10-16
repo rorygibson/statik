@@ -11,23 +11,25 @@ public class ContentItem {
     public static final String SELECTOR = "selector";
     public static final String CONTENT = "content";
     public static final String LANGUAGE = "language";
+    public static final String IMG = "img";
     private final boolean isCopy;
     private final String domain;
     private final String path;
     private final String selector;
     private final String content;
     private final Language language;
+    private final String img;
     private boolean live;
 
-    public ContentItem(String domain, String path, String selector, String content, boolean isCopy, boolean live) {
-        this(domain, path, selector, content, isCopy, live, Language.Default);
+    public ContentItem(String domain, String path, String selector, String content, boolean isCopy, boolean live, String img) {
+        this(domain, path, selector, content, isCopy, live, Language.Default, img);
     }
 
-    public ContentItem(String domain, String path, String selector, String content, boolean live) {
-        this(domain, path, selector, content, false, live, Language.Default);
+    public ContentItem(String domain, String path, String selector, String content, boolean live, String img) {
+        this(domain, path, selector, content, false, live, Language.Default, img);
     }
 
-    public ContentItem(String domain, String path, String selector, String content, boolean isCopy, boolean isLive, Language language) {
+    public ContentItem(String domain, String path, String selector, String content, boolean isCopy, boolean isLive, Language language, String img) {
         this.domain = domain;
         this.path = path;
         this.selector = selector;
@@ -35,6 +37,11 @@ public class ContentItem {
         this.isCopy = isCopy;
         this.live = isLive;
         this.language = language;
+        this.img = img;
+    }
+
+    public String img() {
+        return this.img;
     }
 
     public Language language() {

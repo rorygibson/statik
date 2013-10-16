@@ -63,10 +63,14 @@ body.statik-internal ul#users li .command {
 Control box
 **/
 
+#statik-control-box {
+    font-family: sans-serif;
+}
 
 #statik-control-box li, #statik-control-box li a {
     font-family: sans-serif;
     font-size: 10pt;
+    padding-left: 0;
 }
 
 h3#statik-control-box-heading {
@@ -124,4 +128,33 @@ Editor
 
 .tw-bs .editor-toolbar li {
     float: left;
+}
+
+
+/**
+Uploaded files list
+**/
+#statik-upload-list-dialog {
+    height:400px;
+}
+
+#statik-upload-list-heading {
+    margin-left: 1em;
+}
+
+#statik-upload-list-dialog #cancel {
+    float:right;
+}
+
+#statik-upload-list-dialog ul#files {
+    margin-top:2em;
+}
+
+#statik-uploader-dialog {
+    display: none;
+    height:200px;
+}
+
+#statik-uploader-dialog #cancel {
+    float:right;
 }

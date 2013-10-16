@@ -31,7 +31,11 @@ public class Main implements spark.servlet.SparkApplication {
     private static final String PORT = "port";
     private static final int DEFAULT_PORT = 4567;
     private static final String AUTH_DOMAIN = "authDomain";
+    private static final String UPLOAD_LOCATION = "uploadStorageLocation";
 
+    private static String configFile;
+
+    private String uploadDir;
     private ContentStore contentStore;
     private AuthStore authStore;
     private SessionStore sessionStore;
@@ -45,7 +49,7 @@ public class Main implements spark.servlet.SparkApplication {
 
     public static void main(String[] args) {
         Main main = new Main();
-        String configFile = System.getProperty("config.filename", CONFIG_FILENAME);
+        configFile = System.getProperty("config.filename", CONFIG_FILENAME);
         main.configure(configFile);
         Spark.setPort(port);
 
@@ -56,8 +60,9 @@ public class Main implements spark.servlet.SparkApplication {
 
     @Override
     public void init() {
-        String configFile = System.getProperty("config.filename", CONFIG_FILENAME);
+        configFile = System.getProperty("config.filename", CONFIG_FILENAME);
         configure(configFile);
+
         populate();
         addTestOnlyRoutes();
         addStatikRoutes();
@@ -65,17 +70,17 @@ public class Main implements spark.servlet.SparkApplication {
 
     private void populate() {
         this.contentStore = new RDBMSContentStore();
-        this.contentStore.configure(CONFIG_FILENAME);
+        this.contentStore.configure(configFile);
 
         this.authStore = new RDBMSAuthStore();
-        this.authStore.configure(CONFIG_FILENAME);
+        this.authStore.configure(configFile);
 
         if (this.authStore.users().isEmpty()) {
             addDefaultUser();
         }
 
         this.sessionStore = new RDBMSSessionStore();
-        this.sessionStore.configure(CONFIG_FILENAME);
+        this.sessionStore.configure(configFile);
     }
 
     private void addDefaultUser() {
@@ -101,6 +106,11 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.post(new AddUserRoute(PathsAndRoutes.STATIK_ADMIN_USER, this.authStore));
         Spark.get(new DeleteUserRoute(PathsAndRoutes.STATIK_DELETE_USER, this.authStore));
 
+        Spark.post(new UploadRoute(PathsAndRoutes.UPLOAD_ROUTE, this.uploadDir));
+        Spark.get(new UploadListRoute(PathsAndRoutes.UPLOAD_LIST_ROUTE, this.uploadDir));
+        Spark.get(new UploadedFilesRoute(PathsAndRoutes.UPLOADED_FILES_GLOB, this.uploadDir));
+        Spark.get(new UploadListDialogRoute(PathsAndRoutes.STATIK_UPLOAD_LIST_DIALOG));
+
         Spark.get(new ControlBoxRoute(PathsAndRoutes.CONTROL_BOX, this.fileBase));
         Spark.get(new ResourceRoute(PathsAndRoutes.STATIK_RESOURCES_GLOB));
         Spark.post(new ContentRoute(PathsAndRoutes.STATIK_CONTENT, this.contentStore));
@@ -108,8 +118,8 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.post(new MakeContentLiveRoute(PathsAndRoutes.MAKE_CONTENT_LIVE, this.contentStore));
 
         LOG.info("Setting up editable site routes");
-        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, PathsAndRoutes.ROOT, this.welcomeFile, this.sessionStore, this.notFoundPage));
-        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, PathsAndRoutes.ROOT_GLOB_ALL, this.sessionStore, this.notFoundPage));
+        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, PathsAndRoutes.UPLOADED_FILES_PREFIX, PathsAndRoutes.ROOT, this.welcomeFile, this.sessionStore, this.notFoundPage));
+        Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, PathsAndRoutes.UPLOADED_FILES_PREFIX, PathsAndRoutes.ROOT_GLOB_ALL, this.sessionStore, this.notFoundPage));
     }
 
     private void addTestOnlyRoutes() {
@@ -140,6 +150,7 @@ public class Main implements spark.servlet.SparkApplication {
         this.notFoundPage = config.getString(NOT_FOUND_PAGE);
         this.port = Integer.valueOf(StringUtils.defaultIfEmpty(config.getString(PORT), "" + DEFAULT_PORT));
         this.authDomain = config.getString(AUTH_DOMAIN, "http://localhost:" + this.port);
+        this.uploadDir = config.getString(UPLOAD_LOCATION, "/tmp");
 
         LOG.debug("Test mode is " + testMode);
         LOG.debug("File base is " + fileBase);

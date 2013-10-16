@@ -1,7 +1,7 @@
 requirejs.config({
     "baseUrl": "/statik-resources/js",
     "paths": {
-      "appjs": "/statik-resources/appjs"
+        "appjs": "/statik-resources/appjs"
     },
     "shim": {
         "getpath": ["jquery"],
@@ -9,7 +9,7 @@ requirejs.config({
         "jquery.form": ["jquery"],
         "bootstrap": ["jquery"],
         "wysihtml5": ["bootstrap"],
-        "bootstrap-wysihtml5": ["bootstrap","wysihtml5"]
+        "bootstrap-wysihtml5": ["bootstrap", "wysihtml5"]
     }
 });
 
@@ -19,17 +19,21 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
     var Editing = {
         STATIK_CONTENT_URL: '/statik/content',
 
-        CONTROL_BOX_WRAPPER_HTML: '<div id="wrap" style="position:fixed; top:20px; right:20px; background-color: lightgrey"></div>',
+        CONTROL_BOX_WRAPPER_HTML: '<div id="wrap" style="z-index:1000; position:fixed; top:20px; right:20px; background-color: lightgrey"></div>',
         CONTROL_BOX_IFRAME_HTML: '<iframe seamless="seamless" style="margin-left:10px; border:none" id="control-box" src="/statik/control-box" width="200px" height="470px" />',
 
         EDIT_MENU_HTML: '<div id="editMenu" class="contextMenu tw-bs"><ul></ul></div>',
         EDIT_MENU_EDIT_ITEM_HTML: '<li id="edit"> <i class="icon-pencil"></i> Edit </li>',
         EDIT_MENU_COPY_ITEM_HTML: '<li id="copy"> <i class="icon-plus"></i> Copy </li>',
+        EDIT_MENU_SET_IMAGE_HTML: '<li id="set-src"> <i class="icon-plus"></i> Set image </li>',
         EDITOR_CONTAINER_HTML: '<div id="statik-editor-container" class="tw-bs"></div>',
+        UPLOAD_LIST_CONTAINER_HTML: '<div id="statik-upload-list-container" class="tw-bs"></div>',
+        UPLOADER_DIALOG_HTML: '<div id="statik-uploader-dialog-container" class="tw-bs"></div>',
 
         STATIK_CSS_TAG: '<link rel="stylesheet" type="text/css" href="/statik-resources/css/statik.css" />',
         BOOTSTRAP_CSS_TAG: '<link rel="stylesheet" type="text/css" href="/statik-resources/css/namespaced-bootstrap.css" />',
         WYSIHTML5_CSS_TAG: '<link rel="stylesheet" type="text/css" href="/statik-resources/css/bootstrap-wysihtml5.css" />',
+        UPLOADER_CSS_TAG: '<link rel="stylesheet" type="text/css" href="/statik-resources/css/uploadify.css" />',
 
         addControlBoxTo: function (parent) {
             $(parent).append(Editing.CONTROL_BOX_WRAPPER_HTML);
@@ -41,6 +45,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
 
             $('#editMenu ul')
                 .append(Editing.EDIT_MENU_EDIT_ITEM_HTML)
+                .append(Editing.EDIT_MENU_SET_IMAGE_HTML)
                 .append(Editing.EDIT_MENU_COPY_ITEM_HTML);
 
             $('#editMenu span').css('display', 'inline-block');
@@ -50,10 +55,16 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
             $(parent).append(Editing.EDITOR_CONTAINER_HTML);
         },
 
+        addUploadListContainer: function (parent) {
+            $(parent).append(Editing.UPLOAD_LIST_CONTAINER_HTML);
+            $(parent).append(Editing.UPLOADER_DIALOG_HTML);
+        },
+
         addStyleTagsToHead: function () {
             $('head')
                 .append(Editing.STATIK_CSS_TAG)
                 .append(Editing.BOOTSTRAP_CSS_TAG)
+                .append(Editing.UPLOADER_CSS_TAG)
                 .append(Editing.WYSIHTML5_CSS_TAG);
         },
 
@@ -65,9 +76,35 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
                 (element.tagName === "P");
         },
 
+// Test whether an element supports the setting of its src attr
+// Currently only supports IMG tags
+        hasSetSrcAbility: function (element) {
+            return (element.tagName === "IMG");
+        },
+
+
+// Test whether an element supports text editing
+        hasEditAbility: function (element) {
+            return (element.tagName === "LI") ||
+                (element.tagName === "P") ||
+                (element.tagName === "FIGCAPTION");
+        },
+
+
+// Set the src attribute of an element to an uploaded file chosen from a picker
+        setSrc: function (item, path) {
+            var selector = getPath(item);
+
+            var encodedDomain = encodeURIComponent(window.location.hostname);
+            var encodedSelector = encodeURIComponent(selector);
+            var encodedPath = encodeURIComponent(path);
+
+            Editing.loadUploadedFileList(encodedDomain, encodedSelector, encodedPath);
+        },
+
 
 // Copy an element (item) and append the copy immediately after the original in the DOM.
-// Sets up the appropriate hover state etc hook on the new element so it becomses immediately editable.
+// Sets up the appropriate hover state etc hook on the new element so it becomes immediately editable.
 // Pushes the new element to the CMS backend.
         copy: function (item, path) {
             var theCopy = $(item).clone();
@@ -101,14 +138,14 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
             $(item).hover(
                 function (e) {
                     if (e.target === this) {
-                        $(item).data('pre-hover', $(item).css('background-color'));
+                        $(item).data('pre-hover-bg', $(item).css('background-color'));
                         $(item).css("background-color", "lightgreen");
                     }
                 },
                 function (e) {
                     if (e.target === this) {
-                        $(item).css("background-color", $(item).data('pre-hover'));
-                        $(item).data('pre-hover', '');
+                        $(item).css("background-color", $(item).data('pre-hover-bg'));
+                        $(item).data('pre-hover-bg', '');
                     }
                 }
             );
@@ -120,6 +157,15 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
 
             $("#statik-editor-container").load(url, function () {
                 $("#statik-editor-dialog").attr('class', 'modal').modal("show");
+            });
+        },
+
+
+        loadUploadedFileList: function (encodedDomain, encodedSelector, encodedPath) {
+            var url = "/statik/upload-list-dialog?selector=" + encodedSelector + "&domain=" + encodedDomain + "&path=" + encodedPath;
+
+            $("#statik-upload-list-container").load(url, function () {
+                $("#statik-upload-list-dialog").attr('class', 'modal').modal("show");
             });
         },
 
@@ -140,6 +186,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
             window.statik.item = element;
             window.statik.path = path;
             window.statik.language = language;
+            window.statik.content = content;
 
             this.loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent, encodedLanguage);
         },
@@ -152,13 +199,28 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
                     },
                     'copy': function (t) {
                         Editing.copy(item, path);
+                    },
+                    'set-src': function (t) {
+                        Editing.setSrc(item, path);
                     }
                 },
                 onShowMenu: function (e, menu) {
+                    if (!Editing.hasEditAbility(item)) {
+                        menu.find("#edit").hide();
+                    } else {
+                        menu.find("#edit").show();
+                    }
+
                     if (!Editing.hasCopyAbility(item)) {
                         menu.find("#copy").hide();
                     } else {
                         menu.find("#copy").show();
+                    }
+
+                    if (!Editing.hasSetSrcAbility(item)) {
+                        menu.find("#set-src").hide();
+                    } else {
+                        menu.find("#set-src").show();
                     }
 
                     menu.addClass("tw-bs");
@@ -172,10 +234,10 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
             });
         },
 
-        prepare: function() {
+        prepare: function () {
             this.addStyleTagsToHead();
 
-            var editableElements = $('p, li');
+            var editableElements = $('p, li, figcaption, img'); // set of supported editable elements
             var pagePath = window.location.pathname;
 
             $.each(editableElements, function (index, item) {
@@ -185,6 +247,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
 
             Editing.addContextMenuMarkupTo($('body'));
             Editing.addEditorContainerTo($('body'));
+            Editing.addUploadListContainer($('body'))
             Editing.addControlBoxTo($('body'));
         }
     }

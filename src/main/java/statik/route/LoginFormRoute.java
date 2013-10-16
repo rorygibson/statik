@@ -37,6 +37,7 @@ public class LoginFormRoute extends ThymeLeafResourceRoute {
         }
 
         if (hasSession(request)) {
+            response.raw().setContentType("text/html");
             return alreadyLoggedInPage();
         }
 
@@ -44,6 +45,8 @@ public class LoginFormRoute extends ThymeLeafResourceRoute {
         if (StringUtils.isNotBlank(referringDomain)) {
             ctx.setVariable("originalDomain", referringDomain);
         }
+
+        response.raw().setContentType("text/html");
         return processWithThymeLeaf(PathsAndRoutes.LOGIN_FORM_VIEWNAME, ctx);
     }
 
@@ -53,10 +56,6 @@ public class LoginFormRoute extends ThymeLeafResourceRoute {
 
     private String authenticationRedirectFor(String domain) {
         return "http://" + this.authDomain + PathsAndRoutes.STATIK_LOGIN + "?originalDomain=" + domain;
-    }
-
-    private String domainFrom(Request request) {
-        return request.raw().getServerName();
     }
 
     private boolean hasSession(Request request) {

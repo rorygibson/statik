@@ -1,19 +1,20 @@
 requirejs.config({
     "baseUrl": "/statik-resources/js",
     "paths": {
-      "appjs": "/statik-resources/appjs"
+        "appjs": "/statik-resources/appjs"
     },
     "shim": {
         "jquery.contextmenu": ["jquery"],
         "jquery.form": ["jquery"],
+        "jquery.uploadify": ["jquery"],
         "bootstrap": ["jquery"],
         "wysihtml5": ["bootstrap"],
-        "bootstrap-wysihtml5": ["bootstrap","wysihtml5"]
+        "bootstrap-wysihtml5": ["bootstrap", "wysihtml5"]
     }
 });
 
 
-require(["jquery"], function ($) {
+require(["jquery", "bootstrap", "jquery.uploadify"], function ($) {
 
     function logout(e) {
         $.get("/statik/logout").done(function () {
@@ -52,6 +53,20 @@ require(["jquery"], function ($) {
         e.preventDefault();
     }
 
+    function loadUploader() {
+        var url = "/statik-resources/uploader.html";
+
+        parent.$("#statik-uploader-dialog-container").load(url, function () {
+            var modal = parent.$("#statik-uploader-dialog");
+            $(modal).on('shown', function() {
+
+            });
+
+            $(modal).attr('class', 'modal').modal("show");
+        });
+    };
+
+
     function changeLanguage(e) {
         var lang = $(this).attr('data-lang');
 
@@ -63,6 +78,7 @@ require(["jquery"], function ($) {
     }
 
     $('#publish').click(publish);
+    $('#upload').click(loadUploader);
     $('#logout').click(logout);
     $('#users').click(users);
     $('a.site').click(openSite);

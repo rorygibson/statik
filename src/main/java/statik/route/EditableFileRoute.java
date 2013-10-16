@@ -17,6 +17,7 @@ import statik.util.Http;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 
 
@@ -31,26 +32,29 @@ public class EditableFileRoute extends ResourceRoute {
     private final SessionStore sessionStore;
     private final ContentStore contentStore;
     private final String fileBase;
+    private final String uploadDir;
     private String namedFile = null;
     private static final Logger LOG = LoggerFactory.getLogger(EditableFileRoute.class);
     private String notFoundPageFilename;
 
 
-    public EditableFileRoute(ContentStore contentStore, String fileBase, String route, SessionStore sessionStore, String notFoundPage) {
+    public EditableFileRoute(ContentStore contentStore, String fileBase, String uploadDir, String route, SessionStore sessionStore, String notFoundPage) {
         super(route);
         this.contentStore = contentStore;
         this.fileBase = fileBase;
         this.sessionStore = sessionStore;
         this.notFoundPageFilename = notFoundPage;
+        this.uploadDir = uploadDir;
     }
 
-    public EditableFileRoute(ContentStore contentStore, String fileBase, String route, String namedFile, SessionStore sessionStore, String notFoundPage) {
+    public EditableFileRoute(ContentStore contentStore, String fileBase, String uploadDir, String route, String namedFile, SessionStore sessionStore, String notFoundPage) {
         super(route);
         this.contentStore = contentStore;
         this.fileBase = fileBase;
         this.namedFile = namedFile;
         this.sessionStore = sessionStore;
         this.notFoundPageFilename = notFoundPage;
+        this.uploadDir = uploadDir;
     }
 
     @Override
@@ -73,6 +77,8 @@ public class EditableFileRoute extends ResourceRoute {
             if (metaFile.isCacheable() && !testMode()) {
                 setCacheable(response);
             }
+
+            response.raw().setContentType(metaFile.getContentType());
             IOUtils.write(metaFile.getData(), response.raw().getOutputStream());
 
             response.status(200);
@@ -83,28 +89,25 @@ public class EditableFileRoute extends ResourceRoute {
         return Http.EMPTY_RESPONSE;
     }
 
-    private String domainFrom(Request request) {
-        return request.raw().getServerName();
-    }
-
-    private String pathFrom(Request request) {
-        HttpServletRequest httpReq = request.raw();
-        return httpReq.getPathInfo() == null ? httpReq.getServletPath() : httpReq.getPathInfo();
-    }
 
     class MetaFile {
+        private final String contentType;
         private byte[] data;
         private boolean cacheable;
 
-        MetaFile(boolean cacheable, byte[] data) {
+        MetaFile(boolean cacheable, byte[] data, String contentType) {
             this.cacheable = cacheable;
             this.data = data;
+            this.contentType = contentType;
+        }
+
+        public String getContentType() {
+            return this.contentType;
         }
 
         public byte[] getData() {
             return data;
         }
-
 
         public boolean isCacheable() {
             return cacheable;
@@ -114,6 +117,7 @@ public class EditableFileRoute extends ResourceRoute {
     private MetaFile dataMatching(String domain, Request request, String path, String language, File fileToServe) throws IOException {
         byte[] data;
         boolean cacheable = false;
+        String contentType = contentTypeFrom(fileToServe);
         if (mightContainCmsContent(fileToServe)) {
             LOG.debug("File is candidate for content editing");
             String fileContent;
@@ -125,15 +129,11 @@ public class EditableFileRoute extends ResourceRoute {
             cacheable = true;
         }
 
-        return new MetaFile(cacheable, data);
+        return new MetaFile(cacheable, data, contentType);
     }
 
     private boolean isAuthenticated(Request request) {
         return sessionStore.hasSession(Http.sessionFrom(request));
-    }
-
-    private byte[] rawDataFrom(File fileToServe) throws IOException {
-        return FileUtils.readFileToByteArray(fileToServe);
     }
 
     private Object do404(Response response, String missingFilePath, File fnfPage) {
@@ -205,8 +205,14 @@ public class EditableFileRoute extends ResourceRoute {
         Element el = doc.select(selector).first();
 
         if (el != null) {
-            el.html(contentItem.content());
-            LOG.debug("Replaced element with selector [" + selector + "] with " + contentItem.language().name() + " content [" + contentItem.content() + "]");
+            if (contentItem.content() != null) {
+                LOG.debug("Replaced element with selector [" + selector + "] with " + contentItem.language().name() + " content [" + contentItem.content() + "]");
+                el.html(contentItem.content());
+            }
+            if (contentItem.img() != null) {
+                LOG.debug("Replaced img with selector [" + selector + "] with " + contentItem.img() + "]");
+                el.attr("src", this.uploadDir + "/" + contentItem.img());
+            }
             return;
         }
 

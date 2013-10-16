@@ -51,6 +51,8 @@ public class AddUserRoute extends ThymeLeafResourceRoute {
 
     @Override
     public Object handle(Request request, Response response) {
+        response.raw().setContentType("text/html");
+
         if (isEditRequest(request)) {
             return doGetForEdit(userFor(request));
         }

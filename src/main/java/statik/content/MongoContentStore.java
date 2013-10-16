@@ -89,10 +89,11 @@ public class MongoContentStore extends UsesMongo implements ContentStore {
         String content = dbObject.get(ContentItem.CONTENT).toString();
         String selector = dbObject.get(ContentItem.SELECTOR).toString();
         String itemPath = dbObject.get(ContentItem.PATH).toString();
+        String img = dbObject.get(ContentItem.IMG).toString();
         Object liveObj = dbObject.get(ContentItem.LIVE);
         boolean live = liveObj == null ? false : (Boolean) liveObj;
 
-        return new ContentItem(domain, itemPath, selector, content, live);
+        return new ContentItem(domain, itemPath, selector, content, live, img);
     }
 
 }

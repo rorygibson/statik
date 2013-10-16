@@ -1,0 +1,67 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+
+<html xmlns="http://www.w3c.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="/statik-resources/css/statik.css"/>
+    <link rel="stylesheet" type="text/css" href="/statik-resources/css/namespaced-bootstrap.css"/>
+</head>
+
+<body class="tw-bs">
+
+<div id="statik-upload-list-dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 th:text="#{choose-file}">Choose file</h3>
+    </div>
+
+    <input th:value="#{cancel}" class="btn btn-primary" type="submit" value="" id="cancel" name="cancel"/>
+    <form id="imgChooserForm" method="post" action="/statik/content">
+        <div class="modal-body">
+            <ul id="files">
+                <li th:text="#{no-files}">No files found</li>
+            </ul>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    <!--
+    function cancel() {
+        $("#statik-upload-list-dialog").modal("hide");
+    }
+
+    function populateList() {
+        $.get("/statik/upload-list", function (data) {
+            var files = $('#files');
+            if (files && files.length > 0) {
+                files.empty();
+
+                for (var i = 0; i < data.length; i++) {
+                    files.append('<a class="file" href="#" data-name="' + data[i] + '"> <li>' + data[i] + '</li> </a>');
+                }
+            }
+
+            $('a.file').click(function(e) {
+                e.preventDefault();
+
+                var fname = $(this).attr('data-name');
+                console.log("Selected file " + fname);
+                $('#imgChooserForm').append('<input type="hidden" name="img" value="' + fname + '" />');
+                $('#imgChooserForm').ajaxSubmit();
+
+                $('#statik-upload-list-dialog').modal('hide');
+                $('#statik-upload-list-dialog').data('modal', null);
+
+                window.location.reload();
+            });
+        });
+    }
+
+    populateList();
+
+    $('#cancel').click(cancel);
+    -->
+</script>
+
+</body>
+</html>

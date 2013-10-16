@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+
+<body class="tw-bs">
+
+<div id="statik-uploader-dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Upload file</h3>
+    </div>
+
+    <input type="file" name="file_upload" id="file_upload" />
+</div>
+
+<script src="/statik-resources/js/jquery.uploadify.js" type="text/javascript"></script>
+<script type="text/javascript">
+    <!--
+
+    $(function() {
+        var uploadElement = $('#file_upload');
+        $(uploadElement).uploadify({
+            'swf'      : '/statik-resources/js/uploadify.swf',
+            'uploader' : '/statik/upload'
+            // Put your options here
+        });
+    });
+
+    -->
+</script>
+
+</body>
+</html>

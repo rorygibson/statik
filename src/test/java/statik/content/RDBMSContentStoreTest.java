@@ -23,7 +23,7 @@ public class RDBMSContentStoreTest {
 
     @Test
     public void persistsLanguageAttribute() {
-        ContentItem c = new ContentItem("domain", "/path", "selector", "content", false, false, Language.French);
+        ContentItem c = new ContentItem("domain", "/path", "selector", "content", false, false, Language.French, null);
 
         store.insertOrUpdate(c);
         ContentItem contentItem = store.findBy("domain", "/path", "selector", Language.French);
@@ -33,7 +33,7 @@ public class RDBMSContentStoreTest {
     @Test
     public void insertsNewContentItem() {
         assertEquals("Should have no content items", 0, store.findForDomainAndPath("domain", "/path", Language.Default.code()).size());
-        ContentItem c = new ContentItem("domain", "/path", "selector", "content", false);
+        ContentItem c = new ContentItem("domain", "/path", "selector", "content", false ,null);
 
         store.insertOrUpdate(c);
 
@@ -52,10 +52,10 @@ public class RDBMSContentStoreTest {
 
     @Test
     public void updatesExistingContentItem() {
-        ContentItem item = new ContentItem("domain", "/path", "p", "this is the content", false);
+        ContentItem item = new ContentItem("domain", "/path", "p", "this is the content", false, null);
         store.insertOrUpdate(item);
 
-        ContentItem updated = new ContentItem("domain", "/path", "p", "this is the UPDATED content", false);
+        ContentItem updated = new ContentItem("domain", "/path", "p", "this is the UPDATED content", false, null);
         store.insertOrUpdate(updated);
 
         Map<String, ContentItem> items = store.findForDomainAndPath("domain", "/path", Language.Default.code());
@@ -66,8 +66,8 @@ public class RDBMSContentStoreTest {
 
     @Test
     public void findsContentForDomainPathAndSelector() {
-        store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > p", "this is the content", false));
-        store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > div > span", "this is the other bit of content", false));
+        store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > p", "this is the content", false, null));
+        store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > div > span", "this is the other bit of content", false, null));
 
         ContentItem found = store.findBy("domain", "/path", "html > body > p", Language.Default);
         assertEquals("Should have returned the correct bit of content", "this is the content", found.content());
@@ -75,8 +75,8 @@ public class RDBMSContentStoreTest {
 
     @Test
     public void makesContentLive() {
-        store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > p.1", "this is the content 1", false));
-        store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > p.2", "this is the content 2", false));
+        store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > p.1", "this is the content 1", false, null));
+        store.insertOrUpdate(new ContentItem("domain", "/path", "html > body > p.2", "this is the content 2", false, null));
 
         store.makeContentLiveFor("domain", "/path");
         Map<String,ContentItem> content = store.findForDomainAndPath("domain", "/path", Language.Default.code());
@@ -90,7 +90,7 @@ public class RDBMSContentStoreTest {
         int MAX = 5;
 
         for (; i<MAX; i++) {
-            ContentItem c1 = new ContentItem("domain", "/path", "selector" + i, "content", false);
+            ContentItem c1 = new ContentItem("domain", "/path", "selector" + i, "content", false, null);
             store.insertOrUpdate(c1);
         }
 

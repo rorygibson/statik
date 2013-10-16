@@ -29,10 +29,11 @@ public class ContentRoute extends Route {
         String selector = parameterFrom(ContentItem.SELECTOR, request);
         String path = parameterFrom(ContentItem.PATH, request);
         String lang = parameterFrom(ContentItem.LANGUAGE, request);
+        String img = parameterFrom(ContentItem.IMG, request);
 
-        LOG.debug("POST with selector [" + selector + "], domain [" + domain + "], path [" + path + "], content [" + newContent + "], lang [" + lang + "]");
+        LOG.debug("POST with selector [" + selector + "], domain [" + domain + "], path [" + path + "], img [" + img + "], content [" + newContent + "], lang [" + lang + "]");
 
-        ContentItem contentItem = new ContentItem(domain, path, selector, newContent, false, false, Language.from(lang));
+        ContentItem contentItem = new ContentItem(domain, path, selector, newContent, false, false, Language.from(lang), img);
         contentStore.insertOrUpdate(contentItem);
 
         response.status(200);
