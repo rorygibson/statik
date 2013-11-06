@@ -5,6 +5,7 @@ import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Entities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;
@@ -240,6 +241,7 @@ public class EditableFileRoute extends ResourceRoute {
 
     private String editableContentFor(String domain, String path, String fileContent, boolean authenticated, String language) {
         Document doc = Jsoup.parse(fileContent);
+        doc.outputSettings().escapeMode(Entities.EscapeMode.xhtml);
         doc = replaceContent(doc, domain, path, authenticated, language);
 
         if (authenticated) {
