@@ -29,6 +29,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
         EDITOR_CONTAINER_HTML: '<div id="statik-editor-container" class="tw-bs"></div>',
         UPLOAD_LIST_CONTAINER_HTML: '<div id="statik-upload-list-container" class="tw-bs"></div>',
         UPLOADER_DIALOG_HTML: '<div id="statik-uploader-dialog-container" class="tw-bs"></div>',
+        COPY_PAGE_DIALOG_HTML: '<div id="statik-copy-page-dialog-container" class="tw-bs"></div>',
 
         STATIK_CSS_TAG: '<link rel="stylesheet" type="text/css" href="/statik-resources/css/statik.css" />',
         BOOTSTRAP_CSS_TAG: '<link rel="stylesheet" type="text/css" href="/statik-resources/css/namespaced-bootstrap.css" />',
@@ -58,6 +59,10 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
         addUploadListContainer: function (parent) {
             $(parent).append(Editing.UPLOAD_LIST_CONTAINER_HTML);
             $(parent).append(Editing.UPLOADER_DIALOG_HTML);
+        },
+
+        addCopyPageContainer: function(parent) {
+            $(parent).append(Editing.COPY_PAGE_DIALOG_HTML);
         },
 
         addStyleTagsToHead: function () {
@@ -249,6 +254,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
             Editing.addEditorContainerTo($('body'));
             Editing.addUploadListContainer($('body'))
             Editing.addControlBoxTo($('body'));
+            Editing.addCopyPageContainer($('body'));
         }
     }
 

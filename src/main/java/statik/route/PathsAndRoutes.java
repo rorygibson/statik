@@ -44,4 +44,5 @@ public class PathsAndRoutes {
     public static final String UPLOADED_FILES_GLOB = "/statik-uploads/*";
     public static final String UPLOADED_FILES_PREFIX = "/statik-uploads/";
     public static final String STATIK_UPLOAD_LIST_DIALOG = "/statik/upload-list-dialog";
+    public static final String COPY_PAGE = "/statik/copy-page";
 }

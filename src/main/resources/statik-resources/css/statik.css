@@ -160,7 +160,7 @@ Uploaded files list
     margin-top:2em;
 }
 
-#statik-uploader-dialog {
+#statik-uploader-dialog, #statik-copy-page-dialog {
     display: none;
     height:200px;
 }
@@ -175,4 +175,17 @@ Uploaded files list
 
 .tw-bs .modal-backdrop, .tw-bs .modal-backdrop.fade.in {
     opacity: 0 !important;
+}
+
+.thanks {
+    font-size: larger;
+    margin: 1em;
+    display: none;
+}
+
+#copy-form label {
+    float: left;
+    font-weight: bold;
+    margin-right: 1em;
+    margin-left: 1em;
 }

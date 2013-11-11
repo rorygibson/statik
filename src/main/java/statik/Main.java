@@ -116,6 +116,7 @@ public class Main implements spark.servlet.SparkApplication {
         Spark.post(new ContentRoute(PathsAndRoutes.STATIK_CONTENT, this.contentStore));
         Spark.get(new EditorRoute(PathsAndRoutes.STATIK_EDITOR, this.contentStore));
         Spark.post(new MakeContentLiveRoute(PathsAndRoutes.MAKE_CONTENT_LIVE, this.contentStore));
+        Spark.post(new CopyPageRoute(PathsAndRoutes.COPY_PAGE, this.fileBase));
 
         LOG.info("Setting up editable site routes");
         Spark.get(new EditableFileRoute(this.contentStore, this.fileBase, PathsAndRoutes.UPLOADED_FILES_PREFIX, PathsAndRoutes.ROOT, this.welcomeFile, this.sessionStore, this.notFoundPage));

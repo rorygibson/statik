@@ -77,11 +77,22 @@ require(["jquery", "bootstrap", "jquery.uploadify"], function ($) {
         e.preventDefault();
     }
 
+    function copyPage() {
+        var url = "/statik-resources/copy-page.html";
+
+        parent.$("#statik-copy-page-dialog-container").load(url, function () {
+            var modal = parent.$("#statik-copy-page-dialog");
+            $(modal).attr('class', 'modal').modal("show");
+        });
+    }
+
+
     $('#publish').click(publish);
     $('#upload').click(loadUploader);
     $('#logout').click(logout);
     $('#users').click(users);
+    $('#copy-page').click(copyPage);
     $('a.site').click(openSite);
-    $('a.language').click(changeLanguage)
+    $('a.language').click(changeLanguage);
 });
 

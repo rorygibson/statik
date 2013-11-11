@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+<body class="tw-bs">
+
+<div id="statik-copy-page-dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <strong>Copy page</strong>
+    </div>
+
+    <div class="thanks">Page copied to </div>
+
+    <form id="copy-form" action="/statik/copy-page" method="post">
+        <label for="targetFilename">New filename:</label>
+        <input id="targetFilename" name="targetFilename" type="text" required="required"/>
+        <input id="currentFilename" name="currentFilename" type="hidden" />
+        <input type="submit" class="btn-primary" value="Copy" />
+    </form>
+
+    <script type="text/javascript">
+
+        function ta() {
+            $('.thanks').show();
+            $('.thanks').append($('#currentFilename').val());
+            $('#copy-form').hide();
+        }
+
+        function doPost(e) {
+            var url = window.location.pathname;
+            var filename = url.substring(url.lastIndexOf('/')+1);
+            if (filename == '') filename = 'index.html';
+
+            console.log("Setting up copy of " + filename);
+            $('#currentFilename').val(filename);
+
+            var postData = $(this).serializeArray();
+            var formURL = $(this).attr("action");
+            $.ajax(
+                    {
+                        url : formURL,
+                        type: "POST",
+                        data : postData,
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        headers: {"X-Requested-With": "XMLHttpRequest"},
+                        crossDomain: true,
+                        error: ta,
+                        success: ta
+                    });
+            e.preventDefault();
+        }
+
+        $("#copy-form").submit(doPost);
+
+    </script>
+</div>
+
+</body>
+</html>
