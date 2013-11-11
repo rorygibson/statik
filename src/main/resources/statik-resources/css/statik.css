@@ -8,6 +8,7 @@ body.statik-internal {
 
 iframe#control-box {
     border: none;
+    height: 470px !important;
 }
 
 body.statik-internal h1 {
@@ -63,29 +64,7 @@ body.statik-internal ul#users li .command {
 Control box
 **/
 
-/*
-#statik-control-box {
-    font-family: sans-serif;
-}
 
-#statik-control-box li, #statik-control-box li a {
-    font-family: sans-serif;
-    font-size: 10pt;
-    padding-left: 0;
-}
-
-h3#statik-control-box-heading {
-    border-bottom: solid 1px #999999;
-    font-size: 18px;
-    margin-right: 20px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    color: #999999;
-}
-
-#statik-control-box .active {
-   background-color: blue;
-}
-*/
 
 body.tw-bs {
     background: none;
