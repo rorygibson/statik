@@ -15,10 +15,8 @@ import statik.content.ContentStore;
 import statik.session.SessionStore;
 import statik.util.Http;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Map;
 
 
@@ -197,13 +195,13 @@ public class EditableFileRoute extends ResourceRoute {
                 continue;
             }
 
-            replaceIndividualContentIem(doc, selector, contentItem);
+            replaceIndividualContentItem(doc, selector, contentItem);
         }
 
         return doc;
     }
 
-    private void replaceIndividualContentIem(Document doc, String selector, ContentItem contentItem) {
+    private void replaceIndividualContentItem(Document doc, String selector, ContentItem contentItem) {
         Element el = doc.select(selector).first();
 
         if (el != null) {
