@@ -46,6 +46,7 @@ public class UploadRoute extends ResourceRoute {
             }
         } catch (Exception e) {
             LOG.error("Error parsing request", e.getMessage());
+
             return "ERROR";
         }
 

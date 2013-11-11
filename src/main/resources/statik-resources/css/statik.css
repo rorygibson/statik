@@ -63,6 +63,7 @@ body.statik-internal ul#users li .command {
 Control box
 **/
 
+/*
 #statik-control-box {
     font-family: sans-serif;
 }
@@ -84,7 +85,11 @@ h3#statik-control-box-heading {
 #statik-control-box .active {
    background-color: blue;
 }
+*/
 
+body.tw-bs {
+    background: none;
+}
 
 /**
 Context menu; may appear on any page so can't be name-spaced directly
@@ -97,6 +102,10 @@ Context menu; may appear on any page so can't be name-spaced directly
 /**
 Editor
 **/
+#wysihtml5-textarea-editor-toolbar {
+    margin-left: 0;
+}
+
 .tw-bs .modal textarea {
     min-width: 440px;
     width: 440px;
@@ -130,6 +139,11 @@ Editor
     float: left;
 }
 
+#statik-editor-dialog {
+    width: 480px;
+    height: 410px;
+}
+
 
 /**
 Uploaded files list
@@ -140,10 +154,6 @@ Uploaded files list
 
 #statik-upload-list-heading {
     margin-left: 1em;
-}
-
-#statik-upload-list-dialog #cancel {
-    float:right;
 }
 
 #statik-upload-list-dialog ul#files {
@@ -157,4 +167,12 @@ Uploaded files list
 
 #statik-uploader-dialog #cancel {
     float:right;
+}
+
+.uploadify {
+    margin: 1em;
+}
+
+.tw-bs .modal-backdrop, .tw-bs .modal-backdrop.fade.in {
+    opacity: 0 !important;
 }

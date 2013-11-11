@@ -59,7 +59,7 @@ public class RDBMSContentStore extends UsesRDBMS implements ContentStore {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 ContentItem item = contentItemFrom(rs);
-                if (item.language().equals(language)) {
+                if (item.language().code().equals(language)) {
                     map.put(item.selector(), item);
                 } else if (item.img() != null && !item.img().equals("")) {
                     map.put(item.selector(), item);

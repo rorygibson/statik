@@ -131,13 +131,13 @@
       .tw-bs h2,
       .tw-bs h3 {
         page-break-after: avoid; } }
-  .tw-bs body {
+  body.tw-bs {
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 20px;
     color: #333333;
-    background-color: white; }
+ }
   .tw-bs a {
     color: #0088cc;
     text-decoration: none; }

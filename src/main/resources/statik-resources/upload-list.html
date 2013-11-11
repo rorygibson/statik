@@ -11,10 +11,9 @@
 <div id="statik-upload-list-dialog">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3 th:text="#{choose-file}">Choose file</h3>
+        <strong th:text="#{choose-file}">Choose file</strong>
     </div>
 
-    <input th:value="#{cancel}" class="btn btn-primary" type="submit" value="" id="cancel" name="cancel"/>
     <form id="imgChooserForm" method="post" action="/statik/content">
         <div class="modal-body">
             <ul id="files">

@@ -19,7 +19,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
     var Editing = {
         STATIK_CONTENT_URL: '/statik/content',
 
-        CONTROL_BOX_WRAPPER_HTML: '<div id="wrap" style="z-index:1000; position:fixed; top:20px; right:20px; background-color: lightgrey"></div>',
+        CONTROL_BOX_WRAPPER_HTML: '<div id="wrap" style="z-index:1000; position:fixed; top:20px; right:20px;"></div>',
         CONTROL_BOX_IFRAME_HTML: '<iframe seamless="seamless" style="margin-left:10px; border:none" id="control-box" src="/statik/control-box" width="200px" height="470px" />',
 
         EDIT_MENU_HTML: '<div id="editMenu" class="contextMenu tw-bs"><ul></ul></div>',

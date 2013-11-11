@@ -189,6 +189,7 @@ public class EditableFileRoute extends ResourceRoute {
     private Document replaceContent(Document doc, String domain, String path, boolean authenticated, String language) {
         Map<String, ContentItem> contentItems = this.contentStore.findForDomainAndPath(domain, path, language);
 
+        LOG.debug("Replacing " + contentItems.size() + " content items");
         for (String selector : contentItems.keySet()) {
             ContentItem contentItem = contentItems.get(selector);
 
