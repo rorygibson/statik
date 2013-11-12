@@ -33,7 +33,7 @@ public class LanguageFilter extends Filter {
             desiredLanguage = Language.Default.code();
         }
 
-        LOG.info("Desired language [" + desiredLanguage + "]");
+        LOG.trace("Desired language [" + desiredLanguage + "]");
 
         if (desiredLanguage != null) {
             response.removeCookie(LANGUAGE);

@@ -44,8 +44,8 @@ public class ResourceRoute extends Route {
         String cookie = request.cookie(LanguageFilter.LANGUAGE);
         Object attrib = request.raw().getAttribute(LanguageFilter.LANGUAGE);
 
-        LOG.debug("Detected language [" + cookie + "] from request cookie");
-        LOG.debug("Detected language [" + attrib + "] from request attribute");
+        LOG.trace("Detected language [" + cookie + "] from request cookie");
+        LOG.trace("Detected language [" + attrib + "] from request attribute");
 
         // request attrib will be more up-to-date; prefer it if present
         String language = null;
@@ -54,7 +54,7 @@ public class ResourceRoute extends Route {
         } else if (cookie != null && cookie.equals("")) {
             language = cookie;
         }
-        LOG.debug("Using language [" + language + "]");
+        LOG.trace("Using language [" + language + "]");
 
 
         return StringUtils.isBlank(language) ? Language.Default.code() : language.toString();
@@ -122,7 +122,7 @@ public class ResourceRoute extends Route {
 
     protected Object writeClasspathFileToResponse(Response response, String filename) {
         String filePath = PathsAndRoutes.RESOURCE_ROOT_PATH + filename;
-        LOG.debug("Writing classpath file " + filePath);
+        LOG.trace("Writing classpath file " + filePath);
         String contentType = contentTypeFrom(new File(filePath));
         response.raw().setContentType(contentType);
         InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
@@ -141,7 +141,7 @@ public class ResourceRoute extends Route {
     }
 
     protected void writeFileToResponse(Response response, File theFile) throws IOException {
-        LOG.debug("Writing file " + theFile.getAbsolutePath());
+        LOG.trace("Writing file " + theFile.getAbsolutePath());
         if (theFile.getAbsolutePath().endsWith(".html")) {
             response.raw().setContentType("text/html");
         }

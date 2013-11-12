@@ -123,7 +123,7 @@ public class EditableFileRoute extends ResourceRoute {
             fileContent = FileUtils.readFileToString(fileToServe);
             data = editableContentFor(domain, path, fileContent, isAuthenticated(request), language).getBytes();
         } else {
-            LOG.debug("File [" + fileToServe.getAbsolutePath() + "] not editable, is cacheable");
+            LOG.trace("File [" + fileToServe.getAbsolutePath() + "] not editable, is cacheable");
             data = rawDataFrom(fileToServe);
             cacheable = true;
         }
@@ -166,7 +166,7 @@ public class EditableFileRoute extends ResourceRoute {
 
     private File findRequestedFileFrom(String domain, String path) {
         String fullPath = fileBase + "/" + domain + path;
-        LOG.debug("Request for file, full path to file is [" + fullPath + "]");
+        LOG.trace("Request for file, full path to file is [" + fullPath + "]");
         return new File(fullPath);
     }
 
@@ -202,21 +202,25 @@ public class EditableFileRoute extends ResourceRoute {
     }
 
     private void replaceIndividualContentItem(Document doc, String selector, ContentItem contentItem) {
-        Element el = doc.select(selector).first();
+        Element el;
 
-        if (el != null) {
-            if (contentItem.content() != null) {
-                LOG.debug("Replaced element with selector [" + selector + "] with " + contentItem.language().name() + " content [" + contentItem.content() + "]");
-                el.html(contentItem.content());
+        if (!contentItem.isCopy()) {
+            el = doc.select(selector).first();
+
+            if (el != null) {
+                if (contentItem.content() != null) {
+                    LOG.debug("Replaced element with selector [" + selector + "] with " + contentItem.language().name() + " content [" + contentItem.content() + "]");
+                    el.html(contentItem.content());
+                }
+                if (contentItem.img() != null) {
+                    LOG.debug("Replaced img with selector [" + selector + "] with " + contentItem.img() + "]");
+                    el.attr("src", this.uploadDir + "/" + contentItem.img());
+                }
+                return;
             }
-            if (contentItem.img() != null) {
-                LOG.debug("Replaced img with selector [" + selector + "] with " + contentItem.img() + "]");
-                el.attr("src", this.uploadDir + "/" + contentItem.img());
-            }
-            return;
         }
 
-        LOG.debug("Element doesn't exist; must be a copy. Creating and inserting");
+        LOG.debug("Element doesn't exist; is a copy. Creating and inserting.");
 
         if (describesNthChild(selector)) {
             String siblingSelector = selector.substring(0, selector.lastIndexOf(':'));
@@ -225,7 +229,7 @@ public class EditableFileRoute extends ResourceRoute {
 
             LOG.debug("Creating element with sibling selector [" + siblingSelector + "], tagName [" + tagName + "]");
             el = doc.createElement(tagName);
-            el.text(contentItem.content());
+            el.html(contentItem.content());
 
             Element sibling = doc.select(siblingSelector).last();
             sibling.after(el);
@@ -235,7 +239,10 @@ public class EditableFileRoute extends ResourceRoute {
     }
 
     private boolean describesNthChild(String selector) {
-        return selector.substring(0, selector.length() - 3).endsWith("nth-of-type");
+        int lastArrow = selector.lastIndexOf(">");
+        if (lastArrow == -1) return false;
+        String lastBit = selector.substring(lastArrow);
+        return lastBit.contains("nth-of-type");
     }
 
     private String editableContentFor(String domain, String path, String fileContent, boolean authenticated, String language) {

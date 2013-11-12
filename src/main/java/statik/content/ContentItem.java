@@ -12,6 +12,7 @@ public class ContentItem {
     public static final String CONTENT = "content";
     public static final String LANGUAGE = "language";
     public static final String IMG = "img";
+    public static final String COPY = "copy";
     private final boolean isCopy;
     private final String domain;
     private final String path;

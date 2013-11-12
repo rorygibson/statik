@@ -30,10 +30,11 @@ public class ContentRoute extends Route {
         String path = parameterFrom(ContentItem.PATH, request);
         String lang = parameterFrom(ContentItem.LANGUAGE, request);
         String img = parameterFrom(ContentItem.IMG, request);
+        String copy = parameterFrom(ContentItem.COPY, request);
 
         LOG.debug("POST with selector [" + selector + "], domain [" + domain + "], path [" + path + "], img [" + img + "], content [" + newContent + "], lang [" + lang + "]");
 
-        ContentItem contentItem = new ContentItem(domain, path, selector, newContent, false, false, Language.from(lang), img);
+        ContentItem contentItem = new ContentItem(domain, path, selector, newContent, Boolean.valueOf(copy), false, Language.from(lang), img);
         contentStore.insertOrUpdate(contentItem);
 
         response.status(200);

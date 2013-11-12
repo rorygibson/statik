@@ -144,7 +144,8 @@
 				
 			var editor = new wysi.Editor(this.el.attr('id'), {
 	    		toolbar: this.toolbar.attr('id'),
-				parserRules: parserRules
+				parserRules: parserRules,
+                cleanUp: options.cleanUp
 	  		});
 
 	  		if(options && options.events) {

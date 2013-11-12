@@ -92,6 +92,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
         hasEditAbility: function (element) {
             return (element.tagName === "LI") ||
                 (element.tagName === "P") ||
+                (element.tagName === "H1") ||
                 (element.tagName === "FIGCAPTION");
         },
 
@@ -107,19 +108,54 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
             Editing.loadUploadedFileList(encodedDomain, encodedSelector, encodedPath);
         },
 
+        parentHasCopyAbility: function(el) {
+            var par;
+            while (par = $(el).parent()) {
+                if (!par || (par && par.length == 0)) break;
+                if (Editing.hasCopyAbility(par[0] ? par[0] : par)) {
+                    return true;
+                }
+                return Editing.parentHasCopyAbility(par);
+            }
+            return false;
+        },
+
+        firstCopyableParentOf: function(el) {
+            var par;
+            while (par = $(el).parent()) {
+                if (!par || (par && par.length == 0)) break;
+                if (Editing.hasCopyAbility(par[0] ? par[0] : par)) {
+                    return el.parent();
+                }
+                return Editing.firstCopyableParentOf(par);
+            }
+            return false;
+        },
 
 // Copy an element (item) and append the copy immediately after the original in the DOM.
 // Sets up the appropriate hover state etc hook on the new element so it becomes immediately editable.
 // Pushes the new element to the CMS backend.
         copy: function (item, path) {
-            var theCopy = $(item).clone();
-            $(item).parent().append(theCopy);
+            var newItem, selector;
 
-            var content = $(item).html();
-            var selector = getPath(theCopy.get(0));
+            var itemIsCopyable = Editing.hasCopyAbility(item);
+            var parentIsCopyable = Editing.parentHasCopyAbility(item);
 
-            Editing.addHoverStateTo(theCopy);
-            Editing.addContextMenuTo(theCopy.get(0), path);
+            if (itemIsCopyable) {
+                newItem = $(item).clone();
+                $(item).parent().append(newItem);
+
+            } else if (parentIsCopyable) {
+                var copyableParent = Editing.firstCopyableParentOf(item);
+                newItem = $(copyableParent).clone();
+                copyableParent.parent().append(newItem);
+            }
+
+            selector = getPath(newItem.get(0));
+            var content = $(newItem).html();
+
+            Editing.addHoverStateTo(newItem);
+            Editing.addContextMenuTo(newItem.get(0), path);
 
             $.ajax({
                 type: 'POST',
@@ -128,6 +164,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
                     domain: window.location.hostname,
                     path: path,
                     content: content,
+                    copy: true,
                     selector: selector
                 },
                 success: function (msg) {
@@ -210,22 +247,22 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
                     }
                 },
                 onShowMenu: function (e, menu) {
-                    if (!Editing.hasEditAbility(item)) {
-                        menu.find("#edit").hide();
-                    } else {
+                    if (Editing.hasEditAbility(item)) {
                         menu.find("#edit").show();
+                    } else {
+                        menu.find("#edit").hide();
                     }
 
-                    if (!Editing.hasCopyAbility(item)) {
-                        menu.find("#copy").hide();
-                    } else {
+                    if (Editing.hasCopyAbility(item) || Editing.parentHasCopyAbility(item)) {
                         menu.find("#copy").show();
+                    } else {
+                        menu.find("#copy").hide();
                     }
 
-                    if (!Editing.hasSetSrcAbility(item)) {
-                        menu.find("#set-src").hide();
-                    } else {
+                    if (Editing.hasSetSrcAbility(item)) {
                         menu.find("#set-src").show();
+                    } else {
+                        menu.find("#set-src").hide();
                     }
 
                     menu.addClass("tw-bs");
@@ -239,10 +276,11 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
             });
         },
 
+
         prepare: function () {
             this.addStyleTagsToHead();
 
-            var editableElements = $('p, li, figcaption, img'); // set of supported editable elements
+            var editableElements = $('p, li, figcaption, img, h1'); // set of supported editable elements
             var pagePath = window.location.pathname;
 
             $.each(editableElements, function (index, item) {

@@ -28,16 +28,31 @@
 </div>
 
 <script type="text/javascript">
-
-    // Route class has set raw content into textarea-preload; copy it into the textarea value (avoid jQuery to avoid escaping issues)
-    var txt = document.getElementById('textarea-preload').innerHTML;
-    document.getElementById('wysihtml5-textarea').innerHTML = txt;
+     debugger;
 
     // create the editor
-    $('#wysihtml5-textarea').wysihtml5({image:false});
+    $('#wysihtml5-textarea').wysihtml5({
+        "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
+        "emphasis": true, //Italics, bold, etc. Default true
+        "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+        "html": true, //Button which allows you to edit the generated HTML. Default false
+        "link": true, //Button to insert a link. Default true
+        "image": false, //Button to insert an image. Default true,
+        "color": false, //Button to change color of font
+        "cleanUp": false
+    });
 
     // keep a reference
     document.editor = $('#wysihtml5-textarea').data("wysihtml5").editor;
+
+    // set the content
+    document.editor.on("load", function() {
+        setTimeout(function () {
+            // Route class has set raw content into textarea-preload; copy it into the textarea value (avoid jQuery to avoid escaping issues)
+            var txt = document.getElementById('textarea-preload').innerHTML;
+            document.editor.composer.commands.exec("insertHTML", txt);
+        }, 200);
+    });
 
     // setup the language switcher
     $('#language-switcher').change(function(){
