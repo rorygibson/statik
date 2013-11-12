@@ -233,11 +233,16 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
             this.loadEditorIntoDialog(encodedSelector, encodedDomain, encodedPath, encodedContent, encodedLanguage);
         },
 
+        currentLanguage: function() {
+            var cookieLang = document.cookie.replace(/(?:(?:^|.*;\s*)language\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            return cookieLang ? cookieLang : "en"; //default
+        },
+
         addContextMenuTo: function (item, path) {
             $(item).contextMenu('editMenu', {
                 bindings: {
                     'edit': function (t) {
-                        Editing.openEditorFor(item, path, "en");
+                        Editing.openEditorFor(item, path, Editing.currentLanguage());
                     },
                     'copy': function (t) {
                         Editing.copy(item, path);
