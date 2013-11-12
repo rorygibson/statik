@@ -21,25 +21,26 @@ public class LanguageFilter extends Filter {
 
     @Override
     public void handle(Request request, Response response) {
-        String requestedLanguage = request.queryParams(LANGUAGE);
-        String cookieLanguage = request.cookie(LANGUAGE);
+        String currentLang = request.cookie(LANGUAGE);
+        String targetLang = request.queryParams(LANGUAGE);
 
-        String desiredLanguage;
-        if (StringUtils.isNotBlank(requestedLanguage)) {
-            desiredLanguage = requestedLanguage;
-        } else if ( StringUtils.isNotBlank(cookieLanguage)){
-            desiredLanguage = cookieLanguage;
-        } else {
-            desiredLanguage = Language.Default.code();
+        if (targetLang != null && !targetLang.equals(currentLang)) {
+            LOG.trace("Changing language. Target language [" + targetLang + "]");
+            Cookie removeCookie = new Cookie(LANGUAGE, "");
+            removeCookie.setPath("/");
+            removeCookie.setMaxAge(0);
+
+            Cookie newCookie = new Cookie(LANGUAGE, targetLang);
+            removeCookie.setPath("/");
+            removeCookie.setMaxAge(-1); // forever
+
+            response.raw().addCookie(removeCookie);
+            response.raw().addCookie(newCookie);
+
+            currentLang = targetLang;
         }
 
-        LOG.trace("Desired language [" + desiredLanguage + "]");
-
-        if (desiredLanguage != null) {
-            response.removeCookie(LANGUAGE);
-            response.raw().addCookie(new Cookie(LANGUAGE, desiredLanguage));
-            request.raw().setAttribute(LANGUAGE, desiredLanguage);
-        }
+        request.raw().setAttribute(LANGUAGE, currentLang);
     }
 
 
