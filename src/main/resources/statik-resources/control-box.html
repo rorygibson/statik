@@ -11,20 +11,21 @@
 <section class="well">
 
     <ul id="statik-control-box" class="nav nav-list">
-        <li class="nav-header" th:text="#{about.you}">About you</li>
-        <li><a href="#" id="logout" th:text="#{log.out}">Log out</a></li>
-
         <li class="nav-header" th:text="#{admin}">Admin</li>
+        <li><a href="#" id="logout" th:text="#{log.out}">Log out</a></li>
+        <li><a href="#" id="users" th:text="#{users}">Users</a></li>
+
+        <li class="nav-header" th:text="#{cms}">CMS</li>
         <li><a href="#" id="publish" th:text="#{publish}">Publish</a></li>
         <li><a href="#" id="upload" th:text="#{upload}">Upload file</a></li>
         <li><a href="#" id="copy-page" th:text="#{copy-page}">Copy page</a></li>
-        <li><a href="#" id="users" th:text="#{users}">Users</a></li>
 
         <li class="nav-header" th:text="#{sites}">Sites</li>
         <li th:each="site : ${sites}">
             <a class="site" th:href="${'http://' + site + '/edit'}" th:text="${site}">sitename</a>
         </li>
 
+        <!--
         <li class="nav-header" th:text="#{language}">Language</li>
         <li><a th:class="'language ' + ${language == 'en' ? 'active' : ''}" data-lang="en"
                th:text="#{english}">English</a></li>
@@ -34,6 +35,7 @@
                th:text="#{spanish}">Spanish</a></li>
         <li><a th:class="'language ' + ${language == 'fr' ? 'active' : ''}" data-lang="fr"
                th:text="#{french}">French</a></li>
+        -->
     </ul>
 </section>
 <script data-main="/statik-resources/appjs/control-box" src="/statik-resources/js/require.js"></script>
