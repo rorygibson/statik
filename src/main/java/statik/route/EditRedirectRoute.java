@@ -16,7 +16,7 @@ public class EditRedirectRoute extends Route {
 
     @Override
     public Object handle(Request request, Response response) {
-        String uri = "http://" + authDomain + PathsAndRoutes.STATIK_LOGIN + "?originalDomain=" + request.raw().getServerName();
+        String uri = request.raw().getScheme() + "://" + authDomain + PathsAndRoutes.STATIK_LOGIN + "?originalDomain=" + request.raw().getServerName();
         response.redirect(uri);
         return Http.EMPTY_RESPONSE;
     }
