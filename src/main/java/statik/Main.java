@@ -32,6 +32,7 @@ public class Main implements spark.servlet.SparkApplication {
     private static final int DEFAULT_PORT = 4567;
     private static final String AUTH_DOMAIN = "authDomain";
     private static final String UPLOAD_LOCATION = "uploadStorageLocation";
+    private static final String NOTIFIER_URL = "notifierUrl";
 
     private static String configFile;
 
@@ -46,6 +47,7 @@ public class Main implements spark.servlet.SparkApplication {
     private String notFoundPage;
     private static int port;
     private String authDomain;
+    private String notifierUrl;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -90,7 +92,8 @@ public class Main implements spark.servlet.SparkApplication {
     }
 
     private void addStatikRoutes() {
-        Spark.before(new LanguageFilter("/*"));
+
+        Spark.before(new LanguageFilter("/*", new Notifier(this.notifierUrl)));
         Spark.before(new SecureFilter("/statik/", this.sessionStore));
 
         LOG.info("Setting up statik routes");
@@ -152,6 +155,7 @@ public class Main implements spark.servlet.SparkApplication {
         this.port = Integer.valueOf(StringUtils.defaultIfEmpty(config.getString(PORT), "" + DEFAULT_PORT));
         this.authDomain = config.getString(AUTH_DOMAIN, "http://localhost:" + this.port);
         this.uploadDir = config.getString(UPLOAD_LOCATION, "/tmp");
+        this.notifierUrl = config.getString(NOTIFIER_URL);
 
         LOG.debug("Test mode is " + testMode);
         LOG.debug("File base is " + fileBase);
