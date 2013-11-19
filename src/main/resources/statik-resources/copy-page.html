@@ -21,9 +21,9 @@
 
     <script type="text/javascript">
 
-        function ta() {
+        function ta(newFilename) {
             $('.thanks').show();
-            $('.thanks').append($('#currentFilename').val());
+            $('.thanks').append("<a href=\"/" + newFilename + "\">" + newFilename + "</a>");
             $('#copy-form').hide();
         }
 
@@ -35,6 +35,8 @@
             console.log("Setting up copy of " + filename);
             $('#currentFilename').val(filename);
 
+            var newFilename = $('#targetFilename').val();
+
             var postData = $(this).serializeArray();
             var formURL = $(this).attr("action");
             $.ajax(
@@ -45,8 +47,12 @@
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         headers: {"X-Requested-With": "XMLHttpRequest"},
                         crossDomain: true,
-                        error: ta,
-                        success: ta
+                        error: function() {
+                            ta(newFilename);
+                        },
+                        success: function() {
+                            ta(newFilename);
+                        }
                     });
             e.preventDefault();
         }
