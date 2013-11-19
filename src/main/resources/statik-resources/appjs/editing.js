@@ -90,10 +90,18 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
 
 // Test whether an element supports text editing
         hasEditAbility: function (element) {
-            return (element.tagName === "LI") ||
-                (element.tagName === "P") ||
-                (element.tagName === "H1") ||
-                (element.tagName === "FIGCAPTION");
+            var tagName = element.tagName;
+
+            var match = (tagName === "P") ||
+                (tagName === "H1") ||
+                (tagName === "H2") ||
+                (tagName === "H3") ||
+                (tagName === "H4") ||
+                (tagName === "H5") ||
+                (tagName === "H6") ||
+                (tagName === "FIGCAPTION"); //(element.tagName === "LI") ||
+
+            return match;
         },
 
 
@@ -285,7 +293,7 @@ define(["jquery", "jquery.contextmenu", "bootstrap-wysihtml5", "jquery.form", "g
         prepare: function () {
             this.addStyleTagsToHead();
 
-            var editableElements = $('p, li, figcaption, img, h1'); // set of supported editable elements
+            var editableElements = $('p, figcaption, img, h1, h2, h3, h4, h5, h6'); // set of supported editable elements
             var pagePath = window.location.pathname;
 
             $.each(editableElements, function (index, item) {
